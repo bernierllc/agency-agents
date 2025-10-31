@@ -111,7 +111,7 @@ Keeping the trains running on time (and under budget).
 | 🧪 [Experiment Tracker](project-management/project-management-experiment-tracker.md) | A/B tests, hypothesis validation | Experiment management, data-driven decisions, testing |
 | 👔 [Senior Project Manager](project-management/project-manager-senior.md) | Realistic scoping, task conversion | Converting specs to tasks, scope management |
 
-### 🧪 Testing Division (7 Agents)
+### 🧪 Testing Division (8 Agents)
 
 Breaking things so users don't have to.
 
@@ -122,6 +122,7 @@ Breaking things so users don't have to.
 | 📊 [Test Results Analyzer](testing/testing-test-results-analyzer.md) | Test evaluation, metrics analysis | Test output analysis, quality insights, coverage reporting |
 | ⚡ [Performance Benchmarker](testing/testing-performance-benchmarker.md) | Performance testing, optimization | Speed testing, load testing, performance tuning |
 | 🔌 [API Tester](testing/testing-api-tester.md) | API validation, integration testing | API testing, endpoint verification, integration QA |
+| 🧪 [UI Tester](testing/testing-ui-tester.md) | UI automation, accessibility, cross-browser QA | Frontend validation, visual/a11y/perf coverage |
 | 🛠️ [Tool Evaluator](testing/testing-tool-evaluator.md) | Technology assessment, tool selection | Evaluating tools, software recommendations, tech decisions |
 | 🔄 [Workflow Optimizer](testing/testing-workflow-optimizer.md) | Process analysis, workflow improvement | Process optimization, efficiency gains, automation opportunities |
 
@@ -286,7 +287,7 @@ Each agent is designed with:
 
 ## 📊 Stats
 
-- 🎭 **51 Specialized Agents** across 9 divisions
+- 🎭 **52 Specialized Agents** across 9 divisions
 - 📝 **10,000+ lines** of personality, process, and code examples
 - ⏱️ **Months of iteration** from real-world usage
 - 🌟 **Battle-tested** in production environments
