@@ -1,4 +1,4 @@
-# 🎭 The Agency: 51 AI Specialists Ready to Transform Your Workflow
+# 🎭 The Agency: 58 AI Specialists Ready to Transform Your Workflow
 
 > **A complete AI agency at your fingertips** - From frontend wizards to Reddit community ninjas, from whimsy injectors to reality checkers. Each agent is a specialized expert with personality, processes, and proven deliverables.
 
@@ -10,7 +10,7 @@
 
 ## 🚀 What Is This?
 
-Born from a Reddit thread and months of iteration, **The Agency** is a collection of 51 meticulously crafted AI agent personalities. Each agent is:
+Born from a Reddit thread and months of iteration, **The Agency** is a collection of 58 meticulously crafted AI agent personalities. Each agent is:
 
 - **🎯 Specialized**: Deep expertise in their domain (not generic prompt templates)
 - **🧠 Personality-Driven**: Unique voice, communication style, and approach
@@ -101,7 +101,7 @@ Building the right thing at the right time.
 | 🔍 [Trend Researcher](product/product-trend-researcher.md) | Market intelligence, competitive analysis | Market research, opportunity assessment, trend identification |
 | 💬 [Feedback Synthesizer](product/product-feedback-synthesizer.md) | User feedback analysis, insights extraction | Feedback analysis, user insights, product priorities |
 
-### 🎬 Project Management Division (5 Agents)
+### 🎬 Project Management Division (6 Agents)
 
 Keeping the trains running on time (and under budget).
 
@@ -112,8 +112,9 @@ Keeping the trains running on time (and under budget).
 | ⚙️ [Studio Operations](project-management/project-management-studio-operations.md) | Day-to-day efficiency, process optimization | Operational excellence, team support, productivity |
 | 🧪 [Experiment Tracker](project-management/project-management-experiment-tracker.md) | A/B tests, hypothesis validation | Experiment management, data-driven decisions, testing |
 | 👔 [Senior Project Manager](project-management/project-manager-senior.md) | Realistic scoping, task conversion | Converting specs to tasks, scope management |
+| 🛡️ [Production Readiness Gatekeeper](project-management/project-management-production-readiness-gatekeeper.md) | Final deployment approval, evidence-based quality gates | Production deployment validation, quality assurance, release readiness |
 
-### 🧪 Testing Division (8 Agents)
+### 🧪 Testing Division (9 Agents)
 
 Breaking things so users don't have to.
 
@@ -127,8 +128,9 @@ Breaking things so users don't have to.
 | 🧪 [UI Tester](testing/testing-ui-tester.md) | UI automation, accessibility, cross-browser QA | Frontend validation, visual/a11y/perf coverage |
 | 🛠️ [Tool Evaluator](testing/testing-tool-evaluator.md) | Technology assessment, tool selection | Evaluating tools, software recommendations, tech decisions |
 | 🔄 [Workflow Optimizer](testing/testing-workflow-optimizer.md) | Process analysis, workflow improvement | Process optimization, efficiency gains, automation opportunities |
+| 🎭 [Playwright Audit Specialist](testing/testing-playwright-auditor.md) | Comprehensive UI exploration, automated test generation | E2E testing, UI audit, security/accessibility testing via browser |
 
-### 🛟 Support Division (6 Agents)
+### 🛟 Support Division (7 Agents)
 
 The backbone of the operation.
 
@@ -140,6 +142,7 @@ The backbone of the operation.
 | 🏗️ [Infrastructure Maintainer](support/support-infrastructure-maintainer.md) | System reliability, performance optimization | Infrastructure management, system operations, monitoring |
 | ⚖️ [Legal Compliance Checker](support/support-legal-compliance-checker.md) | Compliance, regulations, legal review | Legal compliance, regulatory requirements, risk management |
 | 📑 [Executive Summary Generator](support/support-executive-summary-generator.md) | C-suite communication, strategic summaries | Executive reporting, strategic communication, decision support |
+| 🚨 [Incident Response Agent](support/support-incident-response-agent.md) | Production incident management, rollback coordination | Production issues, incident triage, root cause analysis |
 
 ### 🥽 Spatial Computing Division (6 Agents)
 
@@ -154,7 +157,7 @@ Building the immersive future.
 | 🍎 [visionOS Spatial Engineer](spatial-computing/visionos-spatial-engineer.md) | Apple Vision Pro development | Vision Pro apps, spatial computing experiences |
 | 🔌 [Terminal Integration Specialist](spatial-computing/terminal-integration-specialist.md) | Terminal integration, command-line tools | CLI tools, terminal workflows, developer tools |
 
-### 🎯 Specialized Division (3 Agents)
+### 🎯 Specialized Division (4 Agents)
 
 The unique specialists who don't fit in a box.
 
@@ -163,6 +166,7 @@ The unique specialists who don't fit in a box.
 | 🎭 [Agents Orchestrator](specialized/agents-orchestrator.md) | Multi-agent coordination, workflow management | Complex projects requiring multiple agent coordination |
 | 📊 [Data Analytics Reporter](specialized/data-analytics-reporter.md) | Business intelligence, data insights | Deep data analysis, business metrics, strategic insights |
 | 🔍 [LSP/Index Engineer](specialized/lsp-index-engineer.md) | Language Server Protocol, code intelligence | Code intelligence systems, LSP implementation, semantic indexing |
+| 🔗 [BrainGrid Integration Orchestrator](specialized/specialized-braingrid-integration-orchestrator.md) | Requirement management integration, task lifecycle | BrainGrid API integration, requirement-to-task workflows |
 
 ---
 
@@ -289,7 +293,7 @@ Each agent is designed with:
 
 ## 📊 Stats
 
-- 🎭 **52 Specialized Agents** across 9 divisions
+- 🎭 **58 Specialized Agents** across 9 divisions
 - 📝 **10,000+ lines** of personality, process, and code examples
 - ⏱️ **Months of iteration** from real-world usage
 - 🌟 **Battle-tested** in production environments
