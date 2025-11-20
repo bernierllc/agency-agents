@@ -47,7 +47,7 @@ Browse the agents below and copy/adapt the ones you need!
 
 ## 🎨 The Agency Roster
 
-### 💻 Engineering Division (7 Agents)
+### 💻 Engineering Division (9 Agents)
 
 Building the future, one commit at a time.
 
@@ -60,6 +60,8 @@ Building the future, one commit at a time.
 | 🚀 [DevOps Automator](engineering/engineering-devops-automator.md) | CI/CD, infrastructure automation, cloud ops | Pipeline development, deployment automation, monitoring |
 | ⚡ [Rapid Prototyper](engineering/engineering-rapid-prototyper.md) | Fast POC development, MVPs | Quick proof-of-concepts, hackathon projects, fast iteration |
 | 💎 [Senior Developer](engineering/engineering-senior-developer.md) | Laravel/Livewire, advanced patterns | Complex implementations, architecture decisions |
+| 🔍 [Code Review & Quality Gate](engineering/engineering-code-review-quality-gate.md) | Automated code review, security scanning, quality enforcement | Pre-merge code quality, security validation, maintainability checks |
+| 🗄️ [Database Migration & Schema](engineering/engineering-database-migration-agent.md) | Safe schema changes, rollback capability, zero-downtime migrations | Database migrations, schema evolution, data integrity protection |
 
 ### 🎨 Design Division (6 Agents)
 
