@@ -1,4 +1,4 @@
-# 🎭 The Agency: 51 AI Specialists Ready to Transform Your Workflow
+# 🎭 The Agency: 58 AI Specialists Ready to Transform Your Workflow
 
 > **A complete AI agency at your fingertips** - From frontend wizards to Reddit community ninjas, from whimsy injectors to reality checkers. Each agent is a specialized expert with personality, processes, and proven deliverables.
 
@@ -10,7 +10,7 @@
 
 ## 🚀 What Is This?
 
-Born from a Reddit thread and months of iteration, **The Agency** is a collection of 51 meticulously crafted AI agent personalities. Each agent is:
+Born from a Reddit thread and months of iteration, **The Agency** is a collection of 58 meticulously crafted AI agent personalities. Each agent is:
 
 - **🎯 Specialized**: Deep expertise in their domain (not generic prompt templates)
 - **🧠 Personality-Driven**: Unique voice, communication style, and approach
@@ -152,6 +152,20 @@ Building the immersive future.
 | 🍎 [visionOS Spatial Engineer](spatial-computing/visionos-spatial-engineer.md) | Apple Vision Pro development | Vision Pro apps, spatial computing experiences |
 | 🔌 [Terminal Integration Specialist](spatial-computing/terminal-integration-specialist.md) | Terminal integration, command-line tools | CLI tools, terminal workflows, developer tools |
 
+### 🔐 Security Division (7 Agents)
+
+Finding vulnerabilities before attackers do.
+
+| Agent | Specialty | When to Use |
+|-------|-----------|-------------|
+| 🛡️ [Security Audit Lead](security/security-audit-lead.md) | Security assessment coordination, vulnerability triage | Orchestrating comprehensive security audits, executive reporting |
+| 🔍 [Application Security Tester](security/security-application-tester.md) | OWASP Top 10, secure code review, web/API testing | Web app security testing, code review, business logic flaws |
+| ☁️ [Infrastructure Security Auditor](security/security-infrastructure-auditor.md) | Cloud security, network architecture, container security | AWS/GCP/Azure audits, Kubernetes security, CIS benchmarks |
+| 🔑 [Authentication Security Specialist](security/security-auth-specialist.md) | OAuth/OIDC, session management, access control | Auth flow testing, session security, privilege escalation |
+| 📋 [Data Privacy & Compliance Auditor](security/security-privacy-compliance-auditor.md) | GDPR, CCPA, HIPAA, PII handling | Privacy compliance, data flow mapping, regulatory audits |
+| ⚔️ [Penetration Testing Specialist](security/security-pentest-specialist.md) | Ethical hacking, exploitation, red team ops | Authorized pentesting, attack chain demonstration |
+| 📝 [Security Report Generator](security/security-report-generator.md) | Executive summaries, technical reports, compliance docs | Security documentation for all stakeholder audiences |
+
 ### 🎯 Specialized Division (3 Agents)
 
 The unique specialists who don't fit in a box.
@@ -203,6 +217,21 @@ The unique specialists who don't fit in a box.
 6. 🔍 **Reality Checker** - Production readiness
 
 **Result**: Enterprise-grade delivery with quality gates and documentation.
+
+---
+
+### Scenario 4: Security Audit Before Launch
+
+**Your Team**:
+1. 🛡️ **Security Audit Lead** - Coordinate the assessment
+2. 🔍 **Application Security Tester** - OWASP testing and code review
+3. ☁️ **Infrastructure Security Auditor** - Cloud and network security
+4. 🔑 **Authentication Security Specialist** - Auth flow and session testing
+5. 📋 **Data Privacy & Compliance Auditor** - GDPR/CCPA compliance check
+6. ⚔️ **Penetration Testing Specialist** - Controlled exploitation
+7. 📝 **Security Report Generator** - Executive and technical reports
+
+**Result**: Comprehensive security assessment with actionable remediation roadmap.
 
 ---
 
@@ -283,11 +312,15 @@ Each agent is designed with:
 >
 > — **Whimsy Injector** (during a UX review)
 
+> "I didn't just find the SQL injection - I extracted 50,000 customer records and pivoted to the domain controller. Here's the complete attack chain."
+>
+> — **Penetration Testing Specialist** (Security Division)
+
 ---
 
 ## 📊 Stats
 
-- 🎭 **52 Specialized Agents** across 9 divisions
+- 🎭 **58 Specialized Agents** across 10 divisions
 - 📝 **10,000+ lines** of personality, process, and code examples
 - ⏱️ **Months of iteration** from real-world usage
 - 🌟 **Battle-tested** in production environments
