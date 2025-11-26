@@ -294,11 +294,7 @@ Each agent is designed with:
 
 ## 📊 Stats
 
-<<<<<<< HEAD
-- 🎭 **58 Specialized Agents** across 9 divisions
-=======
 - 🎭 **59 Specialized Agents** across 9 divisions
->>>>>>> feature/add-quality-agents-clean
 - 📝 **10,000+ lines** of personality, process, and code examples
 - ⏱️ **Months of iteration** from real-world usage
 - 🌟 **Battle-tested** in production environments
