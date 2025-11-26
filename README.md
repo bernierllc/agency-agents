@@ -1,4 +1,4 @@
-# 🎭 The Agency: 58 AI Specialists Ready to Transform Your Workflow
+# 🎭 The Agency: 59 AI Specialists Ready to Transform Your Workflow
 
 > **A complete AI agency at your fingertips** - From frontend wizards to Reddit community ninjas, from whimsy injectors to reality checkers. Each agent is a specialized expert with personality, processes, and proven deliverables.
 
@@ -10,7 +10,7 @@
 
 ## 🚀 What Is This?
 
-Born from a Reddit thread and months of iteration, **The Agency** is a collection of 58 meticulously crafted AI agent personalities. Each agent is:
+Born from a Reddit thread and months of iteration, **The Agency** is a collection of 59 meticulously crafted AI agent personalities. Each agent is:
 
 - **🎯 Specialized**: Deep expertise in their domain (not generic prompt templates)
 - **🧠 Personality-Driven**: Unique voice, communication style, and approach
@@ -114,7 +114,7 @@ Keeping the trains running on time (and under budget).
 | 👔 [Senior Project Manager](project-management/project-manager-senior.md) | Realistic scoping, task conversion | Converting specs to tasks, scope management |
 | 🛡️ [Production Readiness Gatekeeper](project-management/project-management-production-readiness-gatekeeper.md) | Final deployment approval, evidence-based quality gates | Production deployment validation, quality assurance, release readiness |
 
-### 🧪 Testing Division (9 Agents)
+### 🧪 Testing Division (10 Agents)
 
 Breaking things so users don't have to.
 
@@ -129,6 +129,7 @@ Breaking things so users don't have to.
 | 🛠️ [Tool Evaluator](testing/testing-tool-evaluator.md) | Technology assessment, tool selection | Evaluating tools, software recommendations, tech decisions |
 | 🔄 [Workflow Optimizer](testing/testing-workflow-optimizer.md) | Process analysis, workflow improvement | Process optimization, efficiency gains, automation opportunities |
 | 🎭 [Playwright Audit Specialist](testing/testing-playwright-auditor.md) | Comprehensive UI exploration, automated test generation | E2E testing, UI audit, security/accessibility testing via browser |
+| ♿ [Accessibility Specialist](testing/testing-accessibility-specialist.md) | WCAG compliance, VPAT documentation, inclusive design | Accessibility audits, Section 508 compliance, assistive technology testing |
 
 ### 🛟 Support Division (7 Agents)
 
@@ -293,7 +294,11 @@ Each agent is designed with:
 
 ## 📊 Stats
 
+<<<<<<< HEAD
 - 🎭 **58 Specialized Agents** across 9 divisions
+=======
+- 🎭 **59 Specialized Agents** across 9 divisions
+>>>>>>> feature/add-quality-agents-clean
 - 📝 **10,000+ lines** of personality, process, and code examples
 - ⏱️ **Months of iteration** from real-world usage
 - 🌟 **Battle-tested** in production environments
