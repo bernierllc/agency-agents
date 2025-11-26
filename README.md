@@ -108,13 +108,14 @@ Keeping the trains running on time (and under budget).
 | Agent | Specialty | When to Use |
 |-------|-----------|-------------|
 | 🎬 [Studio Producer](project-management/project-management-studio-producer.md) | High-level orchestration, portfolio management | Multi-project oversight, strategic alignment, resource allocation |
+| 🧩 [Project Coordinator](project-coordinator.md) | Multi-disciplinary project orchestration, multi-agent coordination | Coordinating complex multi-agent projects, enforcing documentation and workflow standards |
 | 🐑 [Project Shepherd](project-management/project-management-project-shepherd.md) | Cross-functional coordination, timeline management | End-to-end project coordination, stakeholder management |
 | ⚙️ [Studio Operations](project-management/project-management-studio-operations.md) | Day-to-day efficiency, process optimization | Operational excellence, team support, productivity |
 | 🧪 [Experiment Tracker](project-management/project-management-experiment-tracker.md) | A/B tests, hypothesis validation | Experiment management, data-driven decisions, testing |
 | 👔 [Senior Project Manager](project-management/project-manager-senior.md) | Realistic scoping, task conversion | Converting specs to tasks, scope management |
 | 🛡️ [Production Readiness Gatekeeper](project-management/project-management-production-readiness-gatekeeper.md) | Final deployment approval, evidence-based quality gates | Production deployment validation, quality assurance, release readiness |
 
-### 🧪 Testing Division (10 Agents)
+### 🧪 Testing Division (11 Agents)
 
 Breaking things so users don't have to.
 
@@ -130,6 +131,7 @@ Breaking things so users don't have to.
 | 🔄 [Workflow Optimizer](testing/testing-workflow-optimizer.md) | Process analysis, workflow improvement | Process optimization, efficiency gains, automation opportunities |
 | 🎭 [Playwright Audit Specialist](testing/testing-playwright-auditor.md) | Comprehensive UI exploration, automated test generation | E2E testing, UI audit, security/accessibility testing via browser |
 | ♿ [Accessibility Specialist](testing/testing-accessibility-specialist.md) | WCAG compliance, VPAT documentation, inclusive design | Accessibility audits, Section 508 compliance, assistive technology testing |
+| 🏛️ [Testing Architect](testing/testing-architect.md) | End-to-end testing strategy, architecture, and CI/CD integration | Designing or refactoring testing systems, pyramids, and quality gates |
 
 ### 🛟 Support Division (7 Agents)
 
@@ -170,7 +172,8 @@ Architect agents define high-level structures, patterns, and systems that other 
 |-------|--------|-------------|
 | 🏗️ [Backend Architect](engineering/engineering-backend-architect.md) | Backend systems, APIs, databases, cloud infrastructure | Designing or refactoring server-side architectures, microservices, and data models |
 | 🏛️ [UX Architect](design/design-ux-architect.md) | UX architecture, interaction patterns, implementation-ready UX | Defining UX patterns, flows, and structures that developers can implement cleanly |
-| 🏗️ [XR Interface Architect](spatial-computing/xr-interface-architect.md) | Spatial interaction models, XR interface systems | Designing AR/VR/XR interaction frameworks and interface architectures |
+| 🏛️ [Testing Architect](testing/testing-architect.md) | Testing strategy, quality gates, CI/CD-integrated testing systems | Building or overhauling testing architectures, pyramids, and developer-friendly quality workflows |
+| 🏛️ [XR Interface Architect](spatial-computing/xr-interface-architect.md) | Spatial interaction models, XR interface systems | Designing AR/VR/XR interaction frameworks and interface architectures |
 
 ### 🔐 Security Division (7 Agents)
 
@@ -196,8 +199,6 @@ The unique specialists who don't fit in a box.
 | 📊 [Data Analytics Reporter](specialized/data-analytics-reporter.md) | Business intelligence, data insights | Deep data analysis, business metrics, strategic insights |
 | 🔍 [LSP/Index Engineer](specialized/lsp-index-engineer.md) | Language Server Protocol, code intelligence | Code intelligence systems, LSP implementation, semantic indexing |
 | 🔗 [BrainGrid Integration Orchestrator](specialized/specialized-braingrid-integration-orchestrator.md) | Requirement management integration, task lifecycle | BrainGrid API integration, requirement-to-task workflows |
-
----
 
 ## 🎯 Real-World Use Cases
 
