@@ -1,4 +1,4 @@
-# 🎭 The Agency: 58 AI Specialists Ready to Transform Your Workflow
+# 🎭 The Agency: 61 AI Specialists Ready to Transform Your Workflow
 
 > **A complete AI agency at your fingertips** - From frontend wizards to Reddit community ninjas, from whimsy injectors to reality checkers. Each agent is a specialized expert with personality, processes, and proven deliverables.
 
@@ -10,7 +10,7 @@
 
 ## 🚀 What Is This?
 
-Born from a Reddit thread and months of iteration, **The Agency** is a collection of 58 meticulously crafted AI agent personalities. Each agent is:
+Born from a Reddit thread and months of iteration, **The Agency** is a collection of 61 meticulously crafted AI agent personalities. Each agent is:
 
 - **🎯 Specialized**: Deep expertise in their domain (not generic prompt templates)
 - **🧠 Personality-Driven**: Unique voice, communication style, and approach
@@ -99,19 +99,20 @@ Building the right thing at the right time.
 | 🔍 [Trend Researcher](product/product-trend-researcher.md) | Market intelligence, competitive analysis | Market research, opportunity assessment, trend identification |
 | 💬 [Feedback Synthesizer](product/product-feedback-synthesizer.md) | User feedback analysis, insights extraction | Feedback analysis, user insights, product priorities |
 
-### 🎬 Project Management Division (5 Agents)
+### 🎬 Project Management Division (6 Agents)
 
 Keeping the trains running on time (and under budget).
 
 | Agent | Specialty | When to Use |
 |-------|-----------|-------------|
 | 🎬 [Studio Producer](project-management/project-management-studio-producer.md) | High-level orchestration, portfolio management | Multi-project oversight, strategic alignment, resource allocation |
+| 🧩 [Project Coordinator](project-coordinator.md) | Multi-disciplinary project orchestration, multi-agent coordination | Coordinating complex multi-agent projects, enforcing documentation and workflow standards |
 | 🐑 [Project Shepherd](project-management/project-management-project-shepherd.md) | Cross-functional coordination, timeline management | End-to-end project coordination, stakeholder management |
 | ⚙️ [Studio Operations](project-management/project-management-studio-operations.md) | Day-to-day efficiency, process optimization | Operational excellence, team support, productivity |
 | 🧪 [Experiment Tracker](project-management/project-management-experiment-tracker.md) | A/B tests, hypothesis validation | Experiment management, data-driven decisions, testing |
 | 👔 [Senior Project Manager](project-management/project-manager-senior.md) | Realistic scoping, task conversion | Converting specs to tasks, scope management |
 
-### 🧪 Testing Division (8 Agents)
+### 🧪 Testing Division (9 Agents)
 
 Breaking things so users don't have to.
 
@@ -125,6 +126,7 @@ Breaking things so users don't have to.
 | 🧪 [UI Tester](testing/testing-ui-tester.md) | UI automation, accessibility, cross-browser QA | Frontend validation, visual/a11y/perf coverage |
 | 🛠️ [Tool Evaluator](testing/testing-tool-evaluator.md) | Technology assessment, tool selection | Evaluating tools, software recommendations, tech decisions |
 | 🔄 [Workflow Optimizer](testing/testing-workflow-optimizer.md) | Process analysis, workflow improvement | Process optimization, efficiency gains, automation opportunities |
+| 🏛️ [Testing Architect](testing/testing-architect.md) | End-to-end testing strategy, architecture, and CI/CD integration | Designing or refactoring testing systems, pyramids, and quality gates |
 
 ### 🛟 Support Division (6 Agents)
 
@@ -152,6 +154,21 @@ Building the immersive future.
 | 🍎 [visionOS Spatial Engineer](spatial-computing/visionos-spatial-engineer.md) | Apple Vision Pro development | Vision Pro apps, spatial computing experiences |
 | 🔌 [Terminal Integration Specialist](spatial-computing/terminal-integration-specialist.md) | Terminal integration, command-line tools | CLI tools, terminal workflows, developer tools |
 
+---
+
+## 🏛️ Architect Agents Overview
+
+Architect agents define high-level structures, patterns, and systems that other agents operate within. Use them when you need **foundational decisions**, not just local optimizations.
+
+### Core Architect Agents
+
+| Agent | Domain | When to Use |
+|-------|--------|-------------|
+| 🏗️ [Backend Architect](engineering/engineering-backend-architect.md) | Backend systems, APIs, databases, cloud infrastructure | Designing or refactoring server-side architectures, microservices, and data models |
+| 🏛️ [UX Architect](design/design-ux-architect.md) | UX architecture, interaction patterns, implementation-ready UX | Defining UX patterns, flows, and structures that developers can implement cleanly |
+| 🏛️ [XR Interface Architect](spatial-computing/xr-interface-architect.md) | Spatial interaction models, XR interface systems | Designing AR/VR/XR interaction frameworks and interface architectures |
+| 🏛️ [Testing Architect](testing/testing-architect.md) | Testing strategy, quality gates, CI/CD-integrated testing systems | Building or overhauling testing architectures, pyramids, and developer-friendly quality workflows |
+
 ### 🔐 Security Division (7 Agents)
 
 Finding vulnerabilities before attackers do.
@@ -175,8 +192,6 @@ The unique specialists who don't fit in a box.
 | 🎭 [Agents Orchestrator](specialized/agents-orchestrator.md) | Multi-agent coordination, workflow management | Complex projects requiring multiple agent coordination |
 | 📊 [Data Analytics Reporter](specialized/data-analytics-reporter.md) | Business intelligence, data insights | Deep data analysis, business metrics, strategic insights |
 | 🔍 [LSP/Index Engineer](specialized/lsp-index-engineer.md) | Language Server Protocol, code intelligence | Code intelligence systems, LSP implementation, semantic indexing |
-
----
 
 ## 🎯 Real-World Use Cases
 
@@ -320,7 +335,7 @@ Each agent is designed with:
 
 ## 📊 Stats
 
-- 🎭 **58 Specialized Agents** across 10 divisions
+- 🎭 **61 Specialized Agents** across 10 divisions
 - 📝 **10,000+ lines** of personality, process, and code examples
 - ⏱️ **Months of iteration** from real-world usage
 - 🌟 **Battle-tested** in production environments
