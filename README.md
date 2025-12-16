@@ -47,13 +47,14 @@ Browse the agents below and copy/adapt the ones you need!
 
 ## 🎨 The Agency Roster
 
-### 💻 Engineering Division (9 Agents)
+### 💻 Engineering Division (10 Agents)
 
 Building the future, one commit at a time.
 
 | Agent | Specialty | When to Use |
 |-------|-----------|-------------|
 | 🎨 [Frontend Developer](engineering/engineering-frontend-developer.md) | React/Vue/Angular, UI implementation, performance | Modern web apps, pixel-perfect UIs, Core Web Vitals optimization |
+| 🎨 [Frontend Developer - Tamagui Specialist](engineering/engineering-frontend-tamagui.md) | Tamagui cross-platform UI, design tokens, static compilation | Cross-platform apps (web/mobile), design system implementation, performance-critical UIs |
 | 🏗️ [Backend Architect](engineering/engineering-backend-architect.md) | API design, database architecture, scalability | Server-side systems, microservices, cloud infrastructure |
 | 📱 [Mobile App Builder](engineering/engineering-mobile-app-builder.md) | iOS/Android, React Native, Flutter | Native and cross-platform mobile applications |
 | 🤖 [AI Engineer](engineering/engineering-ai-engineer.md) | ML models, deployment, AI integration | Machine learning features, data pipelines, AI-powered apps |
@@ -342,7 +343,7 @@ Each agent is designed with:
 
 ## 📊 Stats
 
-- 🎭 **66 Specialized Agents** across 10 divisions
+- 🎭 **67 Specialized Agents** across 10 divisions
 - 📝 **10,000+ lines** of personality, process, and code examples
 - ⏱️ **Months of iteration** from real-world usage
 - 🌟 **Battle-tested** in production environments
