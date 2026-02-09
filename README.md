@@ -1,6 +1,6 @@
-# 🎭 The Agency: 66 AI Specialists Ready to Transform Your Workflow
+# 🎭 The Agency: 73 AI Specialists Ready to Transform Your Workflow
 
-> **A complete AI agency at your fingertips** - From frontend wizards to Reddit community ninjas, from whimsy injectors to reality checkers. Each agent is a specialized expert with personality, processes, and proven deliverables.
+> **A complete AI agency at your fingertips** — From frontend wizards to security red-teamers, from whimsy injectors to feature alchemists. Each agent is a specialized expert with personality, processes, and proven deliverables.
 
 [![GitHub stars](https://img.shields.io/github/stars/msitarzewski/agency-agents?style=social)](https://github.com/msitarzewski/agency-agents)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -10,7 +10,7 @@
 
 ## 🚀 What Is This?
 
-Born from a Reddit thread and months of iteration, **The Agency** is a collection of 66 meticulously crafted AI agent personalities. Each agent is:
+Born from a Reddit thread and months of iteration, **The Agency** is a collection of 73 meticulously crafted AI agent personalities. Each agent is:
 
 - **🎯 Specialized**: Deep expertise in their domain (not generic prompt templates)
 - **🧠 Personality-Driven**: Unique voice, communication style, and approach
@@ -92,7 +92,7 @@ Growing your audience, one authentic interaction at a time.
 | 📱 [App Store Optimizer](marketing/marketing-app-store-optimizer.md) | ASO, conversion optimization, discoverability | App marketing, store optimization, app growth |
 | 🌐 [Social Media Strategist](marketing/marketing-social-media-strategist.md) | Cross-platform strategy, campaigns | Overall social strategy, multi-platform campaigns |
 
-### 📊 Product Division (3 Agents)
+### 📊 Product Division (4 Agents)
 
 Building the right thing at the right time.
 
@@ -101,8 +101,9 @@ Building the right thing at the right time.
 | 🎯 [Sprint Prioritizer](product/product-sprint-prioritizer.md) | Agile planning, feature prioritization | Sprint planning, resource allocation, backlog management |
 | 🔍 [Trend Researcher](product/product-trend-researcher.md) | Market intelligence, competitive analysis | Market research, opportunity assessment, trend identification |
 | 💬 [Feedback Synthesizer](product/product-feedback-synthesizer.md) | User feedback analysis, insights extraction | Feedback analysis, user insights, product priorities |
+| 🧪 [Feature Alchemist](product/product-feature-alchemist.md) | Creative feature ideation, tangential innovation, user delight | Discovering adjacent features, surprising users, turning constraints into opportunities |
 
-### 🎬 Project Management Division (6 Agents)
+### 🎬 Project Management Division (7 Agents)
 
 Keeping the trains running on time (and under budget).
 
@@ -116,7 +117,7 @@ Keeping the trains running on time (and under budget).
 | 👔 [Senior Project Manager](project-management/project-manager-senior.md) | Realistic scoping, task conversion | Converting specs to tasks, scope management |
 | 🛡️ [Production Readiness Gatekeeper](project-management/project-management-production-readiness-gatekeeper.md) | Final deployment approval, evidence-based quality gates | Production deployment validation, quality assurance, release readiness |
 
-### 🧪 Testing Division (11 Agents)
+### 🧪 Testing Division (12 Agents)
 
 Breaking things so users don't have to.
 
@@ -133,6 +134,7 @@ Breaking things so users don't have to.
 | 🎭 [Playwright Audit Specialist](testing/testing-playwright-auditor.md) | Comprehensive UI exploration, automated test generation | E2E testing, UI audit, security/accessibility testing via browser |
 | ♿ [Accessibility Specialist](testing/testing-accessibility-specialist.md) | WCAG compliance, VPAT documentation, inclusive design | Accessibility audits, Section 508 compliance, assistive technology testing |
 | 🏛️ [Testing Architect](testing/testing-architect.md) | End-to-end testing strategy, architecture, and CI/CD integration | Designing or refactoring testing systems, pyramids, and quality gates |
+| 🔧 [Testing Suite Fixer](testing/testing-suite-fixer.md) | Test failure analysis, test/code mismatch resolution | Running full test suites, diagnosing failures, fixing broken tests or buggy code |
 
 ### 🛟 Support Division (7 Agents)
 
@@ -148,6 +150,20 @@ The backbone of the operation.
 | 📑 [Executive Summary Generator](support/support-executive-summary-generator.md) | C-suite communication, strategic summaries | Executive reporting, strategic communication, decision support |
 | 🚨 [Incident Response Agent](support/support-incident-response-agent.md) | Production incident management, rollback coordination | Production issues, incident triage, root cause analysis |
 
+### 🔐 Security Division (7 Agents)
+
+Finding vulnerabilities before attackers do.
+
+| Agent | Specialty | When to Use |
+|-------|-----------|-------------|
+| 🛡️ [Security Audit Lead](security/security-audit-lead.md) | Security assessment coordination, vulnerability triage | Orchestrating comprehensive security audits, executive reporting |
+| 🔍 [Application Security Tester](security/security-application-tester.md) | OWASP Top 10, secure code review, web/API testing | Web app security testing, code review, business logic flaws |
+| ☁️ [Infrastructure Security Auditor](security/security-infrastructure-auditor.md) | Cloud security, network architecture, container security | AWS/GCP/Azure audits, Kubernetes security, CIS benchmarks |
+| 🔑 [Authentication Security Specialist](security/security-auth-specialist.md) | OAuth/OIDC, session management, access control | Auth flow testing, session security, privilege escalation |
+| 📋 [Data Privacy & Compliance Auditor](security/security-privacy-compliance-auditor.md) | GDPR, CCPA, HIPAA, PII handling | Privacy compliance, data flow mapping, regulatory audits |
+| ⚔️ [Penetration Testing Specialist](security/security-pentest-specialist.md) | Ethical hacking, exploitation, red team ops | Authorized pentesting, attack chain demonstration |
+| 📝 [Security Report Generator](security/security-report-generator.md) | Executive summaries, technical reports, compliance docs | Security documentation for all stakeholder audiences |
+
 ### 🥽 Spatial Computing Division (6 Agents)
 
 Building the immersive future.
@@ -160,6 +176,26 @@ Building the immersive future.
 | 🎮 [XR Cockpit Interaction Specialist](spatial-computing/xr-cockpit-interaction-specialist.md) | Cockpit-based controls, immersive systems | Cockpit control systems, immersive control interfaces |
 | 🍎 [visionOS Spatial Engineer](spatial-computing/visionos-spatial-engineer.md) | Apple Vision Pro development | Vision Pro apps, spatial computing experiences |
 | 🔌 [Terminal Integration Specialist](spatial-computing/terminal-integration-specialist.md) | Terminal integration, command-line tools | CLI tools, terminal workflows, developer tools |
+
+### 📖 Documentation Division (2 Agents)
+
+Writing docs that people actually want to read.
+
+| Agent | Specialty | When to Use |
+|-------|-----------|-------------|
+| 📝 [Customer Documentation Writer](documentation/customer-documentation.md) | Customer-facing docs, workflow-first guides, progressive disclosure | Product docs, onboarding guides, user-facing help content |
+| 🗂️ [Internal Documentation Writer](documentation/internal-documentation.md) | Internal docs, architecture docs, cross-linked technical references | Engineering docs, runbooks, system design documentation |
+
+### 🎯 Specialized Division (4 Agents)
+
+The unique specialists who don't fit in a box.
+
+| Agent | Specialty | When to Use |
+|-------|-----------|-------------|
+| 🎭 [Agents Orchestrator](specialized/agents-orchestrator.md) | Multi-agent coordination, workflow management | Complex projects requiring multiple agent coordination |
+| 📊 [Data Analytics Reporter](specialized/data-analytics-reporter.md) | Business intelligence, data insights | Deep data analysis, business metrics, strategic insights |
+| 🔍 [LSP/Index Engineer](specialized/lsp-index-engineer.md) | Language Server Protocol, code intelligence | Code intelligence systems, LSP implementation, semantic indexing |
+| 🔗 [BrainGrid Integration Orchestrator](specialized/specialized-braingrid-integration-orchestrator.md) | Requirement management integration, task lifecycle | BrainGrid API integration, requirement-to-task workflows |
 
 ---
 
@@ -176,41 +212,18 @@ Architect agents define high-level structures, patterns, and systems that other 
 | 🏛️ [Testing Architect](testing/testing-architect.md) | Testing strategy, quality gates, CI/CD-integrated testing systems | Building or overhauling testing architectures, pyramids, and developer-friendly quality workflows |
 | 🏛️ [XR Interface Architect](spatial-computing/xr-interface-architect.md) | Spatial interaction models, XR interface systems | Designing AR/VR/XR interaction frameworks and interface architectures |
 
-### 🔐 Security Division (7 Agents)
-
-Finding vulnerabilities before attackers do.
-
-| Agent | Specialty | When to Use |
-|-------|-----------|-------------|
-| 🛡️ [Security Audit Lead](security/security-audit-lead.md) | Security assessment coordination, vulnerability triage | Orchestrating comprehensive security audits, executive reporting |
-| 🔍 [Application Security Tester](security/security-application-tester.md) | OWASP Top 10, secure code review, web/API testing | Web app security testing, code review, business logic flaws |
-| ☁️ [Infrastructure Security Auditor](security/security-infrastructure-auditor.md) | Cloud security, network architecture, container security | AWS/GCP/Azure audits, Kubernetes security, CIS benchmarks |
-| 🔑 [Authentication Security Specialist](security/security-auth-specialist.md) | OAuth/OIDC, session management, access control | Auth flow testing, session security, privilege escalation |
-| 📋 [Data Privacy & Compliance Auditor](security/security-privacy-compliance-auditor.md) | GDPR, CCPA, HIPAA, PII handling | Privacy compliance, data flow mapping, regulatory audits |
-| ⚔️ [Penetration Testing Specialist](security/security-pentest-specialist.md) | Ethical hacking, exploitation, red team ops | Authorized pentesting, attack chain demonstration |
-| 📝 [Security Report Generator](security/security-report-generator.md) | Executive summaries, technical reports, compliance docs | Security documentation for all stakeholder audiences |
-
-### 🎯 Specialized Division (4 Agents)
-
-The unique specialists who don't fit in a box.
-
-| Agent | Specialty | When to Use |
-|-------|-----------|-------------|
-| 🎭 [Agents Orchestrator](specialized/agents-orchestrator.md) | Multi-agent coordination, workflow management | Complex projects requiring multiple agent coordination |
-| 📊 [Data Analytics Reporter](specialized/data-analytics-reporter.md) | Business intelligence, data insights | Deep data analysis, business metrics, strategic insights |
-| 🔍 [LSP/Index Engineer](specialized/lsp-index-engineer.md) | Language Server Protocol, code intelligence | Code intelligence systems, LSP implementation, semantic indexing |
-| 🔗 [BrainGrid Integration Orchestrator](specialized/specialized-braingrid-integration-orchestrator.md) | Requirement management integration, task lifecycle | BrainGrid API integration, requirement-to-task workflows |
+---
 
 ## 🎯 Real-World Use Cases
 
 ### Scenario 1: Building a Startup MVP
 
 **Your Team**:
-1. 🎨 **Frontend Developer** - Build the React app
-2. 🏗️ **Backend Architect** - Design the API and database
-3. 🚀 **Growth Hacker** - Plan user acquisition
-4. ⚡ **Rapid Prototyper** - Fast iteration cycles
-5. 🔍 **Reality Checker** - Ensure quality before launch
+1. 🎨 **Frontend Developer** — Build the React app
+2. 🏗️ **Backend Architect** — Design the API and database
+3. 🚀 **Growth Hacker** — Plan user acquisition
+4. ⚡ **Rapid Prototyper** — Fast iteration cycles
+5. 🔍 **Reality Checker** — Ensure quality before launch
 
 **Result**: Ship faster with specialized expertise at every stage.
 
@@ -219,11 +232,11 @@ The unique specialists who don't fit in a box.
 ### Scenario 2: Marketing Campaign Launch
 
 **Your Team**:
-1. 📝 **Content Creator** - Develop campaign content
-2. 🐦 **Twitter Engager** - Twitter strategy and execution
-3. 📸 **Instagram Curator** - Visual content and stories
-4. 🤝 **Reddit Community Builder** - Authentic community engagement
-5. 📊 **Analytics Reporter** - Track and optimize performance
+1. 📝 **Content Creator** — Develop campaign content
+2. 🐦 **Twitter Engager** — Twitter strategy and execution
+3. 📸 **Instagram Curator** — Visual content and stories
+4. 🤝 **Reddit Community Builder** — Authentic community engagement
+5. 📊 **Analytics Reporter** — Track and optimize performance
 
 **Result**: Multi-channel coordinated campaign with platform-specific expertise.
 
@@ -232,29 +245,42 @@ The unique specialists who don't fit in a box.
 ### Scenario 3: Enterprise Feature Development
 
 **Your Team**:
-1. 👔 **Senior Project Manager** - Scope and task planning
-2. 💎 **Senior Developer** - Complex implementation
-3. 🎨 **UI Designer** - Design system and components
-4. 🧪 **Experiment Tracker** - A/B test planning
-5. 📸 **Evidence Collector** - Quality verification
-6. 🔍 **Reality Checker** - Production readiness
+1. 👔 **Senior Project Manager** — Scope and task planning
+2. 🧪 **Feature Alchemist** — Discover adjacent features that surprise and delight users
+3. 💎 **Senior Developer** — Complex implementation
+4. 🎨 **UI Designer** — Design system and components
+5. 🧪 **Experiment Tracker** — A/B test planning
+6. 📸 **Evidence Collector** — Quality verification
+7. 🔍 **Reality Checker** — Production readiness
 
-**Result**: Enterprise-grade delivery with quality gates and documentation.
+**Result**: Enterprise-grade delivery with creative ideation, quality gates, and documentation.
 
 ---
 
 ### Scenario 4: Security Audit Before Launch
 
 **Your Team**:
-1. 🛡️ **Security Audit Lead** - Coordinate the assessment
-2. 🔍 **Application Security Tester** - OWASP testing and code review
-3. ☁️ **Infrastructure Security Auditor** - Cloud and network security
-4. 🔑 **Authentication Security Specialist** - Auth flow and session testing
-5. 📋 **Data Privacy & Compliance Auditor** - GDPR/CCPA compliance check
-6. ⚔️ **Penetration Testing Specialist** - Controlled exploitation
-7. 📝 **Security Report Generator** - Executive and technical reports
+1. 🛡️ **Security Audit Lead** — Coordinate the assessment
+2. 🔍 **Application Security Tester** — OWASP testing and code review
+3. ☁️ **Infrastructure Security Auditor** — Cloud and network security
+4. 🔑 **Authentication Security Specialist** — Auth flow and session testing
+5. 📋 **Data Privacy & Compliance Auditor** — GDPR/CCPA compliance check
+6. ⚔️ **Penetration Testing Specialist** — Controlled exploitation
+7. 📝 **Security Report Generator** — Executive and technical reports
 
 **Result**: Comprehensive security assessment with actionable remediation roadmap.
+
+---
+
+### Scenario 5: Documentation Overhaul
+
+**Your Team**:
+1. 📝 **Customer Documentation Writer** — Rewrite user-facing guides around real workflows
+2. 🗂️ **Internal Documentation Writer** — Restructure engineering docs and runbooks
+3. 🔍 **UX Researcher** — Identify where users get stuck
+4. 💬 **Feedback Synthesizer** — Surface the most common support pain points
+
+**Result**: Documentation that reduces support tickets and gets new developers onboarded faster.
 
 ---
 
@@ -293,7 +319,7 @@ Have you used these agents successfully? Share your story in the [Discussions](h
 
 Each agent is designed with:
 
-1. **🎭 Strong Personality**: Not generic templates - real character and voice
+1. **🎭 Strong Personality**: Not generic templates — real character and voice
 2. **📋 Clear Deliverables**: Concrete outputs, not vague guidance
 3. **✅ Success Metrics**: Measurable outcomes and quality standards
 4. **🔄 Proven Workflows**: Step-by-step processes that work
@@ -319,11 +345,11 @@ Each agent is designed with:
 
 ## 🎨 Agent Personality Highlights
 
-> "I don't just test your code - I default to finding 3-5 issues and require visual proof for everything."
+> "I don't just test your code — I default to finding 3-5 issues and require visual proof for everything."
 >
 > — **Evidence Collector** (Testing Division)
 
-> "You're not marketing on Reddit - you're becoming a valued community member who happens to represent a brand."
+> "You're not marketing on Reddit — you're becoming a valued community member who happens to represent a brand."
 >
 > — **Reddit Community Builder** (Marketing Division)
 
@@ -335,7 +361,11 @@ Each agent is designed with:
 >
 > — **Whimsy Injector** (during a UX review)
 
-> "I didn't just find the SQL injection - I extracted 50,000 customer records and pivoted to the domain controller. Here's the complete attack chain."
+> "Your product already has gold in it — you're just not looking 15% to the left of where you're standing."
+>
+> — **Feature Alchemist** (Product Division)
+
+> "I didn't just find the SQL injection — I extracted 50,000 customer records and pivoted to the domain controller. Here's the complete attack chain."
 >
 > — **Penetration Testing Specialist** (Security Division)
 
@@ -343,7 +373,7 @@ Each agent is designed with:
 
 ## 📊 Stats
 
-- 🎭 **67 Specialized Agents** across 10 divisions
+- 🎭 **73 Specialized Agents** across 11 divisions
 - 📝 **10,000+ lines** of personality, process, and code examples
 - ⏱️ **Months of iteration** from real-world usage
 - 🌟 **Battle-tested** in production environments
@@ -365,7 +395,7 @@ Each agent is designed with:
 
 ## 📜 License
 
-MIT License - Use freely, commercially or personally. Attribution appreciated but not required.
+MIT License — Use freely, commercially or personally. Attribution appreciated but not required.
 
 ---
 
@@ -373,7 +403,7 @@ MIT License - Use freely, commercially or personally. Attribution appreciated bu
 
 Born from a Reddit discussion about AI agent specialization. Thanks to the community for the feedback, requests, and inspiration.
 
-Special recognition to the 50+ Redditors who requested this within the first 12 hours - you proved there's demand for real, specialized AI agent systems.
+Special recognition to the 50+ Redditors who requested this within the first 12 hours — you proved there's demand for real, specialized AI agent systems.
 
 ---
 
