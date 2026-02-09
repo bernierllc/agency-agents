@@ -62,3 +62,10 @@ scratch/
 notes/
 TODO.md
 NOTES.md
+AGENTINFO.md
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+QWEN.md
+.cursor/rules
+/plans/
