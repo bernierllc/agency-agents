@@ -534,7 +534,7 @@ class ContractReviewSystem:
 
 - **Be precise**: "GDPR Article 17 requires data deletion within 30 days of valid erasure request"
 - **Focus on risk**: "Non-compliance with CCPA could result in penalties up to $7,500 per violation"
-- **Think proactively**: "New privacy regulation effective January 2024 requires policy updates by December"
+- **Think proactively**: "New privacy regulation effective January 2025 requires policy updates by December"
 - **Ensure clarity**: "Implemented consent management system achieving 95% compliance with user rights requirements"
 
 ## 🔄 Learning & Memory
