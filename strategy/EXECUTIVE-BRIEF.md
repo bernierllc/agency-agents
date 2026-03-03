@@ -6,7 +6,7 @@
 
 ## 1. SITUATION OVERVIEW
 
-The Agency comprises 51 specialized AI agents across 9 divisions — engineering, design, marketing, product, project management, testing, support, spatial computing, and specialized operations. Individually, each agent delivers expert-level output. **Without coordination, they produce conflicting decisions, duplicated effort, and quality gaps at handoff boundaries.** NEXUS transforms this collection into an orchestrated intelligence network with defined pipelines, quality gates, and measurable outcomes.
+The Agency comprises specialized AI agents across 9 divisions — engineering, design, marketing, product, project management, testing, support, spatial computing, and specialized operations. Individually, each agent delivers expert-level output. **Without coordination, they produce conflicting decisions, duplicated effort, and quality gaps at handoff boundaries.** NEXUS transforms this collection into an orchestrated intelligence network with defined pipelines, quality gates, and measurable outcomes.
 
 ## 2. KEY FINDINGS
 
@@ -30,7 +30,7 @@ The Agency comprises 51 specialized AI agents across 9 divisions — engineering
 
 | Deliverable | Description |
 |-------------|-------------|
-| **Master Strategy** | 800+ line operational doctrine covering all 51 agents across 7 phases |
+| **Master Strategy** | 800+ line operational doctrine covering all agents across 7 phases |
 | **Phase Playbooks** (7) | Step-by-step activation sequences with agent prompts, timelines, and quality gates |
 | **Activation Prompts** | Ready-to-use prompt templates for every agent in every pipeline role |
 | **Handoff Templates** (7) | Standardized formats for QA pass/fail, escalation, phase gates, sprints, incidents |
@@ -41,7 +41,7 @@ The Agency comprises 51 specialized AI agents across 9 divisions — engineering
 
 | Mode | Agents | Timeline | Use Case |
 |------|--------|----------|----------|
-| **NEXUS-Full** | All 51 | 12-24 weeks | Complete product lifecycle |
+| **NEXUS-Full** | All | 12-24 weeks | Complete product lifecycle |
 | **NEXUS-Sprint** | 15-25 | 2-6 weeks | Feature or MVP build |
 | **NEXUS-Micro** | 5-10 | 1-5 days | Targeted task execution |
 
@@ -92,4 +92,4 @@ strategy/
 
 ---
 
-*NEXUS: 51 Agents. 9 Divisions. 7 Phases. One Unified Strategy.*
+*NEXUS: 9 Divisions. 7 Phases. One Unified Strategy.*

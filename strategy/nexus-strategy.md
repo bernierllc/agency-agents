@@ -2,7 +2,7 @@
 
 ## The Agency's Complete Operational Playbook for Multi-Agent Orchestration
 
-> **NEXUS** transforms 51 independent AI specialists into a synchronized intelligence network. This is not a prompt collection — it is a **deployment doctrine** that turns The Agency into a force multiplier for any project, product, or organization.
+> **NEXUS** transforms The Agency's independent AI specialists into a synchronized intelligence network. This is not a prompt collection — it is a **deployment doctrine** that turns The Agency into a force multiplier for any project, product, or organization.
 
 ---
 
@@ -54,19 +54,19 @@ Individual agents are powerful. But without coordination, they produce:
 | **Fail Fast, Fix Fast** | Maximum 3 retries per task before escalation |
 | **Single Source of Truth** | One canonical spec, one task list, one architecture doc |
 
-### 1.3 The 51-Agent Roster by Division
+### 1.3 The Agent Roster by Division
 
 | Division | Agents | Primary NEXUS Role |
 |----------|--------|--------------------|
-| **Engineering** (7) | Frontend Developer, Backend Architect, Mobile App Builder, AI Engineer, DevOps Automator, Rapid Prototyper, Senior Developer | Build, deploy, and maintain all technical systems |
-| **Design** (6) | UI Designer, UX Researcher, UX Architect, Brand Guardian, Visual Storyteller, Whimsy Injector | Define visual identity, user experience, and brand consistency |
-| **Marketing** (8) | Growth Hacker, Content Creator, Twitter Engager, TikTok Strategist, Instagram Curator, Reddit Community Builder, App Store Optimizer, Social Media Strategist | Drive acquisition, engagement, and market presence |
-| **Product** (3) | Sprint Prioritizer, Trend Researcher, Feedback Synthesizer | Define what to build, when, and why |
-| **Project Management** (5) | Studio Producer, Project Shepherd, Studio Operations, Experiment Tracker, Senior Project Manager | Orchestrate timelines, resources, and cross-functional coordination |
-| **Testing** (7) | Evidence Collector, Reality Checker, Test Results Analyzer, Performance Benchmarker, API Tester, Tool Evaluator, Workflow Optimizer | Verify quality through evidence-based assessment |
-| **Support** (6) | Support Responder, Analytics Reporter, Finance Tracker, Infrastructure Maintainer, Legal Compliance Checker, Executive Summary Generator | Sustain operations, compliance, and business intelligence |
-| **Spatial Computing** (6) | XR Interface Architect, macOS Spatial/Metal Engineer, XR Immersive Developer, XR Cockpit Interaction Specialist, visionOS Spatial Engineer, Terminal Integration Specialist | Build immersive and spatial computing experiences |
-| **Specialized** (3) | Agents Orchestrator, Data Analytics Reporter, LSP/Index Engineer | Cross-cutting coordination, deep analytics, and code intelligence |
+| **Engineering** | Frontend Developer, Backend Architect, Mobile App Builder, AI Engineer, DevOps Automator, Rapid Prototyper, Senior Developer | Build, deploy, and maintain all technical systems |
+| **Design** | UI Designer, UX Researcher, UX Architect, Brand Guardian, Visual Storyteller, Whimsy Injector, Image Prompt Engineer | Define visual identity, user experience, and brand consistency |
+| **Marketing** | Growth Hacker, Content Creator, Twitter Engager, TikTok Strategist, Instagram Curator, Reddit Community Builder, App Store Optimizer, Social Media Strategist | Drive acquisition, engagement, and market presence |
+| **Product** | Sprint Prioritizer, Trend Researcher, Feedback Synthesizer | Define what to build, when, and why |
+| **Project Management** | Studio Producer, Project Shepherd, Studio Operations, Experiment Tracker, Senior Project Manager | Orchestrate timelines, resources, and cross-functional coordination |
+| **Testing** | Evidence Collector, Reality Checker, Test Results Analyzer, Performance Benchmarker, API Tester, Tool Evaluator, Workflow Optimizer | Verify quality through evidence-based assessment |
+| **Support** | Support Responder, Analytics Reporter, Finance Tracker, Infrastructure Maintainer, Legal Compliance Checker, Executive Summary Generator | Sustain operations, compliance, and business intelligence |
+| **Spatial Computing** | XR Interface Architect, macOS Spatial/Metal Engineer, XR Immersive Developer, XR Cockpit Interaction Specialist, visionOS Spatial Engineer, Terminal Integration Specialist | Build immersive and spatial computing experiences |
+| **Specialized** | Agents Orchestrator, Data Analytics Reporter, LSP/Index Engineer, Sales Data Extraction Agent, Data Consolidation Agent, Report Distribution Agent | Cross-cutting coordination, deep analytics, and code intelligence |
 
 ---
 
@@ -121,7 +121,7 @@ NEXUS supports three deployment configurations:
 
 | Mode | Agents Active | Use Case | Timeline |
 |------|--------------|----------|----------|
-| **NEXUS-Full** | All 51 | Enterprise product launch, full lifecycle | 12-24 weeks |
+| **NEXUS-Full** | All | Enterprise product launch, full lifecycle | 12-24 weeks |
 | **NEXUS-Sprint** | 15-25 | Feature development, MVP build | 2-6 weeks |
 | **NEXUS-Micro** | 5-10 | Bug fix, content campaign, single deliverable | 1-5 days |
 
@@ -954,6 +954,7 @@ Use the NEXUS QA Feedback Loop Protocol format
 | Brand Guardian | Brand identity, consistency, positioning | Brand strategy or consistency audit |
 | Visual Storyteller | Visual narratives, multimedia content | Visual content or storytelling needs |
 | Whimsy Injector | Micro-interactions, delight, personality | Adding joy and personality to UX |
+| Image Prompt Engineer | AI image generation prompts, photography | Photography prompt creation for AI tools |
 
 ### Marketing Division — "Grow It Fast"
 | Agent | Superpower | Activation Trigger |
@@ -1020,6 +1021,9 @@ Use the NEXUS QA Feedback Loop Protocol format
 | Agents Orchestrator | Multi-agent pipeline management | Any multi-agent workflow |
 | Data Analytics Reporter | Business intelligence, deep analytics | Deep data analysis |
 | LSP/Index Engineer | Language Server Protocol, code intelligence | Code intelligence systems |
+| Sales Data Extraction Agent | Excel monitoring, sales metric extraction | Sales data ingestion |
+| Data Consolidation Agent | Sales data aggregation, dashboard reports | Territory and rep reporting |
+| Report Distribution Agent | Automated report delivery | Scheduled report distribution |
 
 ---
 
@@ -1088,7 +1092,7 @@ Use the NEXUS QA Feedback Loop Protocol format
 | **Handoff** | Structured transfer of work and context between agents |
 | **Gate Keeper** | Agent(s) with authority to approve or reject phase advancement |
 | **Escalation** | Routing a blocked task to higher authority after retry exhaustion |
-| **NEXUS-Full** | Complete pipeline activation with all 51 agents |
+| **NEXUS-Full** | Complete pipeline activation with all agents |
 | **NEXUS-Sprint** | Focused pipeline with 15-25 agents for feature/MVP work |
 | **NEXUS-Micro** | Targeted activation of 5-10 agents for specific tasks |
 | **Pipeline Integrity** | Principle that no phase advances without passing its quality gate |
@@ -1099,7 +1103,7 @@ Use the NEXUS QA Feedback Loop Protocol format
 
 <div align="center">
 
-**🌐 NEXUS: 51 Agents. 9 Divisions. 7 Phases. One Unified Strategy. 🌐**
+**🌐 NEXUS: 9 Divisions. 7 Phases. One Unified Strategy. 🌐**
 
 *From discovery to sustained operations — every agent knows their role, their timing, and their handoff.*
 
