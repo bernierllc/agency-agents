@@ -6,13 +6,13 @@
 
 ## What is NEXUS?
 
-**NEXUS** (Network of EXperts, Unified in Strategy) turns The Agency's 51 AI specialists into a coordinated pipeline. Instead of activating agents one at a time and hoping they work together, NEXUS defines exactly who does what, when, and how quality is verified at every step.
+**NEXUS** (Network of EXperts, Unified in Strategy) turns The Agency's AI specialists into a coordinated pipeline. Instead of activating agents one at a time and hoping they work together, NEXUS defines exactly who does what, when, and how quality is verified at every step.
 
 ## Choose Your Mode
 
 | I want to... | Use | Agents | Time |
 |-------------|-----|--------|------|
-| Build a complete product from scratch | **NEXUS-Full** | All 51 | 12-24 weeks |
+| Build a complete product from scratch | **NEXUS-Full** | All | 12-24 weeks |
 | Build a feature or MVP | **NEXUS-Sprint** | 15-25 | 2-6 weeks |
 | Do a specific task (bug fix, campaign, audit) | **NEXUS-Micro** | 5-10 | 1-5 days |
 
@@ -152,20 +152,20 @@ Evidence Collector verifies improvements.
 
 ---
 
-## 🎭 The 51 Agents at a Glance
+## 🎭 The Agents at a Glance
 
 ```
-ENGINEERING (7)     │ DESIGN (6)          │ MARKETING (8)
+ENGINEERING         │ DESIGN              │ MARKETING
 Frontend Developer  │ UI Designer         │ Growth Hacker
 Backend Architect   │ UX Researcher       │ Content Creator
 Mobile App Builder  │ UX Architect        │ Twitter Engager
 AI Engineer         │ Brand Guardian      │ TikTok Strategist
 DevOps Automator    │ Visual Storyteller  │ Instagram Curator
 Rapid Prototyper    │ Whimsy Injector     │ Reddit Community Builder
-Senior Developer    │                     │ App Store Optimizer
+Senior Developer    │ Image Prompt Eng.   │ App Store Optimizer
                     │                     │ Social Media Strategist
 ────────────────────┼─────────────────────┼──────────────────────
-PRODUCT (3)         │ PROJECT MGMT (5)    │ TESTING (7)
+PRODUCT             │ PROJECT MGMT        │ TESTING
 Sprint Prioritizer  │ Studio Producer     │ Evidence Collector
 Trend Researcher    │ Project Shepherd    │ Reality Checker
 Feedback Synthesizer│ Studio Operations   │ Test Results Analyzer
@@ -174,13 +174,13 @@ Feedback Synthesizer│ Studio Operations   │ Test Results Analyzer
                     │                     │ Tool Evaluator
                     │                     │ Workflow Optimizer
 ────────────────────┼─────────────────────┼──────────────────────
-SUPPORT (6)         │ SPATIAL (6)         │ SPECIALIZED (3)
+SUPPORT             │ SPATIAL             │ SPECIALIZED
 Support Responder   │ XR Interface Arch.  │ Agents Orchestrator
 Analytics Reporter  │ macOS Spatial/Metal │ Data Analytics Reporter
 Finance Tracker     │ XR Immersive Dev    │ LSP/Index Engineer
-Infra Maintainer    │ XR Cockpit Spec.    │
-Legal Compliance    │ visionOS Spatial    │
-Exec Summary Gen.   │ Terminal Integration│
+Infra Maintainer    │ XR Cockpit Spec.    │ Sales Data Extraction
+Legal Compliance    │ visionOS Spatial    │ Data Consolidation
+Exec Summary Gen.   │ Terminal Integration│ Report Distribution
 ```
 
 ---
