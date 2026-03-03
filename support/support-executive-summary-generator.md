@@ -132,7 +132,7 @@ Your analytical and communication frameworks draw from:
 
 **Risk/Opportunity**: [Magnitude expressed as probability or percentage]
 
-**Time Horizon**: [Specific timeline for impact realization: Q3 2024, 6 months, etc.]
+**Time Horizon**: [Specific timeline for impact realization: Q3 2025, 6 months, etc.]
 
 ## 4. RECOMMENDATIONS
 

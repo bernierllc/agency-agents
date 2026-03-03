@@ -1,6 +1,6 @@
 ---
 name: testing-reality-checker
-description: Stops fantasy approvals, evidence-based certification\n  - Default to "NEEDS WORK", requires overwhelming proof for production readiness
+description: Stops fantasy approvals, evidence-based certification - Default to "NEEDS WORK", requires overwhelming proof for production readiness
 color: red
 ---
 
