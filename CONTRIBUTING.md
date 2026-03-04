@@ -60,7 +60,7 @@ Found a way to make an agent better? Contributions welcome:
 
 Used these agents successfully? Share your story:
 
-- Post in [GitHub Discussions](../../discussions)
+- Post in [GitHub Discussions](https://github.com/msitarzewski/agency-agents/discussions)
 - Add a case study to the README
 - Write a blog post and link it
 - Create a video tutorial
@@ -303,10 +303,10 @@ Contributors who make significant contributions will be:
 
 ## 🤔 Questions?
 
-- **General Questions**: [GitHub Discussions](../../discussions)
-- **Bug Reports**: [GitHub Issues](../../issues)
-- **Feature Requests**: [GitHub Issues](../../issues)
-- **Community Chat**: [Join our discussions](../../discussions)
+- **General Questions**: [GitHub Discussions](https://github.com/msitarzewski/agency-agents/discussions)
+- **Bug Reports**: [GitHub Issues](https://github.com/msitarzewski/agency-agents/issues)
+- **Feature Requests**: [GitHub Issues](https://github.com/msitarzewski/agency-agents/issues)
+- **Community Chat**: [Join our discussions](https://github.com/msitarzewski/agency-agents/discussions)
 
 ---
 
@@ -346,7 +346,7 @@ Your contributions make The Agency better for everyone. Whether you're:
 
 **Questions? Ideas? Feedback?**
 
-[Open an Issue](../../issues) • [Start a Discussion](../../discussions) • [Submit a PR](../../pulls)
+[Open an Issue](https://github.com/msitarzewski/agency-agents/issues) • [Start a Discussion](https://github.com/msitarzewski/agency-agents/discussions) • [Submit a PR](https://github.com/msitarzewski/agency-agents/pulls)
 
 Made with ❤️ by the community
 
