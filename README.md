@@ -302,7 +302,7 @@ Each agent is designed with:
 ## 🗺️ Roadmap
 
 - [ ] Interactive agent selector web tool
-- [ ] Multi-agent workflow examples
+- [x] Multi-agent workflow examples — see [`examples/`](examples/)
 - [ ] Video tutorials on agent design
 - [ ] Community agent marketplace
 - [ ] Agent "personality quiz" for project matching
