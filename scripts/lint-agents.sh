@@ -20,6 +20,7 @@ AGENT_DIRS=(
   support
   spatial-computing
   specialized
+  strategy
 )
 
 REQUIRED_FRONTMATTER=("name" "description" "color")
@@ -36,7 +37,7 @@ lint_file() {
   first_line=$(head -1 "$file")
   if [[ "$first_line" != "---" ]]; then
     echo "ERROR $file: missing frontmatter opening ---"
-    ((errors++))
+    errors=$((errors + 1))
     return
   fi
 
@@ -46,7 +47,7 @@ lint_file() {
 
   if [[ -z "$frontmatter" ]]; then
     echo "ERROR $file: empty or malformed frontmatter"
-    ((errors++))
+    errors=$((errors + 1))
     return
   fi
 
@@ -54,7 +55,7 @@ lint_file() {
   for field in "${REQUIRED_FRONTMATTER[@]}"; do
     if ! echo "$frontmatter" | grep -qE "^${field}:"; then
       echo "ERROR $file: missing frontmatter field '${field}'"
-      ((errors++))
+      errors=$((errors + 1))
     fi
   done
 
@@ -65,14 +66,14 @@ lint_file() {
   for section in "${RECOMMENDED_SECTIONS[@]}"; do
     if ! echo "$body" | grep -qi "$section"; then
       echo "WARN  $file: missing recommended section '${section}'"
-      ((warnings++))
+      warnings=$((warnings + 1))
     fi
   done
 
   # 4. Check file has meaningful content
   if [[ $(echo "$body" | wc -w) -lt 50 ]]; then
     echo "WARN  $file: body seems very short (< 50 words)"
-    ((warnings++))
+    warnings=$((warnings + 1))
   fi
 }
 

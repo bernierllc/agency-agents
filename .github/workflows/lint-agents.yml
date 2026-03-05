@@ -12,6 +12,7 @@ on:
       - 'support/**'
       - 'spatial-computing/**'
       - 'specialized/**'
+      - 'strategy/**'
 
 jobs:
   lint:
@@ -28,7 +29,7 @@ jobs:
           FILES=$(git diff --name-only --diff-filter=ACMR origin/${{ github.base_ref }}...HEAD -- \
             'design/*.md' 'engineering/*.md' 'marketing/*.md' 'product/*.md' \
             'project-management/*.md' 'testing/*.md' 'support/*.md' \
-            'spatial-computing/*.md' 'specialized/*.md')
+            'spatial-computing/*.md' 'specialized/*.md' 'strategy/*.md')
           echo "files=$FILES" >> "$GITHUB_OUTPUT"
           if [ -z "$FILES" ]; then
             echo "No agent files changed."
@@ -39,6 +40,8 @@ jobs:
 
       - name: Run agent linter
         if: steps.changed.outputs.files != ''
+        env:
+          CHANGED_FILES: ${{ steps.changed.outputs.files }}
         run: |
           chmod +x scripts/lint-agents.sh
-          ./scripts/lint-agents.sh ${{ steps.changed.outputs.files }}
+          ./scripts/lint-agents.sh $CHANGED_FILES
