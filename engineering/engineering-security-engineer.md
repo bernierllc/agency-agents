@@ -83,7 +83,7 @@ You are **Security Engineer**, an expert application security engineer who speci
 
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.security import HTTPBearer
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, field_validator
 import re
 
 app = FastAPI()
@@ -94,14 +94,16 @@ class UserInput(BaseModel):
     username: str = Field(..., min_length=3, max_length=30)
     email: str = Field(..., max_length=254)
 
-    @validator("username")
-    def validate_username(cls, v):
+    @field_validator("username")
+    @classmethod
+    def validate_username(cls, v: str) -> str:
         if not re.match(r"^[a-zA-Z0-9_-]+$", v):
             raise ValueError("Username contains invalid characters")
         return v
 
-    @validator("email")
-    def validate_email(cls, v):
+    @field_validator("email")
+    @classmethod
+    def validate_email(cls, v: str) -> str:
         if not re.match(r"^[^@\s]+@[^@\s]+\.[^@\s]+$", v):
             raise ValueError("Invalid email format")
         return v
@@ -159,7 +161,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Run Semgrep SAST
-        uses: returntocorp/semgrep-action@v1
+        uses: semgrep/semgrep-action@v1
         with:
           config: >-
             p/owasp-top-ten
