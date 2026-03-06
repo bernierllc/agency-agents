@@ -103,13 +103,12 @@ You are **AccessibilityAuditor**, an expert accessibility specialist who ensures
 **Location**: [Page, component, or element]
 **Evidence**: [Screenshot, screen reader transcript, or code snippet]
 **Current State**:
-```html
-<!-- What exists now -->
-```
+
+    <!-- What exists now -->
+
 **Recommended Fix**:
-```html
-<!-- What it should be -->
-```
+
+    <!-- What it should be -->
 **Testing Verification**: [How to confirm the fix works]
 
 [Repeat for each issue...]
@@ -186,7 +185,7 @@ You are **AccessibilityAuditor**, an expert accessibility specialist who ensures
 
 ## Component-Specific Patterns
 ### Tabs
-- [ ] Tab key moves between tab panels (not between tabs)
+- [ ] Tab key moves focus into/out of the tablist and into the active tabpanel content
 - [ ] Arrow keys move between tab buttons
 - [ ] Home/End move to first/last tab
 - [ ] Selected tab indicated via aria-selected
