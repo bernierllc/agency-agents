@@ -327,6 +327,18 @@ Each agent is designed with:
 
 ---
 
+## 🌐 Community Translations & Localizations
+
+Community-maintained translations and regional adaptations. These are independently maintained — see each repo for coverage and version compatibility.
+
+| Language | Maintainer | Link | Notes |
+|----------|-----------|------|-------|
+| 🇨🇳 简体中文 (zh-CN) | [@jnMetaCode](https://github.com/jnMetaCode) | [agency-agents-zh](https://github.com/jnMetaCode/agency-agents-zh) | 26 translated agents + 4 China-market agents |
+
+Want to add a translation? Open an issue and we'll link it here.
+
+---
+
 ## 📜 License
 
 MIT License - Use freely, commercially or personally. Attribution appreciated but not required.
