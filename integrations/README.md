@@ -6,10 +6,11 @@ compatible with popular agentic coding tools.
 ## Supported Tools
 
 | Tool | Format | Directory |
-|------|--------|-----------|
-| [Claude Code](#claude-code) | `.md` with frontmatter | *(use repo directly)* |
+| ---- | ------ | --------- |
+| [Claude Code](#claude-code) | `.md` with frontmatter | use repo directly |
 | [Antigravity](#antigravity) | `SKILL.md` per agent | `antigravity/` |
 | [Gemini CLI](#gemini-cli) | Extension + `SKILL.md` | `gemini-cli/` |
+| [OpenCode](#opencode) | `.md` agent files | `opencode/` |
 | [Cursor](#cursor) | `.mdc` rules | `cursor/` |
 | [Aider](#aider) | `CONVENTIONS.md` | `aider/` |
 | [Windsurf](#windsurf) | `.windsurfrules` | `windsurf/` |

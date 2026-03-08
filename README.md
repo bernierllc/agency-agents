@@ -322,14 +322,14 @@ The Agency works natively with Claude Code, and ships conversion + install scrip
 ### Supported Tools
 
 | Tool | Format | Install Target |
-|------|--------|----------------|
+| ---- | ------ | -------------- |
 | [Claude Code](https://claude.ai/code) | `.md` with YAML frontmatter | `~/.claude/agents/` |
 | [Antigravity](https://github.com/google-gemini/antigravity) | `SKILL.md` per skill dir | `~/.gemini/antigravity/skills/` |
 | [Gemini CLI](https://github.com/google-gemini/gemini-cli) | Extension + `SKILL.md` | `~/.gemini/extensions/agency-agents/` |
-| [OpenCode](https://opencode.ai) | `.md` with YAML frontmatter | `.opencode/agent/` (project-scoped) |
-| [Cursor](https://cursor.sh) | `.mdc` rule files | `.cursor/rules/` (project-scoped) |
-| [Aider](https://aider.chat) | Single `CONVENTIONS.md` | `./CONVENTIONS.md` (project-scoped) |
-| [Windsurf](https://codeium.com/windsurf) | Single `.windsurfrules` | `./.windsurfrules` (project-scoped) |
+| [OpenCode](https://opencode.ai) | `.md` with YAML frontmatter | `.opencode/agent/` |
+| [Cursor](https://cursor.sh) | `.mdc` rule files | `.cursor/rules/` |
+| [Aider](https://aider.chat) | Single `CONVENTIONS.md` | `./CONVENTIONS.md` |
+| [Windsurf](https://codeium.com/windsurf) | Single `.windsurfrules` | `./.windsurfrules` |
 
 ---
 
