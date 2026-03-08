@@ -289,19 +289,19 @@ Each agent is designed with:
 
 > "I don't just test your code - I default to finding 3-5 issues and require visual proof for everything."
 >
-> — **Evidence Collector** (Testing Division)
+> -- **Evidence Collector** (Testing Division)
 
 > "You're not marketing on Reddit - you're becoming a valued community member who happens to represent a brand."
 >
-> — **Reddit Community Builder** (Marketing Division)
+> -- **Reddit Community Builder** (Marketing Division)
 
 > "Every playful element must serve a functional or emotional purpose. Design delight that enhances rather than distracts."
 >
-> — **Whimsy Injector** (Design Division)
+> -- **Whimsy Injector** (Design Division)
 
 > "Let me add a celebration animation that reduces task completion anxiety by 40%"
 >
-> — **Whimsy Injector** (during a UX review)
+> -- **Whimsy Injector** (during a UX review)
 
 ---
 
@@ -335,12 +335,12 @@ The Agency works natively with Claude Code, and ships conversion + install scrip
 
 ### ⚡ Quick Install
 
-**Step 1 — Generate integration files:**
+**Step 1 -- Generate integration files:**
 ```bash
 ./scripts/convert.sh
 ```
 
-**Step 2 — Install (interactive, auto-detects your tools):**
+**Step 2 -- Install (interactive, auto-detects your tools):**
 ```bash
 ./scripts/install.sh
 ```
@@ -348,22 +348,22 @@ The Agency works natively with Claude Code, and ships conversion + install scrip
 The installer scans your system for installed tools, shows a checkbox UI, and lets you pick exactly what to install:
 
 ```
-╔══════════════════════════════════════════════════╗
-║      🎭 The Agency — Tool Installer            ║
-╚══════════════════════════════════════════════════╝
+  +------------------------------------------------+
+  |   The Agency -- Tool Installer                 |
+  +------------------------------------------------+
 
-  System scan complete. ● = detected on your system
+  System scan: [*] = detected on this machine
 
-  [✓] 1) ● Claude Code   (claude.ai/code)
-  [✓] 2) ● Antigravity   (~/.gemini/antigravity)
-  [ ] 3) ○ Gemini CLI    (gemini extension)
-  [ ] 4) ○ OpenCode      (opencode.ai)
-  [✓] 5) ● Cursor        (.cursor/rules)
-  [ ] 6) ○ Aider         (CONVENTIONS.md)
-  [ ] 7) ○ Windsurf      (.windsurfrules)
+  [x]  1)  [*]  Claude Code     (claude.ai/code)
+  [x]  2)  [*]  Antigravity     (~/.gemini/antigravity)
+  [ ]  3)  [ ]  Gemini CLI      (gemini extension)
+  [ ]  4)  [ ]  OpenCode        (opencode.ai)
+  [x]  5)  [*]  Cursor          (.cursor/rules)
+  [ ]  6)  [ ]  Aider           (CONVENTIONS.md)
+  [ ]  7)  [ ]  Windsurf        (.windsurfrules)
 
-  [1-7] toggle  [a] select all  [n] select none
-  [d] detected only  [Enter] install  [q] quit
+  [1-7] toggle   [a] all   [n] none   [d] detected
+  [Enter] install   [q] quit
 ```
 
 **Or install a specific tool directly:**
@@ -385,7 +385,7 @@ The installer scans your system for installed tools, shows a checkbox UI, and le
 <details>
 <summary><strong>Claude Code</strong></summary>
 
-Agents are copied directly from the repo into `~/.claude/agents/` — no conversion needed.
+Agents are copied directly from the repo into `~/.claude/agents/` -- no conversion needed.
 
 ```bash
 ./scripts/install.sh --tool claude-code
@@ -522,7 +522,7 @@ When you add new agents or edit existing ones, regenerate all integration files:
 ## 🗺️ Roadmap
 
 - [ ] Interactive agent selector web tool
-- [x] Multi-agent workflow examples — see [examples/](examples/)
+- [x] Multi-agent workflow examples -- see [examples/](examples/)
 - [x] Multi-tool integration scripts (Claude Code, Antigravity, Gemini CLI, OpenCode, Cursor, Aider, Windsurf)
 - [ ] Video tutorials on agent design
 - [ ] Community agent marketplace
@@ -533,7 +533,7 @@ When you add new agents or edit existing ones, regenerate all integration files:
 
 ## 🌐 Community Translations & Localizations
 
-Community-maintained translations and regional adaptations. These are independently maintained — see each repo for coverage and version compatibility.
+Community-maintained translations and regional adaptations. These are independently maintained -- see each repo for coverage and version compatibility.
 
 | Language | Maintainer | Link | Notes |
 |----------|-----------|------|-------|
