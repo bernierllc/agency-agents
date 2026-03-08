@@ -27,5 +27,5 @@ Use the Reality Checker agent to verify this feature is production-ready.
 
 ## Agent Directory
 
-Agents are organized into divisions. See the [main README](../README.md) for
+Agents are organized into divisions. See the [main README](../../README.md) for
 the full roster of 61 specialists.
