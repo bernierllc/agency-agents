@@ -315,8 +315,6 @@ Each agent is designed with:
 
 ---
 
----
-
 ## 🔌 Multi-Tool Integrations
 
 The Agency works natively with Claude Code, and ships conversion + install scripts so you can use the same agents across every major agentic coding tool.
