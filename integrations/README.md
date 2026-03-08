@@ -5,15 +5,13 @@ compatible with popular agentic coding tools.
 
 ## Supported Tools
 
-| Tool | Format | Directory |
-| ---- | ------ | --------- |
-| [Claude Code](#claude-code) | `.md` with frontmatter | use repo directly |
-| [Antigravity](#antigravity) | `SKILL.md` per agent | `antigravity/` |
-| [Gemini CLI](#gemini-cli) | Extension + `SKILL.md` | `gemini-cli/` |
-| [OpenCode](#opencode) | `.md` agent files | `opencode/` |
-| [Cursor](#cursor) | `.mdc` rules | `cursor/` |
-| [Aider](#aider) | `CONVENTIONS.md` | `aider/` |
-| [Windsurf](#windsurf) | `.windsurfrules` | `windsurf/` |
+- **[Claude Code](#claude-code)** — `.md` agents, use the repo directly
+- **[Antigravity](#antigravity)** — `SKILL.md` per agent in `antigravity/`
+- **[Gemini CLI](#gemini-cli)** — extension + `SKILL.md` files in `gemini-cli/`
+- **[OpenCode](#opencode)** — `.md` agent files in `opencode/`
+- **[Cursor](#cursor)** — `.mdc` rule files in `cursor/`
+- **[Aider](#aider)** — `CONVENTIONS.md` in `aider/`
+- **[Windsurf](#windsurf)** — `.windsurfrules` in `windsurf/`
 
 ## Quick Install
 
