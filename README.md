@@ -44,6 +44,23 @@ Each agent file contains:
 
 Browse the agents below and copy/adapt the ones you need!
 
+### Option 3: Use with Other Tools (Cursor, Aider, Windsurf, Gemini CLI, OpenCode)
+
+```bash
+# Step 1 -- generate integration files for all supported tools
+./scripts/convert.sh
+
+# Step 2 -- install interactively (auto-detects what you have installed)
+./scripts/install.sh
+
+# Or target a specific tool directly
+./scripts/install.sh --tool cursor
+./scripts/install.sh --tool aider
+./scripts/install.sh --tool windsurf
+```
+
+See the [Multi-Tool Integrations](#-multi-tool-integrations) section below for full details.
+
 ---
 
 ## 🎨 The Agency Roster
