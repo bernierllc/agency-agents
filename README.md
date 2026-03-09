@@ -95,6 +95,20 @@ Making it beautiful, usable, and delightful.
 | ✨ [Whimsy Injector](design/design-whimsy-injector.md) | Personality, delight, playful interactions | Adding joy, micro-interactions, Easter eggs, brand personality |
 | 📷 [Image Prompt Engineer](design/design-image-prompt-engineer.md) | AI image generation prompts, photography | Photography prompts for Midjourney, DALL-E, Stable Diffusion |
 
+### 💰 Paid Media Division
+
+Turning ad spend into measurable business outcomes.
+
+| Agent | Specialty | When to Use |
+| --- | --- | --- |
+| 💰 [PPC Campaign Strategist](paid-media/paid-media-ppc-strategist.md) | Google/Microsoft/Amazon Ads, account architecture, bidding | Account buildouts, budget allocation, scaling, performance diagnosis |
+| 🔍 [Search Query Analyst](paid-media/paid-media-search-query-analyst.md) | Search term analysis, negative keywords, intent mapping | Query audits, wasted spend elimination, keyword discovery |
+| 📋 [Paid Media Auditor](paid-media/paid-media-auditor.md) | 200+ point account audits, competitive analysis | Account takeovers, quarterly reviews, competitive pitches |
+| 📡 [Tracking & Measurement Specialist](paid-media/paid-media-tracking-specialist.md) | GTM, GA4, conversion tracking, CAPI | New implementations, tracking audits, platform migrations |
+| ✍️ [Ad Creative Strategist](paid-media/paid-media-creative-strategist.md) | RSA copy, Meta creative, Performance Max assets | Creative launches, testing programs, ad fatigue refreshes |
+| 📺 [Programmatic & Display Buyer](paid-media/paid-media-programmatic-buyer.md) | GDN, DSPs, partner media, ABM display | Display planning, partner outreach, ABM programs |
+| 📱 [Paid Social Strategist](paid-media/paid-media-paid-social-strategist.md) | Meta, LinkedIn, TikTok, cross-platform social | Social ad programs, platform selection, audience strategy |
+
 ### 📢 Marketing Division
 
 Growing your audience, one authentic interaction at a time.
@@ -280,6 +294,21 @@ Building worlds, systems, and experiences across every major engine.
 6. 🔍 **Reality Checker** - Production readiness
 
 **Result**: Enterprise-grade delivery with quality gates and documentation.
+
+---
+
+### Scenario 5: Paid Media Account Takeover
+
+**Your Team**:
+
+1. 📋 **Paid Media Auditor** - Comprehensive account assessment
+2. 📡 **Tracking & Measurement Specialist** - Verify conversion tracking accuracy
+3. 💰 **PPC Campaign Strategist** - Redesign account architecture
+4. 🔍 **Search Query Analyst** - Clean up wasted spend from search terms
+5. ✍️ **Ad Creative Strategist** - Refresh all ad copy and extensions
+6. 📊 **Analytics Reporter** (Support Division) - Build reporting dashboards
+
+**Result**: Systematic account takeover with tracking verified, waste eliminated, structure optimized, and creative refreshed — all within the first 30 days.
 
 ---
 
