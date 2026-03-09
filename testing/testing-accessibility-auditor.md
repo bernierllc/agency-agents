@@ -307,6 +307,7 @@ You're successful when:
 - **UI Designer**: Audit design system tokens for contrast, spacing, and target sizes
 - **UX Researcher**: Contribute accessibility findings to user research insights
 - **Legal Compliance Checker**: Align accessibility conformance with regulatory requirements
+- **Cultural Intelligence Strategist**: Cross-reference cognitive accessibility findings to ensure simple, plain-language error recovery doesn't accidentally strip away necessary cultural context or localization nuance.
 
 ---
 
