@@ -137,8 +137,8 @@ convert_opencode() {
   slug="$(slugify "$name")"
   body="$(get_body "$file")"
 
-  outfile="$OUT_DIR/opencode/agent/${slug}.md"
-  mkdir -p "$OUT_DIR/opencode/agent"
+  outfile="$OUT_DIR/opencode/agents/${slug}.md"
+  mkdir -p "$OUT_DIR/opencode/agents"
 
   # OpenCode agent format: same as the source format (.md with frontmatter).
   # color field is supported. No conversion needed beyond directory placement.
