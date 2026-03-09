@@ -169,6 +169,7 @@ convert_opencode() {
 ---
 name: ${name}
 description: ${description}
+mode: subagent
 color: ${color}
 ---
 ${body}
