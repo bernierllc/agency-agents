@@ -127,21 +127,44 @@ ${body}
 HEREDOC
 }
 
+# Map named colors to hex codes for OpenCode (which only accepts hex values).
+# Colors already starting with '#' pass through unchanged.
+resolve_opencode_color() {
+  local c="$1"
+  case "$c" in
+    cyan)           echo "#00FFFF" ;;
+    blue)           echo "#3498DB" ;;
+    green)          echo "#2ECC71" ;;
+    red)            echo "#E74C3C" ;;
+    purple)         echo "#9B59B6" ;;
+    orange)         echo "#F39C12" ;;
+    teal)           echo "#008080" ;;
+    indigo)         echo "#6366F1" ;;
+    pink)           echo "#E84393" ;;
+    gold)           echo "#EAB308" ;;
+    amber)          echo "#F59E0B" ;;
+    neon-green)     echo "#10B981" ;;
+    neon-cyan)      echo "#06B6D4" ;;
+    metallic-blue)  echo "#3B82F6" ;;
+    *)              echo "$c" ;;       # already hex or unknown — pass through
+  esac
+}
+
 convert_opencode() {
   local file="$1"
   local name description color slug outfile body
 
   name="$(get_field "name" "$file")"
   description="$(get_field "description" "$file")"
-  color="$(get_field "color" "$file")"
+  color="$(resolve_opencode_color "$(get_field "color" "$file")")"
   slug="$(slugify "$name")"
   body="$(get_body "$file")"
 
   outfile="$OUT_DIR/opencode/agents/${slug}.md"
   mkdir -p "$OUT_DIR/opencode/agents"
 
-  # OpenCode agent format: same as the source format (.md with frontmatter).
-  # color field is supported. No conversion needed beyond directory placement.
+  # OpenCode agent format: .md with YAML frontmatter in .opencode/agents/.
+  # Named colors are resolved to hex via resolve_opencode_color().
   cat > "$outfile" <<HEREDOC
 ---
 name: ${name}
