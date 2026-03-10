@@ -328,8 +328,8 @@ install_gemini_cli() {
 }
 
 install_opencode() {
-  local src="$INTEGRATIONS/opencode/agent"
-  local dest="${PWD}/.opencode/agent"
+  local src="$INTEGRATIONS/opencode/agents"
+  local dest="${PWD}/.opencode/agents"
   local count=0
   [[ -d "$src" ]] || { err "integrations/opencode missing. Run convert.sh first."; return 1; }
   mkdir -p "$dest"

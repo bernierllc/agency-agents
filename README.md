@@ -392,7 +392,7 @@ The Agency works natively with Claude Code, and ships conversion + install scrip
 - **[Github Copilot](https://github.com/copilot)** — native `.md` agents, no conversion needed → `~/.github/agents/`
 - **[Antigravity](https://github.com/google-gemini/antigravity)** — `SKILL.md` per agent → `~/.gemini/antigravity/skills/`
 - **[Gemini CLI](https://github.com/google-gemini/gemini-cli)** — extension + `SKILL.md` files → `~/.gemini/extensions/agency-agents/`
-- **[OpenCode](https://opencode.ai)** — `.md` agent files → `.opencode/agent/`
+- **[OpenCode](https://opencode.ai)** — `.md` agent files → `.opencode/agents/`
 - **[Cursor](https://cursor.sh)** — `.mdc` rule files → `.cursor/rules/`
 - **[Aider](https://aider.chat)** — single `CONVENTIONS.md` → `./CONVENTIONS.md`
 - **[Windsurf](https://codeium.com/windsurf)** — single `.windsurfrules` → `./.windsurfrules`
@@ -515,7 +515,7 @@ See [integrations/gemini-cli/README.md](integrations/gemini-cli/README.md) for d
 <details>
 <summary><strong>OpenCode</strong></summary>
 
-Agents are placed in `.opencode/agent/` in your project root (project-scoped).
+Agents are placed in `.opencode/agents/` in your project root (project-scoped).
 
 ```bash
 cd /your/project
@@ -524,13 +524,13 @@ cd /your/project
 
 Or install globally:
 ```bash
-mkdir -p ~/.config/opencode/agent
-cp integrations/opencode/agent/*.md ~/.config/opencode/agent/
+mkdir -p ~/.config/opencode/agents
+cp integrations/opencode/agents/*.md ~/.config/opencode/agents/
 ```
 
 Activate in OpenCode:
 ```
-Use the Backend Architect agent to design this API.
+@backend-architect design this API.
 ```
 
 See [integrations/opencode/README.md](integrations/opencode/README.md) for details.
