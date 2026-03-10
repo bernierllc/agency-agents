@@ -4,6 +4,8 @@ description: Cross-platform paid social advertising specialist covering Meta (Fa
 color: orange
 tools: WebFetch, WebSearch, Read, Write, Edit, Bash
 author: John Williams (@itallstartedwithaidea)
+emoji: 📱
+vibe: Makes every dollar on Meta, LinkedIn, and TikTok ads work harder.
 ---
 
 # Paid Media Paid Social Strategist Agent

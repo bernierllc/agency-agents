@@ -16,6 +16,7 @@
 #   cursor       — Cursor rule files (.cursor/rules/*.mdc)
 #   aider        — Single CONVENTIONS.md for Aider
 #   windsurf     — Single .windsurfrules for Windsurf
+#   openclaw     — OpenClaw SOUL.md files (openclaw_workspace/<agent>/SOUL.md)
 #   all          — All tools (default)
 #
 # Output is written to integrations/<tool>/ relative to the repo root.
@@ -199,6 +200,97 @@ ${body}
 HEREDOC
 }
 
+convert_openclaw() {
+  local file="$1"
+  local name description slug outdir body
+  local soul_content="" agents_content=""
+
+  name="$(get_field "name" "$file")"
+  description="$(get_field "description" "$file")"
+  slug="$(slugify "$name")"
+  body="$(get_body "$file")"
+
+  outdir="$OUT_DIR/openclaw/$slug"
+  mkdir -p "$outdir"
+
+  # Split body sections into SOUL.md (persona) vs AGENTS.md (operations)
+  # by matching ## header keywords. Unmatched sections go to AGENTS.md.
+  #
+  # SOUL keywords: identity, memory (paired with identity), communication,
+  #   style, critical rules, rules you must follow
+  # AGENTS keywords: everything else (mission, deliverables, workflow, etc.)
+
+  local current_target="agents"  # default bucket
+  local current_section=""
+
+  while IFS= read -r line; do
+    # Detect ## headers (with or without emoji prefixes)
+    if [[ "$line" =~ ^##[[:space:]] ]]; then
+      # Flush previous section
+      if [[ -n "$current_section" ]]; then
+        if [[ "$current_target" == "soul" ]]; then
+          soul_content+="$current_section"
+        else
+          agents_content+="$current_section"
+        fi
+      fi
+      current_section=""
+
+      # Classify this header by keyword (case-insensitive)
+      local header_lower
+      header_lower="$(echo "$line" | tr '[:upper:]' '[:lower:]')"
+
+      if [[ "$header_lower" =~ identity ]] ||
+         [[ "$header_lower" =~ communication ]] ||
+         [[ "$header_lower" =~ style ]] ||
+         [[ "$header_lower" =~ critical.rule ]] ||
+         [[ "$header_lower" =~ rules.you.must.follow ]]; then
+        current_target="soul"
+      else
+        current_target="agents"
+      fi
+    fi
+
+    current_section+="$line"$'\n'
+  done <<< "$body"
+
+  # Flush final section
+  if [[ -n "$current_section" ]]; then
+    if [[ "$current_target" == "soul" ]]; then
+      soul_content+="$current_section"
+    else
+      agents_content+="$current_section"
+    fi
+  fi
+
+  # Write SOUL.md — persona, tone, boundaries
+  cat > "$outdir/SOUL.md" <<HEREDOC
+${soul_content}
+HEREDOC
+
+  # Write AGENTS.md — mission, deliverables, workflow
+  cat > "$outdir/AGENTS.md" <<HEREDOC
+${agents_content}
+HEREDOC
+
+  # Write IDENTITY.md — emoji + name + vibe from frontmatter, fallback to description
+  local emoji vibe
+  emoji="$(get_field "emoji" "$file")"
+  vibe="$(get_field "vibe" "$file")"
+
+  if [[ -n "$emoji" && -n "$vibe" ]]; then
+    cat > "$outdir/IDENTITY.md" <<HEREDOC
+# ${emoji} ${name}
+${vibe}
+HEREDOC
+  else
+    cat > "$outdir/IDENTITY.md" <<HEREDOC
+# ${name}
+${description}
+HEREDOC
+  fi
+}
+
 # Aider and Windsurf are single-file formats — accumulate into temp files
 # then write at the end.
 AIDER_TMP="$(mktemp)"
@@ -294,6 +386,7 @@ run_conversions() {
         gemini-cli)  convert_gemini_cli  "$file" ;;
         opencode)    convert_opencode    "$file" ;;
         cursor)      convert_cursor      "$file" ;;
+        openclaw)    convert_openclaw    "$file" ;;
         aider)       accumulate_aider    "$file" ;;
         windsurf)    accumulate_windsurf "$file" ;;
       esac
@@ -329,7 +422,7 @@ main() {
     esac
   done
 
-  local valid_tools=("antigravity" "gemini-cli" "opencode" "cursor" "aider" "windsurf" "all")
+  local valid_tools=("antigravity" "gemini-cli" "opencode" "cursor" "aider" "windsurf" "openclaw" "all")
   local valid=false
   for t in "${valid_tools[@]}"; do [[ "$t" == "$tool" ]] && valid=true && break; done
   if ! $valid; then
@@ -345,7 +438,7 @@ main() {
 
   local tools_to_run=()
   if [[ "$tool" == "all" ]]; then
-    tools_to_run=("antigravity" "gemini-cli" "opencode" "cursor" "aider" "windsurf")
+    tools_to_run=("antigravity" "gemini-cli" "opencode" "cursor" "aider" "windsurf" "openclaw")
   else
     tools_to_run=("$tool")
   fi

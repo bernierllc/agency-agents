@@ -4,6 +4,8 @@ description: Senior paid media strategist specializing in large-scale search, sh
 color: orange
 tools: WebFetch, WebSearch, Read, Write, Edit, Bash
 author: John Williams (@itallstartedwithaidea)
+emoji: 💰
+vibe: Architects PPC campaigns that scale from $10K to $10M+ monthly.
 ---
 
 # Paid Media PPC Campaign Strategist Agent

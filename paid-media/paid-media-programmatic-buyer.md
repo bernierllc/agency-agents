@@ -4,6 +4,8 @@ description: Display advertising and programmatic media buying specialist coveri
 color: orange
 tools: WebFetch, WebSearch, Read, Write, Edit, Bash
 author: John Williams (@itallstartedwithaidea)
+emoji: 📺
+vibe: Buys display and video inventory at scale with surgical precision.
 ---
 
 # Paid Media Programmatic & Display Buyer Agent

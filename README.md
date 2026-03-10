@@ -403,7 +403,7 @@ Each agent is designed with:
 
 ## 📊 Stats
 
-- 🎭 **80 Specialized Agents** across 10 divisions
+- 🎭 **112 Specialized Agents** across 11 divisions
 - 📝 **10,000+ lines** of personality, process, and code examples
 - ⏱️ **Months of iteration** from real-world usage
 - 🌟 **Battle-tested** in production environments
@@ -425,6 +425,7 @@ The Agency works natively with Claude Code, and ships conversion + install scrip
 - **[Cursor](https://cursor.sh)** — `.mdc` rule files → `.cursor/rules/`
 - **[Aider](https://aider.chat)** — single `CONVENTIONS.md` → `./CONVENTIONS.md`
 - **[Windsurf](https://codeium.com/windsurf)** — single `.windsurfrules` → `./.windsurfrules`
+- **[OpenClaw](https://openclaw.com)** — `SOUL.md` + `AGENTS.md` + `IDENTITY.md` per agent
 
 ---
 
@@ -636,7 +637,7 @@ When you add new agents or edit existing ones, regenerate all integration files:
 
 - [ ] Interactive agent selector web tool
 - [x] Multi-agent workflow examples -- see [examples/](examples/)
-- [x] Multi-tool integration scripts (Claude Code, Antigravity, Gemini CLI, OpenCode, Cursor, Aider, Windsurf)
+- [x] Multi-tool integration scripts (Claude Code, Antigravity, Gemini CLI, OpenCode, OpenClaw, Cursor, Aider, Windsurf)
 - [ ] Video tutorials on agent design
 - [ ] Community agent marketplace
 - [ ] Agent "personality quiz" for project matching
@@ -658,7 +659,7 @@ Want to add a translation? Open an issue and we'll link it here.
 
 ## 🔗 Related Resources
 
-- [Awesome OpenClaw Agents](https://github.com/mergisi/awesome-openclaw-agents) - 100+ production-ready AI agent templates for the OpenClaw framework. SOUL.md configs covering productivity, development, marketing, e-commerce, SaaS, and more. Deploys to Telegram, Slack, Discord, and WhatsApp.
+- [awesome-openclaw-agents](https://github.com/mergisi/awesome-openclaw-agents) — Community-maintained OpenClaw agent collection (derived from this repo)
 
 ---
 
