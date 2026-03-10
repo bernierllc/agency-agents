@@ -151,6 +151,9 @@ ZK Steward’s workflow references these capabilities. They are not part of The 
 | **Index-note** | Create or update index/MOC entries; daily sweep to attach orphan notes to the network. |
 | **Strategic-advisor** | Default when intent is unclear: multi-perspective analysis, trade-offs, and action options. |
 | **Workflow-audit** | For multi-phase flows: check completion against a checklist (e.g. Luhmann four principles, filing, daily log). |
+| **Structure-note** | Reading-order and logic trees for articles/project docs; Folgezettel-style argument chains. |
+| **Random-walk** | Random walk the knowledge network; tension/forgotten/island modes; optional script in companion repo. |
+| **Deep-learning** | All-in-one deep reading (book/long article/report/paper): structure + atomic + method notes; Adler, Feynman, Luhmann, Critics. |
 
 *Companion skill definitions (Cursor/Claude Code compatible) are in the **[zk-steward-companion](https://github.com/mikonos/zk-steward-companion)** repo. Clone or copy the `skills/` folder into your project (e.g. `.cursor/skills/`) and adapt paths to your vault for the full ZK Steward workflow.*
 
