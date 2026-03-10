@@ -89,36 +89,36 @@ After a deep-learning run (e.g. book/long video), the structure note ties atomic
 ```markdown
 ---
 type: Structure_Note
-tags: [LLM, AI基础设施, 深度学习]
-links: ["[[索引_LLM技术全栈_从预训练到部署]]", "[[索引_AI时代观察]]"]
+tags: [LLM, AI-infrastructure, deep-learning]
+links: ["[[Index_LLM_Stack]]", "[[Index_AI_Observations]]"]
 ---
 
-# [Title] 结构笔记
+# [Title] Structure Note
 
-> **当时语境**：何时、为何、在什么项目下创建。
-> **默认读者**：半年后的自己——本结构自包含。
+> **Context**: When, why, and under what project this was created.
+> **Default reader**: Yourself in six months—this structure is self-contained.
 
 ## Overview (5 Questions)
-1. 它解决什么问题？
-2. 核心机制是什么？
-3. 关键概念 (3–5 个) → 各连到原子笔记 [[YYYYMMDD_原子_主题]]
-4. 与已知方法的对比？
-5. 一句话总结（费曼测试）
+1. What problem does it solve?
+2. What is the core mechanism?
+3. Key concepts (3–5) → each linked to atomic notes [[YYYYMMDD_Atomic_Topic]]
+4. How does it compare to known approaches?
+5. One-sentence summary (Feynman test)
 
-## 逻辑树 (Logic Tree)
-命题一：…
-├─ [[原子笔记A]]
-├─ [[原子笔记B]]
-└─ [[原子笔记C]]
-命题二：…
-└─ [[原子笔记D]]
+## Logic Tree
+Proposition 1: …
+├─ [[Atomic_Note_A]]
+├─ [[Atomic_Note_B]]
+└─ [[Atomic_Note_C]]
+Proposition 2: …
+└─ [[Atomic_Note_D]]
 
-## 阅读顺序 (Reading Sequence)
-1. **[[原子笔记A]]** — 理由：…
-2. **[[原子笔记B]]** — 理由：…
+## Reading Sequence
+1. **[[Atomic_Note_A]]** — Reason: …
+2. **[[Atomic_Note_B]]** — Reason: …
 ```
 
-Companion outputs: execution plan (`YYYYMMDD_01_[书名]_执行计划.md`), atomic/method notes, index note for the topic, workflow-audit report. See **deep-learning** in [zk-steward-companion](https://github.com/mikonos/zk-steward-companion).
+Companion outputs: execution plan (`YYYYMMDD_01_[Book_Title]_Execution_Plan.md`), atomic/method notes, index note for the topic, workflow-audit report. See **deep-learning** in [zk-steward-companion](https://github.com/mikonos/zk-steward-companion).
 
 ## 🔄 Your Workflow Process
 
