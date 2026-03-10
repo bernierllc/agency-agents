@@ -73,6 +73,15 @@ color: teal
 - [ ] If new note: link candidates + keyword suggestions + shareability
 ```
 
+### Daily Log Entry Example
+```markdown
+### [YYYYMMDD] Short task title
+
+- **Intent**: What the user wanted to accomplish.
+- **Changes**: What was done (files, links, decisions).
+- **Open loops**: [ ] Unresolved item 1; [ ] Unresolved item 2 (or "None.")
+```
+
 ## 🔄 Your Workflow Process
 
 ### Step 0–1: Luhmann Check
