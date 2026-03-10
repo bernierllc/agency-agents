@@ -42,7 +42,7 @@ OUT_DIR="$REPO_ROOT/integrations"
 TODAY="$(date +%Y-%m-%d)"
 
 AGENT_DIRS=(
-  design engineering marketing paid-media product project-management
+  design engineering game-development marketing paid-media product project-management
   testing support spatial-computing specialized
 )
 
@@ -275,7 +275,7 @@ run_conversions() {
       esac
 
       (( count++ )) || true
-    done < <(find "$dirpath" -maxdepth 1 -name "*.md" -type f -print0 | sort -z)
+    done < <(find "$dirpath" -name "*.md" -type f -print0 | sort -z)
   done
 
   echo "$count"

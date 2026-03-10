@@ -259,7 +259,7 @@ install_claude_code() {
   local count=0
   mkdir -p "$dest"
   local dir f first_line
-  for dir in design engineering marketing paid-media product project-management \
+  for dir in design engineering game-development marketing paid-media product project-management \
               testing support spatial-computing specialized; do
     [[ -d "$REPO_ROOT/$dir" ]] || continue
     while IFS= read -r -d '' f; do
@@ -267,7 +267,7 @@ install_claude_code() {
       [[ "$first_line" == "---" ]] || continue
       cp "$f" "$dest/"
       (( count++ )) || true
-    done < <(find "$REPO_ROOT/$dir" -maxdepth 1 -name "*.md" -type f -print0)
+    done < <(find "$REPO_ROOT/$dir" -name "*.md" -type f -print0)
   done
   ok "Claude Code: $count agents -> $dest"
 }
