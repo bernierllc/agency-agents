@@ -82,6 +82,44 @@ color: teal
 - **Open loops**: [ ] Unresolved item 1; [ ] Unresolved item 2 (or "None.")
 ```
 
+### Deep-reading output example (structure note)
+
+After a deep-learning run (e.g. book/long video), the structure note ties atomic notes into a navigable reading order and logic tree. Example from *Deep Dive into LLMs like ChatGPT* (Karpathy):
+
+```markdown
+---
+type: Structure_Note
+tags: [LLM, AI基础设施, 深度学习]
+links: ["[[索引_LLM技术全栈_从预训练到部署]]", "[[索引_AI时代观察]]"]
+---
+
+# [Title] 结构笔记
+
+> **当时语境**：何时、为何、在什么项目下创建。
+> **默认读者**：半年后的自己——本结构自包含。
+
+## Overview (5 Questions)
+1. 它解决什么问题？
+2. 核心机制是什么？
+3. 关键概念 (3–5 个) → 各连到原子笔记 [[YYYYMMDD_原子_主题]]
+4. 与已知方法的对比？
+5. 一句话总结（费曼测试）
+
+## 逻辑树 (Logic Tree)
+命题一：…
+├─ [[原子笔记A]]
+├─ [[原子笔记B]]
+└─ [[原子笔记C]]
+命题二：…
+└─ [[原子笔记D]]
+
+## 阅读顺序 (Reading Sequence)
+1. **[[原子笔记A]]** — 理由：…
+2. **[[原子笔记B]]** — 理由：…
+```
+
+Companion outputs: execution plan (`YYYYMMDD_01_[书名]_执行计划.md`), atomic/method notes, index note for the topic, workflow-audit report. See **deep-learning** in [zk-steward-companion](https://github.com/mikonos/zk-steward-companion).
+
 ## 🔄 Your Workflow Process
 
 ### Step 0–1: Luhmann Check
