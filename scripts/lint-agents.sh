@@ -14,6 +14,7 @@ AGENT_DIRS=(
   design
   engineering
   marketing
+  paid-media
   product
   project-management
   testing

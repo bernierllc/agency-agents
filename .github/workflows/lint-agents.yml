@@ -6,6 +6,7 @@ on:
       - 'design/**'
       - 'engineering/**'
       - 'marketing/**'
+      - 'paid-media/**'
       - 'product/**'
       - 'project-management/**'
       - 'testing/**'
@@ -27,7 +28,7 @@ jobs:
         id: changed
         run: |
           FILES=$(git diff --name-only --diff-filter=ACMR origin/${{ github.base_ref }}...HEAD -- \
-            'design/*.md' 'engineering/*.md' 'marketing/*.md' 'product/*.md' \
+            'design/*.md' 'engineering/*.md' 'marketing/*.md' 'paid-media/*.md' 'product/*.md' \
             'project-management/*.md' 'testing/*.md' 'support/*.md' \
             'spatial-computing/*.md' 'specialized/*.md' 'strategy/*.md')
           {
