@@ -360,7 +360,7 @@ install_openclaw() {
     cp "$d/IDENTITY.md" "$dest/$name/IDENTITY.md"
     # Register with OpenClaw so agents are usable by agentId immediately
     if command -v openclaw >/dev/null 2>&1; then
-      openclaw agents add "$name" --workspace "$dest/$name" --non-interactive 2>/dev/null || true
+      openclaw agents add "$name" --workspace "$dest/$name" --non-interactive || true
     fi
     (( count++ )) || true
   done < <(find "$src" -mindepth 1 -maxdepth 1 -type d -print0)
