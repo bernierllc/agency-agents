@@ -358,9 +358,16 @@ install_openclaw() {
     cp "$d/SOUL.md" "$dest/$name/SOUL.md"
     cp "$d/AGENTS.md" "$dest/$name/AGENTS.md"
     cp "$d/IDENTITY.md" "$dest/$name/IDENTITY.md"
+    # Register with OpenClaw so agents are usable by agentId immediately
+    if command -v openclaw >/dev/null 2>&1; then
+      openclaw agents add "$name" --workspace "$dest/$name" --non-interactive || true
+    fi
     (( count++ )) || true
   done < <(find "$src" -mindepth 1 -maxdepth 1 -type d -print0)
   ok "OpenClaw: $count workspaces -> $dest"
+  if command -v openclaw >/dev/null 2>&1; then
+    warn "OpenClaw: run 'openclaw gateway restart' to activate new agents"
+  fi
 }
 
 install_cursor() {
