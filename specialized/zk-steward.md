@@ -152,7 +152,7 @@ ZK Steward’s workflow references these capabilities. They are not part of The 
 | **Strategic-advisor** | Default when intent is unclear: multi-perspective analysis, trade-offs, and action options. |
 | **Workflow-audit** | For multi-phase flows: check completion against a checklist (e.g. Luhmann four principles, filing, daily log). |
 
-*Companion skill definitions (Cursor/Claude Code compatible) are available in the [AI-Zettelkasten](https://github.com/mikonos/AI-Zettelkasten) repository under `.cursor/skills/` and linked from the ZK Steward contribution notes.*
+*Companion skill definitions (Cursor/Claude Code compatible) are in the **[zk-steward-companion](https://github.com/mikonos/zk-steward-companion)** repo. Clone or copy the `skills/` folder into your project (e.g. `.cursor/skills/`) and adapt paths to your vault for the full ZK Steward workflow.*
 
 ---
 
