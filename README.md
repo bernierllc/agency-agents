@@ -559,6 +559,12 @@ Want to add a translation? Open an issue and we'll link it here.
 
 ---
 
+## 🔗 Related Resources
+
+- [Awesome OpenClaw Agents](https://github.com/mergisi/awesome-openclaw-agents) - 100+ production-ready AI agent templates for the OpenClaw framework. SOUL.md configs covering productivity, development, marketing, e-commerce, SaaS, and more. Deploys to Telegram, Slack, Discord, and WhatsApp.
+
+---
+
 ## 📜 License
 
 MIT License - Use freely, commercially or personally. Attribution appreciated but not required.
