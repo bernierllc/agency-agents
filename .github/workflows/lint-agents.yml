@@ -30,7 +30,11 @@ jobs:
             'design/*.md' 'engineering/*.md' 'marketing/*.md' 'product/*.md' \
             'project-management/*.md' 'testing/*.md' 'support/*.md' \
             'spatial-computing/*.md' 'specialized/*.md' 'strategy/*.md')
-          echo "files=$FILES" >> "$GITHUB_OUTPUT"
+          {
+            echo "files<<ENDOFLIST"
+            echo "$FILES"
+            echo "ENDOFLIST"
+          } >> "$GITHUB_OUTPUT"
           if [ -z "$FILES" ]; then
             echo "No agent files changed."
           else
