@@ -441,7 +441,7 @@ The Agency works natively with Claude Code, and ships conversion + install scrip
 ### Supported Tools
 
 - **[Claude Code](https://claude.ai/code)** — native `.md` agents, no conversion needed → `~/.claude/agents/`
-- **[Github Copilot](https://github.com/copilot)** — native `.md` agents, no conversion needed → `~/.github/agents/`
+- **[GitHub Copilot](https://github.com/copilot)** — native `.md` agents, no conversion needed → `~/.github/agents/`
 - **[Antigravity](https://github.com/google-gemini/antigravity)** — `SKILL.md` per agent → `~/.gemini/antigravity/skills/`
 - **[Gemini CLI](https://github.com/google-gemini/gemini-cli)** — extension + `SKILL.md` files → `~/.gemini/extensions/agency-agents/`
 - **[OpenCode](https://opencode.ai)** — `.md` agent files → `.opencode/agents/`
@@ -522,7 +522,7 @@ See [integrations/claude-code/README.md](integrations/claude-code/README.md) for
 </details>
 
 <details>
-<summary><strong>Github Copilot</strong></summary>
+<summary><strong>GitHub Copilot</strong></summary>
 
 Agents are copied directly from the repo into `~/.github/agents/` -- no conversion needed.
 
@@ -530,7 +530,7 @@ Agents are copied directly from the repo into `~/.github/agents/` -- no conversi
 ./scripts/install.sh --tool copilot
 ```
 
-Then activate in Github Copilot:
+Then activate in GitHub Copilot:
 ```
 Use the Frontend Developer agent to review this component.
 ```
@@ -558,7 +558,7 @@ See [integrations/antigravity/README.md](integrations/antigravity/README.md) for
 <details>
 <summary><strong>Gemini CLI</strong></summary>
 
-Installs as a Gemini CLI extension with 80 skills + a manifest.
+Installs as a Gemini CLI extension with one skill per agent plus a manifest.
 
 ```bash
 ./scripts/install.sh --tool gemini-cli
@@ -656,6 +656,8 @@ Each agent becomes a workspace with `SOUL.md`, `AGENTS.md`, and `IDENTITY.md` in
 
 Agents are registered and available by `agentId` in OpenClaw sessions.
 
+See [integrations/openclaw/README.md](integrations/openclaw/README.md) for details.
+
 </details>
 
 ---
@@ -675,7 +677,7 @@ When you add new agents or edit existing ones, regenerate all integration files:
 
 - [ ] Interactive agent selector web tool
 - [x] Multi-agent workflow examples -- see [examples/](examples/)
-- [x] Multi-tool integration scripts (Claude Code, Antigravity, Gemini CLI, OpenCode, OpenClaw, Cursor, Aider, Windsurf)
+- [x] Multi-tool integration scripts (Claude Code, GitHub Copilot, Antigravity, Gemini CLI, OpenCode, OpenClaw, Cursor, Aider, Windsurf)
 - [ ] Video tutorials on agent design
 - [ ] Community agent marketplace
 - [ ] Agent "personality quiz" for project matching
