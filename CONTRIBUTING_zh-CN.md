@@ -294,10 +294,10 @@ interface AgentExample {
 ## 📚 资源
 
 ### 新贡献者指南
-- [README.md](https://github.com/DawnnnHuang/agency-agents/blob/add-chinese-translation/README.md) —— 项目概览与智能体目录
-- [示例：前端开发者](https://github.com/DawnnnHuang/agency-agents/blob/add-chinese-translation/engineering/engineering-frontend-developer.md) —— 结构规范的智能体示例
-- [示例：Reddit 社区运营者](https://github.com/DawnnnHuang/agency-agents/blob/add-chinese-translation/marketing/marketing-reddit-community-builder.md) —— 性格塑造优秀示例
-- [示例：趣味注入器](https://github.com/DawnnnHuang/agency-agents/blob/add-chinese-translation/design/design-whimsy-injector.md) —— 创意型专家示例
+- [README.md](https://github.com/msitarzewski/agency-agents/blob/main/README.md) —— 项目概览与智能体目录
+- [示例：前端开发者](https://github.com/msitarzewski/agency-agents/blob/main/engineering/frontend-developer.md) —— 结构规范的智能体示例
+- [示例：Reddit 社区运营者](https://github.com/msitarzewski/agency-agents/blob/main/marketing/reddit-community-builder.md) —— 性格塑造优秀示例
+- [示例：趣味注入器](https://github.com/msitarzewski/agency-agents/blob/main/specialized/whimsy-injector.md) —— 创意型专家示例
 
 ### 智能体设计参考
 - 阅读现有智能体获取灵感
