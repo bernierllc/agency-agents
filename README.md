@@ -448,7 +448,7 @@ Each agent is designed with:
 
 ## 📊 Stats
 
-- 🎭 **128 Specialized Agents** across 12 divisions
+- 🎭 **142 Specialized Agents** across 12 divisions
 - 📝 **10,000+ lines** of personality, process, and code examples
 - ⏱️ **Months of iteration** from real-world usage
 - 🌟 **Battle-tested** in production environments
