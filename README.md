@@ -582,8 +582,10 @@ See [integrations/antigravity/README.md](integrations/antigravity/README.md) for
 <summary><strong>Gemini CLI</strong></summary>
 
 Installs as a Gemini CLI extension with one skill per agent plus a manifest.
+On a fresh clone, generate the Gemini extension files before running the installer.
 
 ```bash
+./scripts/convert.sh --tool gemini-cli
 ./scripts/install.sh --tool gemini-cli
 ```
 
