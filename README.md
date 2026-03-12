@@ -464,6 +464,7 @@ The Agency works natively with Claude Code, and ships conversion + install scrip
 - **[Aider](https://aider.chat)** — single `CONVENTIONS.md` → `./CONVENTIONS.md`
 - **[Windsurf](https://codeium.com/windsurf)** — single `.windsurfrules` → `./.windsurfrules`
 - **[OpenClaw](https://github.com/openclaw/openclaw)** — `SOUL.md` + `AGENTS.md` + `IDENTITY.md` per agent
+- **[Qwen Code](https://github.com/QwenLM/qwen-code)** — `.md` SubAgent files → `~/.qwen/agents/`
 
 ---
 
@@ -675,6 +676,27 @@ See [integrations/openclaw/README.md](integrations/openclaw/README.md) for detai
 
 </details>
 
+<details>
+<summary><strong>Qwen Code</strong></summary>
+
+SubAgents are installed to `.qwen/agents/` in your project root (project-scoped).
+
+```bash
+# Convert and install (run from your project root)
+cd /your/project
+./scripts/convert.sh --tool qwen
+./scripts/install.sh --tool qwen
+```
+
+**Usage in Qwen Code:**
+- Reference by name: `Use the frontend-developer agent to review this component`
+- Or let Qwen auto-delegate based on task context
+- Manage via `/agents` command in interactive mode
+
+> 📚 [Qwen SubAgents Docs](https://qwenlm.github.io/qwen-code-docs/en/users/features/sub-agents/)
+
+</details>
+
 ---
 
 ### Regenerating After Changes
@@ -692,7 +714,7 @@ When you add new agents or edit existing ones, regenerate all integration files:
 
 - [ ] Interactive agent selector web tool
 - [x] Multi-agent workflow examples -- see [examples/](examples/)
-- [x] Multi-tool integration scripts (Claude Code, GitHub Copilot, Antigravity, Gemini CLI, OpenCode, OpenClaw, Cursor, Aider, Windsurf)
+- [x] Multi-tool integration scripts (Claude Code, GitHub Copilot, Antigravity, Gemini CLI, OpenCode, OpenClaw, Cursor, Aider, Windsurf, Qwen Code)
 - [ ] Video tutorials on agent design
 - [ ] Community agent marketplace
 - [ ] Agent "personality quiz" for project matching
