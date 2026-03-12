@@ -19,6 +19,7 @@
 #   aider        -- Copy CONVENTIONS.md to current directory
 #   windsurf     -- Copy .windsurfrules to current directory
 #   openclaw     -- Copy workspaces to ~/.openclaw/agency-agents/
+#   qwen         -- Copy SubAgents to ~/.qwen/agents/ (user-wide) or .qwen/agents/ (project)
 #   all          -- Install for all detected tools (default)
 #
 # Flags:
@@ -84,7 +85,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 INTEGRATIONS="$REPO_ROOT/integrations"
 
-ALL_TOOLS=(claude-code copilot antigravity gemini-cli opencode openclaw cursor aider windsurf)
+ALL_TOOLS=(claude-code copilot antigravity gemini-cli opencode openclaw cursor aider windsurf qwen)
 
 # ---------------------------------------------------------------------------
 # Usage
@@ -116,6 +117,7 @@ detect_opencode()     { command -v opencode >/dev/null 2>&1 || [[ -d "${HOME}/.c
 detect_aider()        { command -v aider >/dev/null 2>&1; }
 detect_openclaw()     { command -v openclaw >/dev/null 2>&1 || [[ -d "${HOME}/.openclaw" ]]; }
 detect_windsurf()     { command -v windsurf >/dev/null 2>&1 || [[ -d "${HOME}/.codeium" ]]; }
+detect_qwen()         { command -v qwen >/dev/null 2>&1 || [[ -d "${HOME}/.qwen" ]]; }
 
 is_detected() {
   case "$1" in
@@ -128,6 +130,7 @@ is_detected() {
     cursor)      detect_cursor      ;;
     aider)       detect_aider       ;;
     windsurf)    detect_windsurf    ;;
+    qwen)        detect_qwen        ;;
     *)           return 1 ;;
   esac
 }
@@ -144,6 +147,7 @@ tool_label() {
     cursor)      printf "%-14s  %s" "Cursor"       "(.cursor/rules)"         ;;
     aider)       printf "%-14s  %s" "Aider"        "(CONVENTIONS.md)"        ;;
     windsurf)    printf "%-14s  %s" "Windsurf"     "(.windsurfrules)"        ;;
+    qwen)        printf "%-14s  %s" "Qwen Code"    "(~/.qwen/agents)"        ;;
   esac
 }
 
@@ -199,7 +203,7 @@ interactive_select() {
     # --- controls ---
     printf "\n"
     printf "  ------------------------------------------------\n"
-    printf "  ${C_CYAN}[1-9]${C_RESET} toggle   ${C_CYAN}[a]${C_RESET} all   ${C_CYAN}[n]${C_RESET} none   ${C_CYAN}[d]${C_RESET} detected\n"
+    printf "  ${C_CYAN}[1-%s]${C_RESET} toggle   ${C_CYAN}[a]${C_RESET} all   ${C_CYAN}[n]${C_RESET} none   ${C_CYAN}[d]${C_RESET} detected\n" "${#ALL_TOOLS[@]}"
     printf "  ${C_GREEN}[Enter]${C_RESET} install   ${C_RED}[q]${C_RESET} quit\n"
     printf "\n"
     printf "  >> "
@@ -413,6 +417,26 @@ install_windsurf() {
   warn "Windsurf: project-scoped. Run from your project root to install there."
 }
 
+install_qwen() {
+  local src="$INTEGRATIONS/qwen/agents"
+  local dest="${PWD}/.qwen/agents"
+  local count=0
+
+  [[ -d "$src" ]] || { err "integrations/qwen missing. Run convert.sh first."; return 1; }
+
+  mkdir -p "$dest"
+
+  local f
+  while IFS= read -r -d '' f; do
+    cp "$f" "$dest/"
+    (( count++ )) || true
+  done < <(find "$src" -maxdepth 1 -name "*.md" -print0)
+
+  ok "Qwen Code: installed $count agents to $dest"
+  warn "Qwen Code: project-scoped. Run from your project root to install there."
+  warn "Tip: Run '/agents manage' in Qwen Code to refresh, or restart session"
+}
+
 install_tool() {
   case "$1" in
     claude-code) install_claude_code ;;
@@ -424,6 +448,7 @@ install_tool() {
     cursor)      install_cursor      ;;
     aider)       install_aider       ;;
     windsurf)    install_windsurf    ;;
+    qwen)        install_qwen        ;;
   esac
 }
 
