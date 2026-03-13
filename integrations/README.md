@@ -64,7 +64,7 @@ See [claude-code/README.md](claude-code/README.md) for details.
 ## GitHub Copilot
 
 The Agency also works natively with GitHub Copilot. Agents can be copied
-directly into `~/.github/agents/` without conversion.
+directly into `~/.github/agents/` and `~/.copilot/agents/` without conversion.
 
 ```bash
 ./scripts/install.sh --tool copilot
