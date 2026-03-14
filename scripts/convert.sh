@@ -456,16 +456,6 @@ run_conversions() {
   echo "$count"
 }
 
-write_single_file_outputs() {
-  # Aider
-  mkdir -p "$OUT_DIR/aider"
-  cp "$AIDER_TMP" "$OUT_DIR/aider/CONVENTIONS.md"
-
-  # Windsurf
-  mkdir -p "$OUT_DIR/windsurf"
-  cp "$WINDSURF_TMP" "$OUT_DIR/windsurf/.windsurfrules"
-}
-
 # --- Entry point ---
 
 main() {
@@ -524,9 +514,14 @@ HEREDOC
   done
 
   # Write single-file outputs after accumulation
-  if [[ "$tool" == "all" || "$tool" == "aider" || "$tool" == "windsurf" ]]; then
-    write_single_file_outputs
+  if [[ "$tool" == "all" || "$tool" == "aider" ]]; then
+    mkdir -p "$OUT_DIR/aider"
+    cp "$AIDER_TMP" "$OUT_DIR/aider/CONVENTIONS.md"
     info "Wrote integrations/aider/CONVENTIONS.md"
+  fi
+  if [[ "$tool" == "all" || "$tool" == "windsurf" ]]; then
+    mkdir -p "$OUT_DIR/windsurf"
+    cp "$WINDSURF_TMP" "$OUT_DIR/windsurf/.windsurfrules"
     info "Wrote integrations/windsurf/.windsurfrules"
   fi
 
