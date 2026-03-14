@@ -48,10 +48,10 @@ Browse the agents below and copy/adapt the ones you need!
 
 ```bash
 # Step 1 -- generate integration files for all supported tools
-./scripts/convert.sh
+./scripts/convert.sh --parallel
 
 # Step 2 -- install interactively (auto-detects what you have installed)
-./scripts/install.sh
+./scripts/install.sh --parallel
 
 # Or target a specific tool directly
 ./scripts/install.sh --tool cursor
@@ -504,11 +504,13 @@ The Agency works natively with Claude Code, and ships conversion + install scrip
 **Step 1 -- Generate integration files:**
 ```bash
 ./scripts/convert.sh
+# Faster (parallel, output order may vary): ./scripts/convert.sh --parallel
 ```
 
 **Step 2 -- Install (interactive, auto-detects your tools):**
 ```bash
 ./scripts/install.sh
+# Faster (parallel, output order may vary): ./scripts/install.sh --no-interactive --parallel
 ```
 
 The installer scans your system for installed tools, shows a checkbox UI, and lets you pick exactly what to install:
@@ -546,6 +548,16 @@ The installer scans your system for installed tools, shows a checkbox UI, and le
 **Non-interactive (CI/scripts):**
 ```bash
 ./scripts/install.sh --no-interactive --tool all
+```
+
+**Faster runs (parallel)** — On multi-core machines, use `--parallel` so each tool is processed in parallel. Output order across tools is non-deterministic. Works with both interactive and non-interactive install: e.g. `./scripts/install.sh --interactive --parallel` (pick tools, then install in parallel) or `./scripts/install.sh --no-interactive --parallel`. Job count defaults to `nproc` (Linux), `sysctl -n hw.ncpu` (macOS), or 4; override with `--jobs N`.
+
+```bash
+./scripts/convert.sh --parallel                    # convert all tools in parallel
+./scripts/convert.sh --parallel --jobs 8           # cap parallel jobs
+./scripts/install.sh --no-interactive --parallel   # install all detected tools in parallel
+./scripts/install.sh --interactive --parallel      # pick tools, then install in parallel
+./scripts/install.sh --no-interactive --parallel --jobs 4
 ```
 
 ---
@@ -738,8 +750,9 @@ cd /your/project
 When you add new agents or edit existing ones, regenerate all integration files:
 
 ```bash
-./scripts/convert.sh        # regenerate all
-./scripts/convert.sh --tool cursor   # regenerate just one tool
+./scripts/convert.sh                    # regenerate all (serial)
+./scripts/convert.sh --parallel         # regenerate all in parallel (faster)
+./scripts/convert.sh --tool cursor      # regenerate just one tool
 ```
 
 ---
