@@ -11,7 +11,7 @@
 #
 # Tools:
 #   claude-code  -- Copy agents to ~/.claude/agents/
-#   copilot      -- Copy agents to ~/.github/agents/
+#   copilot      -- Copy agents to ~/.github/agents/ and ~/.copilot/agents/
 #   antigravity  -- Copy skills to ~/.gemini/antigravity/skills/
 #   gemini-cli   -- Install extension to ~/.gemini/extensions/agency-agents/
 #   opencode     -- Copy agents to .opencode/agent/ in current directory
@@ -109,7 +109,7 @@ check_integrations() {
 # Tool detection
 # ---------------------------------------------------------------------------
 detect_claude_code() { [[ -d "${HOME}/.claude" ]]; }
-detect_copilot()      { command -v code >/dev/null 2>&1 || [[ -d "${HOME}/.github" ]]; }
+detect_copilot()      { command -v code >/dev/null 2>&1 || [[ -d "${HOME}/.github" || -d "${HOME}/.copilot" ]]; }
 detect_antigravity()  { [[ -d "${HOME}/.gemini/antigravity/skills" ]]; }
 detect_gemini_cli()   { command -v gemini >/dev/null 2>&1 || [[ -d "${HOME}/.gemini" ]]; }
 detect_cursor()       { command -v cursor >/dev/null 2>&1 || [[ -d "${HOME}/.cursor" ]]; }
@@ -139,7 +139,7 @@ is_detected() {
 tool_label() {
   case "$1" in
     claude-code) printf "%-14s  %s" "Claude Code"  "(claude.ai/code)"        ;;
-    copilot)     printf "%-14s  %s" "Copilot"      "(~/.github/agents)"      ;;
+    copilot)     printf "%-14s  %s" "Copilot"      "(~/.github + ~/.copilot)" ;;
     antigravity) printf "%-14s  %s" "Antigravity"  "(~/.gemini/antigravity)" ;;
     gemini-cli)  printf "%-14s  %s" "Gemini CLI"   "(gemini extension)"      ;;
     opencode)    printf "%-14s  %s" "OpenCode"     "(opencode.ai)"           ;;
@@ -288,9 +288,10 @@ install_claude_code() {
 }
 
 install_copilot() {
-  local dest="${HOME}/.github/agents"
+  local dest_github="${HOME}/.github/agents"
+  local dest_copilot="${HOME}/.copilot/agents"
   local count=0
-  mkdir -p "$dest"
+  mkdir -p "$dest_github" "$dest_copilot"
   local dir f first_line
   for dir in design engineering game-development marketing paid-media sales product project-management \
               testing support spatial-computing specialized; do
@@ -298,11 +299,13 @@ install_copilot() {
     while IFS= read -r -d '' f; do
       first_line="$(head -1 "$f")"
       [[ "$first_line" == "---" ]] || continue
-      cp "$f" "$dest/"
+      cp "$f" "$dest_github/"
+      cp "$f" "$dest_copilot/"
       (( count++ )) || true
     done < <(find "$REPO_ROOT/$dir" -name "*.md" -type f -print0)
   done
-  ok "Copilot: $count agents -> $dest"
+  ok "Copilot: $count agents -> $dest_github"
+  ok "Copilot: $count agents -> $dest_copilot"
 }
 
 install_antigravity() {

@@ -487,7 +487,7 @@ The Agency works natively with Claude Code, and ships conversion + install scrip
 ### Supported Tools
 
 - **[Claude Code](https://claude.ai/code)** — native `.md` agents, no conversion needed → `~/.claude/agents/`
-- **[GitHub Copilot](https://github.com/copilot)** — native `.md` agents, no conversion needed → `~/.github/agents/`
+- **[GitHub Copilot](https://github.com/copilot)** — native `.md` agents, no conversion needed → `~/.github/agents/` + `~/.copilot/agents/`
 - **[Antigravity](https://github.com/google-gemini/antigravity)** — `SKILL.md` per agent → `~/.gemini/antigravity/skills/`
 - **[Gemini CLI](https://github.com/google-gemini/gemini-cli)** — extension + `SKILL.md` files → `~/.gemini/extensions/agency-agents/`
 - **[OpenCode](https://opencode.ai)** — `.md` agent files → `.opencode/agents/`
@@ -521,7 +521,7 @@ The installer scans your system for installed tools, shows a checkbox UI, and le
   System scan: [*] = detected on this machine
 
   [x]  1)  [*]  Claude Code     (claude.ai/code)
-  [x]  2)  [*]  Copilot         (~/.github/agents)
+  [x]  2)  [*]  Copilot         (~/.github + ~/.copilot)
   [x]  3)  [*]  Antigravity     (~/.gemini/antigravity)
   [ ]  4)  [ ]  Gemini CLI      (gemini extension)
   [ ]  5)  [ ]  OpenCode        (opencode.ai)
@@ -572,7 +572,7 @@ See [integrations/claude-code/README.md](integrations/claude-code/README.md) for
 <details>
 <summary><strong>GitHub Copilot</strong></summary>
 
-Agents are copied directly from the repo into `~/.github/agents/` -- no conversion needed.
+Agents are copied directly from the repo into `~/.github/agents/` and `~/.copilot/agents/` -- no conversion needed.
 
 ```bash
 ./scripts/install.sh --tool copilot
