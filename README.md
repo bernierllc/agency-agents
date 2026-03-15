@@ -48,10 +48,10 @@ Browse the agents below and copy/adapt the ones you need!
 
 ```bash
 # Step 1 -- generate integration files for all supported tools
-./scripts/convert.sh --parallel
+./scripts/convert.sh
 
 # Step 2 -- install interactively (auto-detects what you have installed)
-./scripts/install.sh --parallel
+./scripts/install.sh
 
 # Or target a specific tool directly
 ./scripts/install.sh --tool cursor
