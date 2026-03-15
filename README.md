@@ -355,7 +355,7 @@ Building worlds, systems, and experiences across every major engine.
 
 ---
 
-### Scenario 3: Enterprise Feature Development
+### Scenario 4: Enterprise Feature Development
 
 **Your Team**:
 1. 👔 **Senior Project Manager** - Scope and task planning
