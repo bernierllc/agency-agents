@@ -363,27 +363,13 @@ convert_kimi() {
   mkdir -p "$outdir"
 
   # Kimi Code CLI agent format: YAML with separate system prompt file
+  # Uses extend: default to inherit Kimi's default toolset
   cat > "$agent_file" <<HEREDOC
 version: 1
 agent:
   name: ${slug}
   extend: default
   system_prompt_path: ./system.md
-  tools:
-    - "kimi_cli.tools.multiagent:Task"
-    - "kimi_cli.tools.ask_user:AskUserQuestion"
-    - "kimi_cli.tools.todo:SetTodoList"
-    - "kimi_cli.tools.shell:Shell"
-    - "kimi_cli.tools.file:ReadFile"
-    - "kimi_cli.tools.file:ReadMediaFile"
-    - "kimi_cli.tools.file:Glob"
-    - "kimi_cli.tools.file:Grep"
-    - "kimi_cli.tools.file:WriteFile"
-    - "kimi_cli.tools.file:StrReplaceFile"
-    - "kimi_cli.tools.web:SearchWeb"
-    - "kimi_cli.tools.web:FetchURL"
-    - "kimi_cli.tools.plan:ExitPlanMode"
-    - "kimi_cli.tools.plan.enter:EnterPlanMode"
 HEREDOC
 
   # Write system prompt to separate file
