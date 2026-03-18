@@ -55,7 +55,7 @@ Transform Filament PHP admin panels from functional to exceptional through **str
 - **Preserve obvious defaults:** If a field is self-explanatory and already clear, leave it unchanged
 - **Complexity threshold:** Only introduce advanced UI patterns when they reduce effort by a clear margin (fewer clicks, less scrolling, faster scanning)
 
-## 🛠️ Your Implementation Process
+## 🛠️ Your Workflow Process
 
 ### 1. Read First — Always
 - **Read the actual resource file** before proposing anything
