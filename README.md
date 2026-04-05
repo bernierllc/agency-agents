@@ -99,6 +99,9 @@ Building the future, one commit at a time.
 | 🔗 [Feishu Integration Developer](engineering/engineering-feishu-integration-developer.md) | Feishu/Lark Open Platform, bots, workflows | Building integrations for the Feishu ecosystem |
 | 🧱 [CMS Developer](engineering/engineering-cms-developer.md) | WordPress & Drupal themes, plugins/modules, content architecture | Code-first CMS implementation and customization |
 | 📧 [Email Intelligence Engineer](engineering/engineering-email-intelligence-engineer.md) | Email parsing, MIME extraction, structured data for AI agents | Turning raw email threads into reasoning-ready context |
+| 🔍 [Code Review Quality Gate](engineering/engineering-code-review-quality-gate.md) | Automated code review, quality enforcement | PR quality gates, automated review standards |
+| 🗄️ [Database Migration Agent](engineering/engineering-database-migration-agent.md) | Schema migrations, data transformation | Database schema changes, migration planning |
+| 📱 [Frontend Developer - Tamagui](engineering/engineering-frontend-tamagui.md) | Tamagui, cross-platform React Native/Web UI | Universal UI with Tamagui, styled components |
 
 ### 🎨 Design Division
 
@@ -191,6 +194,7 @@ Building the right thing at the right time.
 | 💬 [Feedback Synthesizer](product/product-feedback-synthesizer.md) | User feedback analysis, insights extraction | Feedback analysis, user insights, product priorities |
 | 🧠 [Behavioral Nudge Engine](product/product-behavioral-nudge-engine.md) | Behavioral psychology, nudge design, engagement | Maximizing user motivation through behavioral science |
 | 🧭 [Product Manager](product/product-manager.md) | Full lifecycle product ownership | Discovery, PRDs, roadmap planning, GTM, outcome measurement |
+| 🧪 [Feature Alchemist](product/product-feature-alchemist.md) | Creative feature ideation, tangential innovation | Discovering adjacent feature possibilities that spark user imagination |
 
 ### 🎬 Project Management Division
 
@@ -204,6 +208,8 @@ Keeping the trains running on time (and under budget).
 | 🧪 [Experiment Tracker](project-management/project-management-experiment-tracker.md) | A/B tests, hypothesis validation | Experiment management, data-driven decisions, testing |
 | 👔 [Senior Project Manager](project-management/project-manager-senior.md) | Realistic scoping, task conversion | Converting specs to tasks, scope management |
 | 📋 [Jira Workflow Steward](project-management/project-management-jira-workflow-steward.md) | Git workflow, branch strategy, traceability | Enforcing Jira-linked Git discipline and delivery |
+| 🎯 [Project Coordinator](project-management/project-coordinator.md) | Multi-agent orchestration, plan execution | End-to-end project delivery with sub-agent delegation |
+| 🚦 [Production Readiness Gatekeeper](project-management/project-management-production-readiness-gatekeeper.md) | Release readiness, quality gates | Pre-launch checklists, production readiness certification |
 
 ### 🧪 Testing Division
 
@@ -219,6 +225,11 @@ Breaking things so users don't have to.
 | 🛠️ [Tool Evaluator](testing/testing-tool-evaluator.md) | Technology assessment, tool selection | Evaluating tools, software recommendations, tech decisions |
 | 🔄 [Workflow Optimizer](testing/testing-workflow-optimizer.md) | Process analysis, workflow improvement | Process optimization, efficiency gains, automation opportunities |
 | ♿ [Accessibility Auditor](testing/testing-accessibility-auditor.md) | WCAG auditing, assistive technology testing | Accessibility compliance, screen reader testing, inclusive design verification |
+| ♿ [Accessibility Specialist](testing/testing-accessibility-specialist.md) | Deep accessibility testing, ARIA patterns | Comprehensive accessibility testing and remediation |
+| 🏗️ [Testing Architect](testing/testing-architect.md) | Test strategy, framework design, coverage planning | Test infrastructure design, quality architecture |
+| 🎭 [Playwright Auditor](testing/testing-playwright-auditor.md) | Playwright E2E testing, browser automation | End-to-end test suites, cross-browser testing |
+| 🔧 [Testing Suite Fixer](testing/testing-suite-fixer.md) | Test failure analysis, test/code mismatch repair | Fixing broken test suites, diagnosing test failures |
+| 🖥️ [UI Tester](testing/testing-ui-tester.md) | Frontend UI testing, visual regression | UI component testing, visual QA |
 
 ### 🛟 Support Division
 
@@ -232,6 +243,23 @@ The backbone of the operation.
 | 🏗️ [Infrastructure Maintainer](support/support-infrastructure-maintainer.md) | System reliability, performance optimization | Infrastructure management, system operations, monitoring |
 | ⚖️ [Legal Compliance Checker](support/support-legal-compliance-checker.md) | Compliance, regulations, legal review | Legal compliance, regulatory requirements, risk management |
 | 📑 [Executive Summary Generator](support/support-executive-summary-generator.md) | C-suite communication, strategic summaries | Executive reporting, strategic communication, decision support |
+| 🚨 [Incident Response Agent](support/support-incident-response-agent.md) | Incident management, response coordination | Production incidents, outage response, post-mortems |
+| 📝 [Customer Documentation](support/support-customer-documentation.md) | Customer-facing docs, workflow-first writing | Product documentation, user guides, help content |
+| 📖 [Internal Documentation](support/support-internal-documentation.md) | Internal docs, technical knowledge management | Architecture docs, runbooks, onboarding guides |
+
+### 🔒 Security Division
+
+Protecting the perimeter and everything inside it.
+
+| Agent | Specialty | When to Use |
+|-------|-----------|-------------|
+| 🛡️ [Security Audit Lead](security/security-audit-lead.md) | Security audit orchestration, vulnerability triage | Coordinating comprehensive security assessments |
+| 🔍 [Application Tester](security/security-application-tester.md) | Application security testing, OWASP | Web/API security testing, vulnerability scanning |
+| 🔐 [Auth Specialist](security/security-auth-specialist.md) | Authentication, authorization, identity | Auth system design, OAuth/OIDC, access control |
+| 🏗️ [Infrastructure Auditor](security/security-infrastructure-auditor.md) | Cloud security, network hardening | Infrastructure security reviews, cloud posture |
+| ⚔️ [Pentest Specialist](security/security-pentest-specialist.md) | Penetration testing, exploit development | Offensive security testing, red team exercises |
+| 🔏 [Privacy Compliance Auditor](security/security-privacy-compliance-auditor.md) | GDPR, CCPA, privacy compliance | Privacy audits, data protection compliance |
+| 📊 [Security Report Generator](security/security-report-generator.md) | Security reporting, executive summaries | Security assessment reports, compliance documentation |
 
 ### 🥽 Spatial Computing Division
 
@@ -280,6 +308,7 @@ The unique specialists who don't fit in a box.
 | 🇫🇷 [French Consulting Market Navigator](specialized/specialized-french-consulting-market.md) | ESN/SI ecosystem, portage salarial, rate positioning | Freelance consulting in the French IT market |
 | 🇰🇷 [Korean Business Navigator](specialized/specialized-korean-business-navigator.md) | Korean business culture, 품의 process, relationship mechanics | Foreign professionals navigating Korean business relationships |
 | 🏗️ [Civil Engineer](specialized/specialized-civil-engineer.md) | Structural analysis, geotechnical design, global building codes | Multi-standard structural engineering across Eurocode, ACI, AISC, and more |
+| 🧠 [BrainGrid Integration Orchestrator](specialized/specialized-braingrid-integration-orchestrator.md) | Multi-system integration, data orchestration | Complex system integration and data pipeline coordination |
 
 ### 🎮 Game Development Division
 
@@ -497,7 +526,7 @@ Each agent is designed with:
 
 ## 📊 Stats
 
-- 🎭 **144 Specialized Agents** across 12 divisions
+- 🎭 **184 Specialized Agents** across 14 divisions
 - 📝 **10,000+ lines** of personality, process, and code examples
 - ⏱️ **Months of iteration** from real-world usage
 - 🌟 **Battle-tested** in production environments

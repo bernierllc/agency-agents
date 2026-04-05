@@ -5,7 +5,7 @@ description: >
 version: 1.0.0
 author: mattbernier
 source: bernierllc/agency-agents
-division: documentation
+division: support
 color: blue
 ---
 

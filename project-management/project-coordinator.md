@@ -16,7 +16,7 @@ description: >
 version: 1.0.0
 author: mattbernier
 source: bernierllc/agency-agents
-division: root
+division: project-management
 color: indigo
 ---
 
