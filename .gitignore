@@ -64,11 +64,13 @@ TODO.md
 NOTES.md
 AGENTINFO.md
 AGENTS.md
-CLAUDE.md
 GEMINI.md
 QWEN.md
 .cursor/rules
 /plans/
+
+# Metadata scan cursor (local state for scripts/add-metadata.py)
+.metadata-scan-cursor
 
 # Generated integration files — run scripts/convert.sh to regenerate locally
 # The scripts/ and integrations/*/README.md files ARE committed; only generated

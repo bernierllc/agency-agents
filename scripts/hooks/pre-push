@@ -1,0 +1,33 @@
+#!/bin/sh
+#
+# pre-push hook: run incremental metadata scan on agent files
+# before pushing to ensure front matter is up to date.
+#
+# Install: cp scripts/hooks/pre-push .git/hooks/pre-push && chmod +x .git/hooks/pre-push
+# Or run: scripts/install-hooks.sh
+#
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+SCRIPT="$REPO_ROOT/scripts/add-metadata.py"
+
+if [ ! -f "$SCRIPT" ]; then
+    echo "pre-push: scripts/add-metadata.py not found, skipping metadata scan."
+    exit 0
+fi
+
+echo "pre-push: Running incremental metadata scan..."
+python3 "$SCRIPT"
+
+# If the script updated any files, stage and commit them
+CHANGED=$(git diff --name-only -- '*.md')
+if [ -n "$CHANGED" ]; then
+    echo "pre-push: Metadata updated in the following files:"
+    echo "$CHANGED"
+    echo ""
+    echo "pre-push: Auto-staging updated agent metadata..."
+    git add $CHANGED
+    git commit -m "chore: update agent metadata (pre-push hook)"
+    echo "pre-push: Metadata commit created. Push will include it."
+fi
+
+exit 0

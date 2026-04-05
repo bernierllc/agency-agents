@@ -3,6 +3,14 @@
 
 Adds author, contributors, version, source, and division fields
 to the YAML front matter of each agent file.
+
+Supports incremental scanning via a cursor file (.metadata-scan-cursor)
+that stores the last scanned commit SHA. On subsequent runs, only files
+changed since that commit are re-processed for contributor updates.
+
+Usage:
+    python3 scripts/add-metadata.py           # incremental (default)
+    python3 scripts/add-metadata.py --full     # full rescan from scratch
 """
 
 import os
@@ -11,6 +19,7 @@ import subprocess
 import sys
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+CURSOR_FILE = os.path.join(REPO_ROOT, '.metadata-scan-cursor')
 
 SKIP_DIRS = {'examples', 'strategy', 'integrations', '.github', 'scripts'}
 SKIP_FILES = {'README.md', 'CONTRIBUTING.md', 'CONTRIBUTING_zh-CN.md', 'LICENSE', 'EXECUTIVE-BRIEF.md', 'QUICKSTART.md'}
@@ -59,6 +68,108 @@ GITHUB_HANDLES = {
 }
 
 
+# ---------------------------------------------------------------------------
+# Cursor file helpers
+# ---------------------------------------------------------------------------
+
+def read_cursor():
+    """Read the last scanned commit SHA from the cursor file."""
+    if os.path.exists(CURSOR_FILE):
+        with open(CURSOR_FILE, 'r') as f:
+            sha = f.read().strip()
+            if sha:
+                return sha
+    return None
+
+
+def write_cursor(sha):
+    """Write the current HEAD SHA to the cursor file."""
+    with open(CURSOR_FILE, 'w') as f:
+        f.write(sha + '\n')
+
+
+def get_head_sha():
+    """Get the current HEAD commit SHA."""
+    result = subprocess.run(
+        ['git', 'rev-parse', 'HEAD'],
+        capture_output=True, text=True, cwd=REPO_ROOT
+    )
+    return result.stdout.strip()
+
+
+def get_changed_agent_files(since_sha):
+    """Get list of agent .md files changed since the given commit."""
+    result = subprocess.run(
+        ['git', 'diff', '--name-only', since_sha, 'HEAD', '--', '*.md'],
+        capture_output=True, text=True, cwd=REPO_ROOT
+    )
+    files = []
+    for line in result.stdout.strip().split('\n'):
+        line = line.strip()
+        if not line:
+            continue
+        full_path = os.path.join(REPO_ROOT, line)
+        if os.path.exists(full_path) and is_agent_file(full_path):
+            files.append(full_path)
+    return files
+
+
+def get_new_agent_files(since_sha):
+    """Get agent .md files that are new (untracked or added) since cursor."""
+    result = subprocess.run(
+        ['git', 'diff', '--name-only', '--diff-filter=A', since_sha, 'HEAD', '--', '*.md'],
+        capture_output=True, text=True, cwd=REPO_ROOT
+    )
+    files = []
+    for line in result.stdout.strip().split('\n'):
+        line = line.strip()
+        if not line:
+            continue
+        full_path = os.path.join(REPO_ROOT, line)
+        if os.path.exists(full_path) and is_agent_file(full_path):
+            files.append(full_path)
+    return files
+
+
+# ---------------------------------------------------------------------------
+# Agent file identification
+# ---------------------------------------------------------------------------
+
+def is_agent_file(filepath):
+    """Check if a file is an agent .md file (not a doc/config file)."""
+    if not filepath.endswith('.md'):
+        return False
+    rel = os.path.relpath(filepath, REPO_ROOT)
+    fname = os.path.basename(filepath)
+    if fname in SKIP_FILES:
+        return False
+    top_dir = rel.split(os.sep)[0]
+    if top_dir in SKIP_DIRS:
+        return False
+    return True
+
+
+def get_all_agent_files():
+    """Walk the repo and return all agent .md files."""
+    agent_files = []
+    for root, dirs, files in os.walk(REPO_ROOT):
+        rel_root = os.path.relpath(root, REPO_ROOT)
+        top_dir = rel_root.split(os.sep)[0]
+        if top_dir in SKIP_DIRS:
+            continue
+        for fname in sorted(files):
+            if not fname.endswith('.md'):
+                continue
+            if fname in SKIP_FILES:
+                continue
+            agent_files.append(os.path.join(root, fname))
+    return agent_files
+
+
+# ---------------------------------------------------------------------------
+# Git metadata helpers
+# ---------------------------------------------------------------------------
+
 def get_original_author(filepath):
     """Get the original author of a file from git log."""
     rel = os.path.relpath(filepath, REPO_ROOT)
@@ -75,6 +186,24 @@ def get_all_contributors(filepath):
     rel = os.path.relpath(filepath, REPO_ROOT)
     result = subprocess.run(
         ['git', 'log', '--format=%an', '--', rel],
+        capture_output=True, text=True, cwd=REPO_ROOT
+    )
+    names = result.stdout.strip().split('\n')
+    seen = set()
+    unique = []
+    for name in names:
+        name = name.strip()
+        if name and name not in seen:
+            seen.add(name)
+            unique.append(name)
+    return unique
+
+
+def get_contributors_since(filepath, since_sha):
+    """Get contributors to a file since a given commit."""
+    rel = os.path.relpath(filepath, REPO_ROOT)
+    result = subprocess.run(
+        ['git', 'log', f'{since_sha}..HEAD', '--format=%an', '--', rel],
         capture_output=True, text=True, cwd=REPO_ROOT
     )
     names = result.stdout.strip().split('\n')
@@ -109,12 +238,15 @@ def to_github_handle(name):
     return GITHUB_HANDLES.get(name, name)
 
 
+# ---------------------------------------------------------------------------
+# Front matter parsing and building
+# ---------------------------------------------------------------------------
+
 def parse_front_matter(content):
     """Parse existing YAML front matter. Returns (front_matter_dict, body, had_frontmatter)."""
     if not content.startswith('---'):
         return {}, content, False
 
-    # Find the closing ---
     end = content.find('---', 3)
     if end == -1:
         return {}, content, False
@@ -122,16 +254,13 @@ def parse_front_matter(content):
     fm_text = content[3:end].strip()
     body = content[end + 3:].lstrip('\n')
 
-    # Simple YAML parsing (handles the fields we care about)
     fm = {}
     current_key = None
     current_val_lines = []
 
     for line in fm_text.split('\n'):
-        # Check if this is a new key
         match = re.match(r'^(\w[\w-]*)\s*:\s*(.*)', line)
         if match:
-            # Save previous key
             if current_key:
                 val = '\n'.join(current_val_lines).strip()
                 fm[current_key] = val
@@ -147,9 +276,26 @@ def parse_front_matter(content):
     return fm, body, True
 
 
+def parse_contributors_field(val):
+    """Parse the contributors field value into a list of handles."""
+    if isinstance(val, list):
+        return val
+    # Handle YAML list format: lines starting with -
+    contribs = []
+    for line in val.split('\n'):
+        line = line.strip()
+        if line.startswith('- '):
+            handle = line[2:].strip().strip('"').strip("'")
+            if handle:
+                contribs.append(handle)
+    if contribs:
+        return contribs
+    # Handle comma-separated
+    return [c.strip().strip('"').strip("'") for c in val.split(',') if c.strip()]
+
+
 def build_front_matter(fm):
     """Build YAML front matter string from dict, preserving field order."""
-    # Desired field order
     order = ['name', 'description', 'version', 'author', 'contributors', 'source', 'division', 'color', 'emoji', 'tools']
     lines = ['---']
 
@@ -158,10 +304,8 @@ def build_front_matter(fm):
             continue
         val = fm[key]
         if key == 'description' and ('\n' in val or len(val) > 100):
-            # Use > for long descriptions
             if val.startswith('>\n') or val.startswith('>'):
                 lines.append(f'{key}: >')
-                # Strip the > prefix and indent
                 desc = val.lstrip('>').strip()
                 for dline in desc.split('\n'):
                     lines.append(f'  {dline.strip()}')
@@ -171,8 +315,7 @@ def build_front_matter(fm):
                     lines.append(f'  {dline.strip()}')
         elif key == 'contributors':
             lines.append(f'{key}:')
-            # Parse contributor list
-            contribs = val if isinstance(val, list) else [c.strip() for c in val.split(',') if c.strip()]
+            contribs = val if isinstance(val, list) else parse_contributors_field(val)
             for c in contribs:
                 lines.append(f'  - "{c}"')
         elif key in ('description', 'name') and ('"' in str(val) or ':' in str(val)):
@@ -180,7 +323,6 @@ def build_front_matter(fm):
         else:
             lines.append(f'{key}: {val}')
 
-    # Any remaining keys not in order
     for key in fm:
         if key not in order:
             lines.append(f'{key}: {fm[key]}')
@@ -189,44 +331,94 @@ def build_front_matter(fm):
     return '\n'.join(lines)
 
 
-def process_file(filepath):
-    """Add metadata to a single agent file."""
+# ---------------------------------------------------------------------------
+# File processing
+# ---------------------------------------------------------------------------
+
+def process_file(filepath, incremental_since=None):
+    """Add or update metadata on a single agent file.
+
+    If incremental_since is set, only merge in new contributors found
+    since that commit (skips full author/contributor rescan).
+    """
     with open(filepath, 'r', encoding='utf-8') as f:
         content = f.read()
 
     fm, body, had_fm = parse_front_matter(content)
 
     if not had_fm:
-        print(f"  SKIP (no front matter): {filepath}")
+        print(f"  SKIP (no front matter): {os.path.relpath(filepath, REPO_ROOT)}")
         return False
 
-    # Get git metadata
-    author = get_original_author(filepath)
-    contributors = get_all_contributors(filepath)
-    division = get_division(filepath)
-    source = get_source(filepath, author)
+    changed = False
 
-    # Build contributor list (excluding the original author)
-    author_handle = to_github_handle(author)
-    contributor_handles = []
-    for c in contributors:
-        handle = to_github_handle(c)
-        if handle != author_handle:
-            contributor_handles.append(handle)
+    if incremental_since and 'author' in fm:
+        # Incremental mode: only update contributors with new names
+        new_contributors = get_contributors_since(filepath, incremental_since)
+        if new_contributors:
+            existing = set(parse_contributors_field(fm.get('contributors', ''))) if fm.get('contributors') else set()
+            author_handle = fm.get('author', '')
+            for c in new_contributors:
+                handle = to_github_handle(c)
+                if handle != author_handle and handle not in existing:
+                    existing.add(handle)
+                    changed = True
+            if existing:
+                fm['contributors'] = sorted(existing)
 
-    # Add new metadata fields (don't overwrite existing)
-    if 'version' not in fm:
-        fm['version'] = '1.0.0'
-    if 'author' not in fm:
-        fm['author'] = author_handle
-    if 'contributors' not in fm and contributor_handles:
-        fm['contributors'] = contributor_handles
-    if 'source' not in fm:
-        fm['source'] = source
-    if 'division' not in fm:
-        fm['division'] = division
+        # Always update division in case file was moved
+        new_division = get_division(filepath)
+        if fm.get('division') != new_division:
+            fm['division'] = new_division
+            changed = True
+    else:
+        # Full mode: set all metadata fields
+        author = get_original_author(filepath)
+        contributors = get_all_contributors(filepath)
+        division = get_division(filepath)
+        source = get_source(filepath, author)
 
-    # Rebuild
+        author_handle = to_github_handle(author)
+        contributor_handles = []
+        for c in contributors:
+            handle = to_github_handle(c)
+            if handle != author_handle:
+                contributor_handles.append(handle)
+
+        if 'version' not in fm:
+            fm['version'] = '1.0.0'
+            changed = True
+        if 'author' not in fm:
+            fm['author'] = author_handle
+            changed = True
+        if 'contributors' not in fm and contributor_handles:
+            fm['contributors'] = contributor_handles
+            changed = True
+        elif contributor_handles:
+            existing = set(parse_contributors_field(fm.get('contributors', ''))) if fm.get('contributors') else set()
+            for h in contributor_handles:
+                if h not in existing:
+                    existing.add(h)
+                    changed = True
+            if existing:
+                fm['contributors'] = sorted(existing)
+        if 'source' not in fm:
+            fm['source'] = source
+            changed = True
+        if 'division' not in fm:
+            fm['division'] = division
+            changed = True
+        elif fm['division'] != division:
+            fm['division'] = division
+            changed = True
+
+        # If this is a first-time scan, always write to normalize format
+        if incremental_since is None:
+            changed = True
+
+    if not changed:
+        return False
+
     new_fm = build_front_matter(fm)
     new_content = new_fm + '\n\n' + body
 
@@ -236,27 +428,58 @@ def process_file(filepath):
     return True
 
 
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
+
 def main():
-    count = 0
-    for root, dirs, files in os.walk(REPO_ROOT):
-        # Skip non-agent directories
-        rel_root = os.path.relpath(root, REPO_ROOT)
-        top_dir = rel_root.split(os.sep)[0]
-        if top_dir in SKIP_DIRS:
-            continue
+    full_mode = '--full' in sys.argv
 
-        for fname in sorted(files):
-            if not fname.endswith('.md'):
-                continue
-            if fname in SKIP_FILES:
-                continue
+    head_sha = get_head_sha()
+    cursor_sha = read_cursor()
 
-            filepath = os.path.join(root, fname)
-            if process_file(filepath):
+    if full_mode or not cursor_sha:
+        if full_mode:
+            print("Running full metadata scan (--full flag)...")
+        else:
+            print("No .metadata-scan-cursor found — running full scan...")
+
+        agent_files = get_all_agent_files()
+        count = 0
+        for filepath in agent_files:
+            if process_file(filepath, incremental_since=None):
                 count += 1
                 print(f"  Updated: {os.path.relpath(filepath, REPO_ROOT)}")
 
-    print(f"\nDone! Updated {count} agent files with metadata.")
+        write_cursor(head_sha)
+        print(f"\nDone! Updated {count}/{len(agent_files)} agent files.")
+        print(f"Cursor saved: {head_sha[:12]}")
+    else:
+        print(f"Incremental scan since {cursor_sha[:12]}...")
+
+        # Get files changed since last scan
+        changed_files = get_changed_agent_files(cursor_sha)
+        new_files = get_new_agent_files(cursor_sha)
+
+        # New files get a full scan, changed files get incremental
+        all_files = set(changed_files) | set(new_files)
+
+        if not all_files:
+            print("No agent files changed since last scan.")
+            write_cursor(head_sha)
+            return
+
+        count = 0
+        for filepath in sorted(all_files):
+            is_new = filepath in new_files
+            if process_file(filepath, incremental_since=None if is_new else cursor_sha):
+                count += 1
+                label = "NEW" if is_new else "updated"
+                print(f"  {label}: {os.path.relpath(filepath, REPO_ROOT)}")
+
+        write_cursor(head_sha)
+        print(f"\nDone! Processed {count}/{len(all_files)} changed agent files.")
+        print(f"Cursor saved: {head_sha[:12]}")
 
 
 if __name__ == '__main__':
