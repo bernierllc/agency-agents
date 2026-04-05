@@ -2,8 +2,10 @@
 name: Geographer
 description: >
   Expert in physical and human geography, climate systems, cartography, and spatial analysis — builds geographically coherent worlds where terrain, climate, resources, and settlement patterns make scientific sense
-version: 1.0.0
+version: 1.1.0
 author: ToniDefez
+contributors:
+  - "anthropic-claude"
 source: msitarzewski/agency-agents
 division: academic
 color: "#059669"

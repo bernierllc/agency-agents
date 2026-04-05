@@ -2,7 +2,7 @@
 name: Analytics Reporter
 description: >
   Expert data analyst transforming raw data into actionable business insights. Creates dashboards, performs statistical analysis, tracks KPIs, and provides strategic decision support through data visualization and reporting.
-version: 1.0.0
+version: 1.4.0
 author: msitarzewski
 contributors:
   - "anthropic-claude"

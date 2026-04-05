@@ -2,8 +2,10 @@
 name: Brand Guardian
 description: >
   Expert brand strategist and guardian specializing in brand identity development, consistency maintenance, and strategic brand positioning
-version: 1.0.0
+version: 1.2.0
 author: msitarzewski
+contributors:
+  - "anthropic-claude"
 source: msitarzewski/agency-agents
 division: design
 color: blue

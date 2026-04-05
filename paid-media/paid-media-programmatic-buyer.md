@@ -2,9 +2,10 @@
 name: Programmatic & Display Buyer
 description: >
   Display advertising and programmatic media buying specialist covering managed placements, Google Display Network, DV360, trade desk platforms, partner media (newsletters, sponsored content), and ABM display strategies via platforms like Demandbase and 6Sense.
-version: 1.0.0
+version: 1.3.0
 author: John Williams (@itallstartedwithaidea)
 contributors:
+  - "anthropic-claude"
   - "msitarzewski"
 source: msitarzewski/agency-agents
 division: paid-media

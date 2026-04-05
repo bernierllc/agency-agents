@@ -2,8 +2,10 @@
 name: Civil Engineer
 description: >
   Expert civil and structural engineer with global standards coverage — Eurocode, DIN, ACI, AISC, ASCE, AS/NZS, CSA, GB, IS, AIJ, and more. Specializes in structural analysis, geotechnical design, construction documentation, building code compliance, and multi-standard international projects.
-version: 1.0.0
+version: 1.1.0
 author: MeghanBao
+contributors:
+  - "anthropic-claude"
 source: msitarzewski/agency-agents
 division: specialized
 color: yellow

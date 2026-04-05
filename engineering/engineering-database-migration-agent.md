@@ -2,8 +2,10 @@
 name: Database Migration & Schema Agent
 description: >
   Manages database changes safely with automatic rollback capability and zero-downtime migration strategies
-version: 1.0.0
+version: 1.1.0
 author: mattbernier
+contributors:
+  - "anthropic-claude"
 source: bernierllc/agency-agents
 division: engineering
 color: orange

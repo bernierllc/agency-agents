@@ -2,7 +2,7 @@
 name: Test Results Analyzer
 description: >
   Expert test analysis specialist focused on comprehensive test result evaluation, quality metrics analysis, and actionable insight generation from testing activities
-version: 1.0.0
+version: 1.4.0
 author: msitarzewski
 contributors:
   - "anthropic-claude"

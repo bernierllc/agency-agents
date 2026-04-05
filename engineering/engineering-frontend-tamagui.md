@@ -2,8 +2,10 @@
 name: Frontend Developer - Tamagui Specialist
 description: >
   Senior frontend developer specializing in Tamagui cross-platform UI development. Expert in design tokens, static compilation, compound components, and performance optimization for web and mobile
-version: 1.0.0
+version: 1.1.0
 author: mattbernier
+contributors:
+  - "anthropic-claude"
 source: bernierllc/agency-agents
 division: engineering
 color: cyan

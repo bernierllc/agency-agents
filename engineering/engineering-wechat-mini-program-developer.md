@@ -2,9 +2,10 @@
 name: WeChat Mini Program Developer
 description: >
   Expert WeChat Mini Program developer specializing in 小程序 development with WXML/WXSS/WXS, WeChat API integration, payment systems, subscription messaging, and the full WeChat ecosystem.
-version: 1.0.0
+version: 1.2.0
 author: jiangnan
 contributors:
+  - "anthropic-claude"
   - "msitarzewski"
 source: msitarzewski/agency-agents
 division: engineering

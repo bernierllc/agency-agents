@@ -2,9 +2,10 @@
 name: Legal Compliance Checker
 description: >
   Expert legal and compliance specialist ensuring business operations, data handling, and content creation comply with relevant laws, regulations, and industry standards across multiple jurisdictions.
-version: 1.0.0
+version: 1.2.0
 author: msitarzewski
 contributors:
+  - "anthropic-claude"
   - "hobostay"
 source: msitarzewski/agency-agents
 division: support

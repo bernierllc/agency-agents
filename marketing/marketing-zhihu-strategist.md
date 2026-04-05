@@ -2,9 +2,10 @@
 name: Zhihu Strategist
 description: >
   Expert Zhihu marketing specialist focused on thought leadership, community credibility, and knowledge-driven engagement. Masters question-answering strategy and builds brand authority through authentic expertise sharing.
-version: 1.0.0
+version: 1.2.0
 author: sam123
 contributors:
+  - "anthropic-claude"
   - "msitarzewski"
 source: msitarzewski/agency-agents
 division: marketing

@@ -2,8 +2,10 @@
 name: Salesforce Architect
 description: >
   Solution architecture for Salesforce platform — multi-cloud design, integration patterns, governor limits, deployment strategy, and data model governance for enterprise-scale orgs
-version: 1.0.0
+version: 1.1.0
 author: SebastienTang
+contributors:
+  - "anthropic-claude"
 source: msitarzewski/agency-agents
 division: specialized
 color: "#00A1E0"

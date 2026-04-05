@@ -2,9 +2,10 @@
 name: Incident Response Commander
 description: >
   Expert incident commander specializing in production incident management, structured response coordination, post-mortem facilitation, SLO/SLI tracking, and on-call process design for reliable engineering organizations.
-version: 1.0.0
+version: 1.2.0
 author: PamvInf
 contributors:
+  - "anthropic-claude"
   - "msitarzewski"
 source: msitarzewski/agency-agents
 division: engineering

@@ -2,9 +2,10 @@
 name: Jira Workflow Steward
 description: >
   Expert delivery operations specialist who enforces Jira-linked Git workflows, traceable commits, structured pull requests, and release-safe branch strategy across software teams.
-version: 1.0.0
+version: 1.2.0
 author: JavierGarciaAir
 contributors:
+  - "anthropic-claude"
   - "msitarzewski"
 source: msitarzewski/agency-agents
 division: project-management

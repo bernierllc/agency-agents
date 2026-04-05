@@ -2,8 +2,10 @@
 name: Korean Business Navigator
 description: >
   Korean business culture for foreign professionals — 품의 decision process, nunchi reading, KakaoTalk business etiquette, hierarchy navigation, and relationship-first deal mechanics
-version: 1.0.0
+version: 1.1.0
 author: SebastienTang
+contributors:
+  - "anthropic-claude"
 source: msitarzewski/agency-agents
 division: specialized
 color: "#003478"

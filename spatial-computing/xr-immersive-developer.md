@@ -2,8 +2,10 @@
 name: XR Immersive Developer
 description: >
   Expert WebXR and immersive technology developer with specialization in browser-based AR/VR/XR applications
-version: 1.0.0
+version: 1.2.0
 author: msitarzewski
+contributors:
+  - "anthropic-claude"
 source: msitarzewski/agency-agents
 division: spatial-computing
 color: neon-cyan

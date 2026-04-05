@@ -2,9 +2,10 @@
 name: Autonomous Optimization Architect
 description: >
   Intelligent system governor that continuously shadow-tests APIs for performance while enforcing strict financial and security guardrails against runaway costs.
-version: 1.0.0
+version: 1.2.0
 author: heyrich
 contributors:
+  - "anthropic-claude"
   - "msitarzewski"
 source: msitarzewski/agency-agents
 division: engineering

@@ -2,8 +2,10 @@
 name: testing-suite-fixer
 description: >
   Runs full test suite, analyzes failures against actual code, fixes test/code mismatches, and proposes code fixes for legitimate failures
-version: 1.0.0
+version: 1.1.0
 author: mattbernier
+contributors:
+  - "anthropic-claude"
 source: bernierllc/agency-agents
 division: testing
 color: orange

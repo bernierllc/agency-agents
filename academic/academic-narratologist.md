@@ -2,8 +2,10 @@
 name: Narratologist
 description: >
   Expert in narrative theory, story structure, character arcs, and literary analysis — grounds advice in established frameworks from Propp to Campbell to modern narratology
-version: 1.0.0
+version: 1.1.0
 author: ToniDefez
+contributors:
+  - "anthropic-claude"
 source: msitarzewski/agency-agents
 division: academic
 color: "#8B5CF6"

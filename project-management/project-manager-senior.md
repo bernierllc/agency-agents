@@ -2,11 +2,11 @@
 name: Senior Project Manager
 description: >
   Converts specs to tasks and remembers previous projects. Focused on realistic scope, no background processes, exact spec requirements
-version: 1.0.0
+version: 4.1.0
 author: msitarzewski
 contributors:
-  - "anthropic-claude"
   - "4shil"
+  - "anthropic-claude"
   - "mattbernier"
 source: msitarzewski/agency-agents
 division: project-management

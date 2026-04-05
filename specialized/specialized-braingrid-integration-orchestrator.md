@@ -1,8 +1,10 @@
 ---
 name: BrainGrid Integration Orchestrator
 description: Interface between autonomous workflow and BrainGrid API/CLI for requirement and task management
-version: 1.0.0
+version: 1.1.0
 author: mattbernier
+contributors:
+  - "anthropic-claude"
 source: bernierllc/agency-agents
 division: specialized
 color: blue
