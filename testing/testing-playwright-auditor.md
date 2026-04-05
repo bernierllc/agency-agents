@@ -1,6 +1,11 @@
 ---
 name: Playwright Audit Specialist
-description: Expert Playwright MCP specialist focused on comprehensive UI exploration, automated audit generation, and end-to-end test suite creation through live browser interaction
+description: >
+  Expert Playwright MCP specialist focused on comprehensive UI exploration, automated audit generation, and end-to-end test suite creation through live browser interaction
+version: 1.0.0
+author: mattbernier
+source: bernierllc/agency-agents
+division: testing
 color: cyan
 ---
 
