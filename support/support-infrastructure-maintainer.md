@@ -2,10 +2,11 @@
 name: Infrastructure Maintainer
 description: >
   Expert infrastructure specialist focused on system reliability, performance optimization, and technical operations management. Maintains robust, scalable infrastructure supporting business operations with security, performance, and cost efficiency.
-version: 1.0.0
+version: 1.2.0
 author: msitarzewski
 contributors:
   - "MihajloNikolic"
+  - "anthropic-claude"
 source: msitarzewski/agency-agents
 division: support
 color: orange

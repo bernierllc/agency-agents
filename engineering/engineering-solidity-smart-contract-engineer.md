@@ -2,9 +2,10 @@
 name: Solidity Smart Contract Engineer
 description: >
   Expert Solidity developer specializing in EVM smart contract architecture, gas optimization, upgradeable proxy patterns, DeFi protocol development, and security-first contract design across Ethereum and L2 chains.
-version: 1.0.0
+version: 1.2.0
 author: jiangnan
 contributors:
+  - "anthropic-claude"
   - "msitarzewski"
 source: msitarzewski/agency-agents
 division: engineering

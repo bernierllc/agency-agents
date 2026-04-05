@@ -2,8 +2,10 @@
 name: Outbound Strategist
 description: >
   Signal-based outbound specialist who designs multi-channel prospecting sequences, defines ICPs, and builds pipeline through research-driven personalization — not volume.
-version: 1.0.0
+version: 1.1.0
 author: msitarzewski
+contributors:
+  - "anthropic-claude"
 source: msitarzewski/agency-agents
 division: sales
 color: "#E8590C"

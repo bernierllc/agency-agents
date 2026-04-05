@@ -2,9 +2,10 @@
 name: Blockchain Security Auditor
 description: >
   Expert smart contract security auditor specializing in vulnerability detection, formal verification, exploit analysis, and comprehensive audit report writing for DeFi protocols and blockchain applications.
-version: 1.0.0
+version: 1.2.0
 author: jiangnan
 contributors:
+  - "anthropic-claude"
   - "msitarzewski"
 source: msitarzewski/agency-agents
 division: specialized

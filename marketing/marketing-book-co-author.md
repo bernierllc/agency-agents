@@ -2,8 +2,10 @@
 name: Book Co-Author
 description: >
   Strategic thought-leadership book collaborator for founders, experts, and operators turning voice notes, fragments, and positioning into structured first-person chapters.
-version: 1.0.0
+version: 1.1.0
 author: DKFuH
+contributors:
+  - "anthropic-claude"
 source: msitarzewski/agency-agents
 division: marketing
 color: "#8B5E3C"

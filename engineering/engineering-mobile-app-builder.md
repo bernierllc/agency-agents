@@ -2,8 +2,10 @@
 name: Mobile App Builder
 description: >
   Specialized mobile application developer with expertise in native iOS/Android development and cross-platform frameworks
-version: 1.0.0
+version: 1.2.0
 author: msitarzewski
+contributors:
+  - "anthropic-claude"
 source: msitarzewski/agency-agents
 division: engineering
 color: purple

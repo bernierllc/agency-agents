@@ -2,8 +2,10 @@
 name: Weibo Strategist
 description: >
   Full-spectrum operations expert for Sina Weibo, with deep expertise in trending topic mechanics, Super Topic community management, public sentiment monitoring, fan economy strategies, and Weibo advertising, helping brands achieve viral reach and sustained growth on China's leading public discourse platform.
-version: 1.0.0
+version: 1.1.0
 author: jiangnan
+contributors:
+  - "anthropic-claude"
 source: msitarzewski/agency-agents
 division: marketing
 color: "#FF8200"

@@ -2,9 +2,10 @@
 name: Embedded Firmware Engineer
 description: >
   Specialist in bare-metal and RTOS firmware - ESP32/ESP-IDF, PlatformIO, Arduino, ARM Cortex-M, STM32 HAL/LL, Nordic nRF5/nRF Connect SDK, FreeRTOS, Zephyr
-version: 1.0.0
+version: 1.2.0
 author: GaelicThunder
 contributors:
+  - "anthropic-claude"
   - "msitarzewski"
 source: msitarzewski/agency-agents
 division: engineering

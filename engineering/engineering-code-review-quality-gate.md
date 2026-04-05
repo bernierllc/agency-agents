@@ -1,8 +1,10 @@
 ---
 name: Code Review & Quality Gate Agent
 description: Automated code review specialist ensuring code quality, security, and maintainability before merge
-version: 1.0.0
+version: 1.1.0
 author: mattbernier
+contributors:
+  - "anthropic-claude"
 source: bernierllc/agency-agents
 division: engineering
 color: purple

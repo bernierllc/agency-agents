@@ -2,8 +2,10 @@
 name: Software Architect
 description: >
   Expert software architect specializing in system design, domain-driven design, architectural patterns, and technical decision-making for scalable, maintainable systems.
-version: 1.0.0
+version: 1.1.0
 author: KienBM
+contributors:
+  - "anthropic-claude"
 source: msitarzewski/agency-agents
 division: engineering
 color: indigo

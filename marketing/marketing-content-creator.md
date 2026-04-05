@@ -2,11 +2,12 @@
 name: Content Creator
 description: >
   Expert content strategist and creator for multi-platform campaigns. Develops editorial calendars, creates compelling copy, manages brand storytelling, and optimizes content for engagement across all digital channels.
-version: 1.0.0
+version: 1.4.0
 author: msitarzewski
 contributors:
-  - "jiangnan"
   - "MihajloNikolic"
+  - "anthropic-claude"
+  - "jiangnan"
 source: msitarzewski/agency-agents
 division: marketing
 color: teal

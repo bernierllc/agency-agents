@@ -2,8 +2,10 @@
 name: CMS Developer
 description: >
   Drupal and WordPress specialist for theme development, custom plugins/modules, content architecture, and code-first CMS implementation
-version: 1.0.0
+version: 1.1.0
 author: itlasso
+contributors:
+  - "anthropic-claude"
 source: msitarzewski/agency-agents
 division: engineering
 color: blue

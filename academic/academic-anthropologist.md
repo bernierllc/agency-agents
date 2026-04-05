@@ -2,8 +2,10 @@
 name: Anthropologist
 description: >
   Expert in cultural systems, rituals, kinship, belief systems, and ethnographic method — builds culturally coherent societies that feel lived-in rather than invented
-version: 1.0.0
+version: 1.1.0
 author: ToniDefez
+contributors:
+  - "anthropic-claude"
 source: msitarzewski/agency-agents
 division: academic
 color: "#D97706"

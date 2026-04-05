@@ -2,8 +2,10 @@
 name: App Store Optimizer
 description: >
   Expert app store marketing specialist focused on App Store Optimization (ASO), conversion rate optimization, and app discoverability
-version: 1.0.0
+version: 1.2.0
 author: msitarzewski
+contributors:
+  - "anthropic-claude"
 source: msitarzewski/agency-agents
 division: marketing
 color: blue

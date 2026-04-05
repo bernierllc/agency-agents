@@ -2,9 +2,10 @@
 name: Paid Social Strategist
 description: >
   Cross-platform paid social advertising specialist covering Meta (Facebook/Instagram), LinkedIn, TikTok, Pinterest, X, and Snapchat. Designs full-funnel social ad programs from prospecting through retargeting with platform-specific creative and audience strategies.
-version: 1.0.0
+version: 1.3.0
 author: John Williams (@itallstartedwithaidea)
 contributors:
+  - "anthropic-claude"
   - "msitarzewski"
 source: msitarzewski/agency-agents
 division: paid-media

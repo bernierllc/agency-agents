@@ -2,8 +2,10 @@
 name: macOS Spatial/Metal Engineer
 description: >
   Native Swift and Metal specialist building high-performance 3D rendering systems and spatial computing experiences for macOS and Vision Pro
-version: 1.0.0
+version: 1.2.0
 author: msitarzewski
+contributors:
+  - "anthropic-claude"
 source: msitarzewski/agency-agents
 division: spatial-computing
 color: metallic-blue

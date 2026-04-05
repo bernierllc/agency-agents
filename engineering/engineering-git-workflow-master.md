@@ -2,8 +2,10 @@
 name: Git Workflow Master
 description: >
   Expert in Git workflows, branching strategies, and version control best practices including conventional commits, rebasing, worktrees, and CI-friendly branch management.
-version: 1.0.0
+version: 1.1.0
 author: KienBM
+contributors:
+  - "anthropic-claude"
 source: msitarzewski/agency-agents
 division: engineering
 color: orange

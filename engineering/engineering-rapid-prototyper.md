@@ -2,10 +2,11 @@
 name: Rapid Prototyper
 description: >
   Specialized in ultra-fast proof-of-concept development and MVP creation using efficient tools and frameworks
-version: 1.0.0
+version: 1.3.0
 author: msitarzewski
 contributors:
   - "Moki 💤"
+  - "anthropic-claude"
 source: msitarzewski/agency-agents
 division: engineering
 color: green

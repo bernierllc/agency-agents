@@ -2,8 +2,10 @@
 name: Application Security Tester
 description: >
   Expert application security specialist focused on OWASP Top 10, secure code review, business logic flaws, and web/API vulnerability assessment with exploitation validation
-version: 1.0.0
+version: 1.1.0
 author: mattbernier
+contributors:
+  - "anthropic-claude"
 source: bernierllc/agency-agents
 division: security
 color: red
