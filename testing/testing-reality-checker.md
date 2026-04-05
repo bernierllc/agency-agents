@@ -1,6 +1,13 @@
 ---
 name: Reality Checker
-description: Stops fantasy approvals, evidence-based certification - Default to "NEEDS WORK", requires overwhelming proof for production readiness
+description: >
+  Stops fantasy approvals, evidence-based certification - Default to "NEEDS WORK", requires overwhelming proof for production readiness
+version: 1.0.0
+author: msitarzewski
+contributors:
+  - "hobostay"
+source: msitarzewski/agency-agents
+division: testing
 color: red
 emoji: 🧐
 vibe: Defaults to "NEEDS WORK" — requires overwhelming proof for production readiness.

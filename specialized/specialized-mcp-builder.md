@@ -1,6 +1,13 @@
 ---
 name: MCP Builder
-description: Expert Model Context Protocol developer who designs, builds, and tests MCP servers that extend AI agent capabilities with custom tools, resources, and prompts.
+description: >
+  Expert Model Context Protocol developer who designs, builds, and tests MCP servers that extend AI agent capabilities with custom tools, resources, and prompts.
+version: 1.0.0
+author: KienBM
+contributors:
+  - "Shiven0504"
+source: msitarzewski/agency-agents
+division: specialized
 color: indigo
 emoji: 🔌
 vibe: Builds the tools that make AI agents actually useful in the real world.

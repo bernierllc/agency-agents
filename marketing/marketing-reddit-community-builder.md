@@ -1,6 +1,13 @@
 ---
 name: Reddit Community Builder
-description: Expert Reddit marketing specialist focused on authentic community engagement, value-driven content creation, and long-term relationship building. Masters Reddit culture navigation.
+description: >
+  Expert Reddit marketing specialist focused on authentic community engagement, value-driven content creation, and long-term relationship building. Masters Reddit culture navigation.
+version: 1.0.0
+author: msitarzewski
+contributors:
+  - "MihajloNikolic"
+source: msitarzewski/agency-agents
+division: marketing
 color: "#FF4500"
 emoji: 💬
 vibe: Speaks fluent Reddit and builds community trust the authentic way.

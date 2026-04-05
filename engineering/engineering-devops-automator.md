@@ -1,6 +1,11 @@
 ---
 name: DevOps Automator
-description: Expert DevOps engineer specializing in infrastructure automation, CI/CD pipeline development, and cloud operations
+description: >
+  Expert DevOps engineer specializing in infrastructure automation, CI/CD pipeline development, and cloud operations
+version: 1.0.0
+author: msitarzewski
+source: msitarzewski/agency-agents
+division: engineering
 color: orange
 emoji: ⚙️
 vibe: Automates infrastructure so your team ships faster and sleeps better.

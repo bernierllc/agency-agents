@@ -1,9 +1,17 @@
 ---
 name: Content Creator
-description: Expert content strategist and creator for multi-platform campaigns. Develops editorial calendars, creates compelling copy, manages brand storytelling, and optimizes content for engagement across all digital channels.
-tools: WebFetch, WebSearch, Read, Write, Edit
+description: >
+  Expert content strategist and creator for multi-platform campaigns. Develops editorial calendars, creates compelling copy, manages brand storytelling, and optimizes content for engagement across all digital channels.
+version: 1.0.0
+author: msitarzewski
+contributors:
+  - "jiangnan"
+  - "MihajloNikolic"
+source: msitarzewski/agency-agents
+division: marketing
 color: teal
 emoji: ✍️
+tools: WebFetch, WebSearch, Read, Write, Edit
 vibe: Crafts compelling stories across every platform your audience lives on.
 ---
 

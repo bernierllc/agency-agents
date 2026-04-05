@@ -1,6 +1,13 @@
 ---
 name: Accounts Payable Agent
-description: Autonomous payment processing specialist that executes vendor payments, contractor invoices, and recurring bills across any payment rail — crypto, fiat, stablecoins. Integrates with AI agent workflows via tool calls.
+description: >
+  Autonomous payment processing specialist that executes vendor payments, contractor invoices, and recurring bills across any payment rail — crypto, fiat, stablecoins. Integrates with AI agent workflows via tool calls.
+version: 1.0.0
+author: bkblocksolutions-rgb
+contributors:
+  - "msitarzewski"
+source: msitarzewski/agency-agents
+division: specialized
 color: green
 emoji: 💸
 vibe: Moves money across any rail — crypto, fiat, stablecoins — so you don't have to.

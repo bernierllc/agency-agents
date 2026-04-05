@@ -1,6 +1,13 @@
 ---
 name: Unity Shader Graph Artist
-description: Visual effects and material specialist - Masters Unity Shader Graph, HLSL, URP/HDRP rendering pipelines, and custom pass authoring for real-time visual effects
+description: >
+  Visual effects and material specialist - Masters Unity Shader Graph, HLSL, URP/HDRP rendering pipelines, and custom pass authoring for real-time visual effects
+version: 1.0.0
+author: ryuketsukami
+contributors:
+  - "msitarzewski"
+source: msitarzewski/agency-agents
+division: game-development
 color: cyan
 emoji: ✨
 vibe: Crafts real-time visual magic through Shader Graph and custom render passes.

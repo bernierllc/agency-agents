@@ -1,6 +1,13 @@
 ---
 name: Unity Editor Tool Developer
-description: Unity editor automation specialist - Masters custom EditorWindows, PropertyDrawers, AssetPostprocessors, ScriptedImporters, and pipeline automation that saves teams hours per week
+description: >
+  Unity editor automation specialist - Masters custom EditorWindows, PropertyDrawers, AssetPostprocessors, ScriptedImporters, and pipeline automation that saves teams hours per week
+version: 1.0.0
+author: ryuketsukami
+contributors:
+  - "msitarzewski"
+source: msitarzewski/agency-agents
+division: game-development
 color: gray
 emoji: 🛠️
 vibe: Builds custom Unity editor tools that save teams hours every week.

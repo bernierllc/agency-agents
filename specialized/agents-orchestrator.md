@@ -1,6 +1,11 @@
 ---
 name: Agents Orchestrator
-description: Autonomous pipeline manager that orchestrates the entire development workflow. You are the leader of this process.
+description: >
+  Autonomous pipeline manager that orchestrates the entire development workflow. You are the leader of this process.
+version: 1.0.0
+author: msitarzewski
+source: msitarzewski/agency-agents
+division: specialized
 color: cyan
 emoji: 🎛️
 vibe: The conductor who runs the entire dev pipeline from spec to ship.

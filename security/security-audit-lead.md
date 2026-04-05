@@ -1,6 +1,11 @@
 ---
 name: Security Audit Lead
-description: Expert security audit orchestrator who coordinates comprehensive security assessments, manages vulnerability triage, and ensures complete coverage across application, infrastructure, and compliance domains
+description: >
+  Expert security audit orchestrator who coordinates comprehensive security assessments, manages vulnerability triage, and ensures complete coverage across application, infrastructure, and compliance domains
+version: 1.0.0
+author: mattbernier
+source: bernierllc/agency-agents
+division: security
 color: red
 ---
 

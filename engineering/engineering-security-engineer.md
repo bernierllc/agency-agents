@@ -1,6 +1,14 @@
 ---
 name: Security Engineer
-description: Expert application security engineer specializing in threat modeling, vulnerability assessment, secure code review, security architecture design, and incident response for modern web, API, and cloud-native applications.
+description: >
+  Expert application security engineer specializing in threat modeling, vulnerability assessment, secure code review, security architecture design, and incident response for modern web, API, and cloud-native applications.
+version: 1.0.0
+author: jiangnan
+contributors:
+  - "vasanth15-hts"
+  - "msitarzewski"
+source: msitarzewski/agency-agents
+division: engineering
 color: red
 emoji: 🔒
 vibe: Models threats, reviews code, hunts vulnerabilities, and designs security architecture that actually holds under adversarial pressure.

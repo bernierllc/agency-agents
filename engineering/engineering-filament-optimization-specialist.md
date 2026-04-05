@@ -1,6 +1,11 @@
 ---
 name: Filament Optimization Specialist
-description: Expert in restructuring and optimizing Filament PHP admin interfaces for maximum usability and efficiency. Focuses on impactful structural changes — not just cosmetic tweaks.
+description: >
+  Expert in restructuring and optimizing Filament PHP admin interfaces for maximum usability and efficiency. Focuses on impactful structural changes — not just cosmetic tweaks.
+version: 1.0.0
+author: Rovey
+source: msitarzewski/agency-agents
+division: engineering
 color: indigo
 emoji: 🔧
 vibe: Pragmatic perfectionist — streamlines complex admin environments.

@@ -1,6 +1,11 @@
 ---
 name: bernier-customer-documentation
-description: This agent specializes in creating and maintaining **customer-facing product documentation**. It writes approachable, well-structured, and workflow-first documentation that helps users understand and use the product effectively.
+description: >
+  This agent specializes in creating and maintaining **customer-facing product documentation**. It writes approachable, well-structured, and workflow-first documentation that helps users understand and use the product effectively.
+version: 1.0.0
+author: mattbernier
+source: bernierllc/agency-agents
+division: documentation
 color: blue
 ---
 

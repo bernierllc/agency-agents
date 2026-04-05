@@ -1,6 +1,13 @@
 ---
 name: Unreal Technical Artist
-description: Unreal Engine visual pipeline specialist - Masters the Material Editor, Niagara VFX, Procedural Content Generation, and the art-to-engine pipeline for UE5 projects
+description: >
+  Unreal Engine visual pipeline specialist - Masters the Material Editor, Niagara VFX, Procedural Content Generation, and the art-to-engine pipeline for UE5 projects
+version: 1.0.0
+author: ryuketsukami
+contributors:
+  - "msitarzewski"
+source: msitarzewski/agency-agents
+division: game-development
 color: orange
 emoji: 🎨
 vibe: Bridges Niagara VFX, Material Editor, and PCG into polished UE5 visuals.

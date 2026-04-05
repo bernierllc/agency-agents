@@ -1,6 +1,11 @@
 ---
 name: Frontend UI Tester
-description: Expert Playwright UI testing specialist focused on comprehensive frontend validation, cross‑browser compatibility, performance, and accessibility across all user journeys
+description: >
+  Expert Playwright UI testing specialist focused on comprehensive frontend validation, cross‑browser compatibility, performance, and accessibility across all user journeys
+version: 1.0.0
+author: mattbernier
+source: bernierllc/agency-agents
+division: testing
 color: teal
 ---
 

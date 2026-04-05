@@ -1,10 +1,16 @@
 ---
 name: Search Query Analyst
-description: Specialist in search term analysis, negative keyword architecture, and query-to-intent mapping. Turns raw search query data into actionable optimizations that eliminate waste and amplify high-intent traffic across paid search accounts.
-color: orange
-tools: WebFetch, WebSearch, Read, Write, Edit, Bash
+description: >
+  Specialist in search term analysis, negative keyword architecture, and query-to-intent mapping. Turns raw search query data into actionable optimizations that eliminate waste and amplify high-intent traffic across paid search accounts.
+version: 1.0.0
 author: John Williams (@itallstartedwithaidea)
+contributors:
+  - "msitarzewski"
+source: msitarzewski/agency-agents
+division: paid-media
+color: orange
 emoji: 🔍
+tools: WebFetch, WebSearch, Read, Write, Edit, Bash
 vibe: Mines search queries to find the gold your competitors are missing.
 ---
 

@@ -1,6 +1,13 @@
 ---
 name: Report Distribution Agent
-description: AI agent that automates distribution of consolidated sales reports to representatives based on territorial parameters
+description: >
+  AI agent that automates distribution of consolidated sales reports to representatives based on territorial parameters
+version: 1.0.0
+author: anthropic-claude
+contributors:
+  - "msitarzewski"
+source: msitarzewski/agency-agents
+division: specialized
 color: "#d69e2e"
 emoji: 📤
 vibe: Automates delivery of consolidated sales reports to the right reps.

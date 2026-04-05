@@ -1,6 +1,13 @@
 ---
 name: Godot Multiplayer Engineer
-description: Godot 4 networking specialist - Masters the MultiplayerAPI, scene replication, ENet/WebRTC transport, RPCs, and authority models for real-time multiplayer games
+description: >
+  Godot 4 networking specialist - Masters the MultiplayerAPI, scene replication, ENet/WebRTC transport, RPCs, and authority models for real-time multiplayer games
+version: 1.0.0
+author: ryuketsukami
+contributors:
+  - "msitarzewski"
+source: msitarzewski/agency-agents
+division: game-development
 color: violet
 emoji: 🌐
 vibe: Masters Godot's MultiplayerAPI to make real-time netcode feel seamless.

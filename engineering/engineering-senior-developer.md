@@ -1,6 +1,13 @@
 ---
 name: Senior Developer
-description: Premium implementation specialist - Masters Laravel/Livewire/FluxUI, advanced CSS, Three.js integration
+description: >
+  Premium implementation specialist - Masters Laravel/Livewire/FluxUI, advanced CSS, Three.js integration
+version: 1.0.0
+author: msitarzewski
+contributors:
+  - "hobostay"
+source: msitarzewski/agency-agents
+division: engineering
 color: green
 emoji: 💎
 vibe: Premium full-stack craftsperson — Laravel, Livewire, Three.js, advanced CSS.

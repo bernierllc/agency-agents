@@ -1,6 +1,11 @@
 ---
 name: Incident Response Agent
-description: Handles production incidents, coordinates rollbacks, and manages the resolution process with root cause analysis
+description: >
+  Handles production incidents, coordinates rollbacks, and manages the resolution process with root cause analysis
+version: 1.0.0
+author: mattbernier
+source: bernierllc/agency-agents
+division: support
 color: red
 ---
 

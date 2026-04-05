@@ -1,6 +1,13 @@
 ---
 name: Unreal World Builder
-description: Open-world and environment specialist - Masters UE5 World Partition, Landscape, procedural foliage, HLOD, and large-scale level streaming for seamless open-world experiences
+description: >
+  Open-world and environment specialist - Masters UE5 World Partition, Landscape, procedural foliage, HLOD, and large-scale level streaming for seamless open-world experiences
+version: 1.0.0
+author: ryuketsukami
+contributors:
+  - "msitarzewski"
+source: msitarzewski/agency-agents
+division: game-development
 color: green
 emoji: 🌍
 vibe: Builds seamless open worlds with World Partition, Nanite, and procedural foliage.

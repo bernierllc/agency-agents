@@ -1,6 +1,13 @@
 ---
 name: Narrative Designer
-description: Story systems and dialogue architect - Masters GDD-aligned narrative design, branching dialogue, lore architecture, and environmental storytelling across all game engines
+description: >
+  Story systems and dialogue architect - Masters GDD-aligned narrative design, branching dialogue, lore architecture, and environmental storytelling across all game engines
+version: 1.0.0
+author: ryuketsukami
+contributors:
+  - "msitarzewski"
+source: msitarzewski/agency-agents
+division: game-development
 color: red
 emoji: 📖
 vibe: Architects story systems where narrative and gameplay are inseparable.

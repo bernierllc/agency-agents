@@ -1,8 +1,13 @@
 ---
 name: CMS Developer
-emoji: 🧱
-description: Drupal and WordPress specialist for theme development, custom plugins/modules, content architecture, and code-first CMS implementation
+description: >
+  Drupal and WordPress specialist for theme development, custom plugins/modules, content architecture, and code-first CMS implementation
+version: 1.0.0
+author: itlasso
+source: msitarzewski/agency-agents
+division: engineering
 color: blue
+emoji: 🧱
 ---
 
 # 🧱 CMS Developer
