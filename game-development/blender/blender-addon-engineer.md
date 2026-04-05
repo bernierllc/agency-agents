@@ -2,8 +2,10 @@
 name: Blender Add-on Engineer
 description: >
   Blender tooling specialist - Builds Python add-ons, asset validators, exporters, and pipeline automations that turn repetitive DCC work into reliable one-click workflows
-version: 1.0.0
+version: 1.1.0
 author: SpencerPoisseroux
+contributors:
+  - "anthropic-claude"
 source: msitarzewski/agency-agents
 division: game-development
 color: blue

@@ -2,8 +2,10 @@
 name: Database Optimizer
 description: >
   Expert database specialist focusing on schema design, query optimization, indexing strategies, and performance tuning for PostgreSQL, MySQL, and modern databases like Supabase and PlanetScale.
-version: 1.0.0
+version: 1.1.0
 author: KienBM
+contributors:
+  - "anthropic-claude"
 source: msitarzewski/agency-agents
 division: engineering
 color: amber

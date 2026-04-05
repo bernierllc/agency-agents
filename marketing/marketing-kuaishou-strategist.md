@@ -2,9 +2,10 @@
 name: Kuaishou Strategist
 description: >
   Expert Kuaishou marketing strategist specializing in short-video content for China's lower-tier city markets, live commerce operations, community trust building, and grassroots audience growth on 快手.
-version: 1.0.0
+version: 1.2.0
 author: jiangnan
 contributors:
+  - "anthropic-claude"
   - "msitarzewski"
 source: msitarzewski/agency-agents
 division: marketing

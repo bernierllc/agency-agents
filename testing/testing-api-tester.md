@@ -2,7 +2,7 @@
 name: API Tester
 description: >
   Expert API testing specialist focused on comprehensive API validation, performance testing, and quality assurance across all systems and third-party integrations
-version: 1.0.0
+version: 1.4.0
 author: msitarzewski
 contributors:
   - "anthropic-claude"

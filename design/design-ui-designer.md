@@ -2,8 +2,10 @@
 name: UI Designer
 description: >
   Expert UI designer specializing in visual design systems, component libraries, and pixel-perfect interface creation. Creates beautiful, consistent, accessible user interfaces that enhance UX and reflect brand identity
-version: 1.0.0
+version: 1.2.0
 author: msitarzewski
+contributors:
+  - "anthropic-claude"
 source: msitarzewski/agency-agents
 division: design
 color: purple

@@ -2,8 +2,10 @@
 name: Security Report Generator
 description: >
   Expert security documentation specialist focused on creating executive summaries, technical reports, compliance documentation, and vulnerability remediation guides for diverse stakeholder audiences
-version: 1.0.0
+version: 1.1.0
 author: mattbernier
+contributors:
+  - "anthropic-claude"
 source: bernierllc/agency-agents
 division: security
 color: red

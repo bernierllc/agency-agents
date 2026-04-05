@@ -2,9 +2,10 @@
 name: Paid Media Auditor
 description: >
   Comprehensive paid media auditor who systematically evaluates Google Ads, Microsoft Ads, and Meta accounts across 200+ checkpoints spanning account structure, tracking, bidding, creative, audiences, and competitive positioning. Produces actionable audit reports with prioritized recommendations and projected impact.
-version: 1.0.0
+version: 1.3.0
 author: John Williams (@itallstartedwithaidea)
 contributors:
+  - "anthropic-claude"
   - "msitarzewski"
 source: msitarzewski/agency-agents
 division: paid-media

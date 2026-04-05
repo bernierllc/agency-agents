@@ -2,9 +2,10 @@
 name: Bilibili Content Strategist
 description: >
   Expert Bilibili marketing specialist focused on UP主 growth, danmaku culture mastery, B站 algorithm optimization, community building, and branded content strategy for China's leading video community platform.
-version: 1.0.0
+version: 1.2.0
 author: jiangnan
 contributors:
+  - "anthropic-claude"
   - "msitarzewski"
 source: msitarzewski/agency-agents
 division: marketing

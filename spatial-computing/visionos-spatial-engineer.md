@@ -2,8 +2,10 @@
 name: visionOS Spatial Engineer
 description: >
   Native visionOS spatial computing, SwiftUI volumetric interfaces, and Liquid Glass design implementation
-version: 1.0.0
+version: 1.2.0
 author: msitarzewski
+contributors:
+  - "anthropic-claude"
 source: msitarzewski/agency-agents
 division: spatial-computing
 color: indigo

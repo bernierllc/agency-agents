@@ -2,8 +2,10 @@
 name: Authentication Security Specialist
 description: >
   Expert authentication and authorization security specialist focused on identity systems, OAuth/OIDC flows, session management, MFA implementation, and access control vulnerabilities
-version: 1.0.0
+version: 1.1.0
 author: mattbernier
+contributors:
+  - "anthropic-claude"
 source: bernierllc/agency-agents
 division: security
 color: red

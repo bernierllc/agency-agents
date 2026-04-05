@@ -2,12 +2,13 @@
 name: Agentic Identity & Trust Architect
 description: >
   Designs identity, authentication, and trust verification systems for autonomous AI agents operating in multi-agent environments. Ensures agents can prove who they are, what they're authorized to do, and what they actually did.
-version: 1.0.0
+version: 2.3.0
 author: knuckles-stack
 contributors:
-  - "msitarzewski"
+  - "anthropic-claude"
   - "dreynow"
   - "jiangnan"
+  - "msitarzewski"
 source: msitarzewski/agency-agents
 division: specialized
 color: "#2d5a27"

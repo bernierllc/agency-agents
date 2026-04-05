@@ -2,9 +2,10 @@
 name: Roblox Experience Designer
 description: >
   Roblox platform UX and monetization specialist - Masters engagement loop design, DataStore-driven progression, Roblox monetization systems (Passes, Developer Products, UGC), and player retention for Roblox experiences
-version: 1.0.0
+version: 1.2.0
 author: ryuketsukami
 contributors:
+  - "anthropic-claude"
   - "msitarzewski"
 source: msitarzewski/agency-agents
 division: game-development

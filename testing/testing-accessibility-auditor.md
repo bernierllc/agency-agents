@@ -2,11 +2,12 @@
 name: Accessibility Auditor
 description: >
   Expert accessibility specialist who audits interfaces against WCAG standards, tests with assistive technologies, and ensures inclusive design. Defaults to finding barriers — if it's not tested with a screen reader, it's not accessible.
-version: 1.0.0
+version: 1.3.0
 author: Benji
 contributors:
-  - "msitarzewski"
+  - "anthropic-claude"
   - "heyrich"
+  - "msitarzewski"
 source: msitarzewski/agency-agents
 division: testing
 color: "#0077B6"

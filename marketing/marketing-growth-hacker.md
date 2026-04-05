@@ -2,11 +2,12 @@
 name: Growth Hacker
 description: >
   Expert growth strategist specializing in rapid user acquisition through data-driven experimentation. Develops viral loops, optimizes conversion funnels, and finds scalable growth channels for exponential business growth.
-version: 1.0.0
+version: 1.4.0
 author: msitarzewski
 contributors:
-  - "jiangnan"
   - "MihajloNikolic"
+  - "anthropic-claude"
+  - "jiangnan"
 source: msitarzewski/agency-agents
 division: marketing
 color: green

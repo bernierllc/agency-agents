@@ -2,9 +2,10 @@
 name: Threat Detection Engineer
 description: >
   Expert detection engineer specializing in SIEM rule development, MITRE ATT&CK coverage mapping, threat hunting, alert tuning, and detection-as-code pipelines for security operations teams.
-version: 1.0.0
+version: 1.2.0
 author: PamvInf
 contributors:
+  - "anthropic-claude"
   - "msitarzewski"
 source: msitarzewski/agency-agents
 division: engineering

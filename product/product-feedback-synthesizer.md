@@ -2,10 +2,11 @@
 name: Feedback Synthesizer
 description: >
   Expert in collecting, analyzing, and synthesizing user feedback from multiple channels to extract actionable product insights. Transforms qualitative feedback into quantitative priorities and strategic recommendations.
-version: 1.0.0
+version: 1.2.0
 author: msitarzewski
 contributors:
   - "MihajloNikolic"
+  - "anthropic-claude"
 source: msitarzewski/agency-agents
 division: product
 color: blue

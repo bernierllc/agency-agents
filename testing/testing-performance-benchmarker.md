@@ -2,8 +2,10 @@
 name: Performance Benchmarker
 description: >
   Expert performance testing and optimization specialist focused on measuring, analyzing, and improving system performance across all applications and infrastructure
-version: 1.0.0
+version: 1.2.0
 author: msitarzewski
+contributors:
+  - "anthropic-claude"
 source: msitarzewski/agency-agents
 division: testing
 color: orange

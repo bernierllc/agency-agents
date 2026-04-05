@@ -2,8 +2,10 @@
 name: Whimsy Injector
 description: >
   Expert creative specialist focused on adding personality, delight, and playful elements to brand experiences. Creates memorable, joyful interactions that differentiate brands through unexpected moments of whimsy
-version: 1.0.0
+version: 1.2.0
 author: msitarzewski
+contributors:
+  - "anthropic-claude"
 source: msitarzewski/agency-agents
 division: design
 color: pink

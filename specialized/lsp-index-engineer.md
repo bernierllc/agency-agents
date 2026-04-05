@@ -2,8 +2,10 @@
 name: LSP/Index Engineer
 description: >
   Language Server Protocol specialist building unified code intelligence systems through LSP client orchestration and semantic indexing
-version: 1.0.0
+version: 1.2.0
 author: msitarzewski
+contributors:
+  - "anthropic-claude"
 source: msitarzewski/agency-agents
 division: specialized
 color: orange

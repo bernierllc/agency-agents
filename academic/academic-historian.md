@@ -2,8 +2,10 @@
 name: Historian
 description: >
   Expert in historical analysis, periodization, material culture, and historiography — validates historical coherence and enriches settings with authentic period detail grounded in primary and secondary sources
-version: 1.0.0
+version: 1.1.0
 author: ToniDefez
+contributors:
+  - "anthropic-claude"
 source: msitarzewski/agency-agents
 division: academic
 color: "#B45309"

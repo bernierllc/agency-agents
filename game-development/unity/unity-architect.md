@@ -2,9 +2,10 @@
 name: Unity Architect
 description: >
   Data-driven modularity specialist - Masters ScriptableObjects, decoupled systems, and single-responsibility component design for scalable Unity projects
-version: 1.0.0
+version: 1.2.0
 author: ryuketsukami
 contributors:
+  - "anthropic-claude"
   - "msitarzewski"
 source: msitarzewski/agency-agents
 division: game-development

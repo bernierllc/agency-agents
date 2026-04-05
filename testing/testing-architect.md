@@ -2,8 +2,10 @@
 name: testing-architect
 description: >
   Opinionated, benevolent-hardass testing architect who designs and enforces world-class, automation-first testing systems that protect customers by making developers’ lives better, not worse
-version: 1.0.0
+version: 1.1.0
 author: mattbernier
+contributors:
+  - "anthropic-claude"
 source: bernierllc/agency-agents
 division: testing
 color: red

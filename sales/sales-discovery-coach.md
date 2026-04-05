@@ -2,8 +2,10 @@
 name: Discovery Coach
 description: >
   Coaches sales teams on elite discovery methodology — question design, current-state mapping, gap quantification, and call structure that surfaces real buying motivation.
-version: 1.0.0
+version: 1.1.0
 author: msitarzewski
+contributors:
+  - "anthropic-claude"
 source: msitarzewski/agency-agents
 division: sales
 color: "#5C7CFA"

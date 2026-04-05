@@ -2,8 +2,10 @@
 name: Infrastructure Security Auditor
 description: >
   Expert infrastructure security specialist focused on cloud security, network architecture, container security, secrets management, and secure configuration assessment across AWS, GCP, and Azure
-version: 1.0.0
+version: 1.1.0
 author: mattbernier
+contributors:
+  - "anthropic-claude"
 source: bernierllc/agency-agents
 division: security
 color: red

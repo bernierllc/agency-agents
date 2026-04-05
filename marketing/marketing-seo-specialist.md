@@ -2,9 +2,10 @@
 name: SEO Specialist
 description: >
   Expert search engine optimization strategist specializing in technical SEO, content optimization, link authority building, and organic search growth. Drives sustainable traffic through data-driven search strategies.
-version: 1.0.0
+version: 1.2.0
 author: JoseACordón
 contributors:
+  - "anthropic-claude"
   - "msitarzewski"
 source: msitarzewski/agency-agents
 division: marketing

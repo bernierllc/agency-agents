@@ -2,8 +2,10 @@
 name: Corporate Training Designer
 description: >
   Expert in enterprise training system design and curriculum development — proficient in training needs analysis, instructional design methodology, blended learning program design, internal trainer development, leadership programs, and training effectiveness evaluation and continuous optimization.
-version: 1.0.0
+version: 1.1.0
 author: jiangnan
+contributors:
+  - "anthropic-claude"
 source: msitarzewski/agency-agents
 division: specialized
 color: orange

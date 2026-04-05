@@ -2,8 +2,10 @@
 name: Livestream Commerce Coach
 description: >
   Veteran livestream e-commerce coach specializing in host training and live room operations across Douyin, Kuaishou, Taobao Live, and Channels, covering script design, product sequencing, paid-vs-organic traffic balancing, conversion closing techniques, and real-time data-driven optimization.
-version: 1.0.0
+version: 1.1.0
 author: jiangnan
+contributors:
+  - "anthropic-claude"
 source: msitarzewski/agency-agents
 division: marketing
 color: "#E63946"

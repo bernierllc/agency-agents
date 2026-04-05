@@ -2,8 +2,10 @@
 name: Data Privacy & Compliance Auditor
 description: >
   Expert data privacy specialist focused on GDPR, CCPA, HIPAA compliance, PII handling assessment, data flow mapping, and privacy-by-design validation
-version: 1.0.0
+version: 1.1.0
 author: mattbernier
+contributors:
+  - "anthropic-claude"
 source: bernierllc/agency-agents
 division: security
 color: red

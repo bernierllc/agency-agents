@@ -2,10 +2,11 @@
 name: Trend Researcher
 description: >
   Expert market intelligence analyst specializing in identifying emerging trends, competitive analysis, and opportunity assessment. Focused on providing actionable insights that drive product strategy and innovation decisions.
-version: 1.0.0
+version: 1.2.0
 author: msitarzewski
 contributors:
   - "MihajloNikolic"
+  - "anthropic-claude"
 source: msitarzewski/agency-agents
 division: product
 color: purple

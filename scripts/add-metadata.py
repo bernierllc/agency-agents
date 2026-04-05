@@ -217,6 +217,84 @@ def get_contributors_since(filepath, since_sha):
     return unique
 
 
+def derive_version_from_history(filepath):
+    """Derive a semver version by analyzing the git history of a file.
+
+    Strategy:
+    - Start at 1.0.0 (the initial commit that created the file)
+    - For each subsequent commit, look at the diff size:
+      - Large rewrites (>60% of file changed) = major bump
+      - Medium changes (new sections, significant additions) = minor bump
+      - Small changes (typos, formatting, tweaks) = patch bump
+    - Commit messages with conventional commit prefixes are also considered:
+      - 'feat' or 'add' in subject = minor
+      - 'fix', 'chore', 'docs', 'style' = patch
+      - 'rewrite', 'refactor' with large diff = major
+    """
+    rel = os.path.relpath(filepath, REPO_ROOT)
+
+    # Get commit SHAs oldest-first (reverse) that touched this file
+    result = subprocess.run(
+        ['git', 'log', '--format=%H', '--reverse', '--', rel],
+        capture_output=True, text=True, cwd=REPO_ROOT
+    )
+    shas = [s.strip() for s in result.stdout.strip().split('\n') if s.strip()]
+
+    if len(shas) <= 1:
+        return '1.0.0'
+
+    major, minor, patch = 1, 0, 0
+
+    for i, sha in enumerate(shas[1:], 1):
+        # Get the diff stat for this commit on this file
+        stat_result = subprocess.run(
+            ['git', 'diff', '--numstat', f'{shas[i-1]}..{sha}', '--', rel],
+            capture_output=True, text=True, cwd=REPO_ROOT
+        )
+        stat_line = stat_result.stdout.strip()
+        added, deleted = 0, 0
+        if stat_line:
+            parts = stat_line.split('\t')
+            if len(parts) >= 2:
+                try:
+                    added = int(parts[0]) if parts[0] != '-' else 0
+                    deleted = int(parts[1]) if parts[1] != '-' else 0
+                except ValueError:
+                    pass
+
+        total_changed = added + deleted
+
+        # Get the commit subject for conventional commit hints
+        msg_result = subprocess.run(
+            ['git', 'log', '-1', '--format=%s', sha],
+            capture_output=True, text=True, cwd=REPO_ROOT
+        )
+        subject = msg_result.stdout.strip().lower()
+
+        # Get the file size at the previous commit for percentage calculation
+        size_result = subprocess.run(
+            ['git', 'show', f'{shas[i-1]}:{rel}'],
+            capture_output=True, text=True, cwd=REPO_ROOT
+        )
+        prev_lines = len(size_result.stdout.split('\n')) if size_result.stdout else 1
+
+        change_ratio = total_changed / max(prev_lines, 1)
+
+        # Classify the change
+        if change_ratio > 0.6 or ('rewrite' in subject or 'rename' in subject and total_changed > 50):
+            major += 1
+            minor = 0
+            patch = 0
+        elif (total_changed > 20 or change_ratio > 0.15 or
+              any(kw in subject for kw in ['feat', 'add', 'enhance', 'new'])):
+            minor += 1
+            patch = 0
+        else:
+            patch += 1
+
+    return f'{major}.{minor}.{patch}'
+
+
 def get_division(filepath):
     """Derive the division/category from the file path."""
     rel = os.path.relpath(filepath, REPO_ROOT)
@@ -385,9 +463,11 @@ def process_file(filepath, incremental_since=None):
             if handle != author_handle:
                 contributor_handles.append(handle)
 
-        if 'version' not in fm:
-            fm['version'] = '1.0.0'
-            changed = True
+        if 'version' not in fm or fm['version'] == '1.0.0':
+            derived = derive_version_from_history(filepath)
+            if fm.get('version') != derived:
+                fm['version'] = derived
+                changed = True
         if 'author' not in fm:
             fm['author'] = author_handle
             changed = True

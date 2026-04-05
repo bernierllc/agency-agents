@@ -2,9 +2,10 @@
 name: Model QA Specialist
 description: >
   Independent model QA expert who audits ML and statistical models end-to-end - from documentation review and data reconstruction to replication, calibration testing, interpretability analysis, performance monitoring, and audit-grade reporting.
-version: 1.0.0
+version: 1.2.0
 author: JosephChomboM
 contributors:
+  - "anthropic-claude"
   - "msitarzewski"
 source: msitarzewski/agency-agents
 division: specialized
