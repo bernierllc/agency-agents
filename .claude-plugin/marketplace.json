@@ -1,0 +1,323 @@
+{
+  "name": "bernier-agents",
+  "owner": {
+    "name": "Bernier LLC",
+    "email": "matt@bernier.dev"
+  },
+  "metadata": {
+    "description": "Agent collection for Bernier LLC development environment",
+    "version": "2.0.0"
+  },
+  "plugins": [
+    {
+      "name": "academic-agents",
+      "description": "Research and analysis agents spanning anthropology, geography, history, narrative theory, and psychology for academic inquiry and scholarly work",
+      "source": "./",
+      "strict": false,
+      "category": "academic",
+      "agents": [
+        "./academic/academic-anthropologist.md",
+        "./academic/academic-geographer.md",
+        "./academic/academic-historian.md",
+        "./academic/academic-narratologist.md",
+        "./academic/academic-psychologist.md"
+      ]
+    },
+    {
+      "name": "design-agents",
+      "description": "Visual and interaction design agents covering brand identity, UI/UX design, accessibility, image prompting, visual storytelling, and creative expression",
+      "source": "./",
+      "strict": false,
+      "category": "design",
+      "agents": [
+        "./design/design-brand-guardian.md",
+        "./design/design-image-prompt-engineer.md",
+        "./design/design-inclusive-visuals-specialist.md",
+        "./design/design-ui-designer.md",
+        "./design/design-ux-architect.md",
+        "./design/design-ux-researcher.md",
+        "./design/design-visual-storyteller.md",
+        "./design/design-whimsy-injector.md"
+      ]
+    },
+    {
+      "name": "engineering-agents",
+      "description": "Software engineering agents for full-stack development, architecture, DevOps, security, database optimization, code review, incident response, and specialized platform integrations",
+      "source": "./",
+      "strict": false,
+      "category": "engineering",
+      "agents": [
+        "./engineering/engineering-ai-data-remediation-engineer.md",
+        "./engineering/engineering-ai-engineer.md",
+        "./engineering/engineering-autonomous-optimization-architect.md",
+        "./engineering/engineering-backend-architect.md",
+        "./engineering/engineering-cms-developer.md",
+        "./engineering/engineering-code-review-quality-gate.md",
+        "./engineering/engineering-code-reviewer.md",
+        "./engineering/engineering-data-engineer.md",
+        "./engineering/engineering-database-migration-agent.md",
+        "./engineering/engineering-database-optimizer.md",
+        "./engineering/engineering-devops-automator.md",
+        "./engineering/engineering-email-intelligence-engineer.md",
+        "./engineering/engineering-embedded-firmware-engineer.md",
+        "./engineering/engineering-feishu-integration-developer.md",
+        "./engineering/engineering-filament-optimization-specialist.md",
+        "./engineering/engineering-frontend-developer.md",
+        "./engineering/engineering-frontend-tamagui.md",
+        "./engineering/engineering-git-workflow-master.md",
+        "./engineering/engineering-incident-response-commander.md",
+        "./engineering/engineering-mobile-app-builder.md",
+        "./engineering/engineering-rapid-prototyper.md",
+        "./engineering/engineering-security-engineer.md",
+        "./engineering/engineering-senior-developer.md",
+        "./engineering/engineering-software-architect.md",
+        "./engineering/engineering-solidity-smart-contract-engineer.md",
+        "./engineering/engineering-sre.md",
+        "./engineering/engineering-technical-writer.md",
+        "./engineering/engineering-threat-detection-engineer.md",
+        "./engineering/engineering-wechat-mini-program-developer.md"
+      ]
+    },
+    {
+      "name": "game-development-agents",
+      "description": "Game development agents for Unity, Unreal Engine, Godot, Roblox Studio, and Blender covering gameplay scripting, multiplayer, shaders, level design, narrative, audio, and technical art",
+      "source": "./",
+      "strict": false,
+      "category": "game-development",
+      "agents": [
+        "./game-development/blender/blender-addon-engineer.md",
+        "./game-development/game-audio-engineer.md",
+        "./game-development/game-designer.md",
+        "./game-development/godot/godot-gameplay-scripter.md",
+        "./game-development/godot/godot-multiplayer-engineer.md",
+        "./game-development/godot/godot-shader-developer.md",
+        "./game-development/level-designer.md",
+        "./game-development/narrative-designer.md",
+        "./game-development/roblox-studio/roblox-avatar-creator.md",
+        "./game-development/roblox-studio/roblox-experience-designer.md",
+        "./game-development/roblox-studio/roblox-systems-scripter.md",
+        "./game-development/technical-artist.md",
+        "./game-development/unity/unity-architect.md",
+        "./game-development/unity/unity-editor-tool-developer.md",
+        "./game-development/unity/unity-multiplayer-engineer.md",
+        "./game-development/unity/unity-shader-graph-artist.md",
+        "./game-development/unreal-engine/unreal-multiplayer-architect.md",
+        "./game-development/unreal-engine/unreal-systems-engineer.md",
+        "./game-development/unreal-engine/unreal-technical-artist.md",
+        "./game-development/unreal-engine/unreal-world-builder.md"
+      ]
+    },
+    {
+      "name": "marketing-agents",
+      "description": "Digital marketing agents for SEO, social media strategy, content creation, growth hacking, and platform-specific specialists across global markets including China-focused channels",
+      "source": "./",
+      "strict": false,
+      "category": "marketing",
+      "agents": [
+        "./marketing/marketing-ai-citation-strategist.md",
+        "./marketing/marketing-app-store-optimizer.md",
+        "./marketing/marketing-baidu-seo-specialist.md",
+        "./marketing/marketing-bilibili-content-strategist.md",
+        "./marketing/marketing-book-co-author.md",
+        "./marketing/marketing-carousel-growth-engine.md",
+        "./marketing/marketing-china-ecommerce-operator.md",
+        "./marketing/marketing-china-market-localization-strategist.md",
+        "./marketing/marketing-content-creator.md",
+        "./marketing/marketing-cross-border-ecommerce.md",
+        "./marketing/marketing-douyin-strategist.md",
+        "./marketing/marketing-growth-hacker.md",
+        "./marketing/marketing-instagram-curator.md",
+        "./marketing/marketing-kuaishou-strategist.md",
+        "./marketing/marketing-linkedin-content-creator.md",
+        "./marketing/marketing-livestream-commerce-coach.md",
+        "./marketing/marketing-podcast-strategist.md",
+        "./marketing/marketing-private-domain-operator.md",
+        "./marketing/marketing-reddit-community-builder.md",
+        "./marketing/marketing-seo-specialist.md",
+        "./marketing/marketing-short-video-editing-coach.md",
+        "./marketing/marketing-social-media-strategist.md",
+        "./marketing/marketing-tiktok-strategist.md",
+        "./marketing/marketing-twitter-engager.md",
+        "./marketing/marketing-video-optimization-specialist.md",
+        "./marketing/marketing-wechat-official-account.md",
+        "./marketing/marketing-weibo-strategist.md",
+        "./marketing/marketing-xiaohongshu-specialist.md",
+        "./marketing/marketing-zhihu-strategist.md"
+      ]
+    },
+    {
+      "name": "paid-media-agents",
+      "description": "Paid advertising agents for PPC strategy, programmatic buying, paid social, creative optimization, search query analysis, tracking implementation, and media auditing",
+      "source": "./",
+      "strict": false,
+      "category": "paid-media",
+      "agents": [
+        "./paid-media/paid-media-auditor.md",
+        "./paid-media/paid-media-creative-strategist.md",
+        "./paid-media/paid-media-paid-social-strategist.md",
+        "./paid-media/paid-media-ppc-strategist.md",
+        "./paid-media/paid-media-programmatic-buyer.md",
+        "./paid-media/paid-media-search-query-analyst.md",
+        "./paid-media/paid-media-tracking-specialist.md"
+      ]
+    },
+    {
+      "name": "product-agents",
+      "description": "Product management agents for feature ideation, user feedback synthesis, sprint prioritization, trend research, and behavioral nudge design",
+      "source": "./",
+      "strict": false,
+      "category": "product",
+      "agents": [
+        "./product/product-behavioral-nudge-engine.md",
+        "./product/product-feature-alchemist.md",
+        "./product/product-feedback-synthesizer.md",
+        "./product/product-manager.md",
+        "./product/product-sprint-prioritizer.md",
+        "./product/product-trend-researcher.md"
+      ]
+    },
+    {
+      "name": "project-management-agents",
+      "description": "Project management agents for coordination, workflow stewardship, production readiness gating, studio operations, and experiment tracking",
+      "source": "./",
+      "strict": false,
+      "category": "project-management",
+      "agents": [
+        "./project-management/project-coordinator.md",
+        "./project-management/project-management-experiment-tracker.md",
+        "./project-management/project-management-jira-workflow-steward.md",
+        "./project-management/project-management-production-readiness-gatekeeper.md",
+        "./project-management/project-management-project-shepherd.md",
+        "./project-management/project-management-studio-operations.md",
+        "./project-management/project-management-studio-producer.md",
+        "./project-management/project-manager-senior.md"
+      ]
+    },
+    {
+      "name": "sales-agents",
+      "description": "Sales enablement agents for account strategy, deal coaching, discovery facilitation, pipeline analysis, proposal writing, and outbound prospecting",
+      "source": "./",
+      "strict": false,
+      "category": "sales",
+      "agents": [
+        "./sales/sales-account-strategist.md",
+        "./sales/sales-coach.md",
+        "./sales/sales-deal-strategist.md",
+        "./sales/sales-discovery-coach.md",
+        "./sales/sales-engineer.md",
+        "./sales/sales-outbound-strategist.md",
+        "./sales/sales-pipeline-analyst.md",
+        "./sales/sales-proposal-strategist.md"
+      ]
+    },
+    {
+      "name": "security-agents",
+      "description": "Security agents for application testing, audit leadership, authentication, infrastructure review, penetration testing, privacy compliance, and report generation",
+      "source": "./",
+      "strict": false,
+      "category": "security",
+      "agents": [
+        "./security/security-application-tester.md",
+        "./security/security-audit-lead.md",
+        "./security/security-auth-specialist.md",
+        "./security/security-infrastructure-auditor.md",
+        "./security/security-pentest-specialist.md",
+        "./security/security-privacy-compliance-auditor.md",
+        "./security/security-report-generator.md"
+      ]
+    },
+    {
+      "name": "spatial-computing-agents",
+      "description": "Spatial computing and XR agents for visionOS, Metal rendering, immersive interfaces, cockpit interaction, and terminal integration in mixed reality environments",
+      "source": "./",
+      "strict": false,
+      "category": "spatial-computing",
+      "agents": [
+        "./spatial-computing/macos-spatial-metal-engineer.md",
+        "./spatial-computing/terminal-integration-specialist.md",
+        "./spatial-computing/visionos-spatial-engineer.md",
+        "./spatial-computing/xr-cockpit-interaction-specialist.md",
+        "./spatial-computing/xr-immersive-developer.md",
+        "./spatial-computing/xr-interface-architect.md"
+      ]
+    },
+    {
+      "name": "specialized-agents",
+      "description": "Domain-specific agents for compliance, blockchain security, healthcare marketing, recruitment, document generation, MCP building, Salesforce architecture, and cross-cultural business consulting",
+      "source": "./",
+      "strict": false,
+      "category": "specialized",
+      "agents": [
+        "./specialized/accounts-payable-agent.md",
+        "./specialized/agentic-identity-trust.md",
+        "./specialized/agents-orchestrator.md",
+        "./specialized/automation-governance-architect.md",
+        "./specialized/blockchain-security-auditor.md",
+        "./specialized/compliance-auditor.md",
+        "./specialized/corporate-training-designer.md",
+        "./specialized/data-consolidation-agent.md",
+        "./specialized/government-digital-presales-consultant.md",
+        "./specialized/healthcare-marketing-compliance.md",
+        "./specialized/identity-graph-operator.md",
+        "./specialized/lsp-index-engineer.md",
+        "./specialized/recruitment-specialist.md",
+        "./specialized/report-distribution-agent.md",
+        "./specialized/sales-data-extraction-agent.md",
+        "./specialized/specialized-braingrid-integration-orchestrator.md",
+        "./specialized/specialized-civil-engineer.md",
+        "./specialized/specialized-cultural-intelligence-strategist.md",
+        "./specialized/specialized-developer-advocate.md",
+        "./specialized/specialized-document-generator.md",
+        "./specialized/specialized-french-consulting-market.md",
+        "./specialized/specialized-korean-business-navigator.md",
+        "./specialized/specialized-mcp-builder.md",
+        "./specialized/specialized-model-qa.md",
+        "./specialized/specialized-salesforce-architect.md",
+        "./specialized/specialized-workflow-architect.md",
+        "./specialized/study-abroad-advisor.md",
+        "./specialized/supply-chain-strategist.md",
+        "./specialized/zk-steward.md"
+      ]
+    },
+    {
+      "name": "support-agents",
+      "description": "Operations and support agents for analytics reporting, documentation, executive summaries, finance tracking, incident response, infrastructure maintenance, and legal compliance",
+      "source": "./",
+      "strict": false,
+      "category": "support",
+      "agents": [
+        "./support/support-analytics-reporter.md",
+        "./support/support-customer-documentation.md",
+        "./support/support-executive-summary-generator.md",
+        "./support/support-finance-tracker.md",
+        "./support/support-incident-response-agent.md",
+        "./support/support-infrastructure-maintainer.md",
+        "./support/support-internal-documentation.md",
+        "./support/support-legal-compliance-checker.md",
+        "./support/support-support-responder.md"
+      ]
+    },
+    {
+      "name": "testing-agents",
+      "description": "Quality assurance and testing agents for accessibility auditing, API testing, performance benchmarking, Playwright automation, test architecture, and workflow optimization",
+      "source": "./",
+      "strict": false,
+      "category": "testing",
+      "agents": [
+        "./testing/testing-accessibility-auditor.md",
+        "./testing/testing-accessibility-specialist.md",
+        "./testing/testing-api-tester.md",
+        "./testing/testing-architect.md",
+        "./testing/testing-evidence-collector.md",
+        "./testing/testing-performance-benchmarker.md",
+        "./testing/testing-playwright-auditor.md",
+        "./testing/testing-reality-checker.md",
+        "./testing/testing-suite-fixer.md",
+        "./testing/testing-test-results-analyzer.md",
+        "./testing/testing-tool-evaluator.md",
+        "./testing/testing-ui-tester.md",
+        "./testing/testing-workflow-optimizer.md"
+      ]
+    }
+  ]
+}
