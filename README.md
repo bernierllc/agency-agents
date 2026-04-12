@@ -228,6 +228,7 @@ Breaking things so users don't have to.
 | ♿ [Accessibility Specialist](testing/testing-accessibility-specialist.md) | Deep accessibility testing, ARIA patterns | Comprehensive accessibility testing and remediation |
 | 🏗️ [Testing Architect](testing/testing-architect.md) | Test strategy, framework design, coverage planning | Test infrastructure design, quality architecture |
 | 🎭 [Playwright Auditor](testing/testing-playwright-auditor.md) | Playwright E2E testing, browser automation | End-to-end test suites, cross-browser testing |
+| ✍️ [Playwright Test Engineer](testing/testing-playwright-test-engineer.md) | Authoring Playwright tests, locators, fixtures, hybrid API/UI | New or expanded suites, refactors, scalable browser tests |
 | 🔧 [Testing Suite Fixer](testing/testing-suite-fixer.md) | Test failure analysis, test/code mismatch repair | Fixing broken test suites, diagnosing test failures |
 | 🖥️ [UI Tester](testing/testing-ui-tester.md) | Frontend UI testing, visual regression | UI component testing, visual QA |
 
