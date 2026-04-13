@@ -171,6 +171,10 @@ Growing your audience, one authentic interaction at a time.
 | 🛒 [China E-Commerce Operator](marketing/marketing-china-ecommerce-operator.md) | Taobao, Tmall, Pinduoduo, live commerce | Running multi-platform e-commerce in China |
 | 🎥 [Kuaishou Strategist](marketing/marketing-kuaishou-strategist.md) | Kuaishou, 老铁 community, grassroots growth | Building authentic audiences in lower-tier markets |
 | 🔍 [SEO Specialist](marketing/marketing-seo-specialist.md) | Technical SEO, content strategy, link building | Driving sustainable organic search growth |
+| 🔬 [GEO Auditor](marketing/marketing-geo-auditor.md) | LLM citation testing, entity signal audit, structured data coverage | Diagnosing AI search visibility gaps across Google AI Overviews, Perplexity, ChatGPT Search, and Bing Copilot |
+| ⚙️ [GEO Optimizer](marketing/marketing-geo-optimizer.md) | Answer-first restructuring, schema fixes, entity clarity, FAQ optimization | Turning existing content into citation-ready assets for AI search surfaces |
+| 🗺️ [GEO Strategist](marketing/marketing-geo-strategist.md) | Entity authority roadmap, topic cluster strategy, platform priority matrix | Building the quarterly roadmap that makes a brand the answer AI gives consistently |
+| ✍️ [GEO Content Writer](marketing/marketing-geo-content-writer.md) | Citation-first writing, dual-optimized content, schema-ready structure | Creating net-new content engineered to be cited by LLMs and AI search surfaces |
 | 📘 [Book Co-Author](marketing/marketing-book-co-author.md) | Thought-leadership books, ghostwriting, publishing | Strategic book collaboration for founders and experts |
 | 🌏 [Cross-Border E-Commerce Specialist](marketing/marketing-cross-border-ecommerce.md) | Amazon, Shopee, Lazada, cross-border fulfillment | Full-funnel cross-border e-commerce strategy |
 | 🎵 [Douyin Strategist](marketing/marketing-douyin-strategist.md) | Douyin platform, short-video marketing, algorithm | Growing audiences on China's leading short-video platform |
