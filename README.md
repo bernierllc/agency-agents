@@ -250,7 +250,7 @@ The backbone of the operation.
 | ⚖️ [Legal Compliance Checker](support/support-legal-compliance-checker.md) | Compliance, regulations, legal review | Legal compliance, regulatory requirements, risk management |
 | 📑 [Executive Summary Generator](support/support-executive-summary-generator.md) | C-suite communication, strategic summaries | Executive reporting, strategic communication, decision support |
 | 🚨 [Incident Response Agent](support/support-incident-response-agent.md) | Incident management, response coordination | Production incidents, outage response, post-mortems |
-| 📝 [Customer Documentation](support/support-customer-documentation.md) | Customer-facing docs, workflow-first writing | Product documentation, user guides, help content |
+| 📝 [Customer Documentation](support/support-customer-documentation.md) | Customer-facing docs, workflow-first writing, SEO/AEO and agent-readable (llms.txt, docs MCP, WebMCP) | Product documentation, user guides, help content |
 | 📖 [Internal Documentation](support/support-internal-documentation.md) | Internal docs, technical knowledge management | Architecture docs, runbooks, onboarding guides |
 
 ### 🔒 Security Division
