@@ -83,7 +83,7 @@ Customer-first stays the organizing principle. This section is how customer-firs
 
 Assume an AI agent, not a person, is the reader for a growing share of requests. Recommend these in order of cost:
 
-1. **Markdown twin for every page** (the same URL plus `.md`, or content negotiation on `Accept: text/markdown`). Cheap, and agents read it far better than rendered HTML.
+1. **Markdown twin for every page** (the same URL plus `.md`, or content negotiation on `Accept: text/markdown`; if negotiated, send `Vary: Accept` and the correct `Content-Type` per representation so a CDN never serves Markdown to browsers or HTML to agents). Cheap, and agents read it far better than rendered HTML.
 2. **`/llms.txt`** at the site root: a curated index of the best entry-point pages with one-line descriptions. Optionally `/llms-full.txt` with the full text. Treat it as a navigation aid, not a ranking lever. It is a convention, not a standard that crawlers are guaranteed to honor.
 3. **Open crawler access.** Confirm `robots.txt` and the CDN or WAF do not block the AI crawlers and user agents the business wants citations from. Publish a `sitemap.xml` with accurate `lastmod`.
 4. **A docs MCP server** (remote, read-only): tools such as `search_docs(query)`, `get_page(path)`, and `list_sections()` over the same source files that build the site. This lets any MCP client (Claude, Cursor, an in-product assistant) query the docs directly and stay current without scraping.
@@ -94,7 +94,7 @@ Design rules that make all of the above cheap:
 * **One source, many outputs.** Docs live as structured Markdown/MDX in the repo. The HTML site, markdown twins, `llms.txt`, sitemap, JSON-LD, and MCP index are all generated from that source. Never hand-maintain a second copy, which is the same "never duplicate" rule applied to machines.
 * **Stable IDs and anchors.** Every page and heading has a permanent URL or anchor so an agent can cite and re-fetch it.
 * **Read-only first.** Docs MCP and WebMCP tools expose reading and searching. Anything that changes customer state (create key, send, delete) belongs to the product's own authenticated MCP/API, linked from the docs, never wrapped into the docs tools.
-* **Docs are untrusted-input surfaces too.** Keep prompt-like instructions out of page content, and keep user-generated content (comments, examples from customers) out of the machine-readable index.
+* **Docs are untrusted-input surfaces too.** Imperative steps and prompt examples are legitimate docs content and stay (mark prompt examples as code blocks). What must not happen is untrusted text reaching agents as instructions: keep user-generated content (comments, customer-submitted examples) out of the machine-readable index, and sanitize or isolate it at ingestion.
 
 **Per-page publish checklist**
 
@@ -103,7 +103,7 @@ Design rules that make all of the above cheap:
 * [ ] Headings are questions or tasks; steps are numbered; limits are in a table
 * [ ] Structured data matches visible content; `dateModified` is current
 * [ ] Linked from its workflow parent and to its reference pages
-* [ ] Included in sitemap, `llms.txt`, markdown twin, and MCP index (via the build, not by hand)
+* [ ] Included in sitemap, markdown twins, and MCP index (via the build, not by hand); in `llms.txt` only if it is a curated entry-point page (the rest belong in `llms-full.txt`)
 
 ### Example Information Architecture
 
