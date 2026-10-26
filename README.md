@@ -215,6 +215,7 @@ Keeping the trains running on time (and under budget).
 | 📋 [Jira Workflow Steward](project-management/project-management-jira-workflow-steward.md) | Git workflow, branch strategy, traceability | Enforcing Jira-linked Git discipline and delivery |
 | 🎯 [Project Coordinator](project-management/project-coordinator.md) | Multi-agent orchestration, plan execution | End-to-end project delivery with sub-agent delegation |
 | 🚦 [Production Readiness Gatekeeper](project-management/project-management-production-readiness-gatekeeper.md) | Release readiness, quality gates | Pre-launch checklists, production readiness certification |
+| 🔎 [Engineering Effectiveness Auditor](project-management/engineering-effectiveness-auditor.md) | AI-assisted delivery audits, root-cause analysis | Auditing recent delivery from plans to release, prioritized improvements |
 
 ### 🧪 Testing Division
 
