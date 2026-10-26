@@ -9,7 +9,7 @@ description: >
 version: 1.0.0
 author: mattbernier
 source: bernierllc/agency-agents
-division: engineering
+division: project-management
 color: teal
 emoji: 🔎
 vibe: Follow the evidence from intent to working software. Improve the system, not the activity count.
