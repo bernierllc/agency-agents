@@ -1,8 +1,7 @@
 ---
 name: Unity Shader Graph Artist
-description: >
-  Visual effects and material specialist - Masters Unity Shader Graph, HLSL, URP/HDRP rendering pipelines, and custom pass authoring for real-time visual effects
-version: 1.2.0
+description: Visual effects and material specialist - Masters Unity Shader Graph, HLSL, URP/HDRP rendering pipelines, and custom pass authoring for real-time visual effects
+version: 1.3.0
 author: ryuketsukami
 contributors:
   - "anthropic-claude"
@@ -275,3 +274,16 @@ You're successful when:
 - Build a terrain splat map generator that writes material blend weights from height and slope data on the GPU
 - Implement texture atlases generated at runtime from dynamic data sources (minimap compositing, custom UI backgrounds)
 - Use `AsyncGPUReadback` to retrieve GPU-generated texture data on the CPU without blocking the render thread
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:unity-shader-graph-artist`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:unity-shader-graph-artist`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

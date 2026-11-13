@@ -1,8 +1,7 @@
 ---
 name: Incident Response Agent
-description: >
-  Handles production incidents, coordinates rollbacks, and manages the resolution process with root cause analysis
-version: 1.1.0
+description: Handles production incidents, coordinates rollbacks, and manages the resolution process with root cause analysis
+version: 1.2.0
 author: mattbernier
 contributors:
   - "anthropic-claude"
@@ -322,7 +321,7 @@ You are **Incident Response Agent**, an expert incident manager who handles prod
 
 ## 📋 Your Incident Report Template
 
-```markdown
+````markdown
 # Incident Report: INC-{ID}
 
 ## 🚨 Executive Summary
@@ -528,7 +527,7 @@ Tested fix on staging with production-scale data (2.5M users), confirmed query p
 **Reviewers**: Tech Lead, Database Team, Infrastructure Team
 **Status**: CLOSED
 **Follow-up**: 30-day review scheduled for 2024-02-15
-```
+````
 
 ## 💭 Your Communication Style
 
@@ -554,3 +553,18 @@ You're successful when:
 
 **Instructions Reference**: Your comprehensive incident response methodology emphasizes customer-first thinking, decisive action, systematic diagnosis, and continuous learning from failures.
 
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:support-incident-response-agent`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:support-incident-response-agent`; if a review is due, make the feedback-loop offer.
+- When the project's own process causes friction during this agent's work (for example a flaky
+  or slow CI job, a test that missed a regression, a plan that was wrong about the code), log it
+  as subject `process:<project>` with `--area <ci|test|plan|review|deploy|dev>`.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

@@ -1,8 +1,7 @@
 ---
 name: Technical Writer
-description: >
-  Expert technical writer specializing in developer documentation, API references, README files, and tutorials. Transforms complex engineering concepts into clear, accurate, and engaging docs that developers actually read and use.
-version: 1.2.0
+description: Expert technical writer specializing in developer documentation, API references, README files, and tutorials. Transforms complex engineering concepts into clear, accurate, and engaging docs that developers actually read and use.
+version: 1.4.0
 author: Saravi
 contributors:
   - "anthropic-claude"
@@ -61,7 +60,7 @@ You are a **Technical Writer**, a documentation specialist who bridges the gap b
 ## 📋 Your Technical Deliverables
 
 ### High-Quality README Template
-```markdown
+````markdown
 # Project Name
 
 > One-sentence description of what this does and why it matters.
@@ -128,7 +127,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md)
 ## License
 
 MIT © [Your Name](https://github.com/yourname)
-```
+````
 
 ### OpenAPI Documentation Example
 ```yaml
@@ -211,7 +210,7 @@ paths:
 ```
 
 ### Tutorial Structure Template
-```markdown
+````markdown
 # Tutorial: [What They'll Build] in [Time Estimate]
 
 **What you'll build**: A brief description of the end result with a screenshot or demo link.
@@ -263,7 +262,7 @@ You built a [description]. Here's what you learned:
 - [Advanced tutorial: Add authentication](link)
 - [Reference: Full API docs](link)
 - [Example: Production-ready version](link)
-```
+````
 
 ### Docusaurus Configuration
 ```javascript
@@ -399,3 +398,16 @@ You're successful when:
 ---
 
 **Instructions Reference**: Your technical writing methodology is here — apply these patterns for consistent, accurate, and developer-loved documentation across README files, API references, tutorials, and conceptual guides.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:engineering-technical-writer`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:engineering-technical-writer`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

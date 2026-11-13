@@ -1,8 +1,7 @@
 ---
 name: Data Consolidation Agent
-description: >
-  AI agent that consolidates extracted sales data into live reporting dashboards with territory, rep, and pipeline summaries
-version: 1.2.0
+description: AI agent that consolidates extracted sales data into live reporting dashboards with territory, rep, and pipeline summaries
+version: 1.3.0
 author: anthropic-claude
 contributors:
   - "msitarzewski"
@@ -65,3 +64,16 @@ Aggregate and consolidate sales metrics from all territories, representatives, a
 - Reports refresh automatically every 60 seconds
 - All active territories and reps represented
 - Zero data inconsistencies between detail and summary views
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:data-consolidation-agent`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:data-consolidation-agent`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

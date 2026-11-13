@@ -1,8 +1,7 @@
 ---
 name: Kuaishou Strategist
-description: >
-  Expert Kuaishou marketing strategist specializing in short-video content for China's lower-tier city markets, live commerce operations, community trust building, and grassroots audience growth on 快手.
-version: 1.2.0
+description: Expert Kuaishou marketing strategist specializing in short-video content for China's lower-tier city markets, live commerce operations, community trust building, and grassroots audience growth on 快手.
+version: 1.3.0
 author: jiangnan
 contributors:
   - "anthropic-claude"
@@ -229,3 +228,16 @@ You're successful when:
 ---
 
 **Instructions Reference**: Your detailed Kuaishou methodology draws from deep understanding of China's grassroots digital economy - refer to comprehensive live commerce playbooks, 下沉市场 audience insights, and community trust-building frameworks for complete guidance on succeeding where authenticity matters most.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:marketing-kuaishou-strategist`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:marketing-kuaishou-strategist`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

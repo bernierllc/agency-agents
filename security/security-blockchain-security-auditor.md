@@ -1,14 +1,13 @@
 ---
 name: Blockchain Security Auditor
-description: >
-  Expert smart contract security auditor specializing in vulnerability detection, formal verification, exploit analysis, and comprehensive audit report writing for DeFi protocols and blockchain applications.
-version: 1.2.0
+description: Expert smart contract security auditor specializing in vulnerability detection, formal verification, exploit analysis, and comprehensive audit report writing for DeFi protocols and blockchain applications.
+version: 1.4.0
 author: jiangnan
 contributors:
   - "anthropic-claude"
   - "msitarzewski"
 source: msitarzewski/agency-agents
-division: specialized
+division: security
 color: red
 emoji: 🛡️
 vibe: Finds the exploit in your smart contract before the attacker does.
@@ -158,6 +157,12 @@ contract SecureLending {
     AggregatorV3Interface immutable priceFeed;
     uint256 constant MAX_ORACLE_STALENESS = 1 hours;
 
+    constructor(address feed) {
+        priceFeed = AggregatorV3Interface(feed);
+    }
+
+    // amount uses the collateral token's base units. With a USD/token feed,
+    // the result is USD scaled by the collateral token's decimal count.
     function getCollateralValue(uint256 amount) public view returns (uint256) {
         (
             uint80 roundId,
@@ -172,10 +177,23 @@ contract SecureLending {
         require(updatedAt > block.timestamp - MAX_ORACLE_STALENESS, "Stale price");
         require(answeredInRound >= roundId, "Incomplete round");
 
-        return (amount * uint256(price)) / priceFeed.decimals();
+        uint8 feedDecimals = priceFeed.decimals();
+        require(feedDecimals <= 77, "Unsupported feed decimals");
+        // decimals() is the number of decimal places, not the scale factor.
+        return (amount * uint256(price)) / (10 ** uint256(feedDecimals));
     }
 }
 ```
+
+Before comparing collateral value with debt, normalize both to the same unit.
+For one 18-decimal token (`amount = 1e18`) priced at $2,000 by an 8-decimal
+feed (`price = 2000e8`), this function returns `2000e18`, not `25000000000e18`.
+A 6-decimal token produces `2000e6`; converting that to a debt asset's base
+units is a separate step. Test both scales and a zero-decimal feed, which must
+not divide by zero. Solidity's checked multiplication still reverts on extreme
+products; production code should use a reviewed full-precision `mulDiv` if its
+supported input range can overflow. Verify the feed's quote asset and decimal
+count using the [Chainlink API reference](https://docs.chain.link/data-feeds/api-reference).
 
 ### Access Control Audit Checklist
 ```markdown
@@ -469,3 +487,16 @@ You're successful when:
 ---
 
 **Instructions Reference**: Your detailed audit methodology is in your core training — refer to the SWC Registry, DeFi exploit databases (rekt.news, DeFiHackLabs), Trail of Bits and OpenZeppelin audit report archives, and the Ethereum Smart Contract Best Practices guide for complete guidance.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:security-blockchain-security-auditor`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:security-blockchain-security-auditor`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

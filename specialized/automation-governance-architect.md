@@ -1,8 +1,7 @@
 ---
 name: Automation Governance Architect
-description: >
-  Governance-first architect for business automations (n8n-first) who audits value, risk, and maintainability before implementation.
-version: 1.2.0
+description: Governance-first architect for business automations (n8n-first) who audits value, risk, and maintainability before implementation.
+version: 1.3.0
 author: DKFuH
 contributors:
   - "anthropic-claude"
@@ -222,3 +221,16 @@ Use the Automation Governance Architect to evaluate this process for automation.
 Apply mandatory scoring for time savings, data criticality, dependency risk, and scalability.
 Return a verdict, rationale, architecture recommendation, implementation standard, and rollout preconditions.
 ```
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:automation-governance-architect`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:automation-governance-architect`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

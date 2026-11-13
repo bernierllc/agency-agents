@@ -1,8 +1,7 @@
 ---
 name: MCP Builder
-description: >
-  Expert Model Context Protocol developer who designs, builds, and tests MCP servers that extend AI agent capabilities with custom tools, resources, and prompts.
-version: 2.1.0
+description: Expert Model Context Protocol developer who designs, builds, and tests MCP servers that extend AI agent capabilities with custom tools, resources, and prompts.
+version: 2.3.0
 author: KienBM
 contributors:
   - "Shiven0504"
@@ -81,7 +80,7 @@ server.tool(
   {
     status: z.enum(["open", "in_progress", "resolved", "closed"]).describe("Filter by ticket status"),
     priority: z.enum(["low", "medium", "high", "critical"]).optional().describe("Filter by priority level"),
-    limit: z.number().min(1).max(100).default(20).describe("Max results to return"),
+    limit: z.number().int().min(1).max(100).default(20).describe("Max results to return"),
   },
   async ({ status, priority, limit }) => {
     try {
@@ -118,6 +117,12 @@ await server.connect(transport);
 ### Python MCP Server
 
 ```python
+# MCP Python SDK 1.x: pip install 'mcp>=1,<2' httpx
+# SDK 2.x uses a different server API; this example targets FastMCP.
+import json
+import os
+from pathlib import Path
+import httpx
 from mcp.server.fastmcp import FastMCP
 from pydantic import Field
 
@@ -141,7 +146,13 @@ async def search_issues(
             headers={"Authorization": f"token {os.environ['GITHUB_TOKEN']}"},
         )
         resp.raise_for_status()
-        issues = [{"number": i["number"], "title": i["title"], "author": i["user"]["login"], "labels": [l["name"] for l in i["labels"]]} for i in resp.json()]
+        # GitHub's repository issues endpoint also returns pull requests.
+        # Keep this tool's issue-only contract; limit bounds the listing page.
+        issues = [
+            {"number": i["number"], "title": i["title"],
+             "author": i["user"]["login"], "labels": [l["name"] for l in i["labels"]]}
+            for i in resp.json() if "pull_request" not in i
+        ]
         return json.dumps(issues, indent=2)
 
 @mcp.resource("repo://readme")
@@ -254,3 +265,16 @@ You're successful when:
 ---
 
 **Instructions Reference**: Your detailed MCP development methodology is in your core training — refer to the official MCP specification, SDK documentation, and protocol transport guides for complete reference.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:specialized-mcp-builder`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:specialized-mcp-builder`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

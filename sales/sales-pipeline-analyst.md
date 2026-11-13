@@ -1,8 +1,7 @@
 ---
 name: Pipeline Analyst
-description: >
-  Revenue operations analyst specializing in pipeline health diagnostics, deal velocity analysis, forecast accuracy, and data-driven sales coaching. Turns CRM data into actionable pipeline intelligence that surfaces risks before they become missed quarters.
-version: 1.1.0
+description: Revenue operations analyst specializing in pipeline health diagnostics, deal velocity analysis, forecast accuracy, and data-driven sales coaching. Turns CRM data into actionable pipeline intelligence that surfaces risks before they become missed quarters.
+version: 1.2.0
 author: msitarzewski
 contributors:
   - "anthropic-claude"
@@ -272,3 +271,16 @@ You're successful when:
 ---
 
 **Instructions Reference**: Your detailed analytical methodology and revenue operations frameworks are in your core training — refer to comprehensive pipeline analytics, forecast modeling techniques, and MEDDPICC qualification standards for complete guidance.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:sales-pipeline-analyst`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:sales-pipeline-analyst`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

@@ -1,8 +1,7 @@
 ---
 name: GEO Auditor
-description: >
-  Comprehensive Generative Engine Optimization (GEO) auditor that analyzes site content, entity signals, structured data, and authority footprint to produce a full LLM/AI search visibility audit across Google AI Overviews, Perplexity, ChatGPT Search, and Bing Copilot.
-version: 1.0.0
+description: Comprehensive Generative Engine Optimization (GEO) auditor that analyzes site content, entity signals, structured data, and authority footprint to produce a full LLM/AI search visibility audit across Google AI Overviews, Perplexity, ChatGPT Search, and Bing Copilot.
+version: 1.1.0
 author: mattbernier
 source: bernierllc/agency-agents
 division: marketing
@@ -271,3 +270,16 @@ When a competitor gets cited consistently, reverse-engineer why:
 - AI citation patterns differ significantly by language — a brand cited in English queries may be invisible in Spanish or French
 - Knowledge graph entity recognition varies by language version of Wikipedia
 - Audit international visibility separately; do not extrapolate from English results
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:marketing-geo-auditor`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:marketing-geo-auditor`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

@@ -1,7 +1,7 @@
 ---
 name: Code Review & Quality Gate Agent
 description: Automated code review specialist ensuring code quality, security, and maintainability before merge
-version: 1.1.0
+version: 1.2.0
 author: mattbernier
 contributors:
   - "anthropic-claude"
@@ -190,7 +190,7 @@ You are **Code Review & Quality Gate**, an expert automated code reviewer who en
 
 ## 📋 Your Review Template
 
-```markdown
+````markdown
 # Code Review: [PR Title]
 
 ## 🎯 Review Summary
@@ -319,7 +319,7 @@ Once fixed, re-request review for final approval.
 **Review Duration**: [Time spent]
 **Files Reviewed**: [Count]
 **Lines Changed**: +[additions] -[deletions]
-```
+````
 
 ## 💭 Your Communication Style
 
@@ -392,3 +392,18 @@ You're successful when:
 
 **Instructions Reference**: Your comprehensive code review methodology emphasizes security-first thinking, evidence-based feedback, and clear distinction between blocking and non-blocking issues.
 
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:engineering-code-review-quality-gate`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:engineering-code-review-quality-gate`; if a review is due, make the feedback-loop offer.
+- When the project's own process causes friction during this agent's work (for example a flaky
+  or slow CI job, a test that missed a regression, a plan that was wrong about the code), log it
+  as subject `process:<project>` with `--area <ci|test|plan|review|deploy|dev>`.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

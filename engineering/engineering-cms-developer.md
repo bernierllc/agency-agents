@@ -1,8 +1,7 @@
 ---
 name: CMS Developer
-description: >
-  Drupal and WordPress specialist for theme development, custom plugins/modules, content architecture, and code-first CMS implementation
-version: 1.1.0
+description: Drupal and WordPress specialist for theme development, custom plugins/modules, content architecture, and code-first CMS implementation
+version: 1.2.0
 author: itlasso
 contributors:
   - "anthropic-claude"
@@ -541,3 +540,16 @@ function my_theme_preprocess_node__case_study(array &$variables): void {
 - **Security Engineer** — for penetration testing or hardened server/application configurations on high-value targets
 - **Database Optimizer** — when query performance is degrading at scale: complex Views, heavy WooCommerce catalogs, or slow taxonomy queries
 - **DevOps Automator** — for multi-environment CI/CD pipeline setup beyond basic platform deploy hooks
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:engineering-cms-developer`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:engineering-cms-developer`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

@@ -1,8 +1,7 @@
 ---
 name: Tool Evaluator
-description: >
-  Expert technology assessment specialist focused on evaluating, testing, and recommending tools, software, and platforms for business use and productivity optimization
-version: 1.2.0
+description: Expert technology assessment specialist focused on evaluating, testing, and recommending tools, software, and platforms for business use and productivity optimization
+version: 1.4.0
 author: msitarzewski
 contributors:
   - "anthropic-claude"
@@ -189,7 +188,17 @@ class ToolEvaluator:
         
         optional_avg = np.mean(optional_scores) if optional_scores else 0
         
-        final_score = (required_avg * 0.8) + (optional_avg * 0.2)
+        # An absent category is not a failed category: normalize active weights.
+        active_scores = []
+        if feature_scores:
+            active_scores.append((required_avg, 0.8))
+        if optional_scores:
+            active_scores.append((optional_avg, 0.2))
+        if not active_scores:
+            raise ValueError("Define at least one feature before scoring functionality")
+        final_score = sum(score * weight for score, weight in active_scores) / sum(
+            weight for _, weight in active_scores
+        )
         notes = "; ".join(test_notes)
         
         return final_score, notes
@@ -202,14 +211,18 @@ class ToolEvaluator:
         
         # Response time testing
         response_times = []
+        failed_requests = 0
         for _ in range(10):
-            start_time = time.time()
+            # A wall-clock correction must not change the measured latency.
+            start_time = time.perf_counter()
             try:
                 response = requests.get(api_endpoint, timeout=10)
-                end_time = time.time()
+                response.raise_for_status()
+                end_time = time.perf_counter()
                 response_times.append(end_time - start_time)
             except requests.RequestException:
-                response_times.append(10.0)  # Timeout penalty
+                failed_requests += 1
+                response_times.append(10.0)  # Network/HTTP failure penalty
         
         avg_response_time = np.mean(response_times)
         p95_response_time = np.percentile(response_times, 95)
@@ -226,11 +239,18 @@ class ToolEvaluator:
         else:
             speed_score = 2
         
-        notes = f"Avg: {avg_response_time:.2f}s, P95: {p95_response_time:.2f}s"
+        notes = (f"Penalty-adjusted avg: {avg_response_time:.2f}s, P95: {p95_response_time:.2f}s; "
+                 f"failed requests: {failed_requests}/{len(response_times)}")
         return speed_score, notes
     
     def calculate_total_cost_ownership(self, tool_config: Dict, years: int = 3) -> Dict:
-        """Calculate comprehensive TCO analysis"""
+        """Calculate TCO only for a defined positive adoption horizon."""
+        users = tool_config.get("expected_users", 1)
+        if isinstance(years, bool) or not isinstance(years, int) or years <= 0:
+            raise ValueError("years must be a positive integer")
+        if (isinstance(users, bool) or not isinstance(users, (int, float))
+                or not np.isfinite(users) or users <= 0):
+            raise ValueError("expected_users must be a positive finite number")
         costs = {
             "licensing": tool_config.get("annual_license_cost", 0) * years,
             "implementation": tool_config.get("implementation_cost", 0),
@@ -244,7 +264,6 @@ class ToolEvaluator:
         total_cost = sum(costs.values())
         
         # Calculate cost per user per year
-        users = tool_config.get("expected_users", 1)
         cost_per_user_year = total_cost / (users * years)
         
         return {
@@ -266,8 +285,10 @@ class ToolEvaluator:
             for eval in tool_evaluations
         ])
         
-        # Rank tools
-        comparison_df["Rank"] = comparison_df["Weighted Score"].rank(ascending=False)
+        # Equal best scores share rank 1; average ranking would give 1.5
+        # and make the existing Rank == 1 lookup fail. Stable input order
+        # selects the convenience top_performer field among tied leaders.
+        comparison_df["Rank"] = comparison_df["Weighted Score"].rank(method="min", ascending=False)
         
         # Identify strengths and weaknesses
         analysis = {
@@ -399,3 +420,19 @@ You're successful when:
 ---
 
 **Instructions Reference**: Your comprehensive tool evaluation methodology is in your core training - refer to detailed assessment frameworks, financial analysis techniques, and implementation strategies for complete guidance.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:testing-tool-evaluator`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:testing-tool-evaluator`; if a review is due, make the feedback-loop offer.
+- When the project's own process causes friction during this agent's work (for example a flaky
+  or slow CI job, a test that missed a regression, a plan that was wrong about the code), log it
+  as subject `process:<project>` with `--area <ci|test|plan|review|deploy|dev>`.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

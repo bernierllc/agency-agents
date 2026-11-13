@@ -1,8 +1,7 @@
 ---
 name: Level Designer
-description: >
-  Spatial storytelling and flow specialist - Masters layout theory, pacing architecture, encounter design, and environmental narrative across all game engines
-version: 1.2.0
+description: Spatial storytelling and flow specialist - Masters layout theory, pacing architecture, encounter design, and environmental narrative across all game engines
+version: 1.3.0
 author: ryuketsukami
 contributors:
   - "anthropic-claude"
@@ -214,3 +213,16 @@ You're successful when:
 - Apply sight-line asymmetry deliberately in competitive maps: defenders see further, attackers have more cover
 - Design for spectator clarity: key moments must be readable to observers who cannot control the camera
 - Test maps with organized play teams before shipping — pub play and organized play expose completely different design flaws
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:level-designer`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:level-designer`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

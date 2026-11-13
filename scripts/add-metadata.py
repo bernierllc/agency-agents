@@ -22,7 +22,7 @@ REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CURSOR_FILE = os.path.join(REPO_ROOT, '.metadata-scan-cursor')
 
 SKIP_DIRS = {'examples', 'strategy', 'integrations', '.github', 'scripts'}
-SKIP_FILES = {'README.md', 'CONTRIBUTING.md', 'CONTRIBUTING_zh-CN.md', 'LICENSE', 'EXECUTIVE-BRIEF.md', 'QUICKSTART.md'}
+SKIP_FILES = {'README.md', 'CLAUDE.md', 'SECURITY.md', 'CONTRIBUTING.md', 'CONTRIBUTING_zh-CN.md', 'LICENSE', 'EXECUTIVE-BRIEF.md', 'QUICKSTART.md'}
 
 # GitHub username mapping (git name -> GitHub handle where known)
 GITHUB_HANDLES = {
@@ -381,16 +381,17 @@ def build_front_matter(fm):
         if key not in fm:
             continue
         val = fm[key]
-        if key == 'description' and ('\n' in val or len(val) > 100):
-            if val.startswith('>\n') or val.startswith('>'):
-                lines.append(f'{key}: >')
-                desc = val.lstrip('>').strip()
-                for dline in desc.split('\n'):
-                    lines.append(f'  {dline.strip()}')
+        if key == 'description':
+            # lint-agents.sh rejects folded (>) scalars: keep description on one line,
+            # double-quoted when plain YAML would misparse it.
+            val = ' '.join(val.lstrip('>').split())
+            if val.startswith('"') and val.endswith('"'):
+                lines.append(f'{key}: {val}')
+            elif re.search(r': |^[\[\]{}&*!|>\'"%@`#-]| #|"', val) or val.endswith(':'):
+                esc = val.replace('\\', '\\\\').replace('"', '\\"')
+                lines.append(f'{key}: "{esc}"')
             else:
-                lines.append(f'{key}: >')
-                for dline in val.split('\n'):
-                    lines.append(f'  {dline.strip()}')
+                lines.append(f'{key}: {val}')
         elif key == 'contributors':
             lines.append(f'{key}:')
             contribs = val if isinstance(val, list) else parse_contributors_field(val)

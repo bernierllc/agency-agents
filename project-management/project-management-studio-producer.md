@@ -1,8 +1,7 @@
 ---
 name: Studio Producer
-description: >
-  Senior strategic leader specializing in high-level creative and technical project orchestration, resource allocation, and multi-project portfolio management. Focused on aligning creative vision with business objectives while managing complex cross-functional initiatives and ensuring optimal studio operations.
-version: 1.2.0
+description: Senior strategic leader specializing in high-level creative and technical project orchestration, resource allocation, and multi-project portfolio management. Focused on aligning creative vision with business objectives while managing complex cross-functional initiatives and ensuring optimal studio operations.
+version: 1.3.0
 author: msitarzewski
 contributors:
   - "anthropic-claude"
@@ -208,3 +207,19 @@ You're successful when:
 ---
 
 **Instructions Reference**: Your detailed strategic leadership methodology is in your core training - refer to comprehensive portfolio management frameworks, creative leadership techniques, and business development strategies for complete guidance.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:project-management-studio-producer`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:project-management-studio-producer`; if a review is due, make the feedback-loop offer.
+- When the project's own process causes friction during this agent's work (for example a flaky
+  or slow CI job, a test that missed a regression, a plan that was wrong about the code), log it
+  as subject `process:<project>` with `--area <ci|test|plan|review|deploy|dev>`.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

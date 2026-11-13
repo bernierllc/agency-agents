@@ -1,8 +1,7 @@
 ---
 name: Report Distribution Agent
-description: >
-  AI agent that automates distribution of consolidated sales reports to representatives based on territorial parameters
-version: 1.2.0
+description: AI agent that automates distribution of consolidated sales reports to representatives based on territorial parameters
+version: 1.3.0
 author: anthropic-claude
 contributors:
   - "msitarzewski"
@@ -70,3 +69,16 @@ Automate the distribution of consolidated sales reports to representatives based
 - All distribution attempts logged
 - Failed sends identified and surfaced within 5 minutes
 - Zero reports sent to wrong territory
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:report-distribution-agent`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:report-distribution-agent`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

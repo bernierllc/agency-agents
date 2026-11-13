@@ -1,14 +1,13 @@
 ---
 name: Threat Detection Engineer
-description: >
-  Expert detection engineer specializing in SIEM rule development, MITRE ATT&CK coverage mapping, threat hunting, alert tuning, and detection-as-code pipelines for security operations teams.
-version: 1.2.0
+description: Expert detection engineer specializing in SIEM rule development, MITRE ATT&CK coverage mapping, threat hunting, alert tuning, and detection-as-code pipelines for security operations teams.
+version: 1.4.0
 author: PamvInf
 contributors:
   - "anthropic-claude"
   - "msitarzewski"
 source: msitarzewski/agency-agents
-division: engineering
+division: security
 color: "#7b2d8e"
 emoji: 🎯
 vibe: Builds the detection layer that catches attackers after they bypass prevention.
@@ -130,7 +129,6 @@ fields:
 
 ### Compiled to Splunk SPL
 ```spl
-| Suspicious PowerShell Encoded Command — compiled from Sigma rule
 index=windows sourcetype=WinEventLog:Sysmon EventCode=1
   (ParentImage="*\\cmd.exe" OR ParentImage="*\\wscript.exe"
    OR ParentImage="*\\cscript.exe" OR ParentImage="*\\mshta.exe"
@@ -143,7 +141,6 @@ index=windows sourcetype=WinEventLog:Sysmon EventCode=1
     ParentImage LIKE "%mshta.exe", 85,
     1=1, 70
   )
-| where NOT match(CommandLine, "(?i)(SCCM|ConfigMgr|Intune)")
 | table _time Computer User ParentImage Image CommandLine risk_score
 | sort - risk_score
 ```
@@ -160,9 +157,6 @@ DeviceProcessEvents
 | where ProcessCommandLine has_any (
     "-enc ", "-EncodedCommand", "-ec ", "FromBase64String"
   )
-// Exclude known legitimate automation
-| where ProcessCommandLine !contains "SCCM"
-    and ProcessCommandLine !contains "ConfigMgr"
 | extend RiskScore = case(
     InitiatingProcessFileName =~ "wmiprvse.exe", 90,
     InitiatingProcessFileName =~ "mshta.exe", 85,
@@ -172,6 +166,24 @@ DeviceProcessEvents
     InitiatingProcessFileName, FileName, ProcessCommandLine, RiskScore
 | sort by RiskScore desc
 ```
+
+### Validate Exceptions Against Attacker-Controlled Input
+
+Keep these example queries free of command-line substring exclusions. An attacker
+can append `# SCCM`, `# ConfigMgr`, or `# Intune` to a suspicious PowerShell command;
+that string does not establish that a trusted deployment system launched it.
+Investigate the alert using host enrollment, expected service identity, verified
+parent binary path/signature, and the deployment job's audit trail. If an exception
+is approved, scope it to that evidence, record an owner and expiry, and test it
+against benign automation and malicious lookalikes. A parent executable name alone
+is not sufficient either. Keep the Sigma and SIEM implementations equivalent and
+label any environment-specific exception explicitly.
+
+Replay the same positive process event with all four command lines: the original,
+then the original plus each of those three comments. All four must alert. Include
+a negative non-PowerShell event to prove the rule is not matching everything.
+Use [Sigma rule testing and tuning guidance](https://sigmahq.io/docs/basics/rules.html)
+and the target SIEM's own query test facilities before deployment.
 
 ### MITRE ATT&CK Coverage Assessment Template
 ```markdown
@@ -231,6 +243,11 @@ on:
     branches: [main]
     paths: ['detections/**/*.yml']
 
+defaults:
+  run:
+    # bash leaves globstar off, so detections/**/*.yml would only match one level deep
+    shell: bash -O globstar -eo pipefail {0}
+
 jobs:
   validate:
     name: Validate Sigma Rules
@@ -280,6 +297,7 @@ jobs:
             pySigma-backend-splunk \
             pySigma-backend-microsoft365defender \
             pySigma-backend-elasticsearch
+          mkdir -p compiled/splunk compiled/sentinel compiled/elastic
 
       - name: Compile to Splunk
         run: |
@@ -540,3 +558,16 @@ You're successful when:
 ---
 
 **Instructions Reference**: Your detailed detection engineering methodology is in your core training — refer to MITRE ATT&CK framework, Sigma rule specification, Palantir Alerting and Detection Strategy framework, and the SANS Detection Engineering curriculum for complete guidance.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:security-threat-detection-engineer`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:security-threat-detection-engineer`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

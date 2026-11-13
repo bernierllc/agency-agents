@@ -1,8 +1,7 @@
 ---
 name: Recruitment Specialist
-description: >
-  Expert recruitment operations and talent acquisition specialist — skilled in China's major hiring platforms, talent assessment frameworks, and labor law compliance. Helps companies efficiently attract, screen, and retain top talent while building a competitive employer brand.
-version: 1.1.0
+description: Expert recruitment operations and talent acquisition specialist — skilled in China's major hiring platforms, talent assessment frameworks, and labor law compliance. Helps companies efficiently attract, screen, and retain top talent while building a competitive employer brand.
+version: 1.3.0
 author: jiangnan
 contributors:
   - "anthropic-claude"
@@ -327,37 +326,43 @@ class RecruitmentFunnelAnalyzer:
             'quality_score': 'mean',         # Candidate quality score
         }).reset_index()
 
+        # Zero denominators mean no observed rate, not zero cost or perfect ROI.
+        def positive(values):
+            return values.where(values > 0)
+
         channel_data['cost_per_resume'] = (
-            channel_data['cost'] / channel_data['applications']
+            channel_data['cost'] / positive(channel_data['applications'])
         ).round(2)
         channel_data['cost_per_hire'] = (
-            channel_data['cost'] / channel_data['offers_accepted']
+            channel_data['cost'] / positive(channel_data['offers_accepted'])
         ).round(2)
         channel_data['cost_per_effective_hire'] = (
-            channel_data['cost'] / channel_data['probation_passed']
+            channel_data['cost'] / positive(channel_data['probation_passed'])
         ).round(2)
 
         # Channel efficiency ranking
         channel_data['composite_efficiency_score'] = (
             channel_data['quality_score'] * 0.4 +
-            (1 / channel_data['cost_per_hire']) * 10000 * 0.3 +
-            channel_data['probation_passed'] / channel_data['offers_accepted'] * 100 * 0.3
+            (1 / positive(channel_data['cost_per_hire'])) * 10000 * 0.3 +
+            channel_data['probation_passed'] / positive(channel_data['offers_accepted']) * 100 * 0.3
         ).round(2)
 
-        return channel_data.sort_values('composite_efficiency_score', ascending=False)
+        return channel_data.sort_values(
+            'composite_efficiency_score', ascending=False, na_position='last'
+        )
 
     def safe_divide(self, numerator, denominator):
         if denominator == 0:
-            return 0
+            return None
         return round(numerator / denominator * 100, 1)
 
     def filter_data(self, position_id=None, department=None, period=None):
         filtered = self.data.copy()
-        if position_id:
+        if position_id is not None:
             filtered = filtered[filtered['position_id'] == position_id]
-        if department:
+        if department is not None:
             filtered = filtered[filtered['department'] == department]
-        if period:
+        if period is not None:
             filtered = filtered[filtered['period'] == period]
         return filtered
 ```
@@ -514,3 +519,16 @@ Signs you are doing well:
 ---
 
 **Reference note**: Your recruitment operations methodology is internalized from training — refer to China labor law regulations, the latest platform rules for each hiring channel, and human resources management best practices as needed.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:recruitment-specialist`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:recruitment-specialist`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->
