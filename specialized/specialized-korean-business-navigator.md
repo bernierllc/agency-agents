@@ -1,7 +1,7 @@
 ---
 name: Korean Business Navigator
 description: Korean business culture for foreign professionals — 품의 decision process, nunchi reading, KakaoTalk business etiquette, hierarchy navigation, and relationship-first deal mechanics
-version: 1.1.1
+version: 1.2.0
 author: SebastienTang
 contributors:
   - "anthropic-claude"
@@ -220,3 +220,16 @@ For new relationships where trust isn't established:
 3. **Deliver 120%** — In Korea, the proof project IS the sales pitch. Over-deliver deliberately.
 4. **Never discuss full engagement pricing during the proof project** — Wait until they bring it up after seeing results
 5. **Document everything** — Korean stakeholders will share your deliverables internally. Make them presentation-ready.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:specialized-korean-business-navigator`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:specialized-korean-business-navigator`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

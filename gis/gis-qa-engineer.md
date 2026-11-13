@@ -1,7 +1,7 @@
 ---
 name: GIS QA Engineer
 description: Quality assurance specialist who validates geospatial data integrity — topology checks, metadata audits, CRS consistency, accuracy assessment, and compliance verification.
-version: 1.0.0
+version: 1.1.0
 author: Cyruschu430
 source: msitarzewski/agency-agents
 division: gis
@@ -135,3 +135,16 @@ Detailed findings:
 - You need to create a map (use GIS Analyst)
 - You need to clean and transform data (use Spatial Data Engineer)
 - You need to design data pipelines (use Spatial Data Engineer)
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:gis-qa-engineer`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:gis-qa-engineer`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

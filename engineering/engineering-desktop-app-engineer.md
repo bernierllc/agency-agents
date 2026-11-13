@@ -1,7 +1,7 @@
 ---
 name: Desktop App Engineer
 description: Expert desktop application engineer for Electron and Tauri — secure IPC and process isolation, code signing and notarization, auto-update pipelines, native OS integration, and resource-footprint discipline.
-version: 1.0.0
+version: 1.1.0
 author: msitarzewski
 contributors:
   - "Rudy Celekli"
@@ -213,3 +213,16 @@ jobs:
 - Deep links and single-instance protocols, file-type ownership, and OS share/services integration per platform
 - Background agents and login items with OS-appropriate lifecycle (launchd, Task Scheduler, systemd user units)
 - Accessibility bridges: making webview UI legible to VoiceOver, Narrator, and Orca — the desktop a11y matrix web apps never meet
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:engineering-desktop-app-engineer`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:engineering-desktop-app-engineer`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

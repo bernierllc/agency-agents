@@ -1,7 +1,7 @@
 ---
 name: Internationalization Engineer
 description: Expert i18n engineer for ICU MessageFormat, CLDR plural rules, RTL and bidirectional layouts, locale-aware date/number/currency formatting, string extraction pipelines, and pseudo-localization testing.
-version: 1.0.0
+version: 1.1.0
 author: Hotragn Pettugani
 contributors:
   - "Rudy Celekli"
@@ -218,3 +218,16 @@ export function pseudoLocalize(message) {
 - Pseudo-locale and screenshot-automation harnesses that give translators visual context at scale
 - Terminology and style-guide enforcement: glossary checks in the TMS, do-not-translate lists for brand terms
 - Locale rollout strategy: fallback-chain design, staged locale launches, and per-locale quality gates with native review
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:engineering-i18n-engineer`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:engineering-i18n-engineer`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

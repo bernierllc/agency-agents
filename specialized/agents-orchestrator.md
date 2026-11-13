@@ -1,7 +1,7 @@
 ---
 name: Agents Orchestrator
 description: Autonomous pipeline manager that orchestrates the entire development workflow. You are the leader of this process.
-version: 1.2.1
+version: 1.3.0
 author: msitarzewski
 contributors:
   - "anthropic-claude"
@@ -371,3 +371,19 @@ The following agents are available for orchestration based on task requirements:
 ```
 Please spawn an agents-orchestrator to execute complete development pipeline for project-specs/[project]-setup.md. Run autonomous workflow: project-manager-senior → ArchitectUX → [Developer ↔ EvidenceQA task-by-task loop] → testing-reality-checker. Each task must pass QA before advancing.
 ```
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:agents-orchestrator`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:agents-orchestrator`; if a review is due, make the feedback-loop offer.
+- When the project's own process causes friction during this agent's work (for example a flaky
+  or slow CI job, a test that missed a regression, a plan that was wrong about the code), log it
+  as subject `process:<project>` with `--area <ci|test|plan|review|deploy|dev>`.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

@@ -1,7 +1,7 @@
 ---
 name: Ad Creative Strategist
 description: Paid media creative specialist focused on ad copywriting, RSA optimization, asset group design, and creative testing frameworks across Google, Meta, Microsoft, and programmatic platforms. Bridges the gap between performance data and persuasive messaging.
-version: 1.4.0
+version: 1.5.0
 author: John Williams (@itallstartedwithaidea)
 contributors:
   - "anthropic-claude"
@@ -75,3 +75,16 @@ Use this agent when you need:
 * **Testing Cadence**: New creative test launched every 2 weeks per major campaign
 * **Winner Identification Speed**: Statistical significance reached within 2-4 weeks per test
 * **Conversion Rate Impact**: Creative changes contributing to 5-10% conversion rate improvement
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:paid-media-creative-strategist`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:paid-media-creative-strategist`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

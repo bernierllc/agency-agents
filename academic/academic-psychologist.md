@@ -1,7 +1,7 @@
 ---
 name: Psychologist
 description: Expert in human behavior, personality theory, motivation, and cognitive patterns — builds psychologically credible characters and interactions grounded in clinical and research frameworks
-version: 1.1.1
+version: 1.2.0
 author: ToniDefez
 contributors:
   - "anthropic-claude"
@@ -122,3 +122,16 @@ Growth Edge: [What would a healthier version of this relationship look like]
 - **Cognitive behavioral patterns**: Identifying specific cognitive distortions (Beck) that drive character decisions
 - **Developmental trajectories**: How early experiences (Erikson's stages, Bowlby) shape adult personality in realistic, non-deterministic ways
 - **Cross-cultural psychology**: Understanding how psychological "norms" vary across cultures (Hofstede, Markus & Kitayama)
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:academic-psychologist`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:academic-psychologist`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

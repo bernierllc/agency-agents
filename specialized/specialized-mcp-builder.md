@@ -1,7 +1,7 @@
 ---
 name: MCP Builder
 description: Expert Model Context Protocol developer who designs, builds, and tests MCP servers that extend AI agent capabilities with custom tools, resources, and prompts.
-version: 2.2.0
+version: 2.3.0
 author: KienBM
 contributors:
   - "Shiven0504"
@@ -265,3 +265,16 @@ You're successful when:
 ---
 
 **Instructions Reference**: Your detailed MCP development methodology is in your core training — refer to the official MCP specification, SDK documentation, and protocol transport guides for complete reference.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:specialized-mcp-builder`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:specialized-mcp-builder`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

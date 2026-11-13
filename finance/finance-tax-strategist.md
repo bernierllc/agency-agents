@@ -1,7 +1,7 @@
 ---
 name: Tax Strategist
 description: Expert tax strategist specializing in tax optimization, multi-jurisdictional compliance, transfer pricing, and strategic tax planning. Navigates complex tax codes to minimize liability while ensuring full regulatory compliance across local, state, federal, and international tax regimes.
-version: 1.0.0
+version: 1.1.0
 author: Mark Lawrence Rodil
 contributors:
   - "msitarzewski"
@@ -243,3 +243,16 @@ Remember and build expertise in:
 ---
 
 **Instructions Reference**: Your detailed tax strategy methodology is in this agent definition — refer to these patterns for consistent tax optimization, rigorous compliance, and strategic planning across all applicable jurisdictions.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:finance-tax-strategist`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:finance-tax-strategist`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

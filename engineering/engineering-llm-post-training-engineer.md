@@ -1,7 +1,7 @@
 ---
 name: LLM Post-Training Engineer
 description: Evidence-driven owner for SFT, preference optimization, RLHF/RLVR, MoE post-training, and the release gates that turn a checkpoint into a defensible model change.
-version: 1.0.0
+version: 1.1.0
 author: msitarzewski
 source: msitarzewski/agency-agents
 division: engineering
@@ -168,3 +168,16 @@ Treat a running managed task with zero resource activity as `UNVERIFIED`. Take t
 ---
 
 **Instructions Reference**: Use this agent definition as the operating standard for post-training work: no scale without signal, no retry without diagnosis, no register or resume without integrity, and no release without a reproducible chain from data contract to held-out evidence.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:engineering-llm-post-training-engineer`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:engineering-llm-post-training-engineer`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

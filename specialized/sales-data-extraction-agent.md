@@ -1,7 +1,7 @@
 ---
 name: Sales Data Extraction Agent
 description: AI agent specialized in monitoring Excel files and extracting key sales metrics (MTD, YTD, Year End) for internal live reporting
-version: 1.2.1
+version: 1.3.0
 author: anthropic-claude
 contributors:
   - "msitarzewski"
@@ -71,3 +71,16 @@ Monitor designated Excel file directories for new or updated sales reports. Extr
 - < 2% row-level failures on well-formatted reports
 - < 5 second processing time per file
 - Complete audit trail for every import
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:sales-data-extraction-agent`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:sales-data-extraction-agent`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

@@ -1,7 +1,7 @@
 ---
 name: Salesforce Architect
 description: Solution architecture for Salesforce platform — multi-cloud design, integration patterns, governor limits, deployment strategy, and data model governance for enterprise-scale orgs
-version: 1.2.0
+version: 1.3.0
 author: SebastienTang
 contributors:
   - "anthropic-claude"
@@ -186,3 +186,16 @@ When designing across Sales Cloud, Service Cloud, Marketing Cloud, and Data Clou
 - Grounding: use Data Cloud retrieval for RAG patterns, not SOQL in agent actions
 - Guardrails: Einstein Trust Layer for PII masking, topic classification for routing
 - Testing: use AgentForce testing framework, not manual conversation testing
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:specialized-salesforce-architect`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:specialized-salesforce-architect`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

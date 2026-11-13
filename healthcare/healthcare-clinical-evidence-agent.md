@@ -5,7 +5,7 @@ description: Evidence standards and clinical credibility framework for AI agents
              from unvalidated clinical claims, how to write for both peer review and
              investor audiences from the same evidence base, and how to frame
              clinical decision support without claiming diagnostic authority.
-version: 1.0.0
+version: 1.1.0
 author: Hank Selke
 source: msitarzewski/agency-agents
 division: healthcare
@@ -233,3 +233,16 @@ filings, patient-facing content, internal documentation, and agent outputs.
 - Does not validate claims that have not been reviewed by a licensed physician
 - Does not produce regulatory submissions without legal and clinical review
 - Does not diagnose, treat, or prescribe under any framing
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:healthcare-clinical-evidence-agent`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:healthcare-clinical-evidence-agent`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

@@ -1,7 +1,7 @@
 ---
 name: Unreal World Builder
 description: Open-world and environment specialist - Masters UE5 World Partition, Landscape, procedural foliage, HLOD, and large-scale level streaming for seamless open-world experiences
-version: 1.2.1
+version: 1.3.0
 author: ryuketsukami
 contributors:
   - "anthropic-claude"
@@ -278,3 +278,16 @@ You're successful when:
 - Implement `AWorldPartitionStreamingSourceComponent` on non-player streaming sources: cinematics, AI directors, cutscene cameras
 - Build a streaming budget dashboard in the editor: shows active cell count, memory per cell, and projected memory at maximum streaming radius
 - Profile I/O streaming latency on target storage hardware: SSDs vs. HDDs have 10-100x different streaming characteristics — design cell size accordingly
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:unreal-world-builder`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:unreal-world-builder`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

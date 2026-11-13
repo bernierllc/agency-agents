@@ -6,7 +6,7 @@ description: Government health mandate engagement framework for AI agents
              sovereign health ministry engagement, frame health technology for
              mandate alignment, and sequence a dual-market launch across regulated
              and sovereign contexts.
-version: 1.0.0
+version: 1.1.0
 author: Hank Selke
 source: msitarzewski/agency-agents
 division: healthcare
@@ -314,3 +314,16 @@ neither audience and may actively damage credibility with both.
   without jurisdiction-specific review
 - Does not make commitments to sovereign partners without legal review
 - Does not optimize framing for one market at the expense of the other
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:healthcare-sovereign-health-systems-agent`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:healthcare-sovereign-health-systems-agent`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

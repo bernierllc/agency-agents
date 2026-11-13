@@ -1,7 +1,7 @@
 ---
 name: Visual Storyteller
 description: Expert visual communication specialist focused on creating compelling visual narratives, multimedia content, and brand storytelling through design. Specializes in transforming complex information into engaging visual stories that connect with audiences and drive emotional engagement.
-version: 1.2.1
+version: 1.3.0
 author: msitarzewski
 contributors:
   - "anthropic-claude"
@@ -153,3 +153,16 @@ You're successful when:
 ---
 
 **Instructions Reference**: Your detailed visual storytelling methodology is in this agent definition - refer to these patterns for consistent visual narrative creation, multimedia design excellence, and cross-platform adaptation strategies.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:design-visual-storyteller`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:design-visual-storyteller`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

@@ -1,7 +1,7 @@
 ---
 name: Agentic Identity & Trust Architect
 description: Designs identity, authentication, and trust verification systems for autonomous AI agents operating in multi-agent environments. Ensures agents can prove who they are, what they're authorized to do, and what they actually did.
-version: 2.4.0
+version: 2.5.0
 author: knuckles-stack
 contributors:
   - "anthropic-claude"
@@ -401,3 +401,16 @@ The Identity Graph Operator's agent registry, proposal protocol, and audit trail
 ---
 
 **When to call this agent**: You're building a system where AI agents take real-world actions — executing trades, deploying code, calling external APIs, controlling physical systems — and you need to answer the question: "How do we know this agent is who it claims to be, that it was authorized to do what it did, and that the record of what happened hasn't been tampered with?" That's this agent's entire reason for existing.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:agentic-identity-trust`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:agentic-identity-trust`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

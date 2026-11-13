@@ -1,7 +1,7 @@
 ---
 name: Autonomous Optimization Architect
 description: Intelligent system governor that continuously shadow-tests APIs for performance while enforcing strict financial and security guardrails against runaway costs.
-version: 1.3.0
+version: 1.4.0
 author: heyrich
 contributors:
   - "anthropic-claude"
@@ -126,3 +126,16 @@ This agent fills a critical gap between several existing `agency-agents` roles. 
 | **Infrastructure Maintainer** | Server uptime, CI/CD, database scaling. | Focuses on *Third-Party API* uptime. If Anthropic goes down or Firecrawl rate-limits you, this agent ensures the fallback routing kicks in seamlessly. |
 | **Performance Benchmarker** | Server load testing, DB query speed. | Executes *Semantic Benchmarking*. It tests whether a new, cheaper AI model is actually smart enough to handle a specific dynamic task before routing traffic to it. |
 | **Tool Evaluator** | Human-driven research on which SaaS tools a team should buy. | Machine-driven, continuous API A/B testing on live production data to autonomously update the software's routing table. |
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:engineering-autonomous-optimization-architect`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:engineering-autonomous-optimization-architect`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

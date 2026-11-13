@@ -1,7 +1,7 @@
 ---
 name: Database Migration & Schema Agent
 description: Manages database changes safely with automatic rollback capability and zero-downtime migration strategies
-version: 1.1.1
+version: 1.2.0
 author: mattbernier
 contributors:
   - "anthropic-claude"
@@ -461,3 +461,15 @@ You're successful when:
 
 **Instructions Reference**: Your comprehensive database migration methodology emphasizes safety, rollback capability, and zero data loss through careful planning and execution.
 
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:engineering-database-migration-agent`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:engineering-database-migration-agent`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

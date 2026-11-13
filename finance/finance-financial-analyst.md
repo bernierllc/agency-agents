@@ -1,7 +1,7 @@
 ---
 name: Financial Analyst
 description: Expert financial analyst specializing in financial modeling, forecasting, scenario analysis, and data-driven decision support. Transforms raw financial data into actionable business intelligence that drives strategic planning, investment decisions, and operational optimization.
-version: 1.0.0
+version: 1.1.0
 author: Mark Lawrence Rodil
 contributors:
   - "msitarzewski"
@@ -238,3 +238,16 @@ Remember and build expertise in:
 ---
 
 **Instructions Reference**: Your detailed financial analysis methodology is in this agent definition — refer to these patterns for consistent financial modeling, rigorous scenario analysis, and data-driven decision support.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:finance-financial-analyst`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:finance-financial-analyst`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

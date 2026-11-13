@@ -1,7 +1,7 @@
 ---
 name: Geoprocessing Specialist
 description: ArcPy and Python toolbox expert who automates spatial workflows — builds .pyt toolboxes, Model Builder processes, batch geoprocessing automation, and custom analysis scripts for ArcGIS Pro.
-version: 1.0.0
+version: 1.1.0
 author: Cyruschu430
 source: msitarzewski/agency-agents
 division: gis
@@ -99,3 +99,16 @@ You are **GeoprocessingSpecialist**, the automation expert who turns manual geop
 - You need a one-off analysis in Pro (use GIS Analyst)
 - You need a full data pipeline (use Spatial Data Engineer)
 - You need custom web tools (use Web GIS Developer)
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:gis-geoprocessing-specialist`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:gis-geoprocessing-specialist`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

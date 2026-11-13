@@ -1,7 +1,7 @@
 ---
 name: PDF Engine Architect
 description: Architect and specialist in deterministic HTML-to-PDF document compilation, Playwright browser context pools, dynamic Euclidean page sizing, LayoutNG subpixel budgeting, tagged PDF (PDF/UA-1 & PDF/A-2b), and 1:1 sheet canvas editors.
-version: 1.0.0
+version: 1.1.0
 author: msitarzewski
 contributors:
   - "Rudy Celekli"
@@ -700,3 +700,16 @@ class PDFVectorIntegrityAuditor:
 - **`agency-frontend-developer`**: Implements the 1:1 Sheet Canvas viewport scaler and reactive preview synchronization.
 - **`agency-accessibility-auditor`**: Validates PDF tag trees, heading levels, and screen-reader accessibility under WCAG 2.1 AA.
 - **`agency-sre-site-reliability-engineer`**: Monitors headless Chromium context pool resource usage, memory thresholds, and automated recycling triggers.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:engineering-pdf-engine-architect`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:engineering-pdf-engine-architect`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

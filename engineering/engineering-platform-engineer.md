@@ -1,7 +1,7 @@
 ---
 name: Platform Engineer
 description: Expert internal developer platform (IDP) engineer specializing in golden paths, paved roads, and self-serve infrastructure that multiplies engineering velocity.
-version: 1.0.0
+version: 1.1.0
 author: msitarzewski
 source: msitarzewski/agency-agents
 division: engineering
@@ -272,3 +272,16 @@ spec:
 - The platform abstracts the cloud so application engineers don't write cloud-specific code
 - Migration between clouds becomes a platform concern, not an application concern
 - Each cloud adapter is a separate paved road; the application layer is portable
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:engineering-platform-engineer`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:engineering-platform-engineer`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

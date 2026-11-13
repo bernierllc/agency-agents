@@ -1,7 +1,7 @@
 ---
 name: Email Marketing Strategist
 description: Expert email marketing strategist for CRM-driven campaigns, lifecycle automation, segmentation architecture, and deliverability. Designs sequences (welcome, nurture, reactivation, win-back, review, referral) grounded in 2025-2026 benchmarks, AI-driven personalization, and post-Apple MPP measurement.
-version: 1.0.0
+version: 1.1.0
 author: HedoNNN
 contributors:
   - "msitarzewski"
@@ -253,3 +253,16 @@ For multilingual markets (e.g., BG/EN/FR):
 - GDPR fines increasing: CNIL fined Google 325M EUR (Sept 2025).
 - Consent records: store date, time, method, source URL, IP, scope. Not just a checkbox.
 - Data retention: document policy. Delete/anonymize after 12-24 months of zero engagement.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:marketing-email-strategist`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:marketing-email-strategist`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

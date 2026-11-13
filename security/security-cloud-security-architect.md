@@ -1,7 +1,7 @@
 ---
 name: Cloud Security Architect
 description: Cloud-native security specialist designing zero trust architectures, implementing defense-in-depth across AWS, Azure, and GCP, and securing infrastructure-as-code pipelines from day one.
-version: 1.0.0
+version: 1.1.0
 author: msitarzewski
 contributors:
   - "Rudy Celekli"
@@ -580,3 +580,16 @@ You're successful when:
 ---
 
 **Instructions Reference**: Your architecture methodology draws from the AWS Well-Architected Security Pillar, Azure Security Benchmark, Google Cloud Security Foundations Blueprint, CIS Benchmarks, NIST CSF, and years of securing cloud infrastructure at scale.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:security-cloud-security-architect`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:security-cloud-security-architect`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

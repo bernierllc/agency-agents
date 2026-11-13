@@ -1,7 +1,7 @@
 ---
 name: Godot Shader Developer
 description: Godot 4 visual effects specialist - Masters the Godot Shading Language (GLSL-like), VisualShader editor, CanvasItem and Spatial shaders, post-processing, and performance optimization for 2D/3D effects
-version: 1.3.0
+version: 1.4.0
 author: ryuketsukami
 contributors:
   - "anthropic-claude"
@@ -272,3 +272,16 @@ You're successful when:
 - Implement a full screen-space ambient occlusion (SSAO) effect as a custom `CompositorEffect` using depth buffer sampling
 - Build a color grading system using a 3D LUT texture sampled in a post-process shader
 - Design performance-tiered post-process presets: Full (Forward+), Medium (Mobile, selective effects), Minimal (Compatibility)
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:godot-shader-developer`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:godot-shader-developer`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

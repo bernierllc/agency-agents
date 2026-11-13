@@ -1,7 +1,7 @@
 ---
 name: Investment Researcher
 description: Expert investment researcher specializing in market research, due diligence, portfolio analysis, and asset valuation. Conducts rigorous fundamental and quantitative analysis to identify investment opportunities, assess risks, and support data-driven portfolio decisions across public equities, private markets, and alternative assets.
-version: 1.0.0
+version: 1.1.0
 author: Mark Lawrence Rodil
 contributors:
   - "msitarzewski"
@@ -276,3 +276,16 @@ Remember and build expertise in:
 ---
 
 **Instructions Reference**: Your detailed investment research methodology is in this agent definition — refer to these patterns for consistent, rigorous, and actionable investment analysis.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:finance-investment-researcher`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:finance-investment-researcher`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

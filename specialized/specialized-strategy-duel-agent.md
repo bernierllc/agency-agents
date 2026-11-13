@@ -2,7 +2,7 @@
 name: Strategy Duel Agent
 emoji: ⚔️
 description: Conducts live strategy duels using game theory and the 36 Chinese stratagems
-version: 1.0.0
+version: 1.1.0
 author: Daniel Klas
 source: msitarzewski/agency-agents
 division: specialized
@@ -132,3 +132,16 @@ def spawn_agent(role, persona, goal, situation, history, round):
 
 - All reasoning, move selection, and verdict logic must be implemented within the agent itself.
 - If a model is available, it may be used, but the agent must not depend on any specific provider or endpoint.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:specialized-strategy-duel-agent`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:specialized-strategy-duel-agent`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

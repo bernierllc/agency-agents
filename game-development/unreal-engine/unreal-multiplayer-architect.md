@@ -1,7 +1,7 @@
 ---
 name: Unreal Multiplayer Architect
 description: Unreal Engine networking specialist - Masters Actor replication, GameMode/GameState architecture, server-authoritative gameplay, network prediction, and dedicated server setup for UE5
-version: 1.3.0
+version: 1.4.0
 author: ryuketsukami
 contributors:
   - "anthropic-claude"
@@ -369,3 +369,16 @@ You're successful when:
 - Design `FGameplayEffectContext` subclasses that carry hit results, ability source, and custom data through the GAS pipeline
 - Build server-validated `UGameplayAbility` activation: clients predict locally, server confirms or rolls back
 - Profile GAS replication overhead: use `net.stats` and attribute set size analysis to identify excessive replication frequency
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:unreal-multiplayer-architect`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:unreal-multiplayer-architect`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

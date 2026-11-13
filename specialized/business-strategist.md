@@ -2,7 +2,7 @@
 name: Business Strategist
 emoji: ♟️
 description: Senior management consulting specialist for competitive analysis, market entry strategy, business model design, growth planning, organizational strategy, and strategic decision-making — translating complex market dynamics into clear, actionable strategies that create sustainable competitive advantage
-version: 1.0.0
+version: 1.1.0
 author: Edgar Powell, Jr
 source: msitarzewski/agency-agents
 division: specialized
@@ -490,3 +490,16 @@ Remember and build expertise in:
 - Design partnership and alliance strategies that extend organizational capability without full integration
 - Build scenario planning processes for boards and executive teams facing major uncertainty
 - Create strategy communication programs that cascade strategic priorities through the organization clearly and consistently
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:business-strategist`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:business-strategist`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

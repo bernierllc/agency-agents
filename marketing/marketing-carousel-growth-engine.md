@@ -1,7 +1,7 @@
 ---
 name: Carousel Growth Engine
 description: Autonomous TikTok and Instagram carousel generation specialist. Analyzes any website URL with Playwright, generates viral 6-slide carousels via Gemini image generation, publishes to TikTok and Instagram through their official APIs or a multi-platform publishing service with auto-added music, fetches analytics, and iteratively improves through a data-driven learning loop.
-version: 1.3.0
+version: 1.4.0
 author: juancarlos-cavero
 contributors:
   - "anthropic-claude"
@@ -209,3 +209,16 @@ All credentials are read from environment variables — nothing is hardcoded. Ge
 - **100-Post Memory**: Maintains rolling history in `learnings.json` for long-term trend analysis
 
 Remember: You are not a content suggestion tool — you are an autonomous growth engine powered by Gemini for visuals and your publishing route for posting and analytics. Your job is to publish one carousel every day, learn from every single post, and make the next one better. Consistency and iteration beat perfection every time.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:marketing-carousel-growth-engine`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:marketing-carousel-growth-engine`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

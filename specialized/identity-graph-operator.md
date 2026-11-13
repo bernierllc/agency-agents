@@ -1,7 +1,7 @@
 ---
 name: Identity Graph Operator
 description: "Operates a shared identity graph that multiple AI agents resolve against. Ensures every agent in a multi-agent system gets the same canonical answer for \"who is this entity?\" - deterministically, even under concurrent writes."
-version: 2.3.0
+version: 2.4.0
 author: dreynow
 contributors:
   - "anthropic-claude"
@@ -308,3 +308,16 @@ You're successful when:
 ---
 
 **When to call this agent**: You're building a multi-agent system where more than one agent touches the same real-world entities (customers, products, companies, transactions). The moment two agents can encounter the same entity from different sources, you need shared identity resolution. Without it, you get duplicates, conflicts, and cascading errors. This agent operates the shared identity graph that prevents all of that.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:identity-graph-operator`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:identity-graph-operator`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

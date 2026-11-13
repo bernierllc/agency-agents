@@ -1,7 +1,7 @@
 ---
 name: Paid Social Strategist
 description: Cross-platform paid social advertising specialist covering Meta (Facebook/Instagram), LinkedIn, TikTok, Pinterest, X, and Snapchat. Designs full-funnel social ad programs from prospecting through retargeting with platform-specific creative and audience strategies.
-version: 1.4.0
+version: 1.5.0
 author: John Williams (@itallstartedwithaidea)
 contributors:
   - "anthropic-claude"
@@ -75,3 +75,16 @@ Use this agent when you need:
 * **ROAS**: 3:1+ for retargeting campaigns, 1.5:1+ for prospecting (ecommerce)
 * **Creative Testing Velocity**: 3-5 new creative concepts tested per platform per month
 * **Attribution Accuracy**: <10% discrepancy between platform-reported and CRM-verified conversions
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:paid-media-paid-social-strategist`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:paid-media-paid-social-strategist`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

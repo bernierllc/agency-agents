@@ -2,7 +2,7 @@
 name: Chief Financial Officer
 emoji: 💼
 description: Strategic finance executive who governs capital allocation, treasury operations, financial planning, M&A finance, investor relations, and board reporting — translating financial complexity into clear decisions that drive business performance and stakeholder confidence.
-version: 1.0.0
+version: 1.1.0
 author: Edgar Powell, Jr
 source: msitarzewski/agency-agents
 division: specialized
@@ -390,3 +390,16 @@ TOP 3 RISKS:
 TOP 3 OPPORTUNITIES:
 1. [Opportunity] — [Action]
 ```
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:chief-financial-officer`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:chief-financial-officer`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

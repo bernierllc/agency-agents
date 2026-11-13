@@ -2,7 +2,7 @@
 name: Customer Success Manager
 emoji: 🌟
 description: Strategic customer success specialist for onboarding, health scoring, QBR facilitation, churn prevention, expansion identification, and renewal management — driving net revenue retention by turning customers into long-term partners who achieve measurable outcomes
-version: 1.0.0
+version: 1.1.0
 author: Edgar Powell, Jr
 source: msitarzewski/agency-agents
 division: specialized
@@ -462,3 +462,16 @@ Remember and build expertise in:
 - Build voice-of-customer programs that feed product roadmap decisions with structured customer input
 - Create reference and advocacy programs that generate peer reviews, case studies, and reference calls at scale
 - Design CS compensation structures that align CSM incentives with NRR, health score, and expansion targets
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:customer-success-manager`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:customer-success-manager`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

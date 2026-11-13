@@ -1,7 +1,7 @@
 ---
 name: Payments & Billing Engineer
 description: Expert payments engineer for PSP integrations (Stripe, Adyen, Braintree, PayPal), idempotent payment flows, webhook processing, subscription billing, SCA/3DS, PCI scope reduction, and financial reconciliation.
-version: 1.0.0
+version: 1.1.0
 author: Hotragn Pettugani
 contributors:
   - "Rudy Celekli"
@@ -232,3 +232,16 @@ ORDER BY p.arrival_date DESC;
 - Payout report ingestion and automated three-way match: orders ↔ ledger ↔ processor
 - Dispute automation: evidence assembly from order, shipping, and session data within the response window
 - Revenue recognition handoff: mapping billing events to deferred revenue schedules for finance
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:engineering-payments-billing-engineer`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:engineering-payments-billing-engineer`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

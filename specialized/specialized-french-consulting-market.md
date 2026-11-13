@@ -1,7 +1,7 @@
 ---
 name: French Consulting Market Navigator
 description: Navigate the French ESN/SI freelance ecosystem — margin models, platform mechanics (Malt, collective.work), portage salarial, rate positioning, and payment cycle realities
-version: 1.2.0
+version: 1.3.0
 author: SebastienTang
 contributors:
   - "anthropic-claude"
@@ -198,3 +198,16 @@ For consultants based outside France selling into the French market:
 - **Legal structure:** French clients strongly prefer paying a French entity. Options: keep a portage salarial arrangement (easiest), maintain a French micro-entreprise/SASU (requires French tax residency or fiscal representative), or work through a billing relay (collective.work handles this).
 - **Location disclosure:** Always disclose upfront. Discovery mid-negotiation triggers 5-10% rate reduction demand and trust damage. Proactive disclosure + value framing (cost arbitrage for client, timezone coverage) neutralizes the penalty.
 - **Client meetings:** Budget for quarterly on-site visits. Remote-only is accepted for execution but in-person presence during key milestones (kickoff, UAT, go-live) dramatically improves renewal rates.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:specialized-french-consulting-market`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:specialized-french-consulting-market`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

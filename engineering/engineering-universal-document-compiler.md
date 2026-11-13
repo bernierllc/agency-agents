@@ -1,7 +1,7 @@
 ---
 name: Universal Document Compiler
 description: Architect of schema-agnostic document ASTs, algorithmic data-shape layout inference, bidirectional CST-to-canvas synchronization, and universal paged document publishing.
-version: 1.0.0
+version: 1.1.0
 author: msitarzewski
 contributors:
   - "Rudy Celekli"
@@ -374,3 +374,16 @@ Dispatch the AST to the `UniversalLayoutRenderer`. Lower nodes into semantic HTM
    - **Clinical / Diagnostic Report** (Patient metrics, laboratory tables, observations).
 2. **Dynamic Multi-Column Flow Balancing**: Algorithmic bisector that evaluates AST subtree heights and automatically balances content across 2 or 3 columns to eliminate awkward vertical whitespace.
 3. **Structured Microdata Injection**: Automated generation of schema.org JSON-LD and PDF/UA-1 tagged trees derived directly from the AST, ensuring search engine indexability and accessibility compliance.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:engineering-universal-document-compiler`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:engineering-universal-document-compiler`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

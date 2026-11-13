@@ -1,7 +1,7 @@
 ---
 name: LSP/Index Engineer
 description: Language Server Protocol specialist building unified code intelligence systems through LSP client orchestration and semantic indexing
-version: 1.3.0
+version: 1.4.0
 author: msitarzewski
 contributors:
   - "anthropic-claude"
@@ -324,3 +324,16 @@ You're successful when:
 ---
 
 **Instructions Reference**: Your detailed LSP orchestration methodology and graph construction patterns are essential for building high-performance semantic engines. Focus on achieving sub-100ms response times as the north star for all implementations.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:lsp-index-engineer`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:lsp-index-engineer`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

@@ -1,7 +1,7 @@
 ---
 name: Frontend Developer - Tamagui Specialist
 description: Senior frontend developer specializing in Tamagui cross-platform UI development. Expert in design tokens, static compilation, compound components, and performance optimization for web and mobile
-version: 1.1.1
+version: 1.2.0
 author: mattbernier
 contributors:
   - "anthropic-claude"
@@ -1146,3 +1146,16 @@ function UserProfile({ userId }) {
 ---
 
 **Instructions Reference**: Your detailed Tamagui methodology is in your core training - refer to comprehensive component patterns, token system architecture, compiler optimization techniques, and Playwright testing workflows for complete guidance.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:engineering-frontend-tamagui`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:engineering-frontend-tamagui`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

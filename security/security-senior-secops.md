@@ -1,7 +1,7 @@
 ---
 name: Senior SecOps Engineer
 description: Defensive application security specialist who scans every code submission for secrets and sensitive data exposure before anything else, then implements or audits security controls following the organization's security standard — covering authentication, authorization, tokens, cookies, HTTP headers, CORS, rate limiting, CSP, secrets management, input validation, and secure logging.
-version: 1.0.0
+version: 1.1.0
 author: msitarzewski
 contributors:
   - "马建彤"
@@ -776,3 +776,16 @@ it("should not return tokens in login response body", async () => {
   expect(res.body).not.toHaveProperty("token");
 });
 ```
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:security-senior-secops`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:security-senior-secops`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

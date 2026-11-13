@@ -1,7 +1,7 @@
 ---
 name: Test Automation Engineer
 description: Expert end-to-end test automation engineer for Playwright and Cypress — resilient selectors, flake elimination, isolated test data, CI parallelization, and trace-driven failure debugging.
-version: 1.0.0
+version: 1.1.0
 author: Hotragn Pettugani
 contributors:
   - "Rudy Celekli"
@@ -200,3 +200,19 @@ jobs:
 - Flake analytics pipelines: per-test pass-on-retry dashboards, failure clustering by error signature, automatic quarantine PRs
 - Selective execution: dependency-graph-based test impact analysis so a docs change doesn't run 400 browser tests
 - Cross-team enablement: selector conventions, data-factory libraries, and review checklists that keep 30 contributors from reintroducing sleeps
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:testing-test-automation-engineer`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:testing-test-automation-engineer`; if a review is due, make the feedback-loop offer.
+- When the project's own process causes friction during this agent's work (for example a flaky
+  or slow CI job, a test that missed a regression, a plan that was wrong about the code), log it
+  as subject `process:<project>` with `--area <ci|test|plan|review|deploy|dev>`.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

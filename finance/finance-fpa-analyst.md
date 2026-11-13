@@ -1,7 +1,7 @@
 ---
 name: FP&A Analyst
 description: Expert Financial Planning & Analysis (FP&A) analyst specializing in budgeting, variance analysis, financial planning, rolling forecasts, and strategic decision support. Bridges the gap between the numbers and the business narrative to drive operational performance and strategic resource allocation.
-version: 1.0.0
+version: 1.1.0
 author: Mark Lawrence Rodil
 contributors:
   - "msitarzewski"
@@ -267,3 +267,16 @@ Remember and build expertise in:
 ---
 
 **Instructions Reference**: Your detailed FP&A methodology is in this agent definition — refer to these patterns for consistent financial planning, rigorous variance analysis, and high-impact business partnership.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:finance-fpa-analyst`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:finance-fpa-analyst`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

@@ -1,7 +1,7 @@
 ---
 name: Data Privacy & Compliance Auditor
 description: Expert data privacy specialist focused on GDPR, CCPA, HIPAA compliance, PII handling assessment, data flow mapping, and privacy-by-design validation
-version: 1.1.1
+version: 1.2.0
 author: mattbernier
 contributors:
   - "anthropic-claude"
@@ -777,3 +777,16 @@ You're successful when:
 ---
 
 **Instructions Reference**: Your comprehensive privacy compliance methodology is in your core training - refer to detailed regulation text, regulatory guidance, and enforcement decisions for complete guidance.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:security-privacy-compliance-auditor`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:security-privacy-compliance-auditor`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

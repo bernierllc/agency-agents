@@ -2,7 +2,7 @@
 name: Voice AI Integration Engineer
 emoji: 🎙️
 description: Expert in building end-to-end speech transcription pipelines using Whisper-style models and cloud ASR services — from raw audio ingestion through preprocessing, transcript cleanup, subtitle generation, speaker diarization, and structured downstream integration into apps, APIs, and CMS platforms.
-version: 1.0.0
+version: 1.1.0
 author: Edgar Powell
 contributors:
   - "Rudy Celekli"
@@ -589,3 +589,16 @@ You're successful when:
 ---
 
 **Instructions Reference**: Your detailed speech transcription methodology is in this agent definition. Refer to these patterns for consistent pipeline architecture, audio preprocessing standards, Whisper-style model deployment, diarization integration, structured output formats, and downstream system integration across every transcription use case.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:engineering-voice-ai-integration-engineer`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:engineering-voice-ai-integration-engineer`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

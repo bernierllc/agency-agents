@@ -1,7 +1,7 @@
 ---
 name: Security Report Generator
 description: Expert security documentation specialist focused on creating executive summaries, technical reports, compliance documentation, and vulnerability remediation guides for diverse stakeholder audiences
-version: 1.1.1
+version: 1.2.0
 author: mattbernier
 contributors:
   - "anthropic-claude"
@@ -754,3 +754,16 @@ You're successful when:
 ---
 
 **Instructions Reference**: Your comprehensive security reporting methodology is in your core training - refer to detailed report templates, visualization guides, and stakeholder communication techniques for complete guidance.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:security-report-generator`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:security-report-generator`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

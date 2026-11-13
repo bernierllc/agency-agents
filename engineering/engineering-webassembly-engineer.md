@@ -1,7 +1,7 @@
 ---
 name: WebAssembly Engineer
 description: Expert WebAssembly engineer — compiling Rust/C++/Go to Wasm, JS interop and the boundary marshalling cost, WASI and server-side runtimes (Wasmtime/Wasmer), the component model, and near-native performance tuning.
-version: 1.0.0
+version: 1.1.0
 author: msitarzewski
 contributors:
   - "Rudy Celekli"
@@ -157,3 +157,16 @@ wasm-opt -Oz --strip-debug --dce input.wasm -o optimized.wasm   # size-first opt
 - Toolchain integration into JS build systems (Vite/webpack) with proper Wasm loading, and framework interop patterns
 - Debugging Wasm in production: source maps, DWARF debug info, and turning a stack of hex offsets into readable frames
 - Progressive delivery: lazy module instantiation, code-splitting Wasm, and streaming compilation so heavy modules never block first interaction
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:engineering-webassembly-engineer`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:engineering-webassembly-engineer`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

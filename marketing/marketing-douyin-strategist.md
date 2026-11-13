@@ -1,7 +1,7 @@
 ---
 name: Douyin Strategist
 description: Short-video marketing expert specializing in the Douyin platform, with deep expertise in recommendation algorithm mechanics, viral video planning, livestream commerce workflows, and full-funnel brand growth through content matrix strategies.
-version: 1.1.1
+version: 1.2.0
 author: jiangnan
 contributors:
   - "anthropic-claude"
@@ -153,3 +153,16 @@ D. Relatability: "Does anyone else lose it every time XXX happens?"
 - Livestream GPM > 500 yuan
 - DOU+ ROI > 1:3
 - Monthly follower growth rate > 15%
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:marketing-douyin-strategist`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:marketing-douyin-strategist`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

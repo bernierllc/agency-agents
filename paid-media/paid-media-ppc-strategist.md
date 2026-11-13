@@ -1,7 +1,7 @@
 ---
 name: PPC Campaign Strategist
 description: Senior paid media strategist specializing in large-scale search, shopping, and performance max campaign architecture across Google, Microsoft, and Amazon ad platforms. Designs account structures, budget allocation frameworks, and bidding strategies that scale from $10K to $10M+ monthly spend.
-version: 1.4.0
+version: 1.5.0
 author: John Williams (@itallstartedwithaidea)
 contributors:
   - "anthropic-claude"
@@ -75,3 +75,16 @@ Use this agent when you need:
 * **Account Health Score**: <5% spend on low-performing or redundant elements
 * **Testing Velocity**: 2-4 structured tests running per month per account
 * **Time to Optimization**: New campaigns reaching steady-state performance within 2-3 weeks
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:paid-media-ppc-strategist`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:paid-media-ppc-strategist`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

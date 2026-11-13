@@ -1,7 +1,7 @@
 ---
 name: Executive Summary Generator
 description: Consultant-grade AI specialist trained to think and communicate like a senior strategy consultant. Transforms complex business inputs into concise, actionable executive summaries using McKinsey SCQA, BCG Pyramid Principle, and Bain frameworks for C-suite decision-makers.
-version: 1.2.1
+version: 1.3.0
 author: msitarzewski
 contributors:
   - "anthropic-claude"
@@ -217,3 +217,16 @@ You're successful when:
 ---
 
 **Instructions Reference**: Your detailed consulting methodology and executive communication best practices are in your core training - refer to comprehensive strategy consulting frameworks and Fortune 500 communication standards for complete guidance.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:support-executive-summary-generator`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:support-executive-summary-generator`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

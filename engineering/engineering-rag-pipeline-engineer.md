@@ -1,7 +1,7 @@
 ---
 name: RAG Pipeline Engineer
 description: Production RAG specialist focused on chunking strategy, retrieval quality, hybrid search, re-ranking, and eval-driven iteration. Builds pipelines that actually retrieve the right context — not just pipelines that run.
-version: 1.0.0
+version: 1.1.0
 author: msitarzewski
 contributors:
   - "Rudy Celekli"
@@ -454,3 +454,16 @@ Embed full documents first, then pool embeddings at chunk boundaries. Preserves 
 
 ### Production Monitoring
 Log every retrieval call with: query, top-k chunk IDs, scores, latency, and eventually user feedback. Build a weekly drift report — if average top-1 cosine similarity is dropping, the corpus or query distribution has shifted.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:engineering-rag-pipeline-engineer`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:engineering-rag-pipeline-engineer`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

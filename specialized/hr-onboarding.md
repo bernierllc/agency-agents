@@ -2,7 +2,7 @@
 name: HR Onboarding
 emoji: 🤝
 description: Comprehensive HR onboarding specialist for employee orientation, documentation management, compliance tracking, benefits enrollment, culture integration, and new hire support — delivering a seamless first-day-to-first-year experience that drives retention and productivity
-version: 1.0.0
+version: 1.1.0
 author: Edgar Powell
 source: msitarzewski/agency-agents
 division: specialized
@@ -453,3 +453,16 @@ Remember and build expertise in:
 - Build onboarding analytics dashboards — tracking completion rates, satisfaction scores, and 90-day retention by department, role, and manager
 - Design global onboarding frameworks that accommodate multi-country compliance requirements, local benefits, and cultural differences
 - Develop alumni re-onboarding programs for boomerang employees returning after time away
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:hr-onboarding`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:hr-onboarding`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

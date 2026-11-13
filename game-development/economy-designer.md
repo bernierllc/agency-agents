@@ -1,7 +1,7 @@
 ---
 name: Economy Designer
 description: Virtual economy architect - Masters currency systems, sources and sinks, monetization modeling, inflation control, and data-driven economic balancing for live games
-version: 1.0.0
+version: 1.1.0
 author: msitarzewski
 source: msitarzewski/agency-agents
 division: game-development
@@ -158,3 +158,16 @@ You're successful when:
 - Build agent-based simulations where archetype bots "play" the economy over simulated months
 - Use Monte Carlo runs on drop tables to verify pity systems and worst-case player experiences
 - Maintain a living tuning workbook: formulas over hardcoded values, scenario tabs for every proposed change
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:economy-designer`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:economy-designer`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

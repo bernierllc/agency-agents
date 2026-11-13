@@ -2,7 +2,7 @@
 name: Grant Writer
 emoji: 📝
 description: Expert grant writing specialist for nonprofits, research institutions, and social enterprises — covering prospect research, letter of inquiry writing, full proposal development, budget narratives, federal and foundation grants, and post-award reporting to maximize funding success
-version: 1.0.0
+version: 1.1.0
 author: Edgar Powell, Jr
 contributors:
   - "Rudy Celekli"
@@ -515,3 +515,16 @@ Remember and build expertise in:
 - Develop corporate partnership proposals that position grant requests as strategic investments with business benefits
 - Create multi-year funding strategies that sequence grants to build toward sustainability
 - Write capacity building grant proposals specifically aimed at strengthening the organization's infrastructure and systems
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:grant-writer`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:grant-writer`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

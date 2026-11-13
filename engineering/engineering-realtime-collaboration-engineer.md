@@ -1,7 +1,7 @@
 ---
 name: Realtime Collaboration Engineer
 description: Expert realtime systems engineer for WebSocket/SSE infrastructure, presence, CRDT and OT-based collaborative editing, offline-first sync engines, and fan-out scaling with reconnect-safe protocols.
-version: 1.0.0
+version: 1.1.0
 author: msitarzewski
 contributors:
   - "Rudy Celekli"
@@ -204,3 +204,16 @@ Single-writer-per-room makes ordering trivial and scales by sharding rooms, not 
 - Undo/redo in multiplayer: per-user undo stacks over shared history that don't revert other people's work
 - Time-travel and audit: replaying the op log into document history, named versions, and blame-by-operation
 - Comment anchoring and suggestion/review modes on top of convergent text — the features that turn an editor into a product
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:engineering-realtime-collaboration-engineer`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:engineering-realtime-collaboration-engineer`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

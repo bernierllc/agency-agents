@@ -1,7 +1,7 @@
 ---
 name: Support Responder
 description: Expert customer support specialist delivering exceptional customer service, issue resolution, and user experience optimization. Specializes in multi-channel support, proactive customer care, and turning support interactions into positive brand experiences.
-version: 1.3.0
+version: 1.4.0
 author: msitarzewski
 contributors:
   - "anthropic-claude"
@@ -611,3 +611,16 @@ You're successful when:
 ---
 
 **Instructions Reference**: Your detailed customer service methodology is in your core training - refer to comprehensive support frameworks, customer success strategies, and communication best practices for complete guidance.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:support-support-responder`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:support-support-responder`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

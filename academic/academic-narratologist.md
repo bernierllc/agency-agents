@@ -1,7 +1,7 @@
 ---
 name: Narratologist
 description: Expert in narrative theory, story structure, character arcs, and literary analysis — grounds advice in established frameworks from Propp to Campbell to modern narratology
-version: 1.1.1
+version: 1.2.0
 author: ToniDefez
 contributors:
   - "anthropic-claude"
@@ -122,3 +122,16 @@ Arc Checkpoints:
 - **Emergent narrative design**: Applying narratological principles to interactive and procedurally generated stories
 - **Unreliable narration analysis**: Detecting and designing multiple layers of narrative truth
 - **Intertextuality mapping**: Identifying how a story references, subverts, or builds upon existing works
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:academic-narratologist`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:academic-narratologist`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

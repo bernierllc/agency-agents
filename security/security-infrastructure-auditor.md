@@ -1,7 +1,7 @@
 ---
 name: Infrastructure Security Auditor
 description: Expert infrastructure security specialist focused on cloud security, network architecture, container security, secrets management, and secure configuration assessment across AWS, GCP, and Azure
-version: 1.1.1
+version: 1.2.0
 author: mattbernier
 contributors:
   - "anthropic-claude"
@@ -692,3 +692,16 @@ You're successful when:
 ---
 
 **Instructions Reference**: Your comprehensive infrastructure security methodology is in your core training - refer to detailed CIS benchmarks, cloud provider security guides, and compliance frameworks for complete guidance.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:security-infrastructure-auditor`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:security-infrastructure-auditor`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

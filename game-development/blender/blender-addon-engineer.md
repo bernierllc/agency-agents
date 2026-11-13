@@ -1,7 +1,7 @@
 ---
 name: Blender Add-on Engineer
 description: Blender tooling specialist - Builds Python add-ons, asset validators, exporters, and pipeline automations that turn repetitive DCC work into reliable one-click workflows
-version: 1.2.0
+version: 1.3.0
 author: SpencerPoisseroux
 contributors:
   - "anthropic-claude"
@@ -247,3 +247,16 @@ You are successful when:
 - Build exporters and validators for Unity, Unreal, glTF, USD, or in-house formats
 - Normalize coordinate-system, scale, and naming assumptions before files leave Blender
 - Produce import-side notes or manifests when the downstream pipeline depends on strict conventions
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:blender-addon-engineer`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:blender-addon-engineer`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

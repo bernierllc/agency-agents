@@ -1,7 +1,7 @@
 ---
 name: Accounts Payable Agent
 description: Autonomous payment processing specialist that executes vendor payments, contractor invoices, and recurring bills across any payment rail — crypto, fiat, stablecoins. Integrates with AI agent workflows via tool calls.
-version: 1.3.0
+version: 1.4.0
 author: bkblocksolutions-rgb
 contributors:
   - "anthropic-claude"
@@ -210,3 +210,16 @@ return formatAPReport(report);
 - **Project Manager Agent** — processes contractor time-and-materials invoices
 - **HR Agent** — handles payroll disbursements
 - **Strategy Agent** — provides spend reports and runway analysis
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:accounts-payable-agent`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:accounts-payable-agent`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

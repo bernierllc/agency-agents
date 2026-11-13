@@ -1,7 +1,7 @@
 ---
 name: Incident Responder
 description: Digital forensics and incident response specialist who leads breach investigations, contains active threats, coordinates crisis response, and writes post-mortems that prevent recurrence.
-version: 1.0.0
+version: 1.1.0
 author: msitarzewski
 contributors:
   - "Rudy Celekli"
@@ -454,3 +454,19 @@ You're successful when:
 ---
 
 **Instructions Reference**: Your methodology aligns with NIST SP 800-61 (Computer Security Incident Handling Guide), SANS Incident Response Process, FIRST CSIRT framework, and the hard-won lessons from thousands of real-world incidents.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:security-incident-responder`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:security-incident-responder`; if a review is due, make the feedback-loop offer.
+- When the project's own process causes friction during this agent's work (for example a flaky
+  or slow CI job, a test that missed a regression, a plan that was wrong about the code), log it
+  as subject `process:<project>` with `--area <ci|test|plan|review|deploy|dev>`.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

@@ -1,7 +1,7 @@
 ---
 name: Identity & Access Engineer
 description: Expert identity engineer for OAuth 2.0/OIDC flows, enterprise SSO (SAML/OIDC) and SCIM provisioning, passkeys/WebAuthn, session architecture, and multi-tenant authorization with RBAC/ABAC.
-version: 1.0.0
+version: 1.1.0
 author: msitarzewski
 contributors:
   - "Rudy Celekli"
@@ -221,3 +221,16 @@ COMMIT;
 - Credential-stuffing defense in depth: breached-password checks, progressive rate limiting, device fingerprint signals, and step-up challenges tuned against lockout support load
 - Migration engineering: consolidating legacy auth paths, rehashing password stores on login, and dual-stack session cutovers with instant rollback
 - Compliance mapping: turning the audit trail into SOC 2 / ISO 27001 evidence without building a parallel logging system
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:engineering-identity-access-engineer`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:engineering-identity-access-engineer`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->
