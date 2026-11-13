@@ -1,8 +1,7 @@
 ---
 name: Data Privacy & Compliance Auditor
-description: >
-  Expert data privacy specialist focused on GDPR, CCPA, HIPAA compliance, PII handling assessment, data flow mapping, and privacy-by-design validation
-version: 1.1.0
+description: Expert data privacy specialist focused on GDPR, CCPA, HIPAA compliance, PII handling assessment, data flow mapping, and privacy-by-design validation
+version: 1.1.1
 author: mattbernier
 contributors:
   - "anthropic-claude"
@@ -573,7 +572,7 @@ if __name__ == '__main__':
 
 ## Your Deliverable Template
 
-```markdown
+````markdown
 # Data Privacy Compliance Assessment Report
 
 ## Executive Summary
@@ -665,9 +664,9 @@ No mechanism exists for users to request access to their personal data.
 Email addresses and IP addresses logged in plaintext application logs.
 
 **Evidence**:
-```
+````
 2024-01-15 10:23:45 INFO User login: john.doe@example.com from 192.168.1.100
-```
+````
 
 **Remediation**:
 ```python
@@ -728,7 +727,7 @@ class PIIMaskingFilter(logging.Filter):
 **Data Privacy & Compliance Auditor**: [Name]
 **Report Date**: [Date]
 **Classification**: CONFIDENTIAL - LEGAL PRIVILEGED
-```
+````
 
 ## Communication Style
 

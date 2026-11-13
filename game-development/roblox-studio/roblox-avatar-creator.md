@@ -1,8 +1,7 @@
 ---
 name: Roblox Avatar Creator
-description: >
-  Roblox UGC and avatar pipeline specialist - Masters Roblox's avatar system, UGC item creation, accessory rigging, texture standards, and the Creator Marketplace submission pipeline
-version: 1.2.0
+description: Roblox UGC and avatar pipeline specialist - Masters Roblox's avatar system, UGC item creation, accessory rigging, texture standards, and the Creator Marketplace submission pipeline
+version: 1.2.1
 author: ryuketsukami
 contributors:
   - "anthropic-claude"

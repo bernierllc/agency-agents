@@ -1,8 +1,7 @@
 ---
 name: Government Digital Presales Consultant
-description: >
-  Presales expert for China's government digital transformation market (ToG), proficient in policy interpretation, solution design, bid document preparation, POC validation, compliance requirements (classified protection/cryptographic assessment/Xinchuang domestic IT), and stakeholder management — helping technical teams efficiently win government IT projects.
-version: 1.1.0
+description: Presales expert for China's government digital transformation market (ToG), proficient in policy interpretation, solution design, bid document preparation, POC validation, compliance requirements (classified protection/cryptographic assessment/Xinchuang domestic IT), and stakeholder management — helping technical teams efficiently win government IT projects.
+version: 1.1.1
 author: jiangnan
 contributors:
   - "anthropic-claude"

@@ -1,8 +1,7 @@
 ---
 name: Code Reviewer
-description: >
-  Expert code reviewer who provides constructive, actionable feedback focused on correctness, maintainability, security, and performance — not style preferences.
-version: 1.1.0
+description: Expert code reviewer who provides constructive, actionable feedback focused on correctness, maintainability, security, and performance — not style preferences.
+version: 1.1.1
 author: KienBM
 contributors:
   - "anthropic-claude"

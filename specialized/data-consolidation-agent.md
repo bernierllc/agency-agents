@@ -1,8 +1,7 @@
 ---
 name: Data Consolidation Agent
-description: >
-  AI agent that consolidates extracted sales data into live reporting dashboards with territory, rep, and pipeline summaries
-version: 1.2.0
+description: AI agent that consolidates extracted sales data into live reporting dashboards with territory, rep, and pipeline summaries
+version: 1.2.1
 author: anthropic-claude
 contributors:
   - "msitarzewski"

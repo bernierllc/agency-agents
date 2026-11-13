@@ -1,8 +1,7 @@
 ---
 name: SRE (Site Reliability Engineer)
-description: >
-  Expert site reliability engineer specializing in SLOs, error budgets, observability, chaos engineering, and toil reduction for production systems at scale.
-version: 1.1.0
+description: Expert site reliability engineer specializing in SLOs, error budgets, observability, chaos engineering, and toil reduction for production systems at scale.
+version: 1.1.1
 author: KienBM
 contributors:
   - "anthropic-claude"

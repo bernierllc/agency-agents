@@ -1,8 +1,7 @@
 ---
 name: Whimsy Injector
-description: >
-  Expert creative specialist focused on adding personality, delight, and playful elements to brand experiences. Creates memorable, joyful interactions that differentiate brands through unexpected moments of whimsy
-version: 1.2.0
+description: Expert creative specialist focused on adding personality, delight, and playful elements to brand experiences. Creates memorable, joyful interactions that differentiate brands through unexpected moments of whimsy
+version: 1.3.0
 author: msitarzewski
 contributors:
   - "anthropic-claude"
@@ -199,6 +198,24 @@ You are **Whimsy Injector**, an expert creative specialist who adds personality,
   50% { transform: translateX(-50%) translateY(-20px) scale(1.5); opacity: 1; }
   100% { transform: translateX(-50%) translateY(-30px) scale(1); opacity: 0; }
 }
+
+/* Honor the user's OS/browser motion preference while retaining visible feedback. */
+@media (prefers-reduced-motion: reduce) {
+  .btn-whimsy,
+  .btn-whimsy::before,
+  .loading-whimsy .dot,
+  .form-field-success::after,
+  .easter-egg-zone,
+  .easter-egg-zone:hover,
+  .progress-celebration.completed::after {
+    animation: none;
+    transition: none;
+  }
+  .btn-whimsy:hover,
+  .btn-whimsy:active {
+    transform: none;
+  }
+}
 ```
 
 ### Playful Microcopy Library
@@ -315,7 +332,11 @@ class EasterEggManager {
     // Click-based easter eggs
     let clickSequence = [];
     document.addEventListener('click', (e) => {
-      if (e.target.classList.contains('easter-egg-zone')) {
+      // Icons and labels inside a zone bubble clicks from their own elements.
+      const zone = e.target instanceof Element
+        ? e.target.closest('.easter-egg-zone')
+        : null;
+      if (zone) {
         clickSequence.push(Date.now());
         clickSequence = clickSequence.filter(time => Date.now() - time < 2000);
         

@@ -1,8 +1,7 @@
 ---
 name: Deal Strategist
-description: >
-  Senior deal strategist specializing in MEDDPICC qualification, competitive positioning, and win planning for complex B2B sales cycles. Scores opportunities, exposes pipeline risk, and builds deal strategies that survive forecast review.
-version: 1.1.0
+description: Senior deal strategist specializing in MEDDPICC qualification, competitive positioning, and win planning for complex B2B sales cycles. Scores opportunities, exposes pipeline risk, and builds deal strategies that survive forecast review.
+version: 1.1.1
 author: msitarzewski
 contributors:
   - "anthropic-claude"

@@ -1,8 +1,7 @@
 ---
 name: Frontend UI Tester
-description: >
-  Expert Playwright UI testing specialist focused on comprehensive frontend validation, cross‑browser compatibility, performance, and accessibility across all user journeys
-version: 1.2.0
+description: Expert Playwright UI testing specialist focused on comprehensive frontend validation, cross‑browser compatibility, performance, and accessibility across all user journeys
+version: 1.2.1
 author: mattbernier
 contributors:
   - "anthropic-claude"

@@ -1,8 +1,7 @@
 ---
 name: Playwright Audit Specialist
-description: >
-  Expert Playwright MCP specialist focused on comprehensive UI exploration, automated audit generation, and end-to-end test suite creation through live browser interaction
-version: 1.2.0
+description: Expert Playwright MCP specialist focused on comprehensive UI exploration, automated audit generation, and end-to-end test suite creation through live browser interaction
+version: 1.2.1
 author: mattbernier
 contributors:
   - "anthropic-claude"
@@ -120,7 +119,7 @@ During every audit, scan for **missing testids** — this is a developer deficie
 
 ### Comprehensive Audit Script Example
 
-```markdown
+````markdown
 # User Dashboard Audit Script
 
 ## Page Type Description
@@ -217,7 +216,7 @@ await page.fill('input[type="search"]', 'nonexistent123');
 - `clearDashboardData()` - Reset dashboard state for testing
 - `createTestActivity(count)` - Generate test activity items
 - `expectMetricsVisible()` - Verify all metrics cards loaded
-```
+````
 
 ### Generated Playwright Test Suite Example
 

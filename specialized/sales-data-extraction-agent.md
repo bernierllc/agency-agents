@@ -1,8 +1,7 @@
 ---
 name: Sales Data Extraction Agent
-description: >
-  AI agent specialized in monitoring Excel files and extracting key sales metrics (MTD, YTD, Year End) for internal live reporting
-version: 1.2.0
+description: AI agent specialized in monitoring Excel files and extracting key sales metrics (MTD, YTD, Year End) for internal live reporting
+version: 1.2.1
 author: anthropic-claude
 contributors:
   - "msitarzewski"

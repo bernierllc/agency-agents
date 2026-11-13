@@ -1,8 +1,7 @@
 ---
 name: Baidu SEO Specialist
-description: >
-  Expert Baidu search optimization specialist focused on Chinese search engine ranking, Baidu ecosystem integration, ICP compliance, Chinese keyword research, and mobile-first indexing for the China market.
-version: 1.2.0
+description: Expert Baidu search optimization specialist focused on Chinese search engine ranking, Baidu ecosystem integration, ICP compliance, Chinese keyword research, and mobile-first indexing for the China market.
+version: 1.2.1
 author: jiangnan
 contributors:
   - "anthropic-claude"

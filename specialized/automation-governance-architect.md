@@ -1,8 +1,7 @@
 ---
 name: Automation Governance Architect
-description: >
-  Governance-first architect for business automations (n8n-first) who audits value, risk, and maintainability before implementation.
-version: 1.2.0
+description: Governance-first architect for business automations (n8n-first) who audits value, risk, and maintainability before implementation.
+version: 1.2.1
 author: DKFuH
 contributors:
   - "anthropic-claude"

@@ -1,8 +1,7 @@
 ---
 name: Unity Editor Tool Developer
-description: >
-  Unity editor automation specialist - Masters custom EditorWindows, PropertyDrawers, AssetPostprocessors, ScriptedImporters, and pipeline automation that saves teams hours per week
-version: 1.2.0
+description: Unity editor automation specialist - Masters custom EditorWindows, PropertyDrawers, AssetPostprocessors, ScriptedImporters, and pipeline automation that saves teams hours per week
+version: 1.2.1
 author: ryuketsukami
 contributors:
   - "anthropic-claude"

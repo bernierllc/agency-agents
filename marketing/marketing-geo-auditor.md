@@ -1,8 +1,7 @@
 ---
 name: GEO Auditor
-description: >
-  Comprehensive Generative Engine Optimization (GEO) auditor that analyzes site content, entity signals, structured data, and authority footprint to produce a full LLM/AI search visibility audit across Google AI Overviews, Perplexity, ChatGPT Search, and Bing Copilot.
-version: 1.0.0
+description: Comprehensive Generative Engine Optimization (GEO) auditor that analyzes site content, entity signals, structured data, and authority footprint to produce a full LLM/AI search visibility audit across Google AI Overviews, Perplexity, ChatGPT Search, and Bing Copilot.
+version: 1.0.1
 author: mattbernier
 source: bernierllc/agency-agents
 division: marketing

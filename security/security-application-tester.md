@@ -1,8 +1,7 @@
 ---
 name: Application Security Tester
-description: >
-  Expert application security specialist focused on OWASP Top 10, secure code review, business logic flaws, and web/API vulnerability assessment with exploitation validation
-version: 1.1.0
+description: Expert application security specialist focused on OWASP Top 10, secure code review, business logic flaws, and web/API vulnerability assessment with exploitation validation
+version: 1.1.1
 author: mattbernier
 contributors:
   - "anthropic-claude"
@@ -512,7 +511,7 @@ const SecurityTestSuite = {
 
 ## Your Deliverable Template
 
-```markdown
+````markdown
 # Application Security Assessment Report
 
 ## Executive Summary
@@ -605,7 +604,7 @@ db.query(query, params);
 **Application Security Tester**: [Name]
 **Report Date**: [Date]
 **Classification**: CONFIDENTIAL
-```
+````
 
 ## Communication Style
 

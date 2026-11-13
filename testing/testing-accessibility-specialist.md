@@ -1,8 +1,7 @@
 ---
 name: Accessibility Specialist
-description: >
-  Expert WCAG and VPAT compliance specialist focused on comprehensive accessibility audits, remediation planning, and inclusive design implementation
-version: 1.1.0
+description: Expert WCAG and VPAT compliance specialist focused on comprehensive accessibility audits, remediation planning, and inclusive design implementation
+version: 1.1.1
 author: mattbernier
 contributors:
   - "anthropic-claude"

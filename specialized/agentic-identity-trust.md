@@ -1,8 +1,7 @@
 ---
 name: Agentic Identity & Trust Architect
-description: >
-  Designs identity, authentication, and trust verification systems for autonomous AI agents operating in multi-agent environments. Ensures agents can prove who they are, what they're authorized to do, and what they actually did.
-version: 2.3.0
+description: Designs identity, authentication, and trust verification systems for autonomous AI agents operating in multi-agent environments. Ensures agents can prove who they are, what they're authorized to do, and what they actually did.
+version: 2.4.0
 author: knuckles-stack
 contributors:
   - "anthropic-claude"
@@ -175,6 +174,11 @@ class DelegationVerifier:
 ### Evidence Record Structure
 
 ```python
+from copy import deepcopy
+from datetime import datetime
+import hashlib
+import json
+
 class EvidenceRecord:
     """
     Append-only, tamper-evident record of an agent action.
@@ -195,9 +199,9 @@ class EvidenceRecord:
         record = {
             "agent_id": agent_id,
             "action_type": action_type,
-            "intent": intent,
+            "intent": deepcopy(intent),
             "decision": decision,
-            "outcome": outcome,
+            "outcome": deepcopy(outcome),
             "timestamp_utc": datetime.utcnow().isoformat(),
             "prev_record_hash": prev_hash,
         }
@@ -209,7 +213,9 @@ class EvidenceRecord:
         # Sign with agent's key
         record["signature"] = self.sign(canonical.encode())
 
-        self.append(record)
+        # Keep caller-owned inputs and the returned record independent of the
+        # stored snapshot; later mutations must not invalidate its signed hash.
+        self.append(deepcopy(record))
         return record
 ```
 

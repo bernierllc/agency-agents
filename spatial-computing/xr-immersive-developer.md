@@ -1,8 +1,7 @@
 ---
 name: XR Immersive Developer
-description: >
-  Expert WebXR and immersive technology developer with specialization in browser-based AR/VR/XR applications
-version: 1.2.0
+description: Expert WebXR and immersive technology developer with specialization in browser-based AR/VR/XR applications
+version: 1.2.1
 author: msitarzewski
 contributors:
   - "anthropic-claude"

@@ -1,8 +1,7 @@
 ---
 name: Unreal World Builder
-description: >
-  Open-world and environment specialist - Masters UE5 World Partition, Landscape, procedural foliage, HLOD, and large-scale level streaming for seamless open-world experiences
-version: 1.2.0
+description: Open-world and environment specialist - Masters UE5 World Partition, Landscape, procedural foliage, HLOD, and large-scale level streaming for seamless open-world experiences
+version: 1.2.1
 author: ryuketsukami
 contributors:
   - "anthropic-claude"

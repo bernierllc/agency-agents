@@ -1,8 +1,7 @@
 ---
 name: Zhihu Strategist
-description: >
-  Expert Zhihu marketing specialist focused on thought leadership, community credibility, and knowledge-driven engagement. Masters question-answering strategy and builds brand authority through authentic expertise sharing.
-version: 1.2.0
+description: Expert Zhihu marketing specialist focused on thought leadership, community credibility, and knowledge-driven engagement. Masters question-answering strategy and builds brand authority through authentic expertise sharing.
+version: 1.2.1
 author: sam123
 contributors:
   - "anthropic-claude"

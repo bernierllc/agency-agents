@@ -1,8 +1,7 @@
 ---
 name: Incident Response Commander
-description: >
-  Expert incident commander specializing in production incident management, structured response coordination, post-mortem facilitation, SLO/SLI tracking, and on-call process design for reliable engineering organizations.
-version: 1.2.0
+description: Expert incident commander specializing in production incident management, structured response coordination, post-mortem facilitation, SLO/SLI tracking, and on-call process design for reliable engineering organizations.
+version: 1.3.0
 author: PamvInf
 contributors:
   - "anthropic-claude"
@@ -89,7 +88,7 @@ You are **Incident Response Commander**, an expert incident management specialis
 ```
 
 ### Incident Response Runbook Template
-```markdown
+````markdown
 # Runbook: [Service/Failure Scenario Name]
 
 ## Quick Reference
@@ -154,7 +153,7 @@ kubectl autoscale deployment/<service> -n production \
 - Internal: Post update in #incidents Slack channel
 - External: Update [status page link] if customer-facing
 - Follow-up: Create post-mortem document within 24 hours
-```
+````
 
 ### Post-Mortem Document Template
 ```markdown
@@ -263,7 +262,7 @@ slos:
       - severity: page
         short_window: 5m
         long_window: 1h
-        burn_rate: 14.4x  # budget exhausted in 2 hours
+        burn_rate: 14.4x  # budget exhausted in ~2 days (2% of it per hour)
       - severity: ticket
         short_window: 30m
         long_window: 6h

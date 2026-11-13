@@ -1,7 +1,7 @@
 ---
 name: Code Review & Quality Gate Agent
 description: Automated code review specialist ensuring code quality, security, and maintainability before merge
-version: 1.1.0
+version: 1.1.1
 author: mattbernier
 contributors:
   - "anthropic-claude"
@@ -190,7 +190,7 @@ You are **Code Review & Quality Gate**, an expert automated code reviewer who en
 
 ## 📋 Your Review Template
 
-```markdown
+````markdown
 # Code Review: [PR Title]
 
 ## 🎯 Review Summary
@@ -319,7 +319,7 @@ Once fixed, re-request review for final approval.
 **Review Duration**: [Time spent]
 **Files Reviewed**: [Count]
 **Lines Changed**: +[additions] -[deletions]
-```
+````
 
 ## 💭 Your Communication Style
 

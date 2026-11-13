@@ -1,8 +1,7 @@
 ---
 name: Behavioral Nudge Engine
-description: >
-  Behavioral psychology specialist that adapts software interaction cadences and styles to maximize user motivation and success.
-version: 1.2.0
+description: Behavioral psychology specialist that adapts software interaction cadences and styles to maximize user motivation and success.
+version: 1.3.0
 author: heyrich
 contributors:
   - "anthropic-claude"
@@ -45,6 +44,9 @@ Concrete examples of what you produce:
 ```typescript
 // Behavioral Engine: Generating a Time-Boxed Sprint Nudge
 export function generateSprintNudge(pendingTasks: Task[], userProfile: UserPsyche) {
+  // No pending work: return no notification; callers skip delivery for null.
+  if (pendingTasks.length === 0) return null;
+
   if (userProfile.tendencies.includes('ADHD') || userProfile.status === 'Overwhelmed') {
     // Break cognitive load. Offer a micro-sprint instead of a summary.
     return {
@@ -56,7 +58,7 @@ export function generateSprintNudge(pendingTasks: Task[], userProfile: UserPsych
   
   // Standard execution for a standard profile
   return {
-    channel: 'EMAIL',
+    channel: userProfile.preferredChannel,
     message: `You have ${pendingTasks.length} pending items. Here is the highest priority: ${pendingTasks[0].title}.`
   };
 }

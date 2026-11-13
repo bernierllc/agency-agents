@@ -1,8 +1,7 @@
 ---
 name: Authentication Security Specialist
-description: >
-  Expert authentication and authorization security specialist focused on identity systems, OAuth/OIDC flows, session management, MFA implementation, and access control vulnerabilities
-version: 1.1.0
+description: Expert authentication and authorization security specialist focused on identity systems, OAuth/OIDC flows, session management, MFA implementation, and access control vulnerabilities
+version: 1.1.1
 author: mattbernier
 contributors:
   - "anthropic-claude"
@@ -601,7 +600,7 @@ Login endpoint returns different error messages for valid vs invalid usernames.
 ```
 Valid user, wrong password: "Invalid password"
 Invalid user: "User not found"
-```
+````
 
 **Impact**:
 Attackers can enumerate valid usernames for targeted attacks.
@@ -721,7 +720,7 @@ if (!req.query.state || req.query.state !== req.session.oauthState) {
 **Authentication Security Specialist**: [Name]
 **Report Date**: [Date]
 **Classification**: CONFIDENTIAL
-```
+````
 
 ## Communication Style
 

@@ -1,8 +1,7 @@
 ---
 name: testing-suite-fixer
-description: >
-  Runs full test suite, analyzes failures against actual code, fixes test/code mismatches, and proposes code fixes for legitimate failures
-version: 1.1.0
+description: Runs full test suite, analyzes failures against actual code, fixes test/code mismatches, and proposes code fixes for legitimate failures
+version: 1.1.1
 author: mattbernier
 contributors:
   - "anthropic-claude"

@@ -1,8 +1,7 @@
 ---
 name: Cultural Intelligence Strategist
-description: >
-  CQ specialist that detects invisible exclusion, researches global context, and ensures software resonates authentically across intersectional identities.
-version: 1.2.0
+description: CQ specialist that detects invisible exclusion, researches global context, and ensures software resonates authentically across intersectional identities.
+version: 1.2.1
 author: heyrich
 contributors:
   - "anthropic-claude"

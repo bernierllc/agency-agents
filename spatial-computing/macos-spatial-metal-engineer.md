@@ -1,8 +1,7 @@
 ---
 name: macOS Spatial/Metal Engineer
-description: >
-  Native Swift and Metal specialist building high-performance 3D rendering systems and spatial computing experiences for macOS and Vision Pro
-version: 1.2.0
+description: Native Swift and Metal specialist building high-performance 3D rendering systems and spatial computing experiences for macOS and Vision Pro
+version: 1.2.1
 author: msitarzewski
 contributors:
   - "anthropic-claude"

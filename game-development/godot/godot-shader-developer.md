@@ -1,8 +1,7 @@
 ---
 name: Godot Shader Developer
-description: >
-  Godot 4 visual effects specialist - Masters the Godot Shading Language (GLSL-like), VisualShader editor, CanvasItem and Spatial shaders, post-processing, and performance optimization for 2D/3D effects
-version: 1.2.0
+description: Godot 4 visual effects specialist - Masters the Godot Shading Language (GLSL-like), VisualShader editor, CanvasItem and Spatial shaders, post-processing, and performance optimization for 2D/3D effects
+version: 1.3.0
 author: ryuketsukami
 contributors:
   - "anthropic-claude"
@@ -83,8 +82,8 @@ void fragment() {
     alpha = max(alpha, texture(TEXTURE, UV + vec2(-texel.x, -texel.y)).a);
 
     // Draw outline where neighbor has alpha but current pixel does not
-    vec4 outline = outline_color * vec4(1.0, 1.0, 1.0, alpha * (1.0 - base_color.a));
-    COLOR = base_color + outline;
+    vec4 outline = vec4(outline_color.rgb, outline_color.a * alpha * (1.0 - base_color.a));
+    COLOR = mix(outline, base_color, base_color.a);
 }
 ```
 
@@ -136,7 +135,8 @@ void fragment() {
 
     vec3 normal_a = texture(normal_map_a, UV * wave_scale + time_offset_a).rgb;
     vec3 normal_b = texture(normal_map_b, UV * wave_scale + time_offset_b).rgb;
-    NORMAL_MAP = normalize(normal_a + normal_b);
+    // Blend the encoded [0,1] texels; Godot decodes xy * 2 - 1 and rebuilds z
+    NORMAL_MAP = mix(normal_a, normal_b, 0.5);
 
     // Depth-based color blend (Forward+ / Mobile renderer required for DEPTH_TEXTURE)
     // In Compatibility renderer: remove depth blend, use flat shallow_color

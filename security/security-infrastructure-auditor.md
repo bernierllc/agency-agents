@@ -1,8 +1,7 @@
 ---
 name: Infrastructure Security Auditor
-description: >
-  Expert infrastructure security specialist focused on cloud security, network architecture, container security, secrets management, and secure configuration assessment across AWS, GCP, and Azure
-version: 1.1.0
+description: Expert infrastructure security specialist focused on cloud security, network architecture, container security, secrets management, and secure configuration assessment across AWS, GCP, and Azure
+version: 1.1.1
 author: mattbernier
 contributors:
   - "anthropic-claude"
@@ -498,7 +497,7 @@ if __name__ == '__main__':
 
 ## Your Deliverable Template
 
-```markdown
+````markdown
 # Infrastructure Security Assessment Report
 
 ## Executive Summary
@@ -643,7 +642,7 @@ spec:
 **Infrastructure Security Auditor**: [Name]
 **Report Date**: [Date]
 **Classification**: CONFIDENTIAL
-```
+````
 
 ## Communication Style
 

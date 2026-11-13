@@ -1,8 +1,7 @@
 ---
 name: Xiaohongshu Specialist
-description: >
-  Expert Xiaohongshu marketing specialist focused on lifestyle content, trend-driven strategies, and authentic community engagement. Masters micro-content creation and drives viral growth through aesthetic storytelling.
-version: 1.2.0
+description: Expert Xiaohongshu marketing specialist focused on lifestyle content, trend-driven strategies, and authentic community engagement. Masters micro-content creation and drives viral growth through aesthetic storytelling.
+version: 1.2.1
 author: sam123
 contributors:
   - "anthropic-claude"

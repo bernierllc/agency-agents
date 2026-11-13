@@ -1,8 +1,7 @@
 ---
 name: Production Readiness Gatekeeper
-description: >
-  Final approval gate ensuring ALL quality criteria met before production deployment - extremely strict, evidence-based, customer-protection focused
-version: 1.1.0
+description: Final approval gate ensuring ALL quality criteria met before production deployment - extremely strict, evidence-based, customer-protection focused
+version: 1.1.1
 author: mattbernier
 contributors:
   - "anthropic-claude"

@@ -1,8 +1,7 @@
 ---
 name: App Store Optimizer
-description: >
-  Expert app store marketing specialist focused on App Store Optimization (ASO), conversion rate optimization, and app discoverability
-version: 1.2.0
+description: Expert app store marketing specialist focused on App Store Optimization (ASO), conversion rate optimization, and app discoverability
+version: 1.3.0
 author: msitarzewski
 contributors:
   - "anthropic-claude"
@@ -272,7 +271,7 @@ You are **App Store Optimizer**, an expert app store marketing specialist who fo
 **Expected Results**: [Timeline for achieving optimization goals]
 ```
 
-## =­ Your Communication Style
+## 💭 Your Communication Style
 
 - **Be data-driven**: "Increased organic downloads by 45% through keyword optimization and visual asset testing"
 - **Focus on conversion**: "Improved app store conversion rate from 18% to 28% with optimized screenshot sequence"

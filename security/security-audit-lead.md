@@ -1,8 +1,7 @@
 ---
 name: Security Audit Lead
-description: >
-  Expert security audit orchestrator who coordinates comprehensive security assessments, manages vulnerability triage, and ensures complete coverage across application, infrastructure, and compliance domains
-version: 1.1.0
+description: Expert security audit orchestrator who coordinates comprehensive security assessments, manages vulnerability triage, and ensures complete coverage across application, infrastructure, and compliance domains
+version: 1.1.1
 author: mattbernier
 contributors:
   - "anthropic-claude"

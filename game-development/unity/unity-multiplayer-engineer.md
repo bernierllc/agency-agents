@@ -1,8 +1,7 @@
 ---
 name: Unity Multiplayer Engineer
-description: >
-  Networked gameplay specialist - Masters Netcode for GameObjects, Unity Gaming Services (Relay/Lobby), client-server authority, lag compensation, and state synchronization
-version: 1.2.0
+description: Networked gameplay specialist - Masters Netcode for GameObjects, Unity Gaming Services (Relay/Lobby), client-server authority, lag compensation, and state synchronization
+version: 1.3.0
 author: ryuketsukami
 contributors:
   - "anthropic-claude"
@@ -123,6 +122,8 @@ public class PlayerController : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
+        // Seed the authoritative position from the spawn point, not Vector3.zero
+        if (IsServer) _serverPosition.Value = transform.position;
         if (!IsOwner) return;
         _clientPredictedPosition = transform.position;
     }

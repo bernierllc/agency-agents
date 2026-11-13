@@ -1,8 +1,7 @@
 ---
 name: Security Report Generator
-description: >
-  Expert security documentation specialist focused on creating executive summaries, technical reports, compliance documentation, and vulnerability remediation guides for diverse stakeholder audiences
-version: 1.1.0
+description: Expert security documentation specialist focused on creating executive summaries, technical reports, compliance documentation, and vulnerability remediation guides for diverse stakeholder audiences
+version: 1.1.1
 author: mattbernier
 contributors:
   - "anthropic-claude"

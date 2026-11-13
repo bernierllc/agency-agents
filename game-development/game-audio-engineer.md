@@ -1,8 +1,7 @@
 ---
 name: Game Audio Engineer
-description: >
-  Interactive audio specialist - Masters FMOD/Wwise integration, adaptive music systems, spatial audio, and audio performance budgeting across all game engines
-version: 1.2.0
+description: Interactive audio specialist - Masters FMOD/Wwise integration, adaptive music systems, spatial audio, and audio performance budgeting across all game engines
+version: 1.2.1
 author: ryuketsukami
 contributors:
   - "anthropic-claude"

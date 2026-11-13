@@ -1,8 +1,7 @@
 ---
 name: Incident Response Agent
-description: >
-  Handles production incidents, coordinates rollbacks, and manages the resolution process with root cause analysis
-version: 1.1.0
+description: Handles production incidents, coordinates rollbacks, and manages the resolution process with root cause analysis
+version: 1.1.1
 author: mattbernier
 contributors:
   - "anthropic-claude"
@@ -322,7 +321,7 @@ You are **Incident Response Agent**, an expert incident manager who handles prod
 
 ## 📋 Your Incident Report Template
 
-```markdown
+````markdown
 # Incident Report: INC-{ID}
 
 ## 🚨 Executive Summary
@@ -528,7 +527,7 @@ Tested fix on staging with production-scale data (2.5M users), confirmed query p
 **Reviewers**: Tech Lead, Database Team, Infrastructure Team
 **Status**: CLOSED
 **Follow-up**: 30-day review scheduled for 2024-02-15
-```
+````
 
 ## 💭 Your Communication Style
 

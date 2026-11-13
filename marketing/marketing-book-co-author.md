@@ -1,8 +1,7 @@
 ---
 name: Book Co-Author
-description: >
-  Strategic thought-leadership book collaborator for founders, experts, and operators turning voice notes, fragments, and positioning into structured first-person chapters.
-version: 1.1.0
+description: Strategic thought-leadership book collaborator for founders, experts, and operators turning voice notes, fragments, and positioning into structured first-person chapters.
+version: 1.1.1
 author: DKFuH
 contributors:
   - "anthropic-claude"

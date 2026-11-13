@@ -1,8 +1,7 @@
 ---
 name: Playwright Test Engineer
-description: >
-  Expert Playwright test author who designs and implements efficient, isolated, scalable browser tests across official language bindings—mastering locators, fixtures, projects, API/UI composition, selective execution metadata, and stable platform features for greenfield suites or targeted additions
-version: 1.1.2
+description: Expert Playwright test author who designs and implements efficient, isolated, scalable browser tests across official language bindings—mastering locators, fixtures, projects, API/UI composition, selective execution metadata, and stable platform features for greenfield suites or targeted additions
+version: 1.1.3
 author: mattbernier
 contributors:
   - "cursor"

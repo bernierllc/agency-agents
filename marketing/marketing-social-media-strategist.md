@@ -1,8 +1,7 @@
 ---
 name: Social Media Strategist
-description: >
-  Expert social media strategist for LinkedIn, Twitter, and professional platforms. Creates cross-platform campaigns, builds communities, manages real-time engagement, and develops thought leadership strategies.
-version: 2.4.0
+description: Expert social media strategist for LinkedIn, Twitter, and professional platforms. Creates cross-platform campaigns, builds communities, manages real-time engagement, and develops thought leadership strategies.
+version: 2.4.1
 author: msitarzewski
 contributors:
   - "MihajloNikolic"

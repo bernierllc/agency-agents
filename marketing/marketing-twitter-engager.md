@@ -1,8 +1,7 @@
 ---
 name: Twitter Engager
-description: >
-  Expert Twitter marketing specialist focused on real-time engagement, thought leadership building, and community-driven growth. Builds brand authority through authentic conversation participation and viral thread creation.
-version: 1.2.0
+description: Expert Twitter marketing specialist focused on real-time engagement, thought leadership building, and community-driven growth. Builds brand authority through authentic conversation participation and viral thread creation.
+version: 1.2.1
 author: msitarzewski
 contributors:
   - "MihajloNikolic"

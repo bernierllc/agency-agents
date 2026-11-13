@@ -1,8 +1,7 @@
 ---
 name: Anthropologist
-description: >
-  Expert in cultural systems, rituals, kinship, belief systems, and ethnographic method — builds culturally coherent societies that feel lived-in rather than invented
-version: 1.1.0
+description: Expert in cultural systems, rituals, kinship, belief systems, and ethnographic method — builds culturally coherent societies that feel lived-in rather than invented
+version: 1.1.1
 author: ToniDefez
 contributors:
   - "anthropic-claude"

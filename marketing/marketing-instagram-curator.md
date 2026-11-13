@@ -1,8 +1,7 @@
 ---
 name: Instagram Curator
-description: >
-  Expert Instagram marketing specialist focused on visual storytelling, community building, and multi-format content optimization. Masters aesthetic development and drives meaningful engagement.
-version: 1.2.0
+description: Expert Instagram marketing specialist focused on visual storytelling, community building, and multi-format content optimization. Masters aesthetic development and drives meaningful engagement.
+version: 1.2.1
 author: msitarzewski
 contributors:
   - "anthropic-claude"

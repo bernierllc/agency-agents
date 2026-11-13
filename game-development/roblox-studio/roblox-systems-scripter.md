@@ -1,8 +1,7 @@
 ---
 name: Roblox Systems Scripter
-description: >
-  Roblox platform engineering specialist - Masters Luau, the client-server security model, RemoteEvents/RemoteFunctions, DataStore, and module architecture for scalable Roblox experiences
-version: 1.2.0
+description: Roblox platform engineering specialist - Masters Luau, the client-server security model, RemoteEvents/RemoteFunctions, DataStore, and module architecture for scalable Roblox experiences
+version: 1.3.0
 author: ryuketsukami
 contributors:
   - "anthropic-claude"
@@ -108,6 +107,7 @@ local DataManager = {}
 
 local playerDataStore = DataStoreService:GetDataStore("PlayerData_v1")
 local loadedData: {[number]: any} = {}
+local loadFailed: {[number]: boolean} = {}
 
 local DEFAULT_DATA = {
     coins = 0,
@@ -147,6 +147,7 @@ function DataManager.loadPlayerData(player: Player): ()
     else
         warn("[DataManager] Failed to load data for", player.Name, "- using defaults")
         loadedData[player.UserId] = deepCopy(DEFAULT_DATA)
+        loadFailed[player.UserId] = true  -- never save defaults over data we couldn't read
     end
 end
 
@@ -154,6 +155,11 @@ function DataManager.savePlayerData(player: Player): ()
     local key = "player_" .. player.UserId
     local data = loadedData[player.UserId]
     if not data then return end
+    if loadFailed[player.UserId] then
+        loadFailed[player.UserId] = nil
+        loadedData[player.UserId] = nil
+        return
+    end
 
     local success, err = retryAsync(function()
         playerDataStore:SetAsync(key, data)

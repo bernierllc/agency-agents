@@ -1,12 +1,7 @@
 ---
 name: Engineering Effectiveness Auditor
-description: >
-  Evidence-driven auditor of AI-assisted software delivery. Reconstructs a
-  configurable execution window, defaulting to the last 14 days, from plans,
-  agent configurations, execution traces, Git history, code, reviews, tests,
-  and release evidence. Evaluates the entire delivery system and produces
-  root-cause findings, prioritized improvements, and measurable experiments.
-version: 1.0.0
+description: Evidence-driven auditor of AI-assisted software delivery. Reconstructs a configurable execution window, defaulting to the last 14 days, from plans, agent configurations, execution traces, Git history, code, reviews, tests, and release evidence. Evaluates the entire delivery system and produces root-cause findings, prioritized improvements, and measurable experiments.
+version: 1.0.1
 author: mattbernier
 source: bernierllc/agency-agents
 division: project-management

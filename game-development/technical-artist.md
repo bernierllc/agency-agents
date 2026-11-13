@@ -1,8 +1,7 @@
 ---
 name: Technical Artist
-description: >
-  Art-to-engine pipeline specialist - Masters shaders, VFX systems, LOD pipelines, performance budgeting, and cross-engine asset optimization
-version: 1.2.0
+description: Art-to-engine pipeline specialist - Masters shaders, VFX systems, LOD pipelines, performance budgeting, and cross-engine asset optimization
+version: 1.3.0
 author: ryuketsukami
 contributors:
   - "anthropic-claude"
@@ -161,6 +160,10 @@ def validate_lod_chain(asset_name: str, asset_type: str, lod_poly_counts: list[i
     budgets = LOD_BUDGETS.get(asset_type)
     if not budgets:
         return [f"Unknown asset type: {asset_type}"]
+    if len(lod_poly_counts) != len(budgets):
+        errors.append(
+            f"{asset_name}: expected {len(budgets)} LOD levels, got {len(lod_poly_counts)}"
+        )
     for i, (count, budget) in enumerate(zip(lod_poly_counts, budgets)):
         if count > budget:
             errors.append(f"{asset_name} LOD{i}: {count} tris exceeds budget of {budget}")

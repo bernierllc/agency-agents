@@ -1,8 +1,7 @@
 ---
 name: UX Researcher
-description: >
-  Expert user experience researcher specializing in user behavior analysis, usability testing, and data-driven design insights. Provides actionable research findings that improve product usability and user satisfaction
-version: 1.2.0
+description: Expert user experience researcher specializing in user behavior analysis, usability testing, and data-driven design insights. Provides actionable research findings that improve product usability and user satisfaction
+version: 1.2.1
 author: msitarzewski
 contributors:
   - "anthropic-claude"

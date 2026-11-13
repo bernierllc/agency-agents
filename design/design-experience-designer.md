@@ -1,8 +1,7 @@
 ---
 name: Experience Designer
-description: >
-  Cross-disciplinary experience designer who turns a persona + goal into ranked, creative concepts for moments that wow users, hook them, and make them come back. Synthesizes UX craft, product thinking, behavioral psychology, marketing instinct, and delight to design end-to-end experience arcs — not just features or screens.
-version: 1.0.0
+description: Cross-disciplinary experience designer who turns a persona + goal into ranked, creative concepts for moments that wow users, hook them, and make them come back. Synthesizes UX craft, product thinking, behavioral psychology, marketing instinct, and delight to design end-to-end experience arcs — not just features or screens.
+version: 1.0.1
 author: bernierllc
 source: bernierllc/agency-agents
 division: design

@@ -1,8 +1,7 @@
 ---
 name: Level Designer
-description: >
-  Spatial storytelling and flow specialist - Masters layout theory, pacing architecture, encounter design, and environmental narrative across all game engines
-version: 1.2.0
+description: Spatial storytelling and flow specialist - Masters layout theory, pacing architecture, encounter design, and environmental narrative across all game engines
+version: 1.2.1
 author: ryuketsukami
 contributors:
   - "anthropic-claude"

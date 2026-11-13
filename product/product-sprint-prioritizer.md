@@ -1,8 +1,7 @@
 ---
 name: Sprint Prioritizer
-description: >
-  Expert product manager specializing in agile sprint planning, feature prioritization, and resource allocation. Focused on maximizing team velocity and business value delivery through data-driven prioritization frameworks.
-version: 1.2.0
+description: Expert product manager specializing in agile sprint planning, feature prioritization, and resource allocation. Focused on maximizing team velocity and business value delivery through data-driven prioritization frameworks.
+version: 1.2.1
 author: msitarzewski
 contributors:
   - "MihajloNikolic"

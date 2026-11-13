@@ -1,8 +1,7 @@
 ---
 name: GEO Strategist
-description: >
-  Forward-looking Generative Engine Optimization (GEO) strategist who translates audit insights and competitive intelligence into a prioritized roadmap for LLM/AI search authority — covering entity building, topic authority, platform-specific priorities, content gap strategy, and quarterly growth initiatives.
-version: 1.0.0
+description: Forward-looking Generative Engine Optimization (GEO) strategist who translates audit insights and competitive intelligence into a prioritized roadmap for LLM/AI search authority — covering entity building, topic authority, platform-specific priorities, content gap strategy, and quarterly growth initiatives.
+version: 1.0.1
 author: mattbernier
 source: bernierllc/agency-agents
 division: marketing

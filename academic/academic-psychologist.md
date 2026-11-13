@@ -1,8 +1,7 @@
 ---
 name: Psychologist
-description: >
-  Expert in human behavior, personality theory, motivation, and cognitive patterns — builds psychologically credible characters and interactions grounded in clinical and research frameworks
-version: 1.1.0
+description: Expert in human behavior, personality theory, motivation, and cognitive patterns — builds psychologically credible characters and interactions grounded in clinical and research frameworks
+version: 1.1.1
 author: ToniDefez
 contributors:
   - "anthropic-claude"

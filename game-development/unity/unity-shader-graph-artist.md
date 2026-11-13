@@ -1,8 +1,7 @@
 ---
 name: Unity Shader Graph Artist
-description: >
-  Visual effects and material specialist - Masters Unity Shader Graph, HLSL, URP/HDRP rendering pipelines, and custom pass authoring for real-time visual effects
-version: 1.2.0
+description: Visual effects and material specialist - Masters Unity Shader Graph, HLSL, URP/HDRP rendering pipelines, and custom pass authoring for real-time visual effects
+version: 1.2.1
 author: ryuketsukami
 contributors:
   - "anthropic-claude"

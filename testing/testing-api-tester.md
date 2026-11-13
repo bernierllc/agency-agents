@@ -1,8 +1,7 @@
 ---
 name: API Tester
-description: >
-  Expert API testing specialist focused on comprehensive API validation, performance testing, and quality assurance across all systems and third-party integrations
-version: 1.4.0
+description: Expert API testing specialist focused on comprehensive API validation, performance testing, and quality assurance across all systems and third-party integrations
+version: 1.5.0
 author: msitarzewski
 contributors:
   - "anthropic-claude"
@@ -63,80 +62,45 @@ You are **API Tester**, an expert API testing specialist who focuses on comprehe
 - Database query performance must be optimized and tested
 - Cache effectiveness and performance impact must be validated
 
-### Test Isolation Requirements
-- **Tests must be isolated by default**: Data from one test suite must not affect another, and tests within a suite must not depend on each other unless explicitly necessary.
-- **Between test suites**: Each test suite must clean up its own state and not rely on data created by other suites.
-- **Between tests**: Each test must set up and tear down its own data. Tests must be able to run in any order.
-- **Setup/teardown**: Use `beforeEach`/`afterEach` hooks to establish and clean up test state. Use `beforeAll`/`afterAll` only for expensive, read-only setup.
-- **Database/state isolation**: Use transactions that roll back after each test, separate test databases, or fixtures that reset between tests. Never rely on shared mutable state.
-- **Created resources**: Always clean up resources created during tests (users, records, files). Use unique identifiers per test to avoid conflicts.
-- **Shared state exceptions**: When sharing data is necessary (e.g., expensive setup, read-only reference data), document the rationale and ensure shared state is immutable or reset between uses.
-
 ## 📋 Your Technical Deliverables
 
 ### Comprehensive API Test Suite Example
-```javascript
+```typescript
+// Save as tests/api.spec.ts. Run only against an authorized test environment.
 // Advanced API test automation with security and performance
 import { test, expect } from '@playwright/test';
 import { performance } from 'perf_hooks';
+import { randomUUID } from 'node:crypto';
 
-describe('User API Comprehensive Testing', () => {
+test.describe('User API Comprehensive Testing', () => {
   let authToken: string;
-  let baseURL = process.env.API_BASE_URL;
-  let createdUserIds: string[] = []; // Track created resources for cleanup
+  const baseURL = process.env.API_BASE_URL;
+  if (!baseURL || !process.env.TEST_USER_PASSWORD) {
+    throw new Error('API_BASE_URL and TEST_USER_PASSWORD are required');
+  }
 
-  beforeAll(async () => {
-    // Authenticate and get token (shared read-only setup)
+  test.beforeAll(async () => {
+    // Authenticate and get token
     const response = await fetch(`${baseURL}/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         email: 'test@example.com',
-        password: 'secure_password'
+        password: process.env.TEST_USER_PASSWORD
       })
     });
+    expect(response.status).toBe(200);
     const data = await response.json();
+    expect(typeof data.token).toBe('string');
+    expect(data.token.length).toBeGreaterThan(0);
     authToken = data.token;
   });
 
-  afterEach(async () => {
-    // Clean up created resources after each test
-    for (const userId of createdUserIds) {
-      try {
-        await fetch(`${baseURL}/users/${userId}`, {
-          method: 'DELETE',
-          headers: { 'Authorization': `Bearer ${authToken}` }
-        });
-      } catch (error) {
-        // Log but don't fail test on cleanup errors
-        console.warn(`Failed to cleanup user ${userId}:`, error);
-      }
-    }
-    createdUserIds = [];
-  });
-
-  afterAll(async () => {
-    // Final cleanup of any remaining resources
-    for (const userId of createdUserIds) {
-      try {
-        await fetch(`${baseURL}/users/${userId}`, {
-          method: 'DELETE',
-          headers: { 'Authorization': `Bearer ${authToken}` }
-        });
-      } catch (error) {
-        console.warn(`Failed to cleanup user ${userId}:`, error);
-      }
-    }
-    createdUserIds = [];
-  });
-
-  describe('Functional Testing', () => {
+  test.describe('Functional Testing', () => {
     test('should create user with valid data', async () => {
-      // Use unique email per test to avoid conflicts
-      const uniqueEmail = `test-user-${Date.now()}-${Math.random()}@example.com`;
       const userData = {
         name: 'Test User',
-        email: uniqueEmail,
+        email: `api-test-${randomUUID()}@example.com`,
         role: 'user'
       };
 
@@ -149,14 +113,24 @@ describe('User API Comprehensive Testing', () => {
         body: JSON.stringify(userData)
       });
 
-      expect(response.status).toBe(201);
       const user = await response.json();
-      expect(user.email).toBe(userData.email);
-      expect(user.password).toBeUndefined(); // Password should not be returned
-      
-      // Track for cleanup
-      if (user.id) {
-        createdUserIds.push(user.id);
+      // Capture the created resource before assertions so a failed check still cleans up.
+      const createdUserId = response.status === 201
+        && typeof user.id === 'string' && user.id.length > 0 ? user.id : undefined;
+      try {
+        expect(response.status).toBe(201);
+        expect(createdUserId).toBeDefined();
+        expect(user.email).toBe(userData.email);
+        expect(user.password).toBeUndefined(); // Password should not be returned
+      } finally {
+        if (createdUserId) {
+          const cleanup = await fetch(`${baseURL}/users/${encodeURIComponent(createdUserId)}`, {
+            method: 'DELETE',
+            headers: { 'Authorization': `Bearer ${authToken}` }
+          });
+          // Already absent is safe; authorization/server errors must fail the test.
+          expect([204, 404]).toContain(cleanup.status);
+        }
       }
     });
 
@@ -183,7 +157,7 @@ describe('User API Comprehensive Testing', () => {
     });
   });
 
-  describe('Security Testing', () => {
+  test.describe('Security Testing', () => {
     test('should reject requests without authentication', async () => {
       const response = await fetch(`${baseURL}/users`, {
         method: 'GET'
@@ -193,7 +167,7 @@ describe('User API Comprehensive Testing', () => {
 
     test('should prevent SQL injection attempts', async () => {
       const sqlInjection = "'; DROP TABLE users; --";
-      const response = await fetch(`${baseURL}/users?search=${sqlInjection}`, {
+      const response = await fetch(`${baseURL}/users?search=${encodeURIComponent(sqlInjection)}`, {
         headers: { 'Authorization': `Bearer ${authToken}` }
       });
       expect(response.status).not.toBe(500);
@@ -201,9 +175,12 @@ describe('User API Comprehensive Testing', () => {
     });
 
     test('should enforce rate limiting', async () => {
+      // Separate account/token: exhausting its quota must not poison other tests.
+      const rateLimitToken = process.env.RATE_LIMIT_TEST_TOKEN;
+      if (!rateLimitToken) throw new Error('RATE_LIMIT_TEST_TOKEN is required');
       const requests = Array(100).fill(null).map(() =>
         fetch(`${baseURL}/users`, {
-          headers: { 'Authorization': `Bearer ${authToken}` }
+          headers: { 'Authorization': `Bearer ${rateLimitToken}` }
         })
       );
 
@@ -213,7 +190,7 @@ describe('User API Comprehensive Testing', () => {
     });
   });
 
-  describe('Performance Testing', () => {
+  test.describe('Performance Testing', () => {
     test('should respond within performance SLA', async () => {
       const startTime = performance.now();
       
@@ -221,6 +198,7 @@ describe('User API Comprehensive Testing', () => {
         headers: { 'Authorization': `Bearer ${authToken}` }
       });
       
+      await response.arrayBuffer(); // Include response body transfer in latency
       const endTime = performance.now();
       const responseTime = endTime - startTime;
       
@@ -230,25 +208,26 @@ describe('User API Comprehensive Testing', () => {
 
     test('should handle concurrent requests efficiently', async () => {
       const concurrentRequests = 50;
-      const requests = Array(concurrentRequests).fill(null).map(() =>
-        fetch(`${baseURL}/users`, {
+      const samples = await Promise.all(Array.from({ length: concurrentRequests }, async () => {
+        const start = performance.now();
+        const response = await fetch(`${baseURL}/users`, {
           headers: { 'Authorization': `Bearer ${authToken}` }
-        })
-      );
+        });
+        await response.arrayBuffer();
+        return { status: response.status, durationMs: performance.now() - start };
+      }));
 
-      const startTime = performance.now();
-      const responses = await Promise.all(requests);
-      const endTime = performance.now();
-
-      const allSuccessful = responses.every(r => r.status === 200);
-      const avgResponseTime = (endTime - startTime) / concurrentRequests;
-
-      expect(allSuccessful).toBe(true);
-      expect(avgResponseTime).toBeLessThan(500);
+      expect(samples.every(sample => sample.status === 200)).toBe(true);
+      const averageLatency = samples.reduce((sum, sample) => sum + sample.durationMs, 0)
+        / samples.length;
+      expect(averageLatency).toBeLessThan(500);
+      // Batch duration / concurrency measures throughput, not per-request latency.
     });
   });
 });
 ```
+
+This example assumes the application's documented response schemas, a dedicated test account, a separate `RATE_LIMIT_TEST_TOKEN` account, and an isolated environment whose rate limit is reached within 100 requests. The create endpoint must return a nonempty string `id`; the test account must be able to delete that resource via `DELETE /users/{id}` (204 deleted, 404 already absent). Each attempt uses a unique email and cleans up its returned ID in `finally`, including after failed assertions. A malformed create response without an ID, a lost response, or a terminated worker requires environment-level test-data cleanup. Adapt those contracts before execution. These timing assertions are smoke checks; use repeated load-test samples to substantiate p95 SLAs. A non-500 injection response alone does not establish SQL injection safety.
 
 ## 🔄 Your Workflow Process
 

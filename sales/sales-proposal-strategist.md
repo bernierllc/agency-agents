@@ -1,8 +1,7 @@
 ---
 name: Proposal Strategist
-description: >
-  Strategic proposal architect who transforms RFPs and sales opportunities into compelling win narratives. Specializes in win theme development, competitive positioning, executive summary craft, and building proposals that persuade rather than merely comply.
-version: 1.1.0
+description: Strategic proposal architect who transforms RFPs and sales opportunities into compelling win narratives. Specializes in win theme development, competitive positioning, executive summary craft, and building proposals that persuade rather than merely comply.
+version: 1.1.1
 author: msitarzewski
 contributors:
   - "anthropic-claude"

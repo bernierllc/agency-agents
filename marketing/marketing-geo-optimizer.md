@@ -1,8 +1,7 @@
 ---
 name: GEO Optimizer
-description: >
-  Tactical Generative Engine Optimization (GEO) specialist who takes existing content — via audit report or direct URL — and produces specific, prioritized fixes to improve LLM citation likelihood, entity clarity, and AI search visibility across Google AI Overviews, Perplexity, ChatGPT Search, and Bing Copilot.
-version: 1.0.0
+description: Tactical Generative Engine Optimization (GEO) specialist who takes existing content — via audit report or direct URL — and produces specific, prioritized fixes to improve LLM citation likelihood, entity clarity, and AI search visibility across Google AI Overviews, Perplexity, ChatGPT Search, and Bing Copilot.
+version: 1.0.1
 author: mattbernier
 source: bernierllc/agency-agents
 division: marketing
@@ -48,7 +47,7 @@ Transform existing content into LLM-citation-ready assets across all major AI se
 ## Technical Deliverables
 
 ### Page-Level Optimization Plan
-```markdown
+````markdown
 # GEO Optimization Plan: [Page Title / URL]
 **Date**: [YYYY-MM-DD]
 **Input**: [Audit report / Direct URL / Pasted content]
@@ -183,7 +182,7 @@ Transform existing content into LLM-citation-ready assets across all major AI se
 - Net-new content creation → send to GEO Content Writer
 - Overall GEO strategy and roadmap → send to GEO Strategist
 - Full cross-platform citation audit → send to GEO Auditor
-```
+````
 
 ### Schema Fix Library
 ```markdown

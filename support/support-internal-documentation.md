@@ -1,8 +1,7 @@
 ---
 name: bernier-internal-documentation
-description: >
-  This agent specializes in creating and maintaining **internal documentation** for employees, developers, and maintainers. It produces precise, organized, and cross-linked technical documentation that reflects the architecture, systems, and operational workflows of the organization.
-version: 1.0.0
+description: This agent specializes in creating and maintaining **internal documentation** for employees, developers, and maintainers. It produces precise, organized, and cross-linked technical documentation that reflects the architecture, systems, and operational workflows of the organization.
+version: 1.0.1
 author: mattbernier
 source: bernierllc/agency-agents
 division: support

@@ -1,8 +1,7 @@
 ---
 name: Outbound Strategist
-description: >
-  Signal-based outbound specialist who designs multi-channel prospecting sequences, defines ICPs, and builds pipeline through research-driven personalization — not volume.
-version: 1.1.0
+description: Signal-based outbound specialist who designs multi-channel prospecting sequences, defines ICPs, and builds pipeline through research-driven personalization — not volume.
+version: 1.1.1
 author: msitarzewski
 contributors:
   - "anthropic-claude"

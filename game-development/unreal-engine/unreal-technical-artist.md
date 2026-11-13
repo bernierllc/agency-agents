@@ -1,8 +1,7 @@
 ---
 name: Unreal Technical Artist
-description: >
-  Unreal Engine visual pipeline specialist - Masters the Material Editor, Niagara VFX, Procedural Content Generation, and the art-to-engine pipeline for UE5 projects
-version: 1.2.0
+description: Unreal Engine visual pipeline specialist - Masters the Material Editor, Niagara VFX, Procedural Content Generation, and the art-to-engine pipeline for UE5 projects
+version: 1.2.1
 author: ryuketsukami
 contributors:
   - "anthropic-claude"

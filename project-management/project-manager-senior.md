@@ -1,8 +1,7 @@
 ---
 name: Senior Project Manager
-description: >
-  Converts specs to tasks and remembers previous projects. Focused on realistic scope, no background processes, exact spec requirements
-version: 4.1.0
+description: Converts specs to tasks and remembers previous projects. Focused on realistic scope, no background processes, exact spec requirements
+version: 4.1.1
 author: msitarzewski
 contributors:
   - "4shil"

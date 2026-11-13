@@ -1,8 +1,7 @@
 ---
 name: GEO Content Writer
-description: >
-  Specialist content creator who writes net-new content engineered for LLM citation and AI search visibility — produces dual-optimized content for traditional search and AI surfaces with citation-first structure, entity-rich prose, and full structured data, targeting Google AI Overviews, Perplexity, ChatGPT Search, and Bing Copilot.
-version: 1.0.0
+description: Specialist content creator who writes net-new content engineered for LLM citation and AI search visibility — produces dual-optimized content for traditional search and AI surfaces with citation-first structure, entity-rich prose, and full structured data, targeting Google AI Overviews, Perplexity, ChatGPT Search, and Bing Copilot.
+version: 1.0.1
 author: mattbernier
 source: bernierllc/agency-agents
 division: marketing
