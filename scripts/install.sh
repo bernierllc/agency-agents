@@ -165,6 +165,7 @@ FILTER_AGENTS=()         # --agent
 AGENTS_FILE=""           # --agents-file
 DRY_RUN=false            # --dry-run
 SELECTION_ACTIVE=false   # true once any agent-level filter is applied
+FILTER_REQUESTED=false   # a filter was asked for (CLI flag or wizard team subset); empty is then an error
 _ALLOWED_SLUGS=""        # newline-delimited cache of allowed slugs
 _ROSTER_INDEX=""         # "<install slug>\t<file stem>" per agent; see roster_index
 
@@ -224,6 +225,8 @@ resolve_agent() {
 # With no filter flags, SELECTION_ACTIVE stays false (install everything).
 build_selection() {
   if [[ ${#FILTER_DIVISIONS[@]} -eq 0 && ${#FILTER_AGENTS[@]} -eq 0 && -z "$AGENTS_FILE" ]]; then
+    # No selectors means "install everything" only when no filter was asked for.
+    $FILTER_REQUESTED && { err "The selection is empty: no team or agent was chosen. Nothing to install."; exit 1; }
     SELECTION_ACTIVE=false
     return
   fi
@@ -258,6 +261,7 @@ build_selection() {
     done < "$AGENTS_FILE"
   fi
   _ALLOWED_SLUGS="$(printf '%s' "$slugs" | sort -u | sed '/^$/d')"
+  [[ -n "$_ALLOWED_SLUGS" ]] || { err "The selection matched no agents. Nothing to install."; exit 1; }
 }
 
 # slug_allowed <slug> — true if installable under the active selection
@@ -851,7 +855,9 @@ interactive_wizard() {
   FILTER_DIVISIONS=()
   local all=1
   for (( i=0; i<${#TEAM_SEL[@]}; i++ )); do [[ "${TEAM_SEL[$i]}" == 1 ]] || all=0; done
+  FILTER_REQUESTED=false
   if [[ "$all" == 0 ]]; then
+    FILTER_REQUESTED=true
     for (( i=0; i<${#TEAM_SEL[@]}; i++ )); do [[ "${TEAM_SEL[$i]}" == 1 ]] && FILTER_DIVISIONS+=("${ALL_DIVISIONS[$i]}"); done
   fi
   build_selection
@@ -1586,6 +1592,7 @@ main() {
     case "$1" in
       --tool)            tool="${2:?'--tool requires a value'}"; shift 2; interactive_mode="no" ;;
       --division)
+        FILTER_REQUESTED=true
         local _d
         IFS=',' read -ra _divs <<< "${2:?'--division requires a value'}"
         for _d in "${_divs[@]}"; do
@@ -1594,13 +1601,14 @@ main() {
         done
         interactive_mode="no"; shift 2 ;;
       --agent)
+        FILTER_REQUESTED=true
         local _a
         IFS=',' read -ra _ags <<< "${2:?'--agent requires a value'}"
         for _a in "${_ags[@]}"; do
           _a="$(printf '%s' "$_a" | xargs)"; [[ -n "$_a" ]] && FILTER_AGENTS+=("$_a")
         done
         interactive_mode="no"; shift 2 ;;
-      --agents-file)     AGENTS_FILE="${2:?'--agents-file requires a value'}"; interactive_mode="no"; shift 2 ;;
+      --agents-file)     FILTER_REQUESTED=true; AGENTS_FILE="${2:?'--agents-file requires a value'}"; interactive_mode="no"; shift 2 ;;
       --link)            USE_LINK=true; shift ;;
       --path)            OVERRIDE_PATH="${2:?'--path requires a value'}"; shift 2 ;;
       --no-convert)      AUTO_CONVERT=false; shift ;;

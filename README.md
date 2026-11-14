@@ -802,32 +802,50 @@ The Agency works natively with Claude Code, and ships conversion + install scrip
 # Faster (parallel, output order may vary): ./scripts/install.sh --no-interactive --parallel
 ```
 
-The installer scans your system for installed tools, shows a checkbox UI, and lets you pick exactly what to install:
+The installer scans your system for installed tools and walks you through three screens: **Tools**, **Teams**, then **Review**. Move with ↑/↓, toggle with Space, filter with `/`, go back with ←, and press Enter to continue. The Tools screen (the list scrolls to all 17 tools):
 
 ```
-  +------------------------------------------------+
-  |   The Agency -- Tool Installer                 |
-  +------------------------------------------------+
+  ╭── The Agency · Installer  —  1/3 · Tools ───────────────────────────────╮
+  Pick where to install.  ● = detected on this machine.
 
-  System scan: [*] = detected on this machine
+   ▸ [✓] ● Claude Code   ~/.local/bin/claude
+     [·] ○ Copilot       not found
+     [·] ○ Antigravity   not found
+     [·] ○ Gemini CLI    not found
+     [·] ○ OpenCode      not found
+     [·] ○ OpenClaw      not found
+     [✓] ● Cursor        /usr/local/bin/cursor
+     [·] ○ Aider         not found
+     [·] ○ Windsurf      not found
+     [·] ○ Qwen Code     not found
+     [·] ○ ZCode         not found
+     [·] ○ Kimi Code     not found
+     [✓] ● Codex         /opt/homebrew/bin/codex
+     [·] ○ Osaurus       not found
+     [·] ○ hermes        not found
 
-  [x]  1)  [*]  Claude Code     (claude.ai/code)
-  [x]  2)  [*]  Copilot         (~/.github + ~/.copilot)
-  [x]  3)  [*]  Antigravity     (~/.gemini/antigravity)
-  [ ]  4)  [ ]  Gemini CLI      (~/.gemini/agents)
-  [ ]  5)  [ ]  OpenCode        (opencode.ai)
-  [ ]  6)  [ ]  OpenClaw        (~/.openclaw/agency-agents)
-  [x]  7)  [*]  Cursor          (.cursor/rules)
-  [ ]  8)  [ ]  Aider           (CONVENTIONS.md)
-  [ ]  9)  [ ]  Windsurf        (.windsurfrules)
-  [ ] 10)  [ ]  Qwen Code       (~/.qwen/agents)
-  [ ] 11)  [ ]  Kimi Code       (~/.config/kimi/agents)
-  [ ] 12)  [ ]  Codex           (~/.codex/agents)
-  [ ] 13)  [ ]  Osaurus         (~/.osaurus/skills)
-  [ ] 14)  [ ]  Hermes          (~/.hermes/plugins)
+  3 of 17 tools selected
+  space toggle · a all · n none · / search · enter next · q quit
+```
 
-  [1-14] toggle   [a] all   [n] none   [d] detected
-  [Enter] install   [q] quit
+The Teams screen lists every division with its agent count (all selected by default), and the Review screen confirms before anything is written:
+
+```
+  ╭── The Agency · Installer  —  3/3 · Review ────────────────────────────╮
+  Confirm your selection, then install.
+
+   Tools (3)
+     Claude Code       Cursor            Codex
+   Teams (18)
+     academic              product
+     design                project-management
+     engineering           research
+     ...
+
+     Mode: copy  (space toggles copy/symlink)
+
+  Installing 312 agents · 18 teams · 3 tools
+  ▸ Install   ↑/↓ move · enter install · ← back · q quit
 ```
 
 **Or install a specific tool directly:**
