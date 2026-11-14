@@ -287,14 +287,15 @@ selected_agent_count_all() {
 
 # worker_flags — re-emit the active selection/mode flags for parallel workers.
 worker_flags() {
-  local out="" d a
-  $USE_LINK && out="$out --link"
-  $AUTO_CONVERT || out="$out --no-convert"
-  [[ -n "$OVERRIDE_PATH" ]] && out="$out --path $OVERRIDE_PATH"
-  for d in ${FILTER_DIVISIONS[@]+"${FILTER_DIVISIONS[@]}"}; do out="$out --division $d"; done
-  for a in ${FILTER_AGENTS[@]+"${FILTER_AGENTS[@]}"}; do out="$out --agent $a"; done
-  [[ -n "$AGENTS_FILE" ]] && out="$out --agents-file $AGENTS_FILE"
-  printf '%s' "$out"
+  # %q-quote each arg so paths/agent names with spaces survive the worker's eval.
+  local d a
+  $USE_LINK && printf ' %q' --link
+  $AUTO_CONVERT || printf ' %q' --no-convert
+  [[ -n "$OVERRIDE_PATH" ]] && printf ' %q' --path "$OVERRIDE_PATH"
+  for d in ${FILTER_DIVISIONS[@]+"${FILTER_DIVISIONS[@]}"}; do printf ' %q' --division "$d"; done
+  for a in ${FILTER_AGENTS[@]+"${FILTER_AGENTS[@]}"}; do printf ' %q' --agent "$a"; done
+  [[ -n "$AGENTS_FILE" ]] && printf ' %q' --agents-file "$AGENTS_FILE"
+  return 0
 }
 
 # validate_division <name> — exit on unknown division.
@@ -1739,7 +1740,7 @@ main() {
     export AGENCY_INSTALL_OUT_DIR="$install_out_dir"
     export AGENCY_INSTALL_SCRIPT="$SCRIPT_DIR/install.sh"
     export AGENCY_INSTALL_EXTRA="$(worker_flags)"
-    printf '%s\n' "${SELECTED_TOOLS[@]}" | xargs -P "$parallel_jobs" -I {} sh -c 'AGENCY_INSTALL_WORKER=1 "$AGENCY_INSTALL_SCRIPT" --tool "{}" --no-interactive $AGENCY_INSTALL_EXTRA > "$AGENCY_INSTALL_OUT_DIR/{}" 2>&1' || install_status=$?
+    printf '%s\n' "${SELECTED_TOOLS[@]}" | xargs -P "$parallel_jobs" -I {} bash -c 'eval "set -- $AGENCY_INSTALL_EXTRA"; AGENCY_INSTALL_WORKER=1 "$AGENCY_INSTALL_SCRIPT" --tool "$0" --no-interactive "$@" > "$AGENCY_INSTALL_OUT_DIR/$0" 2>&1' {} || install_status=$?
     for t in "${SELECTED_TOOLS[@]}"; do
       [[ -f "$install_out_dir/$t" ]] && cat "$install_out_dir/$t"
     done
