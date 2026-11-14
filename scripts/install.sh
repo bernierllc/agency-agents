@@ -810,12 +810,14 @@ screen_review() {
     if printf '%s\n' "${tools[@]}" | grep -qx "OpenCode" && [[ "$agents" -gt "$cap" ]]; then
       buf+="  ${C_YELLOW}⚠ OpenCode registers ~${cap}; ~$(( agents - cap )) of ${agents} won't load (#27988)${C_RESET}"$'\n'
     fi
+    (( ${#teams[@]} == 0 )) && buf+="  ${C_YELLOW}⚠ No teams selected — go back (←) and pick at least one${C_RESET}"$'\n'
     draw_frame "$buf"
     local key; key="$(read_key)"
     case "$key" in
       UP|DOWN|k|j|TAB) cur=$(( 1 - cur )) ;;
       SPACE) (( cur==1 )) && { $USE_LINK && USE_LINK=false || USE_LINK=true; } ;;
-      ENTER) if (( cur==0 )); then REVIEW_RESULT=install; return; fi ;;
+      # Zero teams would commit an empty FILTER_DIVISIONS, which build_selection reads as "install all".
+      ENTER) if (( cur==0 && ${#teams[@]} > 0 )); then REVIEW_RESULT=install; return; fi ;;
       LEFT)  REVIEW_RESULT=back; return ;;
       q|Q|EOF) REVIEW_RESULT=quit; return ;;
     esac

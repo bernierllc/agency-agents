@@ -32,3 +32,4 @@ jobs:
           bash scripts/test-install-link-ownership.sh
           bash scripts/test-install-parallel-logs.sh
           bash scripts/test-install-parallel-arg-quoting.sh
+          bash scripts/test-install-wizard-empty-teams.sh
