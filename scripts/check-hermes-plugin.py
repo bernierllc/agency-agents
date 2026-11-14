@@ -54,6 +54,9 @@ def main() -> int:
         )
         assert quoted_vibe is not None
         assert quoted_vibe["vibe"].endswith('who is this?"')
+        # YAML-escaped quotes in a double-quoted scalar are unescaped, not kept as \".
+        assert '\\' not in quoted_vibe["description"]
+        assert '"who is this entity?"' in quoted_vibe["description"]
 
         out_dir = Path(tmp) / "hermes"
         builder.build(REPO_ROOT, out_dir)

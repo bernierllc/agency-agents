@@ -58,8 +58,11 @@ def parse_agent(path: Path, repo_root: Path) -> dict[str, str] | None:
         current_key = key.strip()
         fields[current_key] = value.strip()
     for key, value in fields.items():
-        if len(value) > 1 and value[0] == value[-1] and value[0] in ('"', "'"):
-            fields[key] = value[1:-1]
+        if len(value) > 1 and value[0] == value[-1] == '"':
+            # JSON escapes are the subset of YAML double-quoted escapes our frontmatter uses; json.loads raises on any other.
+            fields[key] = json.loads(value)
+        elif len(value) > 1 and value[0] == value[-1] == "'":
+            fields[key] = value[1:-1].replace("''", "'")
     name = fields.get("name", "").strip()
     if not name:
         return None
