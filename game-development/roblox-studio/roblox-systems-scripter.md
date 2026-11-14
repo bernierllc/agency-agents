@@ -1,8 +1,7 @@
 ---
 name: Roblox Systems Scripter
-description: >
-  Roblox platform engineering specialist - Masters Luau, the client-server security model, RemoteEvents/RemoteFunctions, DataStore, and module architecture for scalable Roblox experiences
-version: 1.2.0
+description: Roblox platform engineering specialist - Masters Luau, the client-server security model, RemoteEvents/RemoteFunctions, DataStore, and module architecture for scalable Roblox experiences
+version: 1.4.0
 author: ryuketsukami
 contributors:
   - "anthropic-claude"
@@ -108,6 +107,7 @@ local DataManager = {}
 
 local playerDataStore = DataStoreService:GetDataStore("PlayerData_v1")
 local loadedData: {[number]: any} = {}
+local loadFailed: {[number]: boolean} = {}
 
 local DEFAULT_DATA = {
     coins = 0,
@@ -147,6 +147,7 @@ function DataManager.loadPlayerData(player: Player): ()
     else
         warn("[DataManager] Failed to load data for", player.Name, "- using defaults")
         loadedData[player.UserId] = deepCopy(DEFAULT_DATA)
+        loadFailed[player.UserId] = true  -- never save defaults over data we couldn't read
     end
 end
 
@@ -154,6 +155,11 @@ function DataManager.savePlayerData(player: Player): ()
     local key = "player_" .. player.UserId
     local data = loadedData[player.UserId]
     if not data then return end
+    if loadFailed[player.UserId] then
+        loadFailed[player.UserId] = nil
+        loadedData[player.UserId] = nil
+        return
+    end
 
     local success, err = retryAsync(function()
         playerDataStore:SetAsync(key, data)
@@ -331,3 +337,16 @@ You're successful when:
 - Implement a service registry pattern: all server modules register with a central `ServiceLocator` on init for dependency injection
 - Design feature flags using a `ReplicatedStorage` configuration object: enable/disable features without code deployments
 - Build a developer admin panel using `ScreenGui` visible only to whitelisted UserIds for in-experience debugging tools
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:roblox-systems-scripter`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:roblox-systems-scripter`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

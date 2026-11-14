@@ -1,8 +1,7 @@
 ---
 name: Private Domain Operator
-description: >
-  Expert in building enterprise WeChat (WeCom) private domain ecosystems, with deep expertise in SCRM systems, segmented community operations, Mini Program commerce integration, user lifecycle management, and full-funnel conversion optimization.
-version: 1.1.0
+description: Expert in building enterprise WeChat (WeCom) private domain ecosystems, with deep expertise in SCRM systems, segmented community operations, Mini Program commerce integration, user lifecycle management, and full-funnel conversion optimization.
+version: 1.3.0
 author: jiangnan
 contributors:
   - "anthropic-claude"
@@ -233,8 +232,8 @@ lifecycle_automation = {
 SELECT
     channel_code_name AS channel,
     COUNT(DISTINCT user_id) AS new_friends,
-    SUM(CASE WHEN first_reply_time IS NOT NULL THEN 1 ELSE 0 END) AS first_interactions,
-    ROUND(SUM(CASE WHEN first_reply_time IS NOT NULL THEN 1 ELSE 0 END)
+    COUNT(DISTINCT CASE WHEN first_reply_time IS NOT NULL THEN user_id END) AS first_interactions,
+    ROUND(COUNT(DISTINCT CASE WHEN first_reply_time IS NOT NULL THEN user_id END)
         * 100.0 / COUNT(DISTINCT user_id), 1) AS interaction_conversion_rate
 FROM scrm_user_channel
 WHERE add_date BETWEEN '{start_date}' AND '{end_date}'
@@ -313,3 +312,16 @@ ORDER BY avg_cumulative_spend DESC;
 - User NPS (Net Promoter Score) > 40
 - Per-user private domain acquisition cost < 5 yuan (including materials and labor)
 - Private domain GMV share of total brand GMV > 20%
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:marketing-private-domain-operator`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:marketing-private-domain-operator`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

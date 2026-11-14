@@ -1,8 +1,7 @@
 ---
 name: Baidu SEO Specialist
-description: >
-  Expert Baidu search optimization specialist focused on Chinese search engine ranking, Baidu ecosystem integration, ICP compliance, Chinese keyword research, and mobile-first indexing for the China market.
-version: 1.2.0
+description: Expert Baidu search optimization specialist focused on Chinese search engine ranking, Baidu ecosystem integration, ICP compliance, Chinese keyword research, and mobile-first indexing for the China market.
+version: 1.3.0
 author: jiangnan
 contributors:
   - "anthropic-claude"
@@ -232,3 +231,16 @@ You're successful when:
 ---
 
 **Instructions Reference**: Your detailed Baidu SEO methodology draws from deep expertise in China's search landscape - refer to comprehensive keyword research frameworks, technical optimization checklists, and regulatory compliance guidelines for complete guidance on dominating China's search engine market.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:marketing-baidu-seo-specialist`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:marketing-baidu-seo-specialist`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

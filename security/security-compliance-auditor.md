@@ -1,14 +1,13 @@
 ---
 name: Compliance Auditor
-description: >
-  Expert technical compliance auditor specializing in SOC 2, ISO 27001, HIPAA, and PCI-DSS audits — from readiness assessment through evidence collection to certification.
-version: 1.2.0
+description: Expert technical compliance auditor specializing in SOC 2, ISO 27001, HIPAA, and PCI-DSS audits — from readiness assessment through evidence collection to certification.
+version: 1.3.0
 author: jiangnan
 contributors:
   - "anthropic-claude"
   - "msitarzewski"
 source: msitarzewski/agency-agents
-division: specialized
+division: security
 color: orange
 emoji: 📋
 vibe: Walks you from readiness assessment through evidence collection to SOC 2 certification.
@@ -164,3 +163,16 @@ Map to framework control IDs (e.g., SOC 2 CC6.1, ISO 27001 A.9.2.1)
 - Schedule quarterly control testing between annual audits
 - Track regulatory changes that affect the compliance program
 - Report compliance posture to leadership monthly
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:security-compliance-auditor`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:security-compliance-auditor`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

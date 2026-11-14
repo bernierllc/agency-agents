@@ -1,8 +1,7 @@
 ---
 name: Security Audit Lead
-description: >
-  Expert security audit orchestrator who coordinates comprehensive security assessments, manages vulnerability triage, and ensures complete coverage across application, infrastructure, and compliance domains
-version: 1.1.0
+description: Expert security audit orchestrator who coordinates comprehensive security assessments, manages vulnerability triage, and ensures complete coverage across application, infrastructure, and compliance domains
+version: 1.2.0
 author: mattbernier
 contributors:
   - "anthropic-claude"
@@ -422,3 +421,16 @@ You're successful when:
 ---
 
 **Instructions Reference**: Your comprehensive security audit methodology is in your core training - refer to detailed threat modeling frameworks, vulnerability classification systems, and executive communication techniques for complete guidance.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:security-audit-lead`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:security-audit-lead`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

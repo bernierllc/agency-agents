@@ -1,8 +1,7 @@
 ---
 name: Support Responder
-description: >
-  Expert customer support specialist delivering exceptional customer service, issue resolution, and user experience optimization. Specializes in multi-channel support, proactive customer care, and turning support interactions into positive brand experiences.
-version: 1.2.0
+description: Expert customer support specialist delivering exceptional customer service, issue resolution, and user experience optimization. Specializes in multi-channel support, proactive customer care, and turning support interactions into positive brand experiences.
+version: 1.4.0
 author: msitarzewski
 contributors:
   - "anthropic-claude"
@@ -167,7 +166,7 @@ class SupportAnalytics:
         # Quality metrics
         self.metrics['first_contact_resolution_rate'] = (
             len(self.data[self.data['contacts_to_resolution'] == 1]) / 
-            len(self.data) * 100
+            len(self.data) * 100 if len(self.data) else None
         )
         
         self.metrics['customer_satisfaction_score'] = self.data['csat_score'].mean()
@@ -189,28 +188,44 @@ class SupportAnalytics:
     
     def identify_support_trends(self):
         """
-        Identify trends and patterns in support data
+        Compare calendar periods, preserving year boundaries and missing evidence.
         """
+        dated = self.data.dropna(subset=['created_date']).set_index('created_date').sort_index()
+
+        def compare_recent_periods(values, lower_is_better=False):
+            if len(values) < 2 or values.iloc[-2:].isna().any():
+                return 'insufficient_data'
+            previous, current = values.iloc[-2], values.iloc[-1]
+            if current == previous:
+                return 'stable'
+            improving = current < previous if lower_is_better else current > previous
+            return 'improving' if improving else 'declining'
+
         trends = {}
-        
-        # Ticket volume trends
-        daily_volume = self.data.groupby(self.data['created_date'].dt.date).size()
-        trends['volume_trend'] = 'increasing' if daily_volume.iloc[-7:].mean() > daily_volume.iloc[-14:-7].mean() else 'decreasing'
-        
-        # Common issue categories
-        issue_frequency = self.data['issue_category'].value_counts()
-        trends['top_issues'] = issue_frequency.head(5).to_dict()
-        
-        # Customer satisfaction trends
-        monthly_csat = self.data.groupby(self.data['created_date'].dt.month)['csat_score'].mean()
-        trends['satisfaction_trend'] = 'improving' if monthly_csat.iloc[-1] > monthly_csat.iloc[-2] else 'declining'
-        
-        # Response time trends
-        weekly_response_time = self.data.groupby(self.data['created_date'].dt.week)['first_response_time'].mean()
-        trends['response_time_trend'] = 'improving' if weekly_response_time.iloc[-1] < weekly_response_time.iloc[-2] else 'declining'
-        
+        # Assumes collection covers each day between the first and last dates.
+        # Include zero-ticket calendar days and compare consecutive seven-day
+        # windows ending on the latest observed date, not seven active dates.
+        daily_volume = dated.resample('D').size()
+        trends['volume_trend'] = 'insufficient_data'
+        if len(daily_volume) >= 14:
+            previous = daily_volume.iloc[-14:-7].mean()
+            current = daily_volume.iloc[-7:].mean()
+            trends['volume_trend'] = (
+                'stable' if current == previous else
+                'increasing' if current > previous else 'decreasing'
+            )
+
+        trends['top_issues'] = self.data['issue_category'].value_counts().head(5).to_dict()
+        # Calendar resampling keeps December before January and inserts missing
+        # months/weeks as NaN rather than merging different years or guessing a trend.
+        monthly_csat = dated['csat_score'].resample('MS').mean()
+        trends['satisfaction_trend'] = compare_recent_periods(monthly_csat)
+        weekly_response_time = dated['first_response_time'].resample('W').mean()
+        trends['response_time_trend'] = compare_recent_periods(
+            weekly_response_time, lower_is_better=True
+        )
         return trends
-    
+
     def generate_improvement_recommendations(self):
         """
         Generate specific recommendations based on support data analysis
@@ -228,7 +243,8 @@ class SupportAnalytics:
             })
         
         # First contact resolution recommendations
-        if self.metrics['first_contact_resolution_rate'] < 80:
+        if (self.metrics['first_contact_resolution_rate'] is not None and
+                self.metrics['first_contact_resolution_rate'] < 80):
             recommendations.append({
                 'area': 'Resolution Efficiency',
                 'issue': f"First contact resolution rate is {self.metrics['first_contact_resolution_rate']:.1f}%",
@@ -253,9 +269,13 @@ class SupportAnalytics:
         """
         Identify customers for proactive support outreach
         """
+        # Match the report's timestamp timezone; naive reports stay naive.
+        # Reuse one instant for all outreach windows.
+        now = datetime.now(tz=self.data['created_date'].dt.tz)
+
         # Customers with multiple recent tickets
         frequent_reporters = self.data[
-            self.data['created_date'] >= datetime.now() - timedelta(days=30)
+            self.data['created_date'] >= now - timedelta(days=30)
         ].groupby('customer_id').size()
         
         high_volume_customers = frequent_reporters[frequent_reporters >= 3].index.tolist()
@@ -263,13 +283,14 @@ class SupportAnalytics:
         # Customers with low satisfaction scores
         low_satisfaction = self.data[
             (self.data['csat_score'] <= 3) & 
-            (self.data['created_date'] >= datetime.now() - timedelta(days=7))
+            (self.data['created_date'] >= now - timedelta(days=7))
         ]['customer_id'].unique()
         
-        # Customers with unresolved tickets over SLA
+        # Customers with known unresolved status and tickets over SLA
         overdue_tickets = self.data[
+            self.data['status'].notna() &
             (self.data['status'] != 'resolved') & 
-            (self.data['created_date'] <= datetime.now() - timedelta(hours=48))
+            (self.data['created_date'] <= now - timedelta(hours=48))
         ]['customer_id'].unique()
         
         return {
@@ -590,3 +611,16 @@ You're successful when:
 ---
 
 **Instructions Reference**: Your detailed customer service methodology is in your core training - refer to comprehensive support frameworks, customer success strategies, and communication best practices for complete guidance.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:support-support-responder`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:support-support-responder`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

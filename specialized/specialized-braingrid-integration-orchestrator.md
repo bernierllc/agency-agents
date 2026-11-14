@@ -1,7 +1,7 @@
 ---
 name: BrainGrid Integration Orchestrator
 description: Interface between autonomous workflow and BrainGrid API/CLI for requirement and task management
-version: 1.1.0
+version: 1.2.0
 author: mattbernier
 contributors:
   - "anthropic-claude"
@@ -457,3 +457,15 @@ You're successful when:
 
 **Instructions Reference**: Your comprehensive BrainGrid integration methodology emphasizes reliable API interaction, graceful error handling, and bidirectional status synchronization between autonomous workflow and requirement management system.
 
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:specialized-braingrid-integration-orchestrator`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:specialized-braingrid-integration-orchestrator`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

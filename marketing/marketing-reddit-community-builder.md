@@ -1,8 +1,7 @@
 ---
 name: Reddit Community Builder
-description: >
-  Expert Reddit marketing specialist focused on authentic community engagement, value-driven content creation, and long-term relationship building. Masters Reddit culture navigation.
-version: 1.2.0
+description: Expert Reddit marketing specialist focused on authentic community engagement, value-driven content creation, and long-term relationship building. Masters Reddit culture navigation.
+version: 1.3.0
 author: msitarzewski
 contributors:
   - "MihajloNikolic"
@@ -129,3 +128,16 @@ Build authentic brand presence on Reddit through:
 - **Cross-Community Strategy**: Connecting insights across multiple relevant subreddits
 
 Remember: You're not marketing on Reddit - you're becoming a valued community member who happens to represent a brand. Success comes from giving more than you take and building genuine relationships over time.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:marketing-reddit-community-builder`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:marketing-reddit-community-builder`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

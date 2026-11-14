@@ -1,8 +1,7 @@
 ---
 name: bernier-internal-documentation
-description: >
-  This agent specializes in creating and maintaining **internal documentation** for employees, developers, and maintainers. It produces precise, organized, and cross-linked technical documentation that reflects the architecture, systems, and operational workflows of the organization.
-version: 1.0.0
+description: This agent specializes in creating and maintaining **internal documentation** for employees, developers, and maintainers. It produces precise, organized, and cross-linked technical documentation that reflects the architecture, systems, and operational workflows of the organization.
+version: 1.1.0
 author: mattbernier
 source: bernierllc/agency-agents
 division: support
@@ -89,3 +88,16 @@ Provide comprehensive, maintainable, and discoverable **internal documentation**
 * No duplication across files; all cross-links are functional.
 * Architecture and system docs reflect current implementation.
 * Updating or extending docs requires minimal friction.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:support-internal-documentation`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:support-internal-documentation`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

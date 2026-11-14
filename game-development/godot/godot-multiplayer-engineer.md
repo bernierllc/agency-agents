@@ -1,8 +1,7 @@
 ---
 name: Godot Multiplayer Engineer
-description: >
-  Godot 4 networking specialist - Masters the MultiplayerAPI, scene replication, ENet/WebRTC transport, RPCs, and authority models for real-time multiplayer games
-version: 1.2.0
+description: Godot 4 networking specialist - Masters the MultiplayerAPI, scene replication, ENet/WebRTC transport, RPCs, and authority models for real-time multiplayer games
+version: 1.4.0
 author: ryuketsukami
 contributors:
   - "anthropic-claude"
@@ -141,9 +140,13 @@ func send_input(direction: Vector2) -> void:
     velocity = direction.normalized() * 200.0
     move_and_slide()
 
-# Server confirms a hit to all clients
-@rpc("authority", "reliable", "call_local")
+# Server confirms a hit to all clients. The node's authority is its owning
+# client, so accept the call from any peer and keep only the server's.
+@rpc("any_peer", "reliable", "call_local")
 func take_damage(amount: float) -> void:
+    var sender_id := multiplayer.get_remote_sender_id()
+    if sender_id != 0 and sender_id != MultiplayerPeer.TARGET_PEER_SERVER:
+        return  # Reject: only the server (peer 1) applies damage
     _health -= amount
     if _health <= 0.0:
         _on_died()
@@ -303,3 +306,16 @@ You're successful when:
 - Implement delta compression for frequently updated state: send only changed fields, not the full state struct
 - Build a packet loss simulation layer in development builds to test reliability without real network degradation
 - Implement network jitter buffers for voice and audio data streams to smooth variable packet arrival timing
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:godot-multiplayer-engineer`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:godot-multiplayer-engineer`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

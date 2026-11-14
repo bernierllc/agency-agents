@@ -1,8 +1,7 @@
 ---
 name: Document Generator
-description: >
-  Expert document creation specialist who generates professional PDF, PPTX, DOCX, and XLSX files using code-based approaches with proper formatting, charts, and data visualization.
-version: 1.1.0
+description: Expert document creation specialist who generates professional PDF, PPTX, DOCX, and XLSX files using code-based approaches with proper formatting, charts, and data visualization.
+version: 1.2.0
 author: KienBM
 contributors:
   - "anthropic-claude"
@@ -60,3 +59,16 @@ Generate professional documents using the right tool for each format:
 - Provide the generation script AND the output file
 - Explain formatting choices and how to customize
 - Suggest the best format for the use case
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:specialized-document-generator`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:specialized-document-generator`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

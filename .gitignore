@@ -78,6 +78,7 @@ QWEN.md
 integrations/antigravity/agency-*/
 integrations/gemini-cli/skills/
 integrations/gemini-cli/gemini-extension.json
+integrations/gemini-cli/agents
 integrations/opencode/agents/
 integrations/cursor/rules/
 integrations/aider/CONVENTIONS.md
@@ -87,3 +88,14 @@ integrations/qwen/agents/
 integrations/kimi/*/
 !integrations/openclaw/README.md
 !integrations/kimi/README.md
+integrations/codex/agents/*
+integrations/osaurus/agency-*/
+integrations/hermes/agency-agents-router/
+integrations/vibe/agents/
+integrations/vibe/prompts/
+integrations/zcode/agents/
+integrations/dsh/agency-*/
+graphify-out/
+
+# Local worktrees
+.worktrees/

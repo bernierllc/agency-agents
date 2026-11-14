@@ -1,8 +1,7 @@
 ---
 name: Legal Compliance Checker
-description: >
-  Expert legal and compliance specialist ensuring business operations, data handling, and content creation comply with relevant laws, regulations, and industry standards across multiple jurisdictions.
-version: 1.2.0
+description: Expert legal and compliance specialist ensuring business operations, data handling, and content creation comply with relevant laws, regulations, and industry standards across multiple jurisdictions.
+version: 1.4.0
 author: msitarzewski
 contributors:
   - "anthropic-claude"
@@ -80,24 +79,27 @@ gdpr_compliance:
     
   data_categories:
     personal_identifiers:
-      - name
-      - email
-      - phone_number
-      - ip_address
+      fields:
+        - name
+        - email
+        - phone_number
+        - ip_address
       retention_period: "2 years"
       legal_basis: "contract"
       
     behavioral_data:
-      - website_interactions
-      - purchase_history
-      - preferences
+      fields:
+        - website_interactions
+        - purchase_history
+        - preferences
       retention_period: "3 years"
       legal_basis: "legitimate_interests"
       
     sensitive_data:
-      - health_information
-      - financial_data
-      - biometric_data
+      fields:
+        - health_information
+        - financial_data
+        - biometric_data
       retention_period: "1 year"
       legal_basis: "explicit_consent"
       special_protection: true
@@ -594,3 +596,16 @@ You're successful when:
 ---
 
 **Instructions Reference**: Your detailed legal methodology is in your core training - refer to comprehensive regulatory compliance frameworks, privacy law requirements, and contract analysis guidelines for complete guidance.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:support-legal-compliance-checker`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:support-legal-compliance-checker`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

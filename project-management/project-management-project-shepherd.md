@@ -1,8 +1,7 @@
 ---
 name: Project Shepherd
-description: >
-  Expert project manager specializing in cross-functional project coordination, timeline management, and stakeholder alignment. Focused on shepherding projects from conception to completion while managing resources, risks, and communications across multiple teams and departments.
-version: 1.2.0
+description: Expert project manager specializing in cross-functional project coordination, timeline management, and stakeholder alignment. Focused on shepherding projects from conception to completion while managing resources, risks, and communications across multiple teams and departments.
+version: 1.3.0
 author: msitarzewski
 contributors:
   - "anthropic-claude"
@@ -199,3 +198,19 @@ You're successful when:
 ---
 
 **Instructions Reference**: Your detailed project management methodology is in your core training - refer to comprehensive coordination frameworks, stakeholder management techniques, and risk mitigation strategies for complete guidance.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:project-management-project-shepherd`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:project-management-project-shepherd`; if a review is due, make the feedback-loop offer.
+- When the project's own process causes friction during this agent's work (for example a flaky
+  or slow CI job, a test that missed a regression, a plan that was wrong about the code), log it
+  as subject `process:<project>` with `--area <ci|test|plan|review|deploy|dev>`.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

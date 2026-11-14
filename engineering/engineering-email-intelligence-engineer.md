@@ -1,8 +1,7 @@
 ---
 name: Email Intelligence Engineer
-description: >
-  Expert in extracting structured, reasoning-ready data from raw email threads for AI agents and automation systems
-version: 2.1.0
+description: Expert in extracting structured, reasoning-ready data from raw email threads for AI agents and automation systems
+version: 2.3.0
 author: RachamimKennard
 contributors:
   - "anthropic-claude"
@@ -106,8 +105,14 @@ def fetch_thread(imap_conn, thread_ids):
     """Fetch and parse raw messages, preserving full MIME structure."""
     messages = []
     for msg_id in thread_ids:
-        _, data = imap_conn.fetch(msg_id, "(RFC822)")
-        raw = data[0][1]
+        status, data = imap_conn.fetch(msg_id, "(RFC822)")
+        if status != 'OK':
+            raise RuntimeError(f'IMAP fetch failed for message {msg_id}: {status}')
+        raw = next((item[1] for item in data or []
+                    if isinstance(item, tuple) and len(item) == 2
+                    and isinstance(item[1], bytes)), None)
+        if raw is None:
+            raise RuntimeError(f'IMAP returned no RFC822 body for message {msg_id}')
         parsed = email.message_from_bytes(raw, policy=policy.default)
         messages.append({
             "message_id": parsed["Message-ID"],
@@ -135,7 +140,28 @@ def reconstruct_thread(messages):
     - Quoted replies duplicate content (20-msg thread = ~4-5x token bloat)
     - Thread forks when people reply to different messages in the chain
     """
-    # Build reply graph from In-Reply-To and References headers
+    # Reject ambiguous identities before building or mutating the graph.
+    # Missing/duplicate Message-ID must go to a quarantine/resolution path;
+    # silently using None (or a reused ID) overwrites an unrelated message.
+    messages = list(messages)  # preserve support for one-pass message iterables
+    message_ids = [msg.get("message_id") for msg in messages]
+    if any(not isinstance(mid, str) or not mid.strip() for mid in message_ids):
+        raise ValueError("Every message needs a nonempty Message-ID")
+    if len(set(message_ids)) != len(message_ids):
+        raise ValueError("Duplicate Message-ID: resolve identity before reconstruction")
+
+    parents = {msg["message_id"]: msg["in_reply_to"] for msg in messages}
+    checked = set()
+    for start in parents:
+        path = set()
+        current = start
+        while current in parents and current not in checked:
+            if current in path:
+                raise ValueError("Cyclic In-Reply-To headers: quarantine before reconstruction")
+            path.add(current)
+            current = parents[current]
+        checked.update(path)
+
     graph = {}
     for msg in messages:
         parent_id = msg["in_reply_to"]
@@ -168,6 +194,12 @@ def strip_quoted_content(body, parent_bodies):
     - Outlook XML quoting: nested <div> blocks with specific classes
     """
     lines = body.split("\n")
+    parent_lines = {
+        line.strip()
+        for parent in parent_bodies
+        for line in parent.splitlines()
+        if line.strip()
+    }
     unique_lines = []
     in_quote_block = False
     
@@ -178,7 +210,11 @@ def strip_quoted_content(body, parent_bodies):
         if in_quote_block and not line.strip():
             in_quote_block = False
             continue
-        if not in_quote_block and not line.startswith(">"):
+        if not in_quote_block:
+            # A new quotation is still evidence from this message. Remove a
+            # prefix-quoted line only when its text duplicates a parent.
+            if line.startswith(">") and line[1:].strip() in parent_lines:
+                continue
             unique_lines.append(line)
     
     return "\n".join(unique_lines)
@@ -358,3 +394,16 @@ You're successful when:
 ---
 
 **Instructions Reference**: Your detailed email intelligence methodology is in this agent definition. Refer to these patterns for consistent email pipeline development, thread reconstruction, context assembly for AI agents, and handling the structural edge cases that silently break reasoning over email data.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:engineering-email-intelligence-engineer`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:engineering-email-intelligence-engineer`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

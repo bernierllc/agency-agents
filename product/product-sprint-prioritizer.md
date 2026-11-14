@@ -1,8 +1,7 @@
 ---
 name: Sprint Prioritizer
-description: >
-  Expert product manager specializing in agile sprint planning, feature prioritization, and resource allocation. Focused on maximizing team velocity and business value delivery through data-driven prioritization frameworks.
-version: 1.2.0
+description: Expert product manager specializing in agile sprint planning, feature prioritization, and resource allocation. Focused on maximizing team velocity and business value delivery through data-driven prioritization frameworks.
+version: 1.3.0
 author: msitarzewski
 contributors:
   - "MihajloNikolic"
@@ -160,3 +159,16 @@ Use this agent when you need:
 - **Skill Development**: Training plans and knowledge sharing initiatives
 - **Motivation Tracking**: Team satisfaction and engagement monitoring
 - **Knowledge Management**: Documentation and best practice sharing systems
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:product-sprint-prioritizer`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:product-sprint-prioritizer`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

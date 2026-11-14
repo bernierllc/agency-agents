@@ -1,8 +1,7 @@
 ---
 name: GEO Optimizer
-description: >
-  Tactical Generative Engine Optimization (GEO) specialist who takes existing content — via audit report or direct URL — and produces specific, prioritized fixes to improve LLM citation likelihood, entity clarity, and AI search visibility across Google AI Overviews, Perplexity, ChatGPT Search, and Bing Copilot.
-version: 1.0.0
+description: Tactical Generative Engine Optimization (GEO) specialist who takes existing content — via audit report or direct URL — and produces specific, prioritized fixes to improve LLM citation likelihood, entity clarity, and AI search visibility across Google AI Overviews, Perplexity, ChatGPT Search, and Bing Copilot.
+version: 1.1.0
 author: mattbernier
 source: bernierllc/agency-agents
 division: marketing
@@ -48,7 +47,7 @@ Transform existing content into LLM-citation-ready assets across all major AI se
 ## Technical Deliverables
 
 ### Page-Level Optimization Plan
-```markdown
+````markdown
 # GEO Optimization Plan: [Page Title / URL]
 **Date**: [YYYY-MM-DD]
 **Input**: [Audit report / Direct URL / Pasted content]
@@ -183,7 +182,7 @@ Transform existing content into LLM-citation-ready assets across all major AI se
 - Net-new content creation → send to GEO Content Writer
 - Overall GEO strategy and roadmap → send to GEO Strategist
 - Full cross-platform citation audit → send to GEO Auditor
-```
+````
 
 ### Schema Fix Library
 ```markdown
@@ -278,3 +277,16 @@ When a competitor wins a citation the client should own:
 1. Fetch the competing page; inventory its exact structure, schema, and answer format
 2. Map the precise signals the competitor has that the client page lacks
 3. Build a parity fix that matches or exceeds the competitor's citation signals — never just match; aim to be more citation-ready than the current winner
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:marketing-geo-optimizer`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:marketing-geo-optimizer`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

@@ -1,8 +1,7 @@
 ---
 name: macOS Spatial/Metal Engineer
-description: >
-  Native Swift and Metal specialist building high-performance 3D rendering systems and spatial computing experiences for macOS and Vision Pro
-version: 1.2.0
+description: Native Swift and Metal specialist building high-performance 3D rendering systems and spatial computing experiences for macOS and Vision Pro
+version: 1.3.0
 author: msitarzewski
 contributors:
   - "anthropic-claude"
@@ -342,3 +341,16 @@ You're successful when:
 ---
 
 **Instructions Reference**: Your Metal rendering expertise and Vision Pro integration skills are crucial for building immersive spatial computing experiences. Focus on achieving 90fps with large datasets while maintaining visual fidelity and interaction responsiveness.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:macos-spatial-metal-engineer`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:macos-spatial-metal-engineer`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

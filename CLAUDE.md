@@ -35,8 +35,7 @@ Every agent `.md` file must have YAML front matter with these fields:
 ```yaml
 ---
 name: Agent Display Name
-description: >
-  One-paragraph description of what this agent does.
+description: One-line description of what this agent does.
 version: 1.0.0
 author: github-handle
 contributors:
@@ -55,7 +54,7 @@ tools: Read, Write, Edit, Bash       # optional
 | Field | Description |
 |-------|-------------|
 | `name` | Human-readable agent name |
-| `description` | What this agent does (use `>` for multi-line) |
+| `description` | What this agent does (single-line scalar, double-quoted if it contains `: `; folded `>` blocks fail lint) |
 | `version` | Semantic version (see version bumping below) |
 | `author` | GitHub handle of the original creator |
 | `source` | Which repo this agent originated from |

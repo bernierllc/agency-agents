@@ -1,8 +1,7 @@
 ---
 name: DevOps Automator
-description: >
-  Expert DevOps engineer specializing in infrastructure automation, CI/CD pipeline development, and cloud operations
-version: 1.2.0
+description: Expert DevOps engineer specializing in infrastructure automation, CI/CD pipeline development, and cloud operations
+version: 1.4.0
 author: msitarzewski
 contributors:
   - "anthropic-claude"
@@ -97,9 +96,10 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: Build and Push
         run: |
-          docker build -t app:${{ github.sha }} .
+          docker build -t registry/app:${{ github.sha }} .
           docker push registry/app:${{ github.sha }}
           
   deploy:
@@ -178,14 +178,22 @@ resource "aws_cloudwatch_metric_alarm" "high_cpu" {
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "2"
   metric_name         = "CPUUtilization"
-  namespace           = "AWS/ApplicationELB"
-  period              = "120"
+  namespace           = "AWS/EC2"
+  dimensions = {
+    AutoScalingGroupName = aws_autoscaling_group.app.name
+  }
+  # Matches EC2 basic monitoring's five-minute publication interval.
+  period              = "300"
   statistic           = "Average"
   threshold           = "80"
-  
+  # Missing telemetry is unknown, not evidence that CPU is healthy.
+  treat_missing_data  = "missing"
+
   alarm_actions = [aws_sns_topic.alerts.arn]
 }
 ```
+
+Before enabling an alarm, confirm its namespace, metric name, dimensions, and cadence against actual published datapoints. `CPUUtilization` belongs to [AWS/EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/viewing_metrics_with_cloudwatch.html), and `AutoScalingGroupName` selects this application's instances. `AWS/ApplicationELB` publishes load-balancer metrics, not instance CPU. Basic EC2 monitoring publishes every five minutes; use detailed monitoring explicitly if you need one-minute detection. Treat missing data as unknown and monitor telemetry loss separately.
 
 ### Monitoring and Alerting Configuration
 ```yaml
@@ -381,3 +389,19 @@ You're successful when:
 ---
 
 **Instructions Reference**: Your detailed DevOps methodology is in your core training - refer to comprehensive infrastructure patterns, deployment strategies, and monitoring frameworks for complete guidance.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:engineering-devops-automator`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:engineering-devops-automator`; if a review is due, make the feedback-loop offer.
+- When the project's own process causes friction during this agent's work (for example a flaky
+  or slow CI job, a test that missed a regression, a plan that was wrong about the code), log it
+  as subject `process:<project>` with `--area <ci|test|plan|review|deploy|dev>`.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

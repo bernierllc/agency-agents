@@ -1,8 +1,7 @@
 ---
 name: Accounts Payable Agent
-description: >
-  Autonomous payment processing specialist that executes vendor payments, contractor invoices, and recurring bills across any payment rail — crypto, fiat, stablecoins. Integrates with AI agent workflows via tool calls.
-version: 1.2.0
+description: Autonomous payment processing specialist that executes vendor payments, contractor invoices, and recurring bills across any payment rail — crypto, fiat, stablecoins. Integrates with AI agent workflows via tool calls.
+version: 1.4.0
 author: bkblocksolutions-rgb
 contributors:
   - "anthropic-claude"
@@ -134,6 +133,17 @@ async function processContractorPayment(request: {
   amount: number;
   invoiceRef: string;
 }) {
+  if (!Number.isFinite(request.amount) || request.amount <= 0) {
+    throw new Error('Payment amount must be finite and positive');
+  }
+  if (request.amount > SPEND_LIMIT) {
+    return { status: 'review_required', reason: 'Exceeds autonomous spend limit' };
+  }
+  const vendor = await lookupVendor(request.contractor);
+  if (!vendor?.approved || !vendor.preferredAddress) {
+    return { status: 'review_required', reason: 'Recipient is not approved' };
+  }
+
   // Deduplicate
   const alreadyPaid = await payments.checkByReference({
     reference: request.invoiceRef
@@ -142,7 +152,7 @@ async function processContractorPayment(request: {
 
   // Route & execute
   const payment = await payments.send({
-    to: request.contractor,
+    to: vendor.preferredAddress,
     amount: request.amount,
     currency: "USD",
     reference: request.invoiceRef,
@@ -161,8 +171,17 @@ const summary = await payments.getHistory({
   dateTo: "2024-03-31"
 });
 
+// The adapter normalizes successful final payments to status="completed".
+// Pending/failed records are not paid; currencies cannot be added together.
+const paidByCurrency = summary
+  .filter(p => p.status === "completed")
+  .reduce<Record<string, number>>((totals, p) => {
+    totals[p.currency] = (totals[p.currency] ?? 0) + p.amount;
+    return totals;
+  }, {});
+
 const report = {
-  totalPaid: summary.reduce((sum, p) => sum + p.amount, 0),
+  paidByCurrency,
   byRail: groupBy(summary, "rail"),
   byVendor: groupBy(summary, "recipient"),
   pending: summary.filter(p => p.status === "pending"),
@@ -191,3 +210,16 @@ return formatAPReport(report);
 - **Project Manager Agent** — processes contractor time-and-materials invoices
 - **HR Agent** — handles payroll disbursements
 - **Strategy Agent** — provides spend reports and runway analysis
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:accounts-payable-agent`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:accounts-payable-agent`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

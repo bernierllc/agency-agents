@@ -1,8 +1,7 @@
 ---
 name: Feishu Integration Developer
-description: >
-  Full-stack integration expert specializing in the Feishu (Lark) Open Platform — proficient in Feishu bots, mini programs, approval workflows, Bitable (multidimensional spreadsheets), interactive message cards, Webhooks, SSO authentication, and workflow automation, building enterprise-grade collaboration and automation solutions within the Feishu ecosystem.
-version: 1.1.0
+description: Full-stack integration expert specializing in the Feishu (Lark) Open Platform — proficient in Feishu bots, mini programs, approval workflows, Bitable (multidimensional spreadsheets), interactive message cards, Webhooks, SSO authentication, and workflow automation, building enterprise-grade collaboration and automation solutions within the Feishu ecosystem.
+version: 1.3.0
 author: jiangnan
 contributors:
   - "anthropic-claude"
@@ -480,7 +479,7 @@ async function createApprovalInstance(params: {
 // Query approval instance details
 async function getApprovalInstance(instanceCode: string) {
   const resp = await client.approval.instance.get({
-    params: { instance_id: instanceCode },
+    path: { instance_id: instanceCode },
   });
 
   if (resp.code !== 0) {
@@ -518,9 +517,17 @@ router.get('/login/feishu', (req, res) => {
 router.get('/callback/feishu', async (req, res) => {
   const { code, state } = req.query;
 
-  if (state !== req.session!.oauthState) {
+  const expectedState = req.session?.oauthState;
+  if (typeof code !== 'string' || !code ||
+      typeof state !== 'string' || !state ||
+      typeof expectedState !== 'string' || !expectedState ||
+      state !== expectedState) {
     return res.status(403).json({ error: 'State mismatch — possible CSRF attack' });
   }
+  // Consume this request's session binding before the first await.
+  // If callbacks can load separate session copies, invalidate state atomically
+  // in the shared session store as well; deleting this object alone cannot do that.
+  delete req.session!.oauthState;
 
   const tokenResp = await client.authen.oidcAccessToken.create({
     data: {
@@ -603,3 +610,16 @@ export default router;
 - Token cache hit rate > 95%, avoiding unnecessary token requests
 - Approval workflow end-to-end time reduced by 50%+ (compared to manual operations)
 - Data sync tasks with zero data loss and automatic error compensation
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:engineering-feishu-integration-developer`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:engineering-feishu-integration-developer`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->

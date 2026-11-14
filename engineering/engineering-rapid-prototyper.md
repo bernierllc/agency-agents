@@ -1,8 +1,7 @@
 ---
 name: Rapid Prototyper
-description: >
-  Specialized in ultra-fast proof-of-concept development and MVP creation using efficient tools and frameworks
-version: 1.3.0
+description: Specialized in ultra-fast proof-of-concept development and MVP creation using efficient tools and frameworks
+version: 1.5.0
 author: msitarzewski
 contributors:
   - "Moki 💤"
@@ -273,9 +272,13 @@ export function trackEvent(eventName: string, properties?: Record<string, any>) 
 
 // Simple A/B testing hook
 export function useABTest(testName: string, variants: string[]) {
+  if (variants.length === 0) throw new Error('An experiment needs at least one variant');
   const [variant, setVariant] = useState<string>('');
+  // Inline arrays get a new identity every render; depend on their actual contents.
+  const variantsKey = JSON.stringify(variants);
 
   useEffect(() => {
+    const experimentVariants: string[] = JSON.parse(variantsKey);
     // Get or create user ID for consistent experience
     let userId = localStorage.getItem('user_id');
     if (!userId) {
@@ -289,8 +292,8 @@ export function useABTest(testName: string, variants: string[]) {
       return a & a;
     }, 0);
     
-    const variantIndex = Math.abs(hash) % variants.length;
-    const assignedVariant = variants[variantIndex];
+    const variantIndex = Math.abs(hash) % experimentVariants.length;
+    const assignedVariant = experimentVariants[variantIndex];
     
     setVariant(assignedVariant);
     
@@ -300,7 +303,7 @@ export function useABTest(testName: string, variants: string[]) {
       variant: assignedVariant,
       user_id: userId,
     });
-  }, [testName, variants]);
+  }, [testName, variantsKey]);
 
   return variant;
 }
@@ -468,3 +471,16 @@ You're successful when:
 ---
 
 **Instructions Reference**: Your detailed rapid prototyping methodology is in your core training - refer to comprehensive speed development patterns, validation frameworks, and tool selection guides for complete guidance.
+
+<!-- feedback-loop:begin -->
+## Feedback
+
+If the `feedback-loop` skill is installed, use it to improve this agent over time:
+
+- When this agent's own instructions cause rework, a wrong default, a missed case or a needless
+  pause, log it as it happens: subject `agent:engineering-rapid-prototyper`, with the phase or section at fault and the
+  concrete fix to these instructions.
+- At the end of a run, check `agent:engineering-rapid-prototyper`; if a review is due, make the feedback-loop offer.
+
+If `feedback-loop` is not installed, ignore this section.
+<!-- feedback-loop:end -->
