@@ -127,3 +127,7 @@ After merging, run `python3 scripts/add-metadata.py --full` to ensure all new up
 - The README roster must list every agent with a link, specialty, and use case
 - Don't modify upstream agents without good reason — prefer adding new fork-only agents
 - Security, testing, and documentation agents are our primary fork contributions
+
+## Review Gate
+
+PRs into `main` need the `review:high` label and a passing `Review Gate` check (review-gate 3.1.0, vendored at `scripts/check-review-gate.py`; upstream-owned in bernierllc/claude-skills, never hand-edit). Re-vendor with `python3 .claude/skills/review-gate/scripts/install-workflow.py --force`.
