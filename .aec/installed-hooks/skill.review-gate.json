@@ -2,22 +2,22 @@
   "schema_version": 1,
   "item_type": "skill",
   "item_key": "review-gate",
-  "item_version": "3.0.0",
-  "hooks_file_hash": "sha256:1d6514c89b80525810e0eb12e35d6255744b5138813381a6cb928fc10dcfe3e9",
+  "item_version": "3.1.0",
+  "hooks_file_hash": "sha256:5db7cbeda0e97887f0b0a14d524c7fdeee35dfcb5e026cab29e861a32d4e4e89",
   "hooks_installed": [
     {
       "hook_id": "rg-merge-guard",
       "agent": "claude",
       "target_json_pointer": "/hooks/PreToolUse/0",
       "content_fingerprint": "sha256:81e03e2c29b3e365c72594117683b6fe41879d1a7acfffdccaab7dd7665f09a1",
-      "version": "3.0.0"
+      "version": "3.1.0"
     },
     {
       "hook_id": "rg-merge-guard",
       "agent": "gemini",
       "target_json_pointer": "/hooks/BeforeTool/0",
-      "content_fingerprint": "sha256:3040fa3cbb7c3f050f5dea1e780aa48bf04a41c4befc832da33ef938ad266954",
-      "version": "3.0.0"
+      "content_fingerprint": "sha256:5fdcaae9e3a7061e165f1600524dd0543fddc70d7bebe6d7719ff92826fab055",
+      "version": "3.1.0"
     }
   ],
   "hooks_skipped": [],
