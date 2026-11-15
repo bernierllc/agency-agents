@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "aec_version_last_write": "2.52.4",
+  "scope": "project",
+  "profile": "balanced",
+  "matrix": {
+    "agents": {
+      "additive": "ask"
+    },
+    "skills": {
+      "additive": "auto"
+    },
+    "rules": {
+      "additive": "auto"
+    },
+    "packages": {
+      "additive": "ask"
+    },
+    "plugins": {
+      "additive": "ask"
+    }
+  },
+  "targets": [
+    {
+      "agent_key": "claude",
+      "path": "CLAUDE.md",
+      "template_hash": "518cbbcc3d53baa0",
+      "content_hash": "aab539e6e8d87183",
+      "written_at": "2026-11-15T22:15:26Z"
+    }
+  ]
+}

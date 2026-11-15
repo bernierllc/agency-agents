@@ -1,0 +1,24 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f \"$CLAUDE_PROJECT_DIR\"/.claude/skills/review-gate/scripts/merge-guard.py ]; then /usr/bin/env python3 \"$CLAUDE_PROJECT_DIR\"/.claude/skills/review-gate/scripts/merge-guard.py; else r=$(cd \"$CLAUDE_PROJECT_DIR\" 2>/dev/null && cd \"$(git rev-parse --git-common-dir 2>/dev/null)/..\" 2>/dev/null && pwd || printf %s \"$CLAUDE_PROJECT_DIR\"); if [ -f \"$r\"/.claude/skills/review-gate/scripts/merge-guard.py ]; then /usr/bin/env python3 \"$r\"/.claude/skills/review-gate/scripts/merge-guard.py; else printf '%s\\n' '{\"systemMessage\": \"aec: blocking hook rg-merge-guard is OFF in this checkout: skill:review-gate is not installed. Run: aec install skill review-gate\"}'; fi; fi",
+            "timeout": 25
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f \"$CLAUDE_PROJECT_DIR\"/.claude/skills/pr-merge-flow/scripts/pr-guard.py ]; then /usr/bin/env python3 \"$CLAUDE_PROJECT_DIR\"/.claude/skills/pr-merge-flow/scripts/pr-guard.py; else r=$(cd \"$CLAUDE_PROJECT_DIR\" 2>/dev/null && cd \"$(git rev-parse --git-common-dir 2>/dev/null)/..\" 2>/dev/null && pwd || printf %s \"$CLAUDE_PROJECT_DIR\"); if [ -f \"$r\"/.claude/skills/pr-merge-flow/scripts/pr-guard.py ]; then /usr/bin/env python3 \"$r\"/.claude/skills/pr-merge-flow/scripts/pr-guard.py; else printf '%s\\n' '{\"systemMessage\": \"aec: blocking hook pmf-pr-guard is OFF in this checkout: skill:pr-merge-flow is not installed. Run: aec install skill pr-merge-flow\"}'; fi; fi",
+            "timeout": 20
+          }
+        ]
+      }
+    ]
+  }
+}

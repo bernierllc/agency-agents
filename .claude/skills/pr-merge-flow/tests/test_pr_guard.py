@@ -1,0 +1,186 @@
+"""Run: python3 pr-merge-flow/tests/test_pr_guard.py  (no framework; exits non-zero on failure)."""
+import importlib.util
+from pathlib import Path
+
+spec = importlib.util.spec_from_file_location("g", Path(__file__).parent.parent / "scripts" / "pr-guard.py")
+g = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(g)
+
+calls = lambda c: list(g.sync_calls(c, "/r"))
+
+# What agents actually ran on 2026-09-28 (email_demo #516/#518 rebuilt twice for nothing).
+assert calls('for w in a b; do git -C .worktrees/$w merge -q --no-edit origin/staging; done') == \
+    [(".worktrees/$w", "merge", ["origin/staging"])]
+assert calls("cd /x/wt && git fetch -q origin staging && git merge origin/staging --no-edit") == \
+    [("/x/wt", "merge", ["origin/staging"])]
+assert calls("git pull --rebase origin staging") == [("/r", "pull", ["origin", "staging"])]
+assert calls('git merge -m "sync staging" origin/staging') == [("/r", "merge", ["origin/staging"])]
+assert calls("git -C sub rebase origin/main") == [("/r/sub", "rebase", ["origin/main"])]
+# Not syncs: no ref named, control flags, other git commands.
+assert calls("git pull") == []
+assert calls("git merge --abort") == []
+assert calls("git rebase --continue") == []
+assert calls("git log origin/staging..HEAD") == []
+assert calls("gh pr merge 5 --merge") == []
+
+assert g.names_base(["origin", "staging"], "staging")
+assert g.names_base(["origin/staging"], "staging")
+assert not g.names_base(["origin/feat/x"], "staging")
+
+# Unresolvable dir is refused before any network call; override lets it through.
+assert "can't resolve" in g.check("for w in a; do git -C wt/$w merge origin/staging; done", "/r")
+assert g.check("git -C wt/$w merge origin/staging  # sync-base: need fix abc123", "/r") is None
+
+assert g.draft_violation("gh pr create --draft --title x")
+assert g.draft_violation("git push && gh pr create -d")
+assert g.draft_violation("gh pr ready 5 --undo")
+assert not g.draft_violation("gh pr create --title 'no draft here'")
+assert list(g.pr_create_dirs("git push && gh pr create --title x", "/r"))
+assert not list(g.pr_create_dirs("gh pr create -R me/r --title x", "/r"))
+assert not list(g.pr_create_dirs("gh pr create --repo=me/r", "/r"))
+# Codex P2s on #37: quoting, continuation, other ref spellings, gh aliases/inherited -R.
+assert calls('git merge -m "sync; base" origin/main') == [("/r", "merge", ["origin/main"])]
+assert calls("git merge \\\n  origin/staging") == [("/r", "merge", ["origin/staging"])]
+assert calls("git merge origin/staging # sync; not a command") == [("/r", "merge", ["origin/staging"])]
+assert calls('git commit -m "" && git merge origin/staging') == [("/r", "merge", ["origin/staging"])]
+assert calls("if true; then git -C wt rebase origin/main; fi") == [("/r/wt", "rebase", ["origin/main"])]
+for ref in ["refs/heads/main", "refs/remotes/upstream/main", "company/main", "refs/remotes/origin/main"]:
+    assert g.names_base([ref], "main"), ref
+assert not g.names_base(["refs/heads/feat/main-fix", "a/b/main"], "main")
+assert g.draft_violation("gh pr create \\\n  --draft --title x")
+assert g.draft_violation("gh pr new --draft")
+assert g.draft_violation("gh -R owner/repo pr create --draft")
+assert not g.draft_violation('gh pr create --title "no --draft; here"')
+assert not list(g.pr_create_dirs("gh -R me/r pr create --title x", "/r"))
+assert list(g.pr_create_dirs("gh pr new --title x", "/r"))
+# Codex on #38: a comment ends at the newline, and `#` inside a word or quotes isn't one.
+assert g.draft_violation("echo ok # note\ngh pr create --draft")
+assert g.draft_violation("echo x#not-a-comment; gh pr create --draft")
+assert g.draft_violation('gh pr create --title "#12 fix" --draft')
+assert g.draft_violation("gh pr create --title '# heading' --draft")
+assert not g.draft_violation("gh pr create --title x  # later: --draft")
+assert calls("git status # merge origin/main later\ngit merge origin/staging") == \
+    [("/r", "merge", ["origin/staging"])]
+# Heredoc bodies are data, not commands, and must not hide what follows.
+assert g.draft_violation("cat <<'EOF'\n\"\nEOF\ngh pr create --draft")
+assert g.draft_violation("cat <<-EOF > f\n\tit's\n\tEOF\ngh pr create --draft")
+assert not g.draft_violation("cat <<EOF\ngh pr create --draft\nEOF")
+# Codex round 2 on #38: slashed base names, quoted heredoc delimiters, attached -R.
+for ref in ["release/v1", "origin/release/v1", "refs/remotes/origin/release/v1", "refs/heads/release/v1"]:
+    assert g.names_base([ref], "release/v1"), ref
+assert not g.names_base(["a/b/release/v1", "origin/release/v10"], "release/v1")
+assert g.draft_violation("cat <<E\\OF\nx\nEOF\ngh pr create --draft")
+assert g.draft_violation("cat <<'E'OF\nx\nEOF\ngh pr create --draft")
+assert g.draft_violation('cat <<"EOF"\nx\nEOF\ngh pr create --draft')
+# A heredoc whose terminator never appears drops nothing (fails toward checking).
+assert g.draft_violation("cat <<EOF\nx\ngh pr create --draft")
+assert not list(g.pr_create_dirs("gh -Rme/r pr create --title x", "/r"))
+assert not list(g.pr_create_dirs("gh pr create -Rme/r", "/r"))
+# Codex round 3 (post-merge on #38): subshell cd scope, fail-closed fallback, $'..' delimiters.
+assert calls("(cd /tmp; :); git merge origin/main") == [("/r", "merge", ["origin/main"])]
+assert calls("(cd /tmp && git merge origin/main)") == [("/tmp", "merge", ["origin/main"])]
+assert calls("cd a && (cd b; git merge origin/x); git merge origin/y") == \
+    [("/r/a/b", "merge", ["origin/x"]), ("/r/a", "merge", ["origin/y"])]
+assert g.draft_violation("printf $'\\''; gh pr create --draft")
+assert g.draft_violation("cat <<$'EOF'\nx\nEOF\ngh pr create --draft\n$EOF")
+# Quoted or escaped operator characters are arguments, not shell syntax.
+assert calls("printf '('; cd /tmp/repo; printf ')'; git merge origin/main") == \
+    [("/tmp/repo", "merge", ["origin/main"])]
+assert calls("echo \\( ; cd /x; echo \\) ; git merge origin/main") == [("/x", "merge", ["origin/main"])]
+assert g.draft_violation("echo ';' && gh pr create --draft")
+assert list(g.segments("echo ';' '|'")) == [["echo", ";", "|"]]
+assert g.draft_violation("gh pr create --title '\n' --draft")
+assert g.draft_violation('gh pr create --title "a\nb" --draft')
+# Unparseable input still keeps line boundaries.
+assert g.draft_violation("echo 'unterminated\ngh pr create --draft")
+
+# pr_open_mode: only an explicit "draft" allows drafts; unset, ready and corrupt mean ready.
+import json, tempfile
+_prefs = Path(tempfile.mkdtemp()) / "preferences.json"
+assert not g.draft_mode(_prefs)  # missing file
+for body, want in [({}, False), ({"settings": {}}, False), ({"settings": {"pr_open_mode": "ready"}}, False),
+                   ({"settings": {"pr_open_mode": "draft"}}, True), ({"settings": None}, False)]:
+    _prefs.write_text(json.dumps(body))
+    assert g.draft_mode(_prefs) is want, body
+_prefs.write_text("{not json")
+assert not g.draft_mode(_prefs)
+
+# Ungated merge and polling. Mock the gh call the way a green/red rollup would come back.
+class _R:
+    def __init__(self, rc, out="", err=""):
+        self.returncode, self.stdout, self.stderr = rc, out, err
+
+def _gh(rc=0, rollup=None, err=""):
+    return lambda *a, **k: _R(rc, json.dumps({"statusCheckRollup": rollup}), err)
+
+_run = g.subprocess.run
+def merge(cmd, **kw):
+    g.subprocess.run = _gh(**kw)
+    try:
+        return g.check(cmd, "/r")
+    finally:
+        g.subprocess.run = _run
+
+ok = [{"name": "pytest", "conclusion": "SUCCESS"}, {"name": "lint", "conclusion": "skipped"},
+      {"context": "ci/x", "state": "SUCCESS"}, {"name": "n", "conclusion": "NEUTRAL"}]
+assert "--admin" in merge("gh pr merge 5 --admin --squash", rollup=ok)
+assert "never bypass" in merge("gh pr merge 5 --admin --auto", rollup=ok)
+assert merge("gh pr merge 5 --auto --squash", rollup=[]) is None
+assert merge("gh pr merge 5 --squash", rollup=ok) is None
+assert merge("gh pr merge https://github.com/o/r/pull/5 -t 'x y' --merge", rollup=ok) is None
+for bad, name in [({"name": "pytest", "conclusion": "CANCELLED"}, "pytest: CANCELLED"),
+                  ({"name": "pytest", "conclusion": ""}, "pytest: PENDING"),
+                  ({"name": "pytest", "conclusion": "FAILURE"}, "pytest: FAILURE"),
+                  ({"context": "ci/x", "state": "PENDING"}, "ci/x: PENDING"),
+                  ({"context": "ci/x", "state": "FAILURE"}, "ci/x: FAILURE")]:
+    m = merge("gh pr merge 5 --squash", rollup=ok + [bad])
+    assert m and name in m and "--auto --squash" in m, (bad, m)
+assert "no checks" in merge("gh pr merge 5 --squash", rollup=[])
+assert "no checks" in merge("gh pr merge 5", rollup=None)
+m = merge("gh pr merge 5", rc=1, err="no pull requests found")
+assert m and "no pull requests found" in m
+assert merge("gh pr view 5 && echo done", rollup=[]) is None
+
+for c in ["while true; do gh pr checks 12 | grep -q pending || break; sleep 30; done",
+          "sleep 60 && gh pr view 12", "gh run watch 9; sleep 1", "until gh run list; do sleep 5; done",
+          "for i in 1 2; do sleep 10\n gh pr status\n done"]:
+    assert "never poll" in (g.check(c, "/r") or ""), c
+for c in ["gh pr checks 12 --watch --fail-fast", "sleep 5", "gh pr view 12", "echo gh pr checks; sleep 5",
+          "sleep 5 # gh pr checks 12", "cat <<EOF\ngh pr checks 12\nEOF\nsleep 5"]:
+    assert g.check(c, "/r") is None, c
+print("ok")
+
+# Codex on prevost #332: the fork check uses the dir `gh pr create` runs in, not the hook cwd.
+seen = []
+g.unpinned_fork = lambda d: seen.append(d)
+def forks(c):
+    seen.clear()
+    assert g.check(c, "/hook") is None
+    return list(seen)
+assert forks("cd /some/fork && gh pr create --title x") == ["/some/fork"]
+assert forks("(cd /some/fork && gh pr create --title x) && gh pr create -R o/r --title y") == ["/some/fork"]
+assert forks("gh pr create --title x") == ["/hook"]
+assert forks('cd "$DIR" && gh pr create --title x') == []
+# Codex P2 on prevost #332: `env` and NAME=value prefixes don't hide the command.
+assert calls("GIT_DIR=x env -i FOO=1 git merge origin/main") == [("/r", "merge", ["origin/main"])]
+assert calls("env -u HOME git -C wt rebase origin/main") == [("/r/wt", "rebase", ["origin/main"])]
+assert g.draft_violation("GH_TOKEN=x env gh pr create --draft")
+assert "--admin" in merge("GH_TOKEN=x gh pr merge 5 --admin", rollup=ok)
+assert calls("echo a=b; git merge origin/main") == [("/r", "merge", ["origin/main"])]  # only a leading assignment
+# Codex P2 on prevost #332: cd options and `--` come before the directory operand.
+assert calls("cd -P wt && git merge origin/main") == [("/r/wt", "merge", ["origin/main"])]
+assert calls("cd -- wt && git merge origin/main") == [("/r/wt", "merge", ["origin/main"])]
+# Codex P2s on prevost #332, round 5: directory changes the guard can't model fail closed instead of being ignored.
+assert calls("cd - && git merge origin/main") == [("$OLDPWD", "merge", ["origin/main"])]
+assert calls("cd && git merge origin/main") == [("$HOME", "merge", ["origin/main"])]
+assert calls("pushd wt && git merge origin/main") == [("$DIRSTACK", "merge", ["origin/main"])]
+# `env -C DIR cmd` runs that one command in DIR; the next command is back in the original directory.
+assert calls("env -C wt git merge origin/main; git merge origin/main") == [("/r/wt", "merge", ["origin/main"]), ("/r", "merge", ["origin/main"])]
+assert calls("env --chdir=wt git merge origin/main") == [("/r/wt", "merge", ["origin/main"])]
+assert g.draft_violation("env -C wt gh pr create --draft")
+# Codex P2s on prevost #332, round 6: pflag bool values on the draft flags, and the override is a comment, not a substring.
+assert g.draft_violation("gh pr create --draft=true") and g.draft_violation("gh pr create -d=1")
+assert g.draft_violation("gh pr ready 5 --undo=true")
+assert not g.draft_violation("gh pr create --draft=false") and not g.draft_violation("gh pr ready 5 --undo=false")
+assert g.check("git commit -m 'document sync-base: behavior' && git -C wt/$w merge origin/staging", "/r") is not None
+assert g.check("git -C wt/$w merge origin/staging # sync-base: need abc123", "/r") is None
