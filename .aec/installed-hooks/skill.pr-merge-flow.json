@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "item_type": "skill",
+  "item_key": "pr-merge-flow",
+  "item_version": "1.3.0",
+  "hooks_file_hash": "sha256:b6abc95a8d627f19cf3d10d5fdf4c65b05076e5a67cbe6864fd1d0ac06c93710",
+  "hooks_installed": [
+    {
+      "hook_id": "pmf-pr-guard",
+      "agent": "claude",
+      "target_json_pointer": "/hooks/PreToolUse/1",
+      "content_fingerprint": "sha256:5968eced385f379b6d073a73f328dce5e41b90dec56f3ec705c4393ccf460056",
+      "version": "1.3.0"
+    },
+    {
+      "hook_id": "pmf-pr-guard",
+      "agent": "gemini",
+      "target_json_pointer": "/hooks/BeforeTool/1",
+      "content_fingerprint": "sha256:414ba98927c49c7de43c846776ef6c50c718fd8f6ef273a31f198211b03f84f5",
+      "version": "1.3.0"
+    }
+  ],
+  "hooks_skipped": [],
+  "agents_targeted": [
+    "claude",
+    "gemini",
+    "cursor",
+    "git"
+  ],
+  "skipped_versions": [],
+  "allow_custom_check": false,
+  "hooks_enabled": true,
+  "source_scope": "repo"
+}

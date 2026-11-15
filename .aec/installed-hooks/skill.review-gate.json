@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "item_type": "skill",
+  "item_key": "review-gate",
+  "item_version": "3.0.0",
+  "hooks_file_hash": "sha256:1d6514c89b80525810e0eb12e35d6255744b5138813381a6cb928fc10dcfe3e9",
+  "hooks_installed": [
+    {
+      "hook_id": "rg-merge-guard",
+      "agent": "claude",
+      "target_json_pointer": "/hooks/PreToolUse/0",
+      "content_fingerprint": "sha256:81e03e2c29b3e365c72594117683b6fe41879d1a7acfffdccaab7dd7665f09a1",
+      "version": "3.0.0"
+    },
+    {
+      "hook_id": "rg-merge-guard",
+      "agent": "gemini",
+      "target_json_pointer": "/hooks/BeforeTool/0",
+      "content_fingerprint": "sha256:3040fa3cbb7c3f050f5dea1e780aa48bf04a41c4befc832da33ef938ad266954",
+      "version": "3.0.0"
+    }
+  ],
+  "hooks_skipped": [],
+  "agents_targeted": [
+    "claude",
+    "gemini",
+    "cursor",
+    "git"
+  ],
+  "skipped_versions": [],
+  "allow_custom_check": true,
+  "hooks_enabled": true,
+  "source_scope": "repo"
+}

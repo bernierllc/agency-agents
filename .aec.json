@@ -1,0 +1,137 @@
+{
+  "$schema": "https://aec.bernier.dev/schema/aec.json",
+  "version": "1.0.0",
+  "project": {
+    "name": "agency-agents",
+    "description": ""
+  },
+  "ports": {},
+  "test": {
+    "suites": {},
+    "prerequisites": [],
+    "scheduled": []
+  },
+  "installed": {
+    "skills": {
+      "pr-merge-flow": {
+        "version": "1.3.0",
+        "contentHash": "sha256:0e28733e13581dbae1acfdb04b5e5e993e239005b5a29fef9d84b23f188e46ca",
+        "installedAt": "2026-11-14T02:01:49.894277+00:00",
+        "versionHashes": {
+          "1.1.0": "sha256:f08fcdd3aa6fb3315ff4aca760751bb4e79a5426941483063f731555c0b17a1b"
+        },
+        "installedAs": "explicit"
+      },
+      "resume": {
+        "version": "1.5.0",
+        "contentHash": "sha256:cef531c226096577e43a2a38a471b80ac8d9b661a6d20c249bc8744b88c32cfb",
+        "installedAt": "2026-11-14T22:26:45.654606+00:00",
+        "versionHashes": {
+          "1.4.0": "sha256:9aa42666cb723e803255caa0e038a2c9936df7a00c08977b461195e81c10a5fb"
+        },
+        "installedAs": "explicit"
+      },
+      "verification-writer": {
+        "version": "3.9.0",
+        "contentHash": "sha256:b93b7b9dcc61d99a0e3c3bc9a89427dd6b872af52a1462315a89e861d8d7dc40",
+        "installedAt": "2026-11-14T02:01:49.903348+00:00",
+        "versionHashes": {
+          "3.7.10": "sha256:0025f9973a3664e92008712b30879ff46880f462ea115294a562c2a946e87f4a",
+          "3.7.11": "sha256:c714118930c6924fe14ae570b1b3d26f6ce23ef390c195517d79141ca273ab25"
+        },
+        "installedAs": "explicit"
+      },
+      "api-verification-writer": {
+        "version": "1.4.0",
+        "contentHash": "sha256:54bc85390877cee90b029d17d91e6779d46d93f70793c91768bc927a39273b29",
+        "installedAt": "2026-11-14T22:26:45.662050+00:00",
+        "versionHashes": {
+          "1.2.18": "sha256:972583014763dbe7060bb0b53cc9f4872e692dd26944bce7bb8d35e17ec96060"
+        },
+        "installedAs": "explicit"
+      },
+      "api-verification": {
+        "version": "1.3.0",
+        "contentHash": "sha256:a82e2894279d520d939467da1f7b16b3cb3e3bc9ed4688de6445ab3911728e96",
+        "installedAt": "2026-11-14T22:26:45.666245+00:00",
+        "versionHashes": {
+          "1.1.2": "sha256:8e181e845fbdf019b61ff0c77a7fad3f42d41bc03dd952c422ac4e74ce7793af"
+        },
+        "installedAs": "explicit"
+      },
+      "git-conventions": {
+        "version": "1.1.0",
+        "contentHash": "sha256:b9454a83cb55a56a1536191ae845146212226ca16b83bf296398cbb405058bc7",
+        "installedAt": "2026-11-14T02:01:49.871481+00:00",
+        "versionHashes": {
+          "1.0.1": "sha256:f93b0cd7bcc60f70babb2e7d1a2c06d3dc768ebc6bcac75898ec1918a03a22a7"
+        },
+        "installedAs": "explicit"
+      },
+      "orchata": {
+        "version": "2.0.0",
+        "contentHash": "sha256:2e16d93d3338f87e51c1a7f92e3ac9a8c2c40b57049957f10e96ac9d1d4bf7a8",
+        "installedAt": "2026-11-14T02:01:49.875361+00:00",
+        "versionHashes": {
+          "1.5.0": "sha256:19668c629292232cf221f60c6814894bba6599447483bdf108f806cecb8f8065"
+        },
+        "installedAs": "explicit"
+      },
+      "playwright-test-generator": {
+        "version": "4.2.0",
+        "contentHash": "sha256:95d3855df95bc01aa3219d6bca57ac45f928557fe9d57616428bbe38703910da",
+        "installedAt": "2026-11-14T02:01:49.890155+00:00",
+        "versionHashes": {
+          "4.0.3": "sha256:eee0ca839fbacc823a91b77c6f446d9f2bc62764f88be21f44a9f003c1ea22a2"
+        },
+        "installedAs": "explicit"
+      },
+      "typecheck-on-edit": {
+        "version": "1.1.0",
+        "contentHash": "sha256:eef93b7082c95e796f8081ca6f4f650f5ddfd467f39c721eff4879556fcce957",
+        "installedAt": "2026-11-14T02:01:49.896740+00:00",
+        "versionHashes": {
+          "1.0.1": "sha256:2b76c678375533a031eddd87511a68aaa550cc2bec55bc46d2cd5984fb683141"
+        },
+        "installedAs": "explicit"
+      },
+      "adversarial-review": {
+        "version": "1.1.0",
+        "contentHash": "sha256:0aea2d2e7b69a1dbc5cbc69be8108e637ec63c1cce5181ff44641e550191e176",
+        "installedAt": "2026-11-15T04:44:38.421633+00:00",
+        "versionHashes": {},
+        "installedAs": "explicit"
+      }
+    },
+    "rules": {
+      "general/explicit-reference-convention": {
+        "version": "1.0.0",
+        "contentHash": "",
+        "installedAt": "2026-11-15T20:58:27.794878+00:00",
+        "source": "bernierllc/bernierllc-catalog",
+        "source_commit": "9ee0e295ada4139c56ba6acdbbd5518e318696e8"
+      },
+      "nevar/plan-and-contract-sync": {
+        "version": "1.0.0",
+        "contentHash": "",
+        "installedAt": "2026-11-15T20:58:27.815372+00:00",
+        "source": "nevar/nevar-catalog",
+        "source_commit": "1358565b5fa1ef0fb6c3264ff1b8b55434864cd9"
+      },
+      "nevar/pr-merge-protocol": {
+        "version": "1.0.0",
+        "contentHash": "",
+        "installedAt": "2026-11-15T20:58:27.825852+00:00",
+        "source": "nevar/nevar-catalog",
+        "source_commit": "1358565b5fa1ef0fb6c3264ff1b8b55434864cd9"
+      }
+    },
+    "agents": {
+      "support-customer-documentation": {
+        "version": "1.4.2",
+        "contentHash": "",
+        "installedAt": "2026-10-26T18:02:16.796414+00:00"
+      }
+    }
+  }
+}
