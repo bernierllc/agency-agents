@@ -1,7 +1,7 @@
 ---
 name: pr-merge-flow
-description: Use after opening or pushing to a pull request, while waiting on CI, or before merging the base branch (staging/main) into a feature branch. Keeps parallel PRs from restarting each other's CI and review — hand the merge to GitHub auto-merge, wait on checks in the background, and sync the base only on a real conflict. Ships a PreToolUse guard that enforces it.
-version: 1.3.0
+description: Use after opening or pushing to a pull request, while waiting on CI, or before merging the base branch (staging/main) into a feature branch. Keeps parallel PRs from restarting each other's CI and review — hand the merge to the repo's traffic cop (`gh pr merge <n> --squash --match-head-commit <sha>`, never `--auto`), wait on checks in the background, and sync the base only on a real conflict. Ships a PreToolUse guard that enforces it.
+version: 1.5.2
 author: Bernier LLC
 ---
 
@@ -23,11 +23,22 @@ rebuild. This skill stops that.
      base, and the base's own push CI catches anything that breaks once changes combine.
    - A base change to CI config or `.gitignore` is **not** a reason to sync: the PR picks
      up the new workflow on its next push anyway.
-2. **Hand the merge to GitHub.** When the review loop is done:
-   `gh pr merge <n> --auto --squash` (use `--merge` for long-lived-branch promotions, e.g.
-   staging → main), then stop. GitHub merges it once the required checks pass. Nobody
-   watches. If the repo has auto-merge disabled, enable it:
-   `gh api -X PATCH repos/<owner>/<repo> -F allow_auto_merge=true`.
+2. **Hand the merge to the traffic cop.** When the review loop is done, the repo's
+   `Traffic Cop · <repo>` thread merges after a live recheck of reviews and threads:
+   `gh pr merge <n> --squash --match-head-commit <sha>` (`--merge` for long-lived-branch promotions, e.g.
+   staging → main). Never `--auto` or `--admin`: Review Gate does not re-run on late
+   review or thread events, so auto-merge can land a PR a late P2 should have stopped.
+   **Forged-check step (SEC-MVS-01):** required checks match by name, so a PR can publish
+   its own `Review Gate`. Immediately before every `gh pr merge` into `staging` or `main`, the
+   cop runs the detector on the head it is about to merge and requires exit 0
+   (1 = forged, 2 = could not evaluate; both block):
+   `set -o pipefail; gh api "repos/$REPO/commits/$SHA/check-runs?per_page=100&filter=all" --paginate | REPO=$REPO PR_NUMBER=<n> python3 ~/.claude/skills/review-gate/scripts/check-forged-review-gate.py`.
+   `PR_NUMBER` lets the detector accept the bootstrap PR that replaces a legacy review-gate.yml
+   (review-gate 3.2.2); without it such a job exits 2.
+   Always run the copy in the installed `review-gate` skill, never `scripts/…` from a checkout:
+   a PR controls its own checkout's scripts and could swap in one that exits 0.
+   This stays required after review-gate 3.2.0 reaches a repo: the workflow scans once, and
+   a PR job that publishes after that scan is caught only by this merge-time run.
 3. **Wait for free.** Watch checks with `gh pr checks <n> --watch --fail-fast` run in the
    background (Claude Code: `run_in_background`). It costs nothing until it exits, and the
    harness wakes you. Never write a `sleep`/poll loop.
@@ -50,25 +61,79 @@ hooks dormant). It blocks:
   the PR on the upstream repo).
 
 - `gh pr merge --admin`, always: never bypass required checks; fix the red check or ask Matt;
-- `gh pr merge` without `--auto` unless every check is SUCCESS/SKIPPED/NEUTRAL (it asks
-  `gh pr view --json statusCheckRollup`; an empty rollup or a `gh` failure blocks). PR #325 once
-  merged on a CANCELLED check. The wanted shape is `gh pr merge <n> --auto --squash` (`--merge`
-  for promotions into main): GitHub merges when checks pass and nobody watches;
+- `gh pr merge --auto`, always (see rule 2), and any `gh pr merge` without `--match-head-commit <sha>` naming the full 40-hex SHA;
+- `gh pr merge` unless every check is SUCCESS/SKIPPED/NEUTRAL (it asks
+  `gh pr view --json statusCheckRollup`; an empty rollup or a `gh` failure blocks). Only the newest workflow run of each check counts, identified by the run id in its details URL (GitHub already lists only a run's latest attempt): an older red run superseded by a newer green run of the same workflow (a new PR's first Review Gate run) does not block, while a newer red or still-running run does. Same-named jobs inside one run are distinct jobs and each must be green, so a later green job never hides a failed sibling. A run's start is its earliest job's start, so a dependency-delayed job never makes an older run look newer. Runs started in the same second cannot be ordered, so all of them count (fail closed). An entry with no parsable run id in its details URL has an unknown run, so it supersedes nothing and must be green on its own (fail closed). A workflow is identified by its run's file path and event from the Actions API (one `gh api repos/<repo>/actions/runs?head_sha=<head>` call), never by its editable `name:`: a PR that adds a workflow also named `CI` cannot supersede the real CI's failed job. A run the API does not list (or an API failure) supersedes nothing (fail closed). Because `detailsUrl` is writable, an entry counts as a run's job only when that run's jobs API lists its job id with the same name and conclusion; a custom check pointing at a legitimate run supersedes nothing. Two PRs can share a head sha (one branch into staging and main), and the rollup lists both PRs' runs: a run counts for the merged PR only when its `pull_requests` list is exactly that PR, its head branch and repo are the PR's, and a review-gate run-name (`Review Gate - PR #<n>`, 3.2.6+) names no other PR. Any other run (another PR's, one listing several PRs, a fork's with none) supersedes nothing and must be green on its own (1.4.7). The lookups use the PR's own host and repo from its URL, so a URL selector from another checkout or an Enterprise `-R HOST/OWNER/REPO` resolves runs, and read JSON rather than `@tsv`, so a job name with a backslash or tab still matches (1.4.7). All of a merge check's `gh` calls share one 15 s budget under the hook's 20 s timeout; a run whose jobs lookup would overrun it supersedes nothing (fail closed). Boolean flags are last-wins like gh's own parser: `--disable-auto --disable-auto=false` merges and gets the full checks. PR #325 once
+  merged on a CANCELLED check. The wanted shape is `gh pr merge <n> --squash --match-head-commit <sha>` (`--merge`
+  for promotions into main);
+- a posted comment that mentions the Codex bot (the at-sign followed by `codex`, any case): `gh pr comment`,
+  `gh issue comment`, `gh pr review`, and a `gh api` call whose `-f`/`-F`/`--field`/`--raw-field` value or
+  `--input` file holds it (1.5.0). Each mention starts a Codex review on Matt's quota; Codex reviews a PR's
+  first head only, and later heads get a fallback review plus the `Fallback review:` line in `## Review`.
+  The body is scanned in the arguments and in a readable `--body-file`/`-F`, `-F body=@file` or `--input`
+  file (a relative path against the hook's working directory). When the body comes from a file or stdin (`-`, `/dev/stdin`,
+  `/dev/fd/0`), the command is also blocked when the mention appears anywhere in it, because that file may
+  be written earlier in the same command (`cat > b.md <<EOF … && gh pr comment 5 -F b.md`). A body file the
+  hook can't resolve before the shell runs is blocked too, with a message to write the body to a plain
+  path (1.5.1). The hook resolves only an allowlist: a path of letters, digits and `_ . / + , : @ % = -`,
+  not starting with `=`, with no quoting, backslash or `~`. Anything else fails closed,
+  including every expansion (`$`, backtick, glob, brace, `<(...)`, zsh `=(...)` and `=cmd`, `$'...'`) and
+  every `~` form (`~/`, `~+`, `~-`, `~user`). There is no cd tracking: when the command contains `cd`,
+  `pushd`, `popd` or `chdir` as a word anywhere (after `builtin`/`command`/a backslash, inside `if`, a
+  function, a loop, a subshell or a pipeline) or runs `env` with `--chdir` or a short option holding `C` (`-Csub`, `-iC sub`, even `-uC`), the directory is unknown, so a relative
+  body path fails closed and only an absolute plain path (starting with `/`) is scanned. A body file over
+  1 MiB is blocked as too large to scan, never scanned in part. Conservative blocks, by design: a quoted
+  path with special characters (`'plain*.md'`), `~/body.md`, any relative body path in a command that
+  contains `cd` (workaround: an absolute path), and any `gh api` call with an unresolvable body file
+  unless its effective method is a literal `GET` (1.5.2): the last `-X`/`--method` in any spelling (`-X GET`,
+  `-XGET`, `--method=GET`, `-iXGET`). A variable, `get`, or no `-X` (gh then POSTs when fields are given) is not
+  GET. Inline `-f`/`-F` values are scanned even for GET. A mention split by a backslash-newline inside single
+  quotes (`'@co\<newline>dex'`) is not a mention, since the shell keeps both characters there (1.5.2); in double
+  quotes or unquoted the line joins and it blocks. When the command holds quoting a flat scan can't follow (a
+  heredoc, `$(...)`, a backtick, `$'...'`, a quote in a comment) every backslash-newline is joined, so such a
+  split still blocks. Wrappers (1.5.2): after `env`, `sudo`, `nice`, `timeout`, `xargs`, `nohup`, `time` and
+  `exec` every later word is tried as the command, so no option argument hides `gh` or `git` (`env -S gh …`,
+  `env -u gh gh …`, `sudo -u x gh …`, `timeout 60 git rebase …`); a quoted or attached split string
+  (`env -S 'gh pr merge' …`, `-Sgh`, `--split-string=gh pr merge`, and env's `\_` separator) is split and each of its
+  words tried too; a word that splits to `(` or `)` is never read as a subshell bound. Their options are not parsed, so the command's
+  directory and root are known only behind no prefix, a plain `command`, or `env NAME=value…`; `env -C DIR` /
+  `--chdir[=]DIR` keeps the root, so only an absolute plain body path is read. Behind anything else (any wrapper,
+  any option such as `env -i`/`-u`/`-S`, `command -p`, `sudo -D`/`-R`) no body file is read and the call blocks,
+  and a base sync or merge there runs in an unresolved directory, even with an absolute `git -C` (blocked;
+  workaround: run `gh`/`git` without the wrapper, or pass `-R owner/repo` to `gh pr merge`). A `gh pr create`
+  there blocks unless it passes `-R owner/repo`, since the fork check can't run in an unknown directory. `env -i`/`env -u` before a body file are new false
+  blocks (accepted). WONTFIX: a `gh …` that is only an argument after a wrapper (`env echo gh pr merge 1`) is
+  checked as a command, since telling `echo` from a wrapper is the wrapper knowledge the guard avoids; rare,
+  fails closed, workaround: drop the `env`. Out of scope: `bash -c 'cd …'`. A value consumed by `--body`/`-b` or another value flag is never read as a flag, an
+  attached value (`-b<text>`) is scanned like a separate one, and short-flag clusters parse as gh's pflag does (`-iF body=@f`, `-iXPOST`). The mention is
+  the at-sign plus `codex` as its own word, so an email address such as `bob@codex.io` does not count.
+  Known limits, not checked: a body built by command substitution (`--body "$(cat f)"`) or a variable;
+  a file written by an earlier command; stdin piped from another command; `gh` not run as a bare word
+  (an absolute path, `bash -c`); `gh pr create`/`edit` and `gh issue create`
+  bodies; a comment line ending in a backslash, which folds the next line into the comment; and a heredoc
+  nested in `$(...)` inside quotes. A heredoc that feeds no posting command (`cat > notes.md`) is never blocked;
 - a `sleep` plus a status query (`gh pr checks|view|status`, `gh run view|watch|list`) in one
   command, loop or not. The wanted shape is `gh pr checks <n> --watch --fail-fast` run in the
-  background, or `--auto`.
+  background.
 
 The sync and draft rules fail open when there's no open PR, `gh` is unavailable, or GitHub reports `UNKNOWN`.
 
-**Scope:** the guard catches the commands agents habitually run, not a determined
-evasion; it is a speed bump, not a Bash sandbox. Parsing errs toward checking more:
-comments and heredoc bodies are dropped, `( … )` scopes `cd`, and input `shlex` can't
-parse is split on every operator character. Exotic Bash that still slips past is out of
-scope unless an agent actually ran it.
+**Best-effort guard:** this is a quota guard, not a security boundary. It catches the
+commands agents habitually run, not a determined evasion. Backslash-newline is joined first,
+as the shell does, outside single quotes (the mention scan also reads the unjoined text), then comments and heredoc
+bodies are dropped, and input `shlex` can't parse is split on every operator character. Wrappers fail closed
+(every later word is tried as the command, in an unknown directory). Any shell form that rewrites the command after
+the hook sees it is out of scope: `bash -c`, `eval`, variables and command substitution. A parity test
+(`tests/test_pr_guard_parity.py`, in CI) replays every test and fixture input against the previous release and
+fails when a block is lost, unless the input is listed in its `ALLOWED_FLIPS` with a reason.
 
 **Override:** when you genuinely need a specific commit from the base (a fix your tests
 depend on), append `# sync-base: <reason>` to the command. Say which commit and why.
 The reason stays in the transcript.
+
+**Codex override:** only when Matt explicitly asked for a Codex review on this head, append
+`# codex-review-ok: <reason>` (a shell comment with a reason; the colon is optional, so
+`# codex-review-ok <reason>` works too; quoted text does not count).
 
 Self-check: `python3 pr-merge-flow/tests/test_pr_guard.py`.
 
