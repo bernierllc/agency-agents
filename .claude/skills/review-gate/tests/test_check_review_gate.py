@@ -18,11 +18,16 @@ spec2 = importlib.util.spec_from_file_location(
 )
 mg = importlib.util.module_from_spec(spec2)
 spec2.loader.exec_module(mg)
+# check_one runs CI's forged-check step after evaluate; its own behavior tests live in test_forged_gate.py
+# (MergeGuardForgedStep). Here it is recorded, so the payload stubs below decide alone.
+_forged_calls = []
+mg.forged_gate_check = lambda *a, **k: _forged_calls.append(a)
 
 
 def pr(**kwargs):
     base = {
         "body": "## Review\n\nCodex round 1\n",
+        "author": {"login": "pr-author"},
         "baseRefName": "staging",
         "headRefOid": "abc1234",
         "labels": {"nodes": []},
@@ -83,9 +88,8 @@ for reviewer in ("codex", "agy", "antigravity", "superpowers", "claude-sonnet"):
                 f"## Review\n\nFallback review: {reviewer} on {sha} "
                 f"— verdict: {verdict}\n"
             )
-            assert g.evaluate(
-                pr(body=body, headRefOid=head, reviews={"nodes": []})
-            ) == []
+            result = g.evaluate(pr(body=body, headRefOid=head, reviews={"nodes": []}))
+            assert (result == []) == (sha == head), (sha, result)
 
 # Clean Codex runs post no review, only a state marker in the summary PR comment.
 def codex_comment(sha, status="completed", unresolved=False, login="chatgpt-codex-connector"):
@@ -125,52 +129,253 @@ invalid_lines = (
     "Fallback review: agy on 89cda061 — verdict: unknown",
     "https://example.com/Fallback review: agy on 89cda061 — verdict: clean",
     "[Fallback review: agy on 89cda061 — verdict: clean](https://example.com)",
+    # full head, so only the verdict or reviewer name can reject these
+    f"Fallback review: agy on {head} — verdict: findings",
+    f"Fallback review: none on {head} — verdict: clean",
+    f"Fallback review: codex-bot on {head} — verdict: clean",
 )
 for line in invalid_lines:
     assert g.evaluate(
         pr(body=f"## Review\n\n{line}\n", headRefOid=head, reviews={"nodes": []})
     ), line
 
-attestation = "Fallback review: agy on 89cda061 — verdict: clean"
-# Examples that GitHub does not render as prose must not count.
-hidden = (
-    f"<!-- example only\n{attestation}\n-->",
-    f"<!-- example only\n{attestation}",  # unclosed comment
-    f"```\n{attestation}\n```",
-    f"~~~\n{attestation}\n~~~",
-    f"````\n```\n{attestation}\n````",
-    f"    {attestation}",
-    f"\t{attestation}",
-    f"<pre>\n{attestation}\n</pre>",
-    f"<PRE>{attestation}</PRE>",
-    f"```\n{attestation}",  # unclosed fence
+attestation = f"Fallback review: agy on {head} — verdict: clean"
+# Strict PR-body grammar (Program 19:10, #105): no Markdown parsing, a physical-line allow-list.
+R = "## Review"
+ok_bodies = (
+    f"{R}\n\n{attestation}\n",
+    f"{R}\n{attestation}",
+    f"Summary text.\n\n- a bullet\n\n{R}\n\nCodex high ran twice.\n\n{attestation}\n\n## Notes\n\n- `code` and [links](https://x) here\n",
+    f"{R}\n\nRound 2 fixed in deadbeef.\n{attestation}\nfixed in deadbeef\nnot-a-finding: by design\n",
 )
-for block in hidden:
-    assert g.evaluate(pr(
-        body=f"## Review\n\nPending\n\n{block}\n", headRefOid=head, reviews={"nodes": []}
-    )), block
-# A heading hidden in a comment is not a Review section.
-assert g.evaluate(pr(
-    body=f"<!--\n## Review\n{attestation}\n-->", headRefOid=head, reviews={"nodes": []}
-))
-# U+2028 must not split a line into a bare attestation.
-assert g.evaluate(pr(
-    body=f"## Review\n\nnote\u2028{attestation}\n", headRefOid=head, reviews={"nodes": []}
-))
-# A real attestation after a closed comment/fence still passes.
-assert not g.evaluate(pr(
-    body=f"## Review\n\n<!-- c -->\n```\nx\n```\n{attestation}\n",
-    headRefOid=head, reviews={"nodes": []},
-))
-assert g.evaluate(pr(
-    body=f"## Review\n\n{attestation}\n",
-    headRefOid="dddddddfffffffffff",
-    reviews={"nodes": []},
-)), "new push must invalidate the previous attestation"
-for body in (attestation, f"## Review\nPending\n## Other\n{attestation}"):
-    assert g.evaluate(pr(body=body, headRefOid=head, reviews={"nodes": []}))
+for body in ok_bodies:
+    assert g.evaluate(pr(body=body, headRefOid=head, reviews={"nodes": []})) == [], body
+# blank-surrounded exact attestation inside a fence or comment, the Program counterexample
+for body in (f"{R}\n\n```text\n\n{attestation}\n\n```\n", f"{R}\n\n~~~\n\n{attestation}\n\n~~~\n",
+             f"{R}\n\n<!--\n\n{attestation}\n\n-->\n", f"<!--\n\n{R}\n\n{attestation}\n\n-->\n",
+             f"```\n\n{R}\n\n{attestation}\n\n```\n", f"{R}\n\n{attestation}\n\n   ```\n",
+             f"x <!-- note -->\n\n{R}\n\n{attestation}\n"):
+    reasons = g.evaluate(pr(body=body, headRefOid=head, reviews={"nodes": []}))
+    assert any("fences" in r or "HTML comments" in r for r in reasons), body
+# a line opening with `<` (after quote/list markers), anywhere in the body: raw HTML blocks survive blank
+# lines, and an unterminated attribute (`<div title='`, Sonnet ef23aa3 P1) hides everything after it on GitHub
+for opener in ("<pre>", "<PRE class=x>", "<script>", "<style>", "<textarea>", "<?x", "<!DOCTYPE x", "<![CDATA[", "- <pre>", "> <pre>",
+               "<div title='", "<p title=\"", "<table x='", "<presentation> ok", "1. <div title='", "   <div title='", "<"):
+    reasons = g.evaluate(pr(body=f"{opener}\n\n{R}\n\n{attestation}\n", headRefOid=head, reviews={"nodes": []}))
+    assert any("starting with <" in r for r in reasons), opener
+# `<` later in a line or escaped does not open a block (GitHub renderer, 2026-11-16): still allowed
+# 3.2.14 (nevar-content P2): digits are a marker only as `N.`/`N)`, so `2026 < 2027` and `1.5 < 2` are prose
+for line in ("a <div title='", "- [ ] <div title='", "\\<div title='", "&lt;div title='", "Uses `<PR_NUMBER>` here",
+             "2026 < 2027", "1.5 < 2", "3 <= 4", ". <x", ") <x", "> 2026 < 2027", "- 10 < 20"):
+    assert g.evaluate(pr(body=f"{line}\n\n{R}\n\n{attestation}\n", headRefOid=head, reviews={"nodes": []})) == [], line
+# the heading: exactly one exact line, after a blank line or at the top
+for body in (f"{attestation}\n", f"{R}\n\n{attestation}\n\n{R}\n", f"## Review notes\n\n{attestation}\n",
+             f"##\tReview\n\n{attestation}\n", f" {R}\n\n{attestation}\n", f"### Review\n\n{attestation}\n",
+             f"[x]: /u '\n{R}\n{attestation}\n## x '\n"):
+    assert g.evaluate(pr(body=body, headRefOid=head, reviews={"nodes": []})), body
+# every non-blank region line: exact attestation, exact closing line, or plain prose
+for line in (f"    {attestation}", f"\t{attestation}", f" {attestation}", f"- {attestation}", f"* {attestation}",
+             f"1. {attestation}", f"1) {attestation}", f"> {attestation}", f"| {attestation} |", f"# {attestation}",
+             f"### {attestation}", "===", "---", "***", "<div>", "<span>x</span>", "[x]: https://example.org", "[x](u)",
+             "`code`", "text with `code`", "text (paren)", "text | pipe", "a > b", "| a | b |", "- note", "+ note",
+             "2. note", "10) note", "<!-- -->", "\\- escaped", "&amp; entity first", "_emphasis_", "**bold**"):
+    for body in (f"{R}\n\n{line}\n\n{attestation}\n", f"{R}\n\n{attestation}\n\n{line}\n", f"{R}\n{attestation}\n{line}\n"):
+        reasons = g.evaluate(pr(body=body, headRefOid=head, reviews={"nodes": []}))
+        assert reasons, body
+        assert not g.review_section_names_fallback(body, head), body
+# generic prose never authorises a non-exact attestation
+for line in (f"{attestation} and more", f"Note {attestation}", f"{attestation} ", attestation.replace("—", "-"),
+             f"{attestation}.", "Pending: " + attestation):
+    assert not g.review_section_names_fallback(f"{R}\n\n{line}\n", head), line
+# blank means only spaces and tabs (CommonMark): an NBSP/U+2028/form-feed/... line does not end an HTML
+# block, so it neither precedes the heading nor counts as a blank region line
+_UNI_BLANKS = ("\u00a0", "\u2028", "\u3000", "\x0c", "\x0b", "\x1c", "\x85", "\u200a")
+for ws in _UNI_BLANKS:
+    for opener in ("<details>", "<div>", "<a>", "<details><summary>"):
+        body = f"{opener}\n{ws}\n{R}\n{attestation}\n"
+        assert g.evaluate(pr(body=body, headRefOid=head, reviews={"nodes": []})), repr(body)
+        assert not g.review_section_names_fallback(body, head), repr(body)
+    assert g.evaluate(pr(body=f"{R}\n\n{ws}\n\n{attestation}\n", headRefOid=head, reviews={"nodes": []})), repr(ws)
+for blank in (" ", "\t", " \t "):
+    assert g.evaluate(pr(body=f"Intro\n{blank}\n{R}\n{blank}\n{attestation}\n", headRefOid=head, reviews={"nodes": []})) == []
+# emphasis, strikethrough and math markers can span lines around the attestation
+for line in ("x ~~y", "x *y", "x _y", "x $y", "z~~", "z*"):
+    body = f"{R}\n{line}\n{attestation}\n"
+    assert g.evaluate(pr(body=body, headRefOid=head, reviews={"nodes": []})), body
+    assert not g.review_section_names_fallback(body, head), body
+# each banned prose character, mid-line (Sonnet b on ea4fb8b, P1 4)
+_NR = {"nodes": []}
+for ch in "`<>|[]()*_~$":
+    body = f"{R}\n\nnote {ch} here\n\n{attestation}\n"
+    assert g.evaluate(pr(body=body, headRefOid=head, reviews=_NR)), body
+    assert not g.review_section_names_fallback(body, head), body
+for line in ("note: plain, words; 'quoted' - fine!", "1.5 seconds later", "1234567890. not a list marker"):
+    assert g.evaluate(pr(body=f"{R}\n\n{line}\n\n{attestation}\n", headRefOid=head, reviews=_NR)) == [], line
+for line in ("1.", "123456789. note", "1)"):
+    assert g.evaluate(pr(body=f"{R}\n\n{line}\n\n{attestation}\n", headRefOid=head, reviews=_NR)), line
+# CR and CRLF bodies read like LF ones, for passing and failing bodies alike
+for nl in ("\r\n", "\r"):
+    assert g.evaluate(pr(body=f"Intro{nl}{nl}{R}{nl}{nl}{attestation}{nl}", headRefOid=head, reviews=_NR)) == [], repr(nl)
+    assert g.evaluate(pr(body=f"{R}{nl}{nl}```{nl}{nl}{attestation}{nl}", headRefOid=head, reviews=_NR)), repr(nl)
+    assert g.evaluate(pr(body=f"Intro{nl}{R}{nl}{attestation}{nl}", headRefOid=head, reviews=_NR)), repr(nl)
+# a tab-indented fence, raw-HTML openers behind tab/list/ordered prefixes, and trailing space on the heading
+assert any("fences" in r for r in g.evaluate(pr(body=f"{R}\n\n\t```\n\n{attestation}\n", headRefOid=head, reviews=_NR)))
+for opener in ("\t<pre>", "1. <pre>", "1) <script>", "* <style>", "+ <textarea>", "> - 2. <pre>", ">><pre>", "-<pre>"):
+    assert any("raw HTML" in r for r in g.evaluate(pr(body=f"{opener}\n\n{R}\n\n{attestation}\n", headRefOid=head, reviews=_NR))), opener
+assert g.evaluate(pr(body=f"{R}  \n\n{attestation}\n", headRefOid=head, reviews=_NR)) == []
+# the attestation names the full 40-hex head: any prefix (grindable) or a different head fails
+assert g.review_section_names_fallback(f"{R}\n{attestation}", head[:7]) is False
+for short in (head[:7], head[:12], head[:39]):
+    assert not g.review_section_names_fallback(f"{R}\n\nFallback review: agy on {short} — verdict: clean\n", head), short
+assert g.review_section_names_fallback(f"{R}\n\nFallback review: agy on {head.upper()} — verdict: clean\n", head)
+assert g.review_section_names_fallback(f"{R}\n\n{attestation}\n", head)
+# <details> anywhere: an unclosed one collapses the section that follows
+for line in ("<details>", "<DETAILS open>", "text <details>", "<details><summary>x</summary>"):
+    body = f"{line}\n\n{R}\n\n{attestation}\n"
+    assert any("<details>" in r for r in g.evaluate(pr(body=body, headRefOid=head, reviews={"nodes": []}))), body
+assert g.evaluate(pr(body=f"text <detailsx> ok\n\n{R}\n\n{attestation}\n", headRefOid=head, reviews={"nodes": []})) == []
+# ASCII-only matching: re.I would otherwise fold U+017F to s
+assert g.FALLBACK_ATTESTATION.fullmatch(f"Fallback review: claude-sonnet on {head} — verdict: clean")
+assert not g.FALLBACK_ATTESTATION.fullmatch(f"Fallback review: claude-\u017fonnet on {head} — verdict: clean")
+# the region ends at the next `## ` line: an attestation after it does not count
+assert not g.review_section_names_fallback(f"{R}\n\nPending\n\n## Other\n\n{attestation}\n", head)
+# the Claude Code footer belongs outside ## Review
+assert g.evaluate(pr(body=f"{R}\n\n{attestation}\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n",
+                     headRefOid=head, reviews={"nodes": []}))
+assert g.evaluate(pr(body=f"{R}\n\n{attestation}\n\n## Footer\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n",
+                     headRefOid=head, reviews={"nodes": []})) == []
+# a well-formed region is required even when Codex reviewed the head on GitHub
+assert g.evaluate(pr(body=f"{R}\n\n- bullet\n", headRefOid=head, reviews=no_reviews,
+                     comments={"nodes": [codex_comment(head)]}))
+# U+2028 stays inside one physical line
+assert not g.review_section_names_fallback(f"{R}\n\nnote {attestation}\n", head)
+assert g.evaluate(pr(body=f"{R}\n\n{attestation}\n", headRefOid="dddddddfffffffffff", reviews={"nodes": []}))
 for missing_head in (None, "", "89cda0"):
-    assert not g.review_section_names_fallback(f"## Review\n{attestation}", missing_head)
+    assert not g.review_section_names_fallback(f"{R}\n{attestation}", missing_head)
+
+# merge guard: the same grammar decides `gh pr merge` (it calls gate.evaluate on the live payload)
+_orig_parse, _orig_payload = mg.gate.parse_repo_with_host, mg.gate.pr_payload
+mg.gate.parse_repo_with_host = lambda repo, cwd=None, env=None: (None, "owner", "target")
+try:
+    for body, allowed in ((f"{R}\n\n{attestation}\n", True),
+                          (f"{R}\n\n```text\n\n{attestation}\n\n```\n", False),
+                          (f"{R}\n\n<!--\n\n{attestation}\n\n-->\n", False),
+                          (f"{R}\n\n- {attestation}\n", False),
+                          (f"{R}\n\n> {attestation}\n", False),
+                          (f"{R}\n\n    {attestation}\n", False),
+                          (f"{R}\n\n| {attestation} |\n", False),
+                          (f"{R}\n\n<pre>\n\n{attestation}\n", False),
+                          (f"{R}\n\n[x]: https://example.org\n\n{attestation}\n", False),
+                          (f"{R}\n\ntext\n===\n\n{attestation}\n", False),
+                          (f"<details>\n\u00a0\n{R}\n{attestation}\n", False),
+                          (f"{R}\nx ~~y\n{attestation}\nz~~\n", False),
+                          (f"<details>\n\n{R}\n\n{attestation}\n", False)):
+        mg.gate.pr_payload = lambda *a, _b=body, **k: pr(body=_b, headRefOid=head, reviews={"nodes": []})
+        blocked = mg.check_one("gh -R owner/target pr merge 42 --squash", cwd="/tmp")
+        assert (blocked is None) == allowed, (body, blocked)
+    # one body per rule, each violating only that rule (Sonnet b on ea4fb8b, P1 5)
+    single_rule = [f"{R}\n\nnote {ch} here\n\n{attestation}\n" for ch in "`<>|[]()*_~$"] + [
+        f"{attestation}\n",  # no heading
+        f"{R}\n\n{attestation}\n\n{R}\n",  # two headings
+        f"Intro\n{R}\n\n{attestation}\n",  # heading not after a blank line
+        f"{R}\n\n1. note\n\n{attestation}\n",  # ordered marker
+        f"{R}\n\n~~~\n\n{attestation}\n",  # tilde fence
+        f"{R}\n\n{attestation}\n\nx <!-- y\n",  # comment after the region
+        f"<script>\n\n{R}\n\n{attestation}\n",  # raw HTML
+        f"x <details>\n\n{R}\n\n{attestation}\n",  # details mid-line
+        f"{R}\n\nFallback review: agy on 89cda06f — verdict: clean\n",  # stale SHA
+    ]
+    for body in single_rule:
+        mg.gate.pr_payload = lambda *a, _b=body, **k: pr(body=_b, headRefOid=head, reviews={"nodes": []})
+        assert mg.check_one("gh -R owner/target pr merge 42 --squash", cwd="/tmp"), body
+    good = f"Intro\r\n\r\n{R}\r\n\r\n{attestation}\r\n"
+    mg.gate.pr_payload = lambda *a, **k: pr(body=good, headRefOid=head, reviews={"nodes": []})
+    assert mg.check_one("gh -R owner/target pr merge 42 --squash", cwd="/tmp") is None
+    # 3.2.13: the forged-check step runs only once evaluate passes, on the PR's own head; its block is the result
+    _forged_calls.clear()
+    assert mg.check_one("gh -R owner/target pr merge 42 --squash", cwd="/tmp") is None
+    assert [c[:4] for c in _forged_calls] == [("owner", "target", 42, head)], _forged_calls
+    mg.forged_gate_check = lambda *a, **k: "forged here"
+    assert mg.check_one("gh -R owner/target pr merge 42 --squash", cwd="/tmp") == "forged here"
+    mg.forged_gate_check = lambda *a, **k: _forged_calls.append(a)
+    _forged_calls.clear()
+    mg.gate.pr_payload = lambda *a, **k: pr(body=f"{R}\n\nno attestation\n", headRefOid=head, reviews={"nodes": []})
+    assert mg.check_one("gh -R owner/target pr merge 42 --squash", cwd="/tmp") and _forged_calls == []
+    # a command the guard cannot resolve is blocked with its own reason, before any payload is read
+    _err = mg.check_one("GH_CONFIG_DIR=~/e gh -R o/t pr merge 42", cwd="/tmp")
+    assert _err and "dynamic GH_CONFIG_DIR" in _err, _err
+    # Codex review on the head, the review:high label and P2 roots decide the merge too
+    for kw, allowed in (({"reviews": {"nodes": [{"state": "COMMENTED", "body": "ok", "commit": {"oid": head},
+                                                  "author": {"login": "chatgpt-codex-connector"}}]}}, True),
+                        ({"reviews": {"nodes": []}}, False),
+                        ({"baseRefName": "main", "labels": {"nodes": [{"name": "review:high"}]}}, True),
+                        ({"baseRefName": "main"}, False),
+                        ({"reviewThreads": {"nodes": [{"comments": {"nodes": [{"body": "_P2_ x"}]}}]}}, False)):
+        payload = {"body": f"{R}\n\nCodex reviewed.\n", "headRefOid": head,
+                   "reviews": {"nodes": [{"state": "COMMENTED", "body": "ok", "commit": {"oid": head},
+                                          "author": {"login": "chatgpt-codex-connector"}}]}, **kw}
+        mg.gate.pr_payload = lambda *a, _p=payload, **k: pr(**_p)
+        blocked = mg.check_one("gh -R owner/target pr merge 42 --squash", cwd="/tmp")
+        assert (blocked is None) == allowed, (kw, blocked)
+    # P2 closure decides the merge too
+    for reply, assoc, allowed in (("fixed in deadbeef", "MEMBER", True), ("fixed in deadbeef", "NONE", False),
+                                  ("Thanks.\nfixed in deadbeef", "OWNER", False), ("fixed in deadbeef\n===", "OWNER", False),
+                                  ("[Row](https://app.notion.com/p/abc)", "COLLABORATOR", True)):
+        threads = {"nodes": [{"comments": {"nodes": [{"body": "P2: x"}, {"body": reply, "author": {"login": "reviewer"}, "authorAssociation": assoc}]}}]}
+        mg.gate.pr_payload = lambda *a, _t=threads, **k: pr(body=f"{R}\n\n{attestation}\n", headRefOid=head,
+                                                             reviews={"nodes": []}, reviewThreads=_t)
+        blocked = mg.check_one("gh -R owner/target pr merge 42 --squash", cwd="/tmp")
+        assert (blocked is None) == allowed, (reply, assoc, blocked)
+finally:
+    mg.gate.parse_repo_with_host, mg.gate.pr_payload = _orig_parse, _orig_payload
+
+# check_one wiring: the real arguments reach parse_repo_with_host / pr_payload, under the merge child's gh env.
+# `GH_REPO=` clears the selector (scrub), GH_HOST and a relative GH_CONFIG_DIR are overlaid against the tool cwd.
+_calls = {}
+def _rec_parse(repo, cwd=None, env=None):
+    _calls["parse"] = (repo, cwd, dict(env) if env is not None else None, mg.gate._GH_SUBPROCESS_ENV.get())
+    return ("ghe.example", "owner", "target")
+def _rec_payload(owner, name, number, hostname=None):
+    _calls["payload"] = (owner, name, number, hostname, mg.gate._GH_SUBPROCESS_ENV.get())
+    return pr(body=f"{R}\n\n{attestation}\n", headRefOid=head, reviews={"nodes": []})
+_old_env = os.environ.copy()
+os.environ["GH_REPO"] = "evil/repo"
+mg.gate.parse_repo_with_host, mg.gate.pr_payload = _rec_parse, _rec_payload
+try:
+    assert mg.check_one("GH_REPO= GH_HOST=ghe.example GH_CONFIG_DIR=cfg gh pr merge 42", cwd="/tmp/wire") is None, _calls
+    _repo, _cwd, _env, _ctx = _calls["parse"]
+    assert (_repo, _cwd) == (None, "/tmp/wire"), _calls["parse"][:2]
+    assert _env is not None and "GH_REPO" not in _env, "scrubbed GH_REPO leaked into the gate env"
+    assert _env["GH_HOST"] == "ghe.example" and _env["GH_CONFIG_DIR"] == "/tmp/wire/cfg", _env
+    assert _ctx is not None and _ctx.get("GH_HOST") == "ghe.example" and "GH_REPO" not in _ctx, "gh_subprocess_env not active"
+    _o, _n, _num, _host, _pctx = _calls["payload"]
+    assert (_o, _n, _num, _host) == ("owner", "target", 42, "ghe.example"), _calls["payload"][:4]
+    assert _pctx is _ctx or _pctx == _ctx, "pr_payload ran outside the child env"
+    # any exception on the check path (not only RuntimeError) blocks with a message instead of escaping
+    mg.gate.pr_payload = lambda *a, **k: (_ for _ in ()).throw(ValueError("bad json"))
+    _msg = mg.check_one("gh -R owner/target pr merge 42", cwd="/tmp")
+    assert _msg and _msg.startswith("review-gate: gate check failed: bad json"), _msg
+finally:
+    os.environ.clear(); os.environ.update(_old_env)
+    mg.gate.parse_repo_with_host, mg.gate.pr_payload = _orig_parse, _orig_payload
+
+# a P2 root never closes itself, even when its author may close and its first line is a closing token
+_self_closing = {"body": "fixed in abc1234\n\nP2: x", "author": {"login": "owner"}, "authorAssociation": "OWNER"}
+assert g.P2_ROOT.search(_self_closing["body"]) and g.closes(_self_closing["body"])
+assert g.p2_threads_closed({"reviewThreads": {"nodes": [{"comments": {"nodes": [_self_closing]}}]}}), "root closed itself"
+# 3.2.13: a closing reply with text on its first line does not close, and the failure names the rule
+_root = {"body": "P2: x", "author": {"login": "r"}, "authorAssociation": "OWNER"}
+_trailing = {"body": "fixed in abc1234: explained here", "author": {"login": "owner"}, "authorAssociation": "OWNER"}
+_alone = {"body": "fixed in abc1234\n\nexplained here", "author": {"login": "owner"}, "authorAssociation": "OWNER"}
+_fail = g.p2_threads_closed({"reviewThreads": {"nodes": [{"comments": {"nodes": [_root, _trailing]}}]}})
+assert len(_fail) == 1 and "must be the reply's whole first line, standing alone" in _fail[0], _fail
+assert "explanation after a blank line" in _fail[0], _fail
+assert g.p2_threads_closed({"reviewThreads": {"nodes": [{"comments": {"nodes": [_root, _alone]}}]}}) == []
+# no head OID: neither Codex path passes, even with a Codex review that carries no commit and a clean comment
+_codex_nohead = {"state": "COMMENTED", "body": "ok", "commit": None, "author": {"login": "chatgpt-codex-connector"}}
+for _h in ("", None):
+    _p = {"headRefOid": _h, "reviews": {"nodes": [_codex_nohead]}, "comments": {"nodes": [codex_comment("")]}}
+    assert g.codex_done_on_head(_p) is False and g.codex_clean_comment_on_head(_p) is False, _h
 
 # Dismissed Codex review on head does not count
 dismissed = pr(
@@ -224,6 +429,10 @@ p2 = pr(
 )
 assert any("P2" in r for r in g.evaluate(p2))
 
+def _p2(reply, assoc="MEMBER"):
+    return pr(reviewThreads={"nodes": [{"comments": {"nodes": [{"body": "P2: add a test"},
+                                                               {"body": reply, "author": {"login": "reviewer"}, "authorAssociation": assoc}]}}]})
+
 # Closed P2
 p2_ok = pr(
     reviewThreads={
@@ -232,7 +441,7 @@ p2_ok = pr(
                 "comments": {
                     "nodes": [
                         {"body": "P2: add a test"},
-                        {"body": "fixed in `deadbeef`"},
+                        {"body": "fixed in `deadbeef`", "author": {"login": "reviewer"}, "authorAssociation": "MEMBER"},
                     ]
                 }
             }
@@ -240,6 +449,102 @@ p2_ok = pr(
     }
 )
 assert g.evaluate(p2_ok) == []
+# only an owner, member or collaborator closes: anyone can reply on a public repo
+for assoc in ("OWNER", "MEMBER", "COLLABORATOR"):
+    assert g.evaluate(_p2("fixed in deadbeef", assoc)) == [], assoc
+for assoc in (None, "NONE", "CONTRIBUTOR", "FIRST_TIME_CONTRIBUTOR", "FIRST_TIMER", "MANNEQUIN", "member"):
+    assert any("P2" in r for r in g.evaluate(_p2("fixed in deadbeef", assoc))), assoc
+
+
+# A P2 reply closes only when its FIRST line starts, at column 0, with a closing token.
+for ok in ("fixed in deadbeef", "fixed in `deadbeef`", "fixed in commit deadbeef1.", "fixed in deadbeef  ",
+           "not-a-finding: intentional, see SKILL.md", "Tracked: https://app.notion.com/p/4194efecc95a816c",
+           "https://www.notion.so/abc123", "[Tracker row](https://app.notion.com/p/abc)",
+           "fixed in deadbeef\n\n```\nanything after the first line\n```", "fixed in deadbeef\n \t\nmore",
+           "fixed in deadbeef\r\n\r\nmore", "fixed in deadbeef\n"):
+    assert g.evaluate(_p2(ok)) == [], ok
+    assert g.closes(ok), ok
+for bad in ("Thanks.\nfixed in deadbeef", " fixed in deadbeef", "\tfixed in deadbeef", "- fixed in deadbeef",
+            "1. fixed in deadbeef", "> fixed in deadbeef", "```\nfixed in deadbeef\n```", "<!-- fixed in deadbeef -->",
+            "`fixed in deadbeef`", "Still open; eventually reply with `fixed in deadbeef`", "will be not-a-finding: maybe",
+            "fixed in deadbeefzz", "not-fixed:https://notion.so/ticket", "`https://notion.so/ticket`",
+            "https://evilnotion.so/ticket", "\nfixed in deadbeef", "    fixed in deadbeef",
+            # the next line would make the first a setext heading or a table header
+            "fixed in 0123456\n===", "not-a-finding: x\n---", "not-a-finding: a|b\n-|-\nc|d", "fixed in 0123456\r===",
+            "fixed in 0123456\nmore text", "fixed in 0123456\n\u00a0\nmore",
+            # link text must be visible
+            "[](https://notion.so/x)", "[\u200b](https://notion.so/x)", "[![](https://notion.so/x)",
+            "[ ](https://notion.so/x)", "[a<!--](https://notion.so/x)-->", "[a>b](https://notion.so/x)",
+            "not-a-finding: <!-- -->", "not-a-finding: &nbsp;", "not-a-finding: \u200b", "not-a-finding: \u2800",
+            "not-a-finding: _", "fixed in \u017f0123456",
+            # nothing may follow the SHA or the link on the first line
+            "fixed in 0000000 — not actually fixed, ignore", "fixed in commit deadbeef1 — details", "fixed in `deadbeef",
+            "fixed in deadbeef`", "[x](https://notion.so/a", "[x](https://notion.so/a) not tracked", "<https://notion.so/x",
+            "https://notion.so/x is not where this is tracked"):
+    assert any("P2" in r for r in g.evaluate(_p2(bad))), bad
+for ok in ("<https://notion.so/x>", "Tracked: <https://www.notion.so/x>", "tracked https://notion.com/x",
+           "FIXED IN DEADBEEF", "fixed in 0123456", "fixed in commit `0123456789abcdef0123456789abcdef01234567`"):
+    assert g.closes(ok), ok
+for bad in ("https://notion.so.evil.com/x", "https://notion.sox/x", "fixed in 012345", "not-a-finding:",
+            "not-a-finding:   ", "fixed in 0123456\r\nmore"):
+    assert not g.closes(bad), bad
+# the root is P2 by word, any case; any one closing reply closes; the root cannot close itself
+for root in ("P2: x", "p2 x", "nit (P2)"):
+    t = pr(reviewThreads={"nodes": [{"comments": {"nodes": [{"body": root, "author": {"login": "reviewer"}, "authorAssociation": "OWNER"}]}}]})
+    assert any("P2" in r for r in g.evaluate(t)), root
+t = pr(reviewThreads={"nodes": [{"comments": {"nodes": [{"body": "P2: fixed in deadbeef", "author": {"login": "reviewer"}, "authorAssociation": "OWNER"}]}}]})
+assert any("P2" in r for r in g.evaluate(t))
+for root in ("xp2 note", "P20 note", "mp2y"):
+    t = pr(reviewThreads={"nodes": [{"comments": {"nodes": [{"body": root}]}}]})
+    assert g.evaluate(t) == [], root
+t = pr(reviewThreads={"nodes": [{"comments": {"nodes": [{"body": "P2: x"}, {"body": "thanks", "author": {"login": "reviewer"}, "authorAssociation": "OWNER"},
+                                                        {"body": "fixed in deadbeef", "author": {"login": "reviewer"}, "authorAssociation": "MEMBER"}]}}]})
+assert g.evaluate(t) == []
+for root in ("_P2_ x", "P2_x", "see p2."):
+    t = pr(reviewThreads={"nodes": [{"comments": {"nodes": [{"body": root}]}}]})
+    assert any("P2" in r for r in g.evaluate(t)), root
+assert not g.closes("https://notion.so/ is not where this is tracked")
+# Codex completion: only a completed, non-pending review or clean marker by the exact bot on the exact head
+_cx = lambda **kw: {"state": "COMMENTED", "body": "findings", "commit": {"oid": head},
+                    "author": {"login": "chatgpt-codex-connector"}, **kw}
+assert g.codex_done_on_head(pr(headRefOid=head, reviews={"nodes": [_cx()]}))
+for rev in (_cx(state="PENDING"), _cx(state="pending"), _cx(state="DISMISSED"), _cx(body="Running review"),
+            _cx(body="Running " + "x" * 391), _cx(commit={"oid": head[:12]}), _cx(commit=None),
+            _cx(author={"login": "chatgpt-codex-connectorx"}), _cx(author={"login": "xchatgpt-codex-connector"})):
+    assert not g.codex_done_on_head(pr(headRefOid=head, reviews={"nodes": [rev]})), rev
+assert g.codex_done_on_head(pr(headRefOid=head, reviews={"nodes": [_cx(body="Running " + "x" * 392)]}))
+assert g.codex_done_on_head(pr(headRefOid=head, reviews={"nodes": [_cx(author={"login": "ChatGPT-Codex-Connector"})]}))
+def _marker(**kw):
+    review = {"commit_sha": head, "status": "completed", "has_unresolved_findings": False, **kw}
+    return {"author": {"login": "chatgpt-codex-connector"},
+            "body": "<!-- codex-review-state:v1 " + __import__("json").dumps({"code_review": review}) + " -->"}
+assert g.codex_clean_comment_on_head(pr(headRefOid=head, comments={"nodes": [_marker()]}))
+for c in (_marker(status="queued"), _marker(status="Completed"), _marker(has_unresolved_findings=None),
+          _marker(has_unresolved_findings=0), _marker(commit_sha=head[:12]), _marker(commit_sha=head.upper())):
+    assert not g.codex_clean_comment_on_head(pr(headRefOid=head, comments={"nodes": [c]})), c
+for login in ("chatgpt-codex-connectorx", "chatgpt-codex-connector[bot]", "chatgpt-codex", ""):
+    assert not g.is_codex_author(login), login
+# a non-matching first marker must not hide a valid later one in the same comment
+_two = codex_comment("deadbeef" + head[8:])
+_two["body"] += "\n" + codex_comment(head)["body"]
+assert g.evaluate(pr(headRefOid=head, reviews=no_reviews, comments={"nodes": [_two]})) == []
+
+# 3.2.12: a Codex state naming an older sha words the failure as "attest a fallback review"; the verdict is
+# unchanged (same failing reasons, one message longer), and no state or a state on the head adds no hint
+_old_sha = "deadbeef" + head[8:]
+_stale = g.evaluate(pr(headRefOid=head, reviews=no_reviews, comments={"nodes": [codex_comment(_old_sha)]}))
+_none = g.evaluate(pr(headRefOid=head, reviews=no_reviews, comments={"nodes": []}))
+assert len(_stale) == len(_none) and _stale != _none, (_stale, _none)
+_hint = [r for r in _stale if "Codex bot last reviewed deadbeef" in r]
+assert len(_hint) == 1 and "add that Fallback review line to ## Review" in _hint[0], _stale
+# 3.2.13: the hint no longer offers a manual Codex re-review (it spends quota; never the default)
+assert "@codex" not in _hint[0] and "quota" not in _hint[0] and "manual" not in _hint[0], _hint[0]
+assert not any("last reviewed" in r for r in _none)
+_running = g.evaluate(pr(headRefOid=head, reviews=no_reviews, comments={"nodes": [codex_comment(head, status="running")]}))
+assert _running and not any("last reviewed" in r for r in _running), _running
+_fixed = f"Summary\n\n## Review\n\nFallback review: claude-sonnet on {head} — verdict: clean\n"
+assert g.evaluate(pr(body=_fixed, headRefOid=head, reviews=no_reviews,
+                     comments={"nodes": [codex_comment(_old_sha)]})) == []
 
 # main without label
 main = pr(baseRefName="main")
@@ -1577,16 +1882,22 @@ yml = (Path(__file__).parent.parent / "templates" / "review-gate.yml").read_text
 assert "pull_request_target:" in yml
 assert "pull_request_review:" not in yml
 assert "pull_request_review_comment:" not in yml
-assert "contents/scripts/check-review-gate.py?ref=$ref" in yml
+assert "contents/scripts/$name?ref=$ref" in yml
+for _script in ("check-review-gate.py", "check-forged-gate-names.py", "check-forged-review-gate.py"):
+    assert f"load_trusted {_script}" in yml
 assert "DEFAULT_BRANCH" in yml
 assert 'ref="$DEFAULT_BRANCH"' in yml
 assert "$BASE_SHA" not in yml
 assert "BASE_SHA:" not in yml
 assert "actions/checkout" not in yml
-assert re.search(r"(?m)^\s+name:\s*Review Gate\s*$", yml)
+# 3.2.8: the required context "Review Gate" is the gate's own job, on the PR head in its own suite;
+# nothing is POSTed (behavior pinned in test_forged_gate.py).
+assert '-f name="Review Gate"' not in yml
+assert re.search(r"(?m)^    name:\s*Review Gate\s*$", yml)
 assert "check-runs" in yml
-assert 'status="in_progress"' in yml
-assert "check-runs/$check_id" in yml
+# 3.2.1 for legacy API runs: a reevaluation first turns this PR's runs red so a stale success cannot stand.
+assert 'complete_check failure "review-gate running"' in yml
+assert "check-runs/$id" in yml
 assert "cancel-ci-on-finding" not in yml
 assert "gate-refresh-on-comment" not in yml
 assert "actions: write" not in yml
@@ -1600,6 +1911,11 @@ assert "aec path" not in skill
 assert "$(dirname)/scripts/install-workflow.py" not in skill
 assert "scripts/check-review-gate.py" in skill
 assert "default branch" in skill.lower()
+# the gate-safe body example in SKILL.md passes the gate, attestation and all, into main with review:high
+_ex = re.search(r"A PR body the gate accepts.*?```markdown\n(.*?)```", skill, re.S).group(1)
+_ex_head = re.search(r"on ([0-9a-f]{40}) ", _ex).group(1)
+assert g.evaluate(pr(body=_ex, headRefOid=_ex_head, baseRefName="main", reviews={"nodes": []},
+                     labels={"nodes": [{"name": "review:high"}]})) == [], _ex
 
 # PATH=… can swap the gh binary even with a literal -R — fail closed
 assert mg.sets_path_override("PATH=/tmp/fake:$PATH gh -R owner/safe pr merge 1")
@@ -1742,6 +2058,7 @@ _doctor_spec = importlib.util.spec_from_file_location("doctor_review_gate", _doc
 _doctor = importlib.util.module_from_spec(_doctor_spec)
 assert _doctor_spec.loader is not None
 _doctor_spec.loader.exec_module(_doctor)
+assert {_doctor.MAIN_REVIEW_LABEL} == g.MAIN_REVIEW_LABELS  # doctor checks the label the gate requires
 assert _doctor.ruleset_requires_review_gate(
     {
         "rules": [
@@ -1900,9 +2217,188 @@ assert not _doctor.ruleset_requires_conversation_resolution(
     {"rules": [{"type": "pull_request", "parameters": {}}]}
 )
 
-# Thread pagination embeds the first comments page (avoid N+1 gh api calls)
-_paginate_src = inspect.getsource(g._paginate_threads)
-assert "comments(first: 50)" in _paginate_src
-assert "_paginate_thread_comments" in _paginate_src
+# pr_payload reads every page of every connection, and fails closed on a missing one; main() exits
+# 0/1/2 (pass/fail/error) through the real script (Sonnet b on 035394a, P1 1-2). A fake gh serves GraphQL.
+_FAKE_GQL = r"""#!/usr/bin/env python3
+import json, os, re, sys
+fx = json.load(open(os.environ["FAKE_GQL"]))
+args = sys.argv[1:]
+m = next(filter(None, (re.fullmatch(r"repos/o/r/collaborators/([^/]+)/permission", a) for a in args)), None)
+if m:
+    open(os.environ["FAKE_GQL"] + ".calls", "a").write(m.group(1) + "\n")
+    perm = fx.get("permissions", {}).get(m.group(1), "none")
+    if perm == "ERROR":
+        print("gh: Server Error (HTTP 502)", file=sys.stderr); sys.exit(1)
+    print(json.dumps({"permission": perm} if perm != "MISSING" else {})); sys.exit(0)
+q = next(a[6:] for a in args if a.startswith("query="))
+var = dict(a.split("=", 1) for a in args[args.index("graphql"):] if "=" in a and not a.startswith("query="))
+i = int(var.get("cursor", "0"))
+def page(pages, i):
+    return {"pageInfo": {"hasNextPage": i + 1 < len(pages), "endCursor": str(i + 1)}, "nodes": pages[i]}
+if "node(id" in q:
+    pages = fx["thread_pages"][var["id"]]
+    print(json.dumps({"data": {"node": {"comments": page(pages, i)}}})); sys.exit(0)
+m = re.search(r"pullRequest\(number:\$number\) \{\s*(\w+)\(first", q)
+if not m:
+    print(json.dumps({"data": {"repository": {"pullRequest": fx["pr"]}}})); sys.exit(0)
+field = m.group(1)
+if field in fx.get("missing", ()):
+    print(json.dumps({"data": {"repository": {"pullRequest": {}}}})); sys.exit(0)
+print(json.dumps({"data": {"repository": {"pullRequest": {field: page(fx[field], i)}}}}))
+"""
+import json as _json, subprocess as _sp, sys as _sys, tempfile as _tf2
+_gd = _tf2.mkdtemp()
+Path(_gd, "gh").write_text(_FAKE_GQL); os.chmod(Path(_gd, "gh"), 0o755)
+_SCRIPT = Path(__file__).parent.parent / "scripts" / "check-review-gate.py"
+_p2_root = {"body": "P2: x"}
+_closer = {"body": "fixed in deadbeef", "author": {"login": "reviewer"}, "authorAssociation": "MEMBER"}
+def _thread(tid, comments, more=False):
+    return {"id": tid, "comments": {"pageInfo": {"hasNextPage": more, "endCursor": "1"}, "nodes": comments}}
+def _fixture(**over):
+    fx = {"pr": {"number": 7, "body": f"{R}\n\n{attestation}\n", "author": {"login": "pr-author"}, "baseRefName": "main", "headRefOid": head},
+          "labels": [[{"name": "x"}], [{"name": "review:high"}]],
+          "reviews": [[], []], "comments": [[], []],
+          "reviewThreads": [[], [_thread("T2", [_p2_root, _closer])]], "thread_pages": {}}
+    fx.update(over)
+    return fx
+def _run(fx):
+    path = Path(_gd, "fx.json"); path.write_text(_json.dumps(fx))
+    env = dict(os.environ, PATH=f"{_gd}:{os.environ['PATH']}", FAKE_GQL=str(path))
+    old = os.environ.copy(); os.environ.update(env)
+    try:
+        try:
+            reasons = g.evaluate(g.pr_payload("o", "r", 7))
+        except RuntimeError as e:
+            reasons = e
+    finally:
+        os.environ.clear(); os.environ.update(old)
+    proc = _sp.run([_sys.executable, str(_SCRIPT), "--pr", "7", "--repo", "o/r"], env=env, capture_output=True, text=True)
+    return reasons, proc.returncode, proc.stdout + proc.stderr
+# label and closed thread on page 2 only: pass
+assert _run(_fixture())[:2] == ([], 0)
+# an open P2 thread on page 2 of threads fails
+_r, _rc, _out = _run(_fixture(reviewThreads=[[], [_thread("T2", [_p2_root])]]))
+assert _rc == 1 and any("P2" in x for x in _r), _out
+# a closing reply on the second page of one thread's comments counts; an open P2 there fails
+_fx = _fixture(reviewThreads=[[_thread("T1", [_p2_root], more=True)]],
+               thread_pages={"T1": [[], [{"body": "thanks", "author": {"login": "reviewer"}, "authorAssociation": "OWNER"}, _closer]]})
+assert _run(_fx)[:2] == ([], 0)
+_fx["thread_pages"]["T1"] = [[], [{"body": "thanks", "author": {"login": "reviewer"}, "authorAssociation": "OWNER"}]]
+assert _run(_fx)[1] == 1
+# the review:high label only on page 2 is still found; without it main fails
+assert _run(_fixture(labels=[[{"name": "x"}], [{"name": "y"}]]))[1] == 1
+# Codex review / clean comment on a later page satisfies the gate without an attestation
+_noatt = {"number": 7, "body": f"{R}\n\nCodex reviewed.\n", "author": {"login": "pr-author"}, "baseRefName": "staging", "headRefOid": head}
+assert _run(_fixture(pr=_noatt))[1] == 1
+assert _run(_fixture(pr=_noatt, reviews=[[], [{"state": "COMMENTED", "body": "ok", "commit": {"oid": head},
+                                               "author": {"login": "chatgpt-codex-connector"}}]]))[:2] == ([], 0)
+assert _run(_fixture(pr=_noatt, comments=[[], [codex_comment(head)]]))[:2] == ([], 0)
+# a missing connection fails closed (exit 2), never reads as an empty list
+for field in ("labels", "reviews", "comments", "reviewThreads"):
+    _r, _rc, _out = _run(_fixture(missing=[field]))
+    assert isinstance(_r, RuntimeError) and _rc == 2, (field, _r, _out)
+    assert f"pullRequest.{field}" in _out, _out
 
+
+# a next page with no cursor fails closed instead of returning page 1
+try:
+    g._all_nodes({"nodes": [], "pageInfo": {"hasNextPage": True, "endCursor": None}}, "reviewThreads", lambda c: {})
+    raise AssertionError("_all_nodes accepted a next page without a cursor")
+except RuntimeError as _e:
+    assert "without a cursor" in str(_e), _e
+# the fallback reviewer allow-list is exactly the documented set
+assert re.search(r"\(([a-z|-]+)\) on", g.FALLBACK_ATTESTATION.pattern).group(1).split("|") == [
+    "codex", "agy", "antigravity", "superpowers", "claude-sonnet"]
+
+
+# An API failure names the method and endpoint (never field values such as the GraphQL query).
+import os as _os, tempfile as _tf
+_d = _tf.mkdtemp()
+Path(_d, "gh").write_text("#!/bin/sh\necho 'gh: Not Found (HTTP 404)' >&2\nexit 1\n"); _os.chmod(Path(_d, "gh"), 0o755)
+_old_path = _os.environ["PATH"]; _os.environ["PATH"] = f"{_d}:{_old_path}"
+try:
+    for _args, _want in ((["repos/o/r/pulls/26"], "gh api GET repos/o/r/pulls/26 failed (exit 1): gh: Not Found (HTTP 404)"),
+                         (["graphql", "-f", "query=secretish", "-F", "n=1"], "gh api POST graphql failed (exit 1)"),
+                         (["-X", "PATCH", "repos/o/r/check-runs/5", "-f", "a=b"], "gh api PATCH repos/o/r/check-runs/5 failed")):
+        try:
+            g.run_gh(_args)
+            raise AssertionError("run_gh did not raise")
+        except RuntimeError as _e:
+            assert str(_e).startswith(_want), str(_e)
+            assert "secretish" not in str(_e)
+finally:
+    _os.environ["PATH"] = _old_path
 print("ok")
+
+# the PR author may close (shared gh identity, see p2_threads_closed); a non-member reply still does not
+_own_reply = {"body": "not-a-finding: mine", "author": {"login": "pr-author"}, "authorAssociation": "OWNER"}
+assert g.evaluate(pr(reviewThreads={"nodes": [{"comments": {"nodes": [{"body": "P2: x"}, _own_reply]}}]})) == []
+# end to end through gh: the author's own closing reply closes the P2
+_own = {"body": "fixed in deadbeef", "author": {"login": "pr-author"}, "authorAssociation": "OWNER"}
+assert _run(_fixture(reviewThreads=[[], [_thread("T2", [_p2_root, _own])]]))[:2] == ([], 0)
+
+
+# A private org member reads as CONTRIBUTOR to the Actions token (review-gate-sandbox run 44388630509,
+# nevar-fund #27): a closing reply from a User with write or admin on the repo closes, read via
+# GET repos/{o}/{r}/collaborators/{login}/permission. Who may close is otherwise unchanged.
+def _priv(login="priv", typename="User", assoc="CONTRIBUTOR", body="fixed in deadbeef"):
+    return {"body": body, "author": {"__typename": typename, "login": login}, "authorAssociation": assoc}
+def _run_perm(replies, permissions):
+    calls = Path(_gd, "fx.json.calls")
+    calls.unlink(missing_ok=True)
+    out = _run(_fixture(reviewThreads=[[], [_thread("T2", [_p2_root, *replies])]], permissions=permissions))
+    return (*out, calls.read_text().split() if calls.exists() else [])
+# a private member with admin or write closes; maintain reads as write
+for perm in ("admin", "write"):
+    _r, _rc, _out, _calls = _run_perm([_priv()], {"priv": perm})
+    assert (_r, _rc, _calls) == ([], 0, ["priv", "priv"]), (perm, _r, _out, _calls)
+# read (and triage, which reads as read), none (unrelated account) and an unknown value are still rejected
+for perm in ("read", "none", "maintain", "triage", "WRITE"):
+    _r, _rc, _out, _ = _run_perm([_priv()], {"priv": perm})
+    assert _rc == 1 and any(f"priv (CONTRIBUTOR, permission {perm})" in x for x in _r), (perm, _r, _out)
+# bots, mannequins, organizations and null authors are never looked up and never close
+for reply in (_priv("github-actions", "Bot"), _priv("ghost", "Mannequin"), _priv("acme", "Organization"),
+              {"body": "fixed in deadbeef", "author": None, "authorAssociation": "CONTRIBUTOR"},
+              _priv("priv", None), _priv("bad/login")):
+    _r, _rc, _out, _calls = _run_perm([reply], {"priv": "admin", "github-actions": "admin", "acme": "admin"})
+    assert _rc == 1 and _calls == [], (reply, _r, _out, _calls)
+# a non-closing reply, or a closer whose association already counts, triggers no lookup
+_r, _rc, _out, _calls = _run_perm([_priv(body="thanks")], {"priv": "admin"})
+assert _rc == 1 and _calls == [], (_r, _out, _calls)
+_r, _rc, _out, _calls = _run_perm([_priv(assoc="MEMBER")], {})
+assert (_r, _rc, _calls) == ([], 0, []), (_r, _out, _calls)
+# a thread an association-closer already closed makes no lookup, so a failing lookup cannot fail it (#116 P2-2)
+_r, _rc, _out, _calls = _run_perm([_priv("gone"), _priv(assoc="MEMBER", login="m")], {"gone": "ERROR"})
+assert (_r, _rc, _calls) == ([], 0, []), (_r, _out, _calls)
+# the skip is per thread: a MEMBER closing thread 1 does not let a read-permission CONTRIBUTOR close thread 2
+_r, _rc, _out = _run(_fixture(reviewThreads=[[], [_thread("T1", [_p2_root, _priv(assoc="MEMBER", login="m")]),
+                                                  _thread("T2", [_p2_root, _priv("r")])]], permissions={"r": "read"}))[:3]
+assert _rc == 1 and len(_r) == 1 and "P2 thread #2" in _r[0] and "r (CONTRIBUTOR, permission read)" in _r[0], (_r, _out)
+# an enterprise-managed login (`handle_shortcode`) is looked up and closes with write (#116 P2-3)
+_r, _rc, _out, _calls = _run_perm([_priv("jdoe_acme")], {"jdoe_acme": "write"})
+assert (_r, _rc, _calls) == ([], 0, ["jdoe_acme", "jdoe_acme"]), (_r, _out, _calls)
+# one lookup per login per run, however many replies it wrote
+_r, _rc, _out, _calls = _run_perm([_priv(), _priv(body="not-a-finding: x")], {"priv": "read"})
+assert _rc == 1 and _calls == ["priv", "priv"], (_r, _out, _calls)
+# any API error, or a response without a permission, fails closed (exit 2) naming the call
+for perm, want in (("ERROR", "gh api GET repos/o/r/collaborators/priv/permission failed (exit 1)"),
+                   ("MISSING", "gh api GET repos/o/r/collaborators/priv/permission returned no permission")):
+    _r, _rc, _out, _ = _run_perm([_priv()], {"priv": perm})
+    assert isinstance(_r, RuntimeError) and want in str(_r) and _rc == 2 and want in _out, (perm, _r, _out)
+# evaluate() alone: only User authors with admin/write in closerPermissions close
+_t = {"nodes": [{"comments": {"nodes": [{"body": "P2: x"}, _priv()]}}]}
+assert g.evaluate(pr(reviewThreads=_t, closerPermissions={"priv": "write"})) == []
+assert any("P2" in x for x in g.evaluate(pr(reviewThreads=_t)))
+_tb = {"nodes": [{"comments": {"nodes": [{"body": "P2: x"}, _priv(typename="Bot")]}}]}
+assert any("P2" in x for x in g.evaluate(pr(reviewThreads=_tb, closerPermissions={"priv": "admin"})))
+# the merge guard decides on the same permissions (it calls pr_payload, then evaluate)
+_orig_payload = mg.gate.pr_payload
+try:
+    for perms, allowed in (({"priv": "admin"}, True), ({"priv": "read"}, False), ({}, False)):
+        mg.gate.pr_payload = lambda *a, _p=perms, **k: pr(body=f"{R}\n\n{attestation}\n", headRefOid=head,
+                                                           reviews={"nodes": []}, reviewThreads=_t, closerPermissions=_p)
+        blocked = mg.check_one("gh -R owner/target pr merge 42 --squash", cwd="/tmp")
+        assert (blocked is None) == allowed, (perms, blocked)
+finally:
+    mg.gate.pr_payload = _orig_payload
+print("closer permission ok")

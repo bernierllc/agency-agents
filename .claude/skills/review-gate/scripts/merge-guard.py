@@ -13,17 +13,23 @@ import re
 import shlex
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 _spec = importlib.util.spec_from_file_location(
     "check_review_gate", Path(__file__).resolve().with_name("check-review-gate.py")
 )
 gate = importlib.util.module_from_spec(_spec)
-_spec.loader.exec_module(gate)
+try:
+    _spec.loader.exec_module(gate)
+except BaseException as _exc:  # noqa: BLE001 - a missing/broken gate module must block, not exit 1 (non-blocking)
+    print(f"review-gate merge guard: cannot load check-review-gate.py ({type(_exc).__name__}); blocked", file=sys.stderr)
+    sys.exit(2)
 
 OVERRIDE = re.compile(r"#\s*review-gate-ok:\s*\S")
 # Loose detector; `is_gh_pr_merge` confirms token order (allows `gh pr -R … merge`).
-MERGE_RE = re.compile(r"\bgh\b.*\bpr\b.*\bmerge\b", re.S)
+# Hyphen-aware word edges: `pr-merge-flow` is a skill name, not `pr … merge`.
+MERGE_RE = re.compile(r"(?<![\w-])gh(?![\w-]).*(?<![\w-])pr(?![\w-]).*(?<![\w-])merge(?![\w-])", re.S)
 # Quote-smashed executable: Bash concatenates `g''h` / `g"h"` into `gh`.
 QUOTE_SMASHED_GH_RE = re.compile(r"g['\"]+h", re.I)
 # ``NAME=value``, ``NAME+=value``, and indexed ``NAME[0]=value`` / ``PATH[0]=…``.
@@ -1471,7 +1477,7 @@ def quote_smashed_merge(cmd: str) -> bool:
     if collapsed != cmd and MERGE_RE.search(collapsed):
         return True
     if QUOTE_SMASHED_GH_RE.search(cmd) and re.search(
-        r"\bpr\b.*\bmerge\b", cmd, re.S | re.I
+        r"(?<![\w-])pr(?![\w-]).*(?<![\w-])merge(?![\w-])", cmd, re.S | re.I
     ):
         return True
     return False
@@ -1479,7 +1485,7 @@ def quote_smashed_merge(cmd: str) -> bool:
 
 _ARRAY_ASSIGN_RE = re.compile(r"[A-Za-z_][A-Za-z0-9_]*\+?=\(")
 _ARRAY_EXPAND_TOKEN_RE = re.compile(r"^\$\{[A-Za-z_][A-Za-z0-9_]*\[(@|\*)\]\}$")
-_PR_MERGE_LOOSE_RE = re.compile(r"\bpr\b.*\bmerge\b", re.S | re.I)
+_PR_MERGE_LOOSE_RE = re.compile(r"(?<![\w-])pr(?![\w-]).*(?<![\w-])merge(?![\w-])", re.S | re.I)
 
 
 def _part_array_assign_has_merge(part: str) -> bool:
@@ -3468,7 +3474,7 @@ def _child_gh_env(
 
 
 def resolve_pr_number(
-    cmd: str, cwd: str | None = None
+    cmd: str, cwd: str | None = None, deadline: float | None = None
 ) -> tuple[int | None, str | None, str | None, bool]:
     """Resolve gh pr merge selector → (number, repo, error, scrub_gh_repo).
 
@@ -3514,14 +3520,14 @@ def resolve_pr_number(
     if repo:
         args.extend(["-R", repo])
     try:
-        proc = subprocess.run(
-            args,
-            capture_output=True,
-            text=True,
-            cwd=cwd or None,
-            env=child_env,
-            timeout=20,
-        )
+        # ``deadline``: check_one's hook-wide budget; a library caller gets a fresh one.
+        with gate.gh_deadline(deadline if deadline is not None else _deadline()):
+            proc = gate.run_by_deadline(args, cwd=cwd or None, env=child_env)
+    except subprocess.TimeoutExpired:
+        return None, repo, (
+            f"review-gate blocked merge: resolving the PR from the merge selector did not finish within "
+            f"{HOOK_BUDGET_S:.0f} s (GitHub slow or unreachable); retry"
+        ), scrub_gh_repo
     except (OSError, subprocess.SubprocessError) as e:
         return None, repo, f"review-gate: could not resolve PR via gh: {e}", scrub_gh_repo
     if proc.returncode != 0 or not proc.stdout.strip():
@@ -3683,26 +3689,113 @@ def iter_merge_segments(
     return out, None
 
 
+FORGED_CHECK = Path(__file__).resolve().with_name("check-forged-review-gate.py")
+GATE_WORKFLOW = ".github/workflows/review-gate.yml"
+# hooks.json gives this blocking hook timeout_ms 25000, and a harness-killed hook does not block. Every gh
+# call of a merge check (the gate's GraphQL reads and the forged step) therefore finishes, or fails closed, by
+# HOOK_BUDGET_S after the hook started (main sets the start; a library caller gets the budget from its call).
+HOOK_BUDGET_S = 20.0
+_HOOK_STARTED: float | None = None
+_NO_RUNS = "input contains no check runs"  # the detector's error for a well-formed listing with zero runs
+
+
+def _is_empty_listing(listing: str) -> bool:
+    """True only for a well-formed listing with zero check runs, by the detector's own type validation.
+
+    Anything malformed (no page, `check_runs` missing, null or not a list, a non-object page) is False,
+    so the wrapper sees it and fails closed. If the detector's message ever changes this returns False,
+    which also fails closed.
+    """
+    if not listing.strip():
+        return False
+    spec = importlib.util.spec_from_file_location(
+        "check_forged_gate_names", FORGED_CHECK.with_name("check-forged-gate-names.py"))
+    detector = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(detector)
+    try:
+        detector._load_check_runs(listing)
+    except ValueError as exc:
+        return str(exc) == _NO_RUNS
+    except (KeyError, TypeError):
+        return False
+    return False
+
+
+def _deadline() -> float:
+    return (_HOOK_STARTED if _HOOK_STARTED is not None else time.monotonic()) + HOOK_BUDGET_S
+
+
+def forged_gate_check(
+    owner: str, name: str, number: int, head: str, hostname: str | None, env: dict[str, str] | None
+) -> str | None:
+    """SEC-MVS-01 rung 1: run CI's forged-check step locally before a merge; None when nothing is forged.
+
+    The same wrapper the Review Gate workflow runs reads the head's check runs, so a `Review Gate` job
+    from an untrusted workflow (or another PR's run on a shared head) blocks here too, not only in CI.
+    Fails closed: a failed or malformed listing, a missing wrapper, wrapper exit 1 (forged) or 2 (could
+    not evaluate), or running out of the time budget all block. A well-formed empty listing blocks only
+    where the repo has the gate workflow.
+    """
+    deadline = gate._GH_DEADLINE.get() or _deadline()  # check_one's budget when called from there
+    base = dict(env if env is not None else os.environ)
+    host = ["--hostname", hostname] if hostname else []
+
+    def run(args, **kw):
+        left = deadline - time.monotonic()
+        if left <= 0:
+            raise subprocess.TimeoutExpired(args, 0)
+        return subprocess.run(args, capture_output=True, text=True, timeout=left, **kw)
+
+    try:
+        listing = run(["gh", "api", *host, "--paginate",
+                       f"repos/{owner}/{name}/commits/{head}/check-runs?per_page=100&filter=all"], env=base)
+        if listing.returncode != 0:
+            detail = listing.stderr.strip() or "no output"
+            return f"review-gate: could not list check runs on {head[:12]} for the forged-check step: {detail}"
+        if _is_empty_listing(listing.stdout):
+            # Nothing to forge. Only a repo configured for Review Gate (the workflow file doctor checks for,
+            # on the default branch) must have runs; there, the wrapper's exit 2 still blocks. A repo without
+            # the gate and without CI merges on gate.evaluate alone (cop P2 on #121).
+            wf = run(["gh", "api", *host, "--silent", f"repos/{owner}/{name}/contents/{GATE_WORKFLOW}"], env=base)
+            if wf.returncode != 0 and "HTTP 404" in wf.stderr:
+                return None
+            if wf.returncode != 0:
+                detail = wf.stderr.strip() or "no output"
+                return f"review-gate: could not tell whether {owner}/{name} has {GATE_WORKFLOW}: {detail}"
+        child = {**base, "REPO": f"{owner}/{name}", "PR_NUMBER": str(number)}
+        if hostname:
+            child["GH_HOST"] = hostname
+        proc = run([sys.executable, str(FORGED_CHECK)], input=listing.stdout, env=child)
+    except subprocess.TimeoutExpired:
+        return (f"review-gate blocked merge: the forged-check step did not finish within {HOOK_BUDGET_S:.0f} s "
+                "of the hook starting (GitHub slow or unreachable); retry the merge")
+    if proc.returncode == 0:
+        return None
+    detail = proc.stderr.strip().replace("::error::", "") or "no output"
+    return f"review-gate blocked merge: forged-check step exited {proc.returncode}:\n- {detail}"
+
+
 def check_one(segment: str, cwd: str | None) -> str | None:
-    number, repo, err, scrub_gh_repo = resolve_pr_number(segment, cwd=cwd)
+    deadline = _deadline()  # one budget for every gh call below, PR resolution included
+    number, repo, err, scrub_gh_repo = resolve_pr_number(segment, cwd=cwd, deadline=deadline)
     if err:
         return err
     if number is None:
         return "review-gate: could not parse PR number from `gh pr merge` command"
     child_env = _child_gh_env(segment, scrub_gh_repo, cwd=cwd)
     try:
-        with gate.gh_subprocess_env(child_env):
+        with gate.gh_subprocess_env(child_env), gate.gh_deadline(deadline):
             hostname, owner, name = gate.parse_repo_with_host(
                 repo, cwd=cwd, env=child_env
             )
             pr = gate.pr_payload(owner, name, number, hostname=hostname)
             reasons = gate.evaluate(pr)
+            if reasons:
+                return "review-gate blocked merge:\n" + "\n".join(f"- {r}" for r in reasons)
+            return forged_gate_check(owner, name, number, pr.get("headRefOid") or "", hostname, child_env)
     except Exception as e:  # noqa: BLE001
         # Fail closed: infra / GraphQL errors must not silently allow merges.
         return f"review-gate: gate check failed: {e}"
-    if reasons:
-        return "review-gate blocked merge:\n" + "\n".join(f"- {r}" for r in reasons)
-    return None
 
 
 def check_command(cmd: str, cwd: str | None = None) -> str | None:
@@ -3941,20 +4034,19 @@ def check_command(cmd: str, cwd: str | None = None) -> str | None:
 
 
 def main() -> int:
+    global _HOOK_STARTED
+    _HOOK_STARTED = time.monotonic()
+    # Any tool the hook matcher routes here is checked when it carries a command, whatever the harness
+    # names it (`Bash`, `mcp__…__Bash`, `run_shell_command`): an allow-list of tool names failed open.
+    # Unreadable input blocks: a guard that cannot see the command must not let it through.
     try:
         payload = json.load(sys.stdin)
-    except Exception:
-        return 0
-    if (payload.get("tool_name") or payload.get("toolName") or "") not in (
-        "Bash",
-        "bash",
-        "Shell",
-        "shell",
-    ):
-        return 0
-    inp = payload.get("tool_input") or payload.get("input") or {}
-    cmd = inp.get("command") or inp.get("cmd") or ""
-    if not cmd:
+        inp = payload.get("tool_input") or payload.get("input") or {}
+        cmd = inp.get("command") or inp.get("cmd") or ""
+    except (ValueError, AttributeError) as exc:
+        print(f"review-gate merge guard: unreadable hook input ({type(exc).__name__}); blocked", file=sys.stderr)
+        return 2
+    if not isinstance(cmd, str) or not cmd:
         return 0
     cwd = payload_cwd(payload, inp)
     err = check_command(cmd, cwd)
@@ -3962,6 +4054,7 @@ def main() -> int:
         print(err, file=sys.stderr)
         return 2
     return 0
+
 
 def fb_log(subject: str, severity: str, summary: str) -> None:
     """Best-effort feedback-loop capture: a missing or failing store never affects this hook."""
@@ -3983,8 +4076,15 @@ def fb_log(subject: str, severity: str, summary: str) -> None:
 
 
 if __name__ == "__main__":
+    # Fail closed on ANY crash: a PreToolUse hook exiting 1 is a non-blocking error, so the command would
+    # run. A ~1000-deep `$( … )` nest raised RecursionError and exited 1 (Sonnet pass on 07baddd).
     try:
-        sys.exit(main())
-    except Exception as exc:
-        fb_log("hook:review-gate/rg-merge-guard", "high", f"merge-guard crashed: {type(exc).__name__}")
-        raise
+        rc = main()
+    except BaseException as exc:  # noqa: BLE001 - only exit 2 blocks the tool call
+        rc = 2
+        print(f"review-gate merge guard: crashed ({type(exc).__name__}); blocked", file=sys.stderr)
+        try:
+            fb_log("hook:review-gate/rg-merge-guard", "high", f"merge-guard crashed: {type(exc).__name__}")
+        except Exception as log_exc:  # noqa: BLE001 - logging must not turn the block into exit 1
+            print(f"review-gate merge guard: feedback log failed ({type(log_exc).__name__})", file=sys.stderr)
+    sys.exit(rc)

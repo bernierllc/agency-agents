@@ -1,0 +1,28 @@
+# Review Gate doctor: optional, written by `install-workflow.py --doctor-job`. Installed from
+# bernierllc/claude-skills skill `review-gate`.
+#
+# Fails when this repo's review-gate.yml or a vendored scripts/ file is missing or differs from the
+# review-gate skill on claude-skills main (doctor-review-gate.py --strict), for example a checker
+# vendored before closer_permissions existed. A claude-skills release that changes a vendored file
+# therefore turns this job red on every PR until the repo re-runs install-workflow.py --force.
+# Label and ruleset checks stay warnings: the job has no token that can read rulesets.
+#
+# NOT a required check. Making it one is the repo owner's branch-protection decision.
+# Cost: one ~10 s job per PR push (a shallow, blob-filtered clone of one directory plus a Python
+# run). Free on public repos; a private repo is billed 1 minute per run (per-job rounding).
+# No paths filter on purpose: drift comes from claude-skills, not from this PR's diff.
+# Safe on pull_request: the doctor only reads files (bytes and an AST parse); it never runs repo code.
+name: Review Gate doctor
+
+on: pull_request
+
+permissions:
+  contents: read
+
+jobs:
+  doctor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@v4
+      - run: git clone -q --depth 1 --filter=blob:none --sparse https://github.com/bernierllc/claude-skills "$RUNNER_TEMP/cs" && git -C "$RUNNER_TEMP/cs" sparse-checkout set review-gate && python3 "$RUNNER_TEMP/cs/review-gate/scripts/doctor-review-gate.py" --strict
